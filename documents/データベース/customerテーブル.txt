@@ -1,0 +1,16 @@
+USE d3;--使うときは必ず入力
+
+/*テーブル作成*/
+CREATE TABLE customer (
+customer_id INT ,
+customer_name VARCHAR(20) ,
+customer_email VARCHAR(100) ,
+customer_password VARCHAR(100),
+customer_birthday DATE
+) ;
+
+/*テーブル確認*/
+SHOW TABLES;
+
+/*テーブル削除*/
+DROP TABLE customer;
