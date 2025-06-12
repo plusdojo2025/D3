@@ -14,3 +14,6 @@ INSERT INTO store_memo VALUES (1,NOW(),'テストメモ');
 
 /*テーブルデータ確認*/
 SELECT * FROM store_memo;
+
+/*storeテーブルとの結合*/
+SELECT * FROM store LEFT JOIN store_memo ON store.store_id = store_memo.store_id;
