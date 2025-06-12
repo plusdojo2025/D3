@@ -1,0 +1,16 @@
+/*テーブル削除*/
+DROP TABLE store_memo;
+
+
+/*テーブル作成*/
+CREATE TABLE store_memo (
+store_id INT NOT NULL,
+store_date DATE NOT NULL,
+store_remark VARCHAR(100)
+) ;
+
+/*テストデータ*/
+INSERT INTO store_memo VALUES (1,NOW(),'テストメモ');
+
+/*テーブルデータ確認*/
+SELECT * FROM store_memo;
