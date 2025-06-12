@@ -11,8 +11,10 @@ import dto.Event;
 
 public class EventDAO {
 		
+		//イベント取得用
+		// 日付の新しい順で並び替えして、取得されたデータのリストを返す
 		public List<Event> select() {
-			// 日付の新しい順で並び替えして、取得されたデータのリストを返す
+			
 			
 				Connection conn = null;
 				List<Event> eveList = new ArrayList<Event>();
@@ -70,6 +72,7 @@ public class EventDAO {
 		}
 		
 		
+		//イベント登録用
 		// 引数eventで指定されたレコードを登録し、成功したらtrueを返す
 		//古いデータは削除したかったら追加します
 		public boolean insert(Event event) {
@@ -90,11 +93,9 @@ public class EventDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (event.getStore_id() != null) {
-					pStmt.setInt(1, event.getStore_id());
-				} else {
-					pStmt.setInt(1, 0);
-				}
+				
+				pStmt.setInt(1, event.getStore_id());
+				
 				if (event.getEvent_date() != null) {
 					pStmt.setString(2, event.getEvent_date());
 				} else {
