@@ -1,4 +1,8 @@
 CREATE DATABASE d3 ;
 SHOW DATABASES;
 
-USE d3;--使うときは必ず入力
+/*使うときは必ず入力*/
+USE d3;
+
+/*テーブル確認*/
+SHOW TABLES;

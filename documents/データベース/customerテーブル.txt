@@ -1,16 +1,18 @@
-USE d3;--使うときは必ず入力
+/*テーブル削除*/
+DROP TABLE customer;
+
 
 /*テーブル作成*/
 CREATE TABLE customer (
-customer_id INT ,
-customer_name VARCHAR(20) ,
-customer_email VARCHAR(100) ,
-customer_password VARCHAR(100),
-customer_birthday DATE
+customer_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_name VARCHAR(20) NOT NULL,
+customer_email VARCHAR(100) NOT NULL,
+customer_password VARCHAR(100) NOT NULL,
+customer_birthday DATE NOT NULL
 ) ;
 
-/*テーブル確認*/
-SHOW TABLES;
+/*テストデータ*/
+INSERT INTO customer VALUES (NULL,'ニックネーム','test@example.com','password',NOW());
 
-/*テーブル削除*/
-DROP TABLE customer;
+/*テーブルデータ確認*/
+SELECT * FROM customer;
