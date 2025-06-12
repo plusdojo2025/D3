@@ -1,0 +1,16 @@
+/*テーブル削除*/
+DROP TABLE store;
+
+/*テーブル作成*/
+CREATE TABLE store (
+store_id INT AUTO_INCREMENT PRIMARY KEY,
+store_name VARCHAR(100) NOT NULL,
+store_password VARCHAR(100) NOT NULL
+) ;
+
+
+/*テストデータ*/
+INSERT INTO store VALUES (NULL,'id','password');
+
+/*テーブルデータ確認*/
+SELECT * FROM store;
