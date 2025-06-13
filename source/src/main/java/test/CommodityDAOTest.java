@@ -23,7 +23,12 @@ public class CommodityDAOTest {
 		
 		//ページング付きのテスト（カテゴリ＝1,ページ1,3件)
 		System.out.println("---------- selectByCategory(1) のテスト ----------");
-		List<Commodity> listPaged = dao.selectByCategoryWithPage(1,1,3);
-		showAllData(listPaged);
+		List<Commodity> listPaged1 = dao.selectByCategoryWithPage(1,1,3);
+		showAllData(listPaged1);
+		
+		//ページング付きのテスト（カテゴリ＝1,ページ1,3件)
+		System.out.println("---------- selectByCategory(2) のテスト ----------");
+		List<Commodity> listPaged2 = dao.selectByCategoryWithPage(2,1,3);
+		showAllData(listPaged2);
 	}
 }
