@@ -11,7 +11,7 @@ import dto.Commodity;
 
 public class CommodityDAO {
 	// 商品のカテゴリごとにデータを取り出す
-	public List<Commodity> selectByCategoryWhithPage(int category_id,int page, int itemsPerPage) {
+	public List<Commodity> selectByCategoryWithPage(int category_id,int page, int itemsPerPage) {
 		Connection conn = null;
 		List<Commodity> commodityList = new ArrayList<Commodity>();
 
