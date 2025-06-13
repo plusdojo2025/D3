@@ -10,7 +10,7 @@ import java.util.List;
 import dto.Commodity;
 
 public class CommodityDAO {
-	// 引数Commodityで指定された項目で検索して、取得されたデータのリストを返す
+	// 引数Commodityで取得されたデータのリストをすべて返す
 	public List<Commodity> selectAll() {
 		Connection conn = null;
 		List<Commodity> commodityList = new ArrayList<Commodity>();
