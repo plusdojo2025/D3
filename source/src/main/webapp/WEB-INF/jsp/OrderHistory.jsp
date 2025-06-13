@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -20,13 +22,11 @@
 
 <main>
 	<div class="categoryRanking">
-		<p>カテゴリ	品目		個数		日付</p>
+		<p>カテゴリ	品目		個数		日付</p>	
 		<table>
-			<tr>
-				<th>ウイスキー（変数）</th>
-				<th>（）</th>
-				<th>2025/06/06（変数）</th>
-			</tr>
+		
+			
+			
 			<tr>
 				<td>ハイボール（変数）</td>
 				<td>40（変数）</td>
@@ -54,6 +54,7 @@
 				<td>30（変数）</td>
 				<td>2025/06/06（変数）</td>
 			</tr>
+			
 			
 		</table>
 	</div>
@@ -124,6 +125,9 @@
 <p>&copy;おかゆ</p>
 </div>
 </footer>
+
+
+
 
 </body>
 </html>

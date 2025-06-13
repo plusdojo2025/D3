@@ -11,138 +11,198 @@ import java.util.List;
 import dto.TopicTag;
 
 public class TopicTagDAO {
+	// 引数topicTagで指定された項目で検索して、取得されたデータのリストを返す
+	public List<TopicTag> select(TopicTag topicTag) {
+		Connection conn = null;
+		List<TopicTag> tagList = new ArrayList<TopicTag>();
 
-    // 全件検索
-    public List<TopicTag> select() {
-        Connection conn = null;
-        List<TopicTag> topicList = new ArrayList<>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-                    + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
-                    "root", "password");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
-            String sql = "SELECT * FROM topic_tag ORDER BY topic_id";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            ResultSet rs = pStmt.executeQuery();
+			// SQL文を準備する
+			String sql = "SELECT * FROM topic_tag WHERE topic_name LIKE ? ORDER BY topic_id";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-            while (rs.next()) {
-                TopicTag tag = new TopicTag(
-                    rs.getInt("topic_id"),
-                    rs.getString("topic_name")
-                );
-                topicList.add(tag);
-            }
+			// SQL文を完成させる
+			if (topicTag.getTopic_name() != null) {
+				pStmt.setString(1, "%" + topicTag.getTopic_name() + "%");
+			} else {
+				pStmt.setString(1, "%");
+			}
 
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            topicList = null;
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
 
-        return topicList;
-    }
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				TopicTag tag = new TopicTag(
+					rs.getInt("topic_id"),
+					rs.getString("topic_name")
+				);
+				tagList.add(tag);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			tagList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			tagList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					tagList = null;
+				}
+			}
+		}
 
-    // 登録
-    public boolean insert(TopicTag tag) {
-        Connection conn = null;
-        boolean result = false;
+		// 結果を返す
+		return tagList;
+	}
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-                    + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
-                    "root", "password");
+	// 引数topicTagで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean insert(TopicTag topicTag) {
+		Connection conn = null;
+		boolean result = false;
 
-            String sql = "INSERT INTO topic_tag (topic_name) VALUES (?)";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, tag.getTopic_name());
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-            if (pStmt.executeUpdate() == 1) {
-                result = true;
-            }
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+			// SQL文を準備する
+			String sql = "INSERT INTO topic_tag (topic_name) VALUES (?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-        return result;
-    }
+			// SQL文を完成させる
+			pStmt.setString(1, topicTag.getTopic_name());
 
-    // 更新
-    public boolean update(TopicTag tag) {
-        Connection conn = null;
-        boolean result = false;
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-                    + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
-                    "root", "password");
+		// 結果を返す
+		return result;
+	}
 
-            String sql = "UPDATE topic_tag SET topic_name = ? WHERE topic_id = ?";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, tag.getTopic_name());
-            pStmt.setInt(2, tag.getTopic_id());
+	// 引数topicTagで指定されたレコードを更新し、成功したらtrueを返す
+	public boolean update(TopicTag topicTag) {
+		Connection conn = null;
+		boolean result = false;
 
-            if (pStmt.executeUpdate() == 1) {
-                result = true;
-            }
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
-        return result;
-    }
+			// SQL文を準備する
+			String sql = "UPDATE topic_tag SET topic_name=? WHERE topic_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-    // 削除
-    public boolean delete(int topicId) {
-        Connection conn = null;
-        boolean result = false;
+			// SQL文を完成させる
+			if (topicTag.getTopic_name() != null) {
+				pStmt.setString(1, topicTag.getTopic_name());
+			} else {
+				pStmt.setString(1, "");
+			}
+			pStmt.setInt(2, topicTag.getTopic_id());
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-                    + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
-                    "root", "password");
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-            String sql = "DELETE FROM topic_tag WHERE topic_id = ?";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, topicId);
+		// 結果を返す
+		return result;
+	}
 
-            if (pStmt.executeUpdate() == 1) {
-                result = true;
-            }
+	// 引数topicTagで指定されたIDのレコードを削除し、成功したらtrueを返す
+	public boolean delete(TopicTag topicTag) {
+		Connection conn = null;
+		boolean result = false;
 
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-        return result;
-    }
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM topic_tag WHERE topic_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, topicTag.getTopic_id());
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 }
