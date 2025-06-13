@@ -1,8 +1,9 @@
+/*データベース作成*/
 CREATE DATABASE d3 ;
-SHOW DATABASES;
-
 /*使うときは必ず入力*/
 USE d3;
 
+/*データベース確認*/
+SHOW DATABASES;
 /*テーブル確認*/
 SHOW TABLES;
