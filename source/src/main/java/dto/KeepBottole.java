@@ -1,52 +1,53 @@
 package dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class KeepBottole implements Serializable{
-	private int bottole_id;			// キープボトルID
-	private int customer_id;		// 顧客ID
-	private int commodity_id;		// 商品ID
-	private int bottole_remaining;	// 残量
-	private Date bottole_rimit;		// 期限
+	private int bottole_id;				// キープボトルID
+	private Customer customer;			// 顧客ID
+	private Commodity commodity;		// 商品ID
+	private int bottole_remaining;		// 残量
+	private Timestamp bottole_rimit;	// 期限
 	
 	
 	
-	public KeepBottole(int bottoleId, int customerId, int commodityId, int bottoleRemaining, Date bottoleRimit) {
-		bottole_id = bottoleId;
-		customer_id = customerId;
-		commodity_id = commodityId;
-		bottole_rimit = bottoleRimit;
+	public KeepBottole() {};
+	public KeepBottole(int bottoleId, Customer customer, Commodity commodity, int bottoleRemaining, Timestamp bottoleRimit) {
+		this.bottole_id = bottoleId;
+		this.customer = customer;
+		this.commodity = commodity;
+		this.bottole_rimit = bottoleRimit;
 	}
 	
 	public int getBottole_id() {
-		return bottole_id;
+		return this.bottole_id;
 	}
 	public void setBottole_id(int bottole_id) {
 		this.bottole_id = bottole_id;
 	}
-	public int getCustomer_id() {
-		return customer_id;
+	public Customer getCustomer() {
+		return this.customer;
 	}
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	public int getCommodity_id() {
-		return commodity_id;
+	public Commodity getCommodity() {
+		return this.commodity;
 	}
-	public void setCommodity_id(int commodity_id) {
-		this.commodity_id = commodity_id;
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
 	}
 	public int getBottole_remaining() {
-		return bottole_remaining;
+		return this.bottole_remaining;
 	}
 	public void setBottole_remaining(int bottole_remaining) {
 		this.bottole_remaining = bottole_remaining;
 	}
-	public Date getBottole_rimit() {
-		return bottole_rimit;
+	public Timestamp getBottole_rimit() {
+		return this.bottole_rimit;
 	}
-	public void setBottole_rimit(Date bottole_rimit) {
+	public void setBottole_rimit(Timestamp bottole_rimit) {
 		this.bottole_rimit = bottole_rimit;
 	}
 }
