@@ -48,14 +48,14 @@ public class OrderSubmitServlet extends HttpServlet {
 
 		
 		
-			List<OrderList> list= new ArrayList<OrderList>();
+			List<OrderList> orderlist= new ArrayList<OrderList>();
 			for(int i=0;i<5;i++) {
-				//受け取ったメニューデータをセッションで送る
-				list.add(new OrderList(0,1,null,3));
+				
+				orderlist.add(new OrderList(0,1,null,3));
 			}
 			
 			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("orderList", list);
+			request.setAttribute("orderList", orderlist);
 			
 
 			// OrderListServletにリダイレクトする
