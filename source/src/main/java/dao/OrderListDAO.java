@@ -31,20 +31,17 @@ public class OrderListDAO {
 					for(int i=0;i<order.size();i++) {
 						
 						// SQL文を準備する
-						String sql = "INSERT INTO Order VALUES (0, ?, ?, ?)";
+						String sql = "INSERT INTO OrderList VALUES (0, ?,NOW(), ?)";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						// SQL文を完成させる
 						
 							pStmt.setInt(1, order.get(i).getCommodity_id());
 						
-						if (order.get(i).getOrder_datetime() != null) {
-							pStmt.setString(2, order.get(i).getOrder_datetime());
-						} else {
-							pStmt.setString(2, "");
-						}
+							//Date today = Date.valueOf(LocalDate.now());
+							//pStmt.setDate(2, today);
 						
-							pStmt.setInt(3, order.get(i).getOrder_quantity());
+							pStmt.setInt(2, order.get(i).getOrder_quantity());
 						
 							
 
@@ -73,98 +70,10 @@ public class OrderListDAO {
 				return result;
 			}
 			
-			
-			
-			
-			//注文履歴を日時古い順で取得
-			// 取得されたデータのリストを返す
-			public List<OrderList> select_old(OrderList order) {
-				
-				
-					Connection conn = null;
-					List<OrderList> orderList = new ArrayList<OrderList>();
-
-					try {
-						// JDBCドライバを読み込む
-						Class.forName("com.mysql.cj.jdbc.Driver");
-
-						// データベースに接続する
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-								"root", "password");
-
-						// SQL文を準備する
 						
-						
-						
-						String sql = "SELECT * FROM Order "
-								+ "WHERE order_id LIKE ? AND commodity_id LIKE ? AND order_datetime LIKE ? AND order_quantity LIKE ? "
-								+ "ORDER BY order_datetime ASC";
-						
-						PreparedStatement pStmt = conn.prepareStatement(sql);
-
-						
-						// SQL文を完成させる
-						if (order.getOrder_id() != -1) {//入力がなかった場合を-1として持ってきます
-							pStmt.setString(1, String.valueOf(order.getOrder_id()));
-						} else {
-							pStmt.setString(1, "%");
-						}
-						if (order.getCommodity_id() != -1) {//入力がなかった場合を-1として持ってきます
-							pStmt.setString(2,  String.valueOf(order.getCommodity_id()) );
-						} else {
-							pStmt.setString(2, "%");
-						}
-						if (order.getOrder_datetime() != "") {
-							pStmt.setString(3, order.getOrder_datetime());
-						} else {
-							pStmt.setString(3, "%");
-						}
-						if (order.getOrder_quantity() != -1) {//入力がなかった場合を-1として持ってきます
-							pStmt.setString(4, String.valueOf(order.getOrder_quantity()));
-						} else {
-							pStmt.setString(4, "%");
-						}
-							
-						// SQL文を実行し、結果表を取得する
-						ResultSet rs = pStmt.executeQuery();
-						
-						
-						// 結果表をコレクションにコピーする
-							while (rs.next()) {
-								OrderList ord = new OrderList(
-										rs.getInt("order_id"), 
-										rs.getInt("commodity_id"),
-										rs.getString("order_datetime"),
-										rs.getInt("order_quantity")													
-										);
-								orderList.add(ord);			
-							}//while終了
-
-					} catch (SQLException e) {
-						e.printStackTrace();
-						orderList = null;
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-						orderList = null;
-					} finally {
-						// データベースを切断
-						if (conn != null) {
-							try {
-								conn.close();
-							} catch (SQLException e) {
-								e.printStackTrace();
-								orderList = null;
-							}
-						}
-					}
-
-					// 結果を返す
-					return orderList;
-			}
 			
 			//注文履歴を日時新しい順で取得
-			// 取得されたデータのリストを返す
+			// 注文履歴画面用
 			public List<OrderList> select_new(OrderList order) {
 				
 				
@@ -184,7 +93,7 @@ public class OrderListDAO {
 						
 						
 						
-						String sql = "SELECT * FROM Order "
+						String sql = "SELECT * FROM OrderList "
 								+ "WHERE order_id LIKE ? AND commodity_id LIKE ? AND order_datetime LIKE ? AND order_quantity LIKE ? "
 								+ "ORDER BY order_datetime DESC";
 						
@@ -250,7 +159,7 @@ public class OrderListDAO {
 					return orderList;
 			}
 			
-
+			//
 			
 			
 			
