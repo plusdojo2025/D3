@@ -1,0 +1,17 @@
+/*テーブル削除*/
+DROP TABLE keep_bottole;
+
+/*テーブル作成*/
+CREATE TABLE keep_bottole (
+bottole_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+commodity_id INT NOT NULL,
+bottole_remaining INT NOT NULL,
+bottole_rimit DATE NOT NULL
+) ;
+
+/*テストデータ*/
+INSERT INTO keep_bottole VALUES (NULL,1,1,100,DATE_ADD(CURDATE(), INTERVAL 3 MONTH) );--サンプルは登録日の３か月後が期限です。
+
+/*テーブルデータ確認*/
+SELECT * FROM keep_bottole;

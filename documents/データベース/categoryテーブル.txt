@@ -1,0 +1,17 @@
+/*テーブル削除*/
+DROP TABLE category;
+
+/*テーブル作成*/
+CREATE TABLE category (
+category_id INT AUTO_INCREMENT PRIMARY KEY,
+category_name VARCHAR(100) NOT NULL
+) ;
+
+/*テストデータ*/
+INSERT INTO category VALUES (NULL,'ビール');
+
+/*テーブルデータ確認*/
+SELECT * FROM category;
+
+/*commodityテーブルとの結合*/
+SELECT * FROM commodity LEFT JOIN category ON commodity.commodity_category = category.category_id;
