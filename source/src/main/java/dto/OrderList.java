@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class Order implements Serializable{
+public class OrderList implements Serializable{
 
 	private int order_id;//注文ID 
 	private int commodity_id;//商品ID
@@ -10,7 +10,7 @@ public class Order implements Serializable{
 	private int order_quantity;//個数
 	
 	
-	public Order(int order_id, int commodity_id, String order_datetime, int order_quantity) {
+	public OrderList(int order_id, int commodity_id, String order_datetime, int order_quantity) {
 		super();
 		this.order_id = order_id;
 		this.commodity_id = commodity_id;
@@ -18,7 +18,7 @@ public class Order implements Serializable{
 		this.order_quantity = order_quantity;
 	}
 	
-	public Order() {
+	public OrderList() {
 		super();
 		this.order_id = 0;
 		this.commodity_id = 0;

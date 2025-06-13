@@ -20,7 +20,6 @@ public class EventDAO {
 				List<Event> eveList = new ArrayList<Event>();
 
 				try {
-					// JDBCドライバを読み込む
 					Class.forName("com.mysql.cj.jdbc.Driver");
 
 					// データベースに接続する

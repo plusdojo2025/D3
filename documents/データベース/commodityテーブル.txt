@@ -1,0 +1,17 @@
+/*テーブル削除*/
+DROP TABLE commodity;
+
+/*テーブル作成*/
+CREATE TABLE commodity (
+commodity_id INT AUTO_INCREMENT PRIMARY KEY,
+commodity_name VARCHAR(100) NOT NULL,
+commodity_price INT NOT NULL,
+commodity_category INT NOT NULL,
+commodity_image VARCHAR(100)
+) ;
+
+/*テストデータ*/
+INSERT INTO commodity VALUES (NULL,'ビール中',200,1,NULL);
+
+/*テーブルデータ確認*/
+SELECT * FROM commodity;

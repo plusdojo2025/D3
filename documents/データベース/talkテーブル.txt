@@ -1,0 +1,19 @@
+/*テーブル削除*/
+DROP TABLE talk;
+
+/*テーブル作成*/
+CREATE TABLE talk(
+customer_id INT NOT NULL,
+topic_id INT NOT NULL,
+talk_remark VARCHAR(200) NOT NULL
+) ;
+
+/*テストデータ*/
+INSERT INTO talk VALUES (1,1,'テストメモ');
+
+/*テーブルデータ確認*/
+SELECT * FROM talk;
+
+/*talkテーブルとの結合*/
+SELECT * FROM talk LEFT JOIN topic_tag ON talk.topic_id = topic_tag.topic_id;
+
