@@ -1,0 +1,15 @@
+/*テーブル削除*/
+DROP TABLE topic_tag;
+
+/*テーブル作成*/
+CREATE TABLE topic_tag(
+topic_id INT AUTO_INCREMENT PRIMARY KEY,
+topic_name VARCHAR(100) NOT NULL
+) ;
+
+/*テストデータ*/
+INSERT INTO topic_tag VALUES (1,'スポーツ');
+
+/*テーブルデータ確認*/
+SELECT * FROM topic_tag;
+

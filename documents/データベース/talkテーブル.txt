@@ -3,15 +3,17 @@ DROP TABLE talk;
 
 /*テーブル作成*/
 CREATE TABLE talk(
-order_id INT AUTO_INCREMENT PRIMARY KEY,
-commodity_id INT NOT NULL,
-order_datetime DATE NOT NULL,
-order_quantity INT NOT NULL
+customer_id INT NOT NULL,
+topic_id INT NOT NULL,
+talk_remark VARCHAR(200) NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO talk VALUES (NULL,1,CURRENT_TIMESTAMP,2);
+INSERT INTO talk VALUES (1,1,'テストメモ');
 
 /*テーブルデータ確認*/
 SELECT * FROM talk;
+
+/*talkテーブルとの結合*/
+SELECT * FROM talk LEFT JOIN topic_tag ON talk.topic_id = topic_tag.topic_id;
 

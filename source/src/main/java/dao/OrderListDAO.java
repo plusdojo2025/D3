@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.Order;
+import dto.OrderList;
+
 
 public class OrderListDAO {
 	
 	//注文画面で注文ボタンを押した時のデータを登録する作業
 	// 引数orderで指定されたレコードを登録し、成功したらtrueを返す
-			public boolean insert(List<Order> order) {
+			public boolean insert(List<OrderList> order) {
 				Connection conn = null;
 				boolean result = false;
 
@@ -77,11 +78,11 @@ public class OrderListDAO {
 			
 			//注文履歴を日時古い順で取得
 			// 取得されたデータのリストを返す
-			public List<Order> select_old(Order order) {
+			public List<OrderList> select_old(OrderList order) {
 				
 				
 					Connection conn = null;
-					List<Order> orderList = new ArrayList<Order>();
+					List<OrderList> orderList = new ArrayList<OrderList>();
 
 					try {
 						// JDBCドライバを読み込む
@@ -131,7 +132,7 @@ public class OrderListDAO {
 						
 						// 結果表をコレクションにコピーする
 							while (rs.next()) {
-								Order ord = new Order(
+								OrderList ord = new OrderList(
 										rs.getInt("order_id"), 
 										rs.getInt("commodity_id"),
 										rs.getString("order_datetime"),
@@ -164,11 +165,11 @@ public class OrderListDAO {
 			
 			//注文履歴を日時新しい順で取得
 			// 取得されたデータのリストを返す
-			public List<Order> select_new(Order order) {
+			public List<OrderList> select_new(OrderList order) {
 				
 				
 					Connection conn = null;
-					List<Order> orderList = new ArrayList<Order>();
+					List<OrderList> orderList = new ArrayList<OrderList>();
 
 					try {
 						// JDBCドライバを読み込む
@@ -218,7 +219,7 @@ public class OrderListDAO {
 						
 						// 結果表をコレクションにコピーする
 							while (rs.next()) {
-								Order ord = new Order(
+								OrderList ord = new OrderList(
 										rs.getInt("order_id"), 
 										rs.getInt("commodity_id"),
 										rs.getString("order_datetime"),
