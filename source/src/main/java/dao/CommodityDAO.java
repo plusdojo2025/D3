@@ -10,8 +10,8 @@ import java.util.List;
 import dto.Commodity;
 
 public class CommodityDAO {
-	// 引数Commodityで取得されたデータのリストをすべて返す
-	public List<Commodity> selectAll() {
+	// 商品のカテゴリごとにデータを取り出す
+	public List<Commodity> selectByCategoryWhithPage(int category_id,int page, int itemsPerPage) {
 		Connection conn = null;
 		List<Commodity> commodityList = new ArrayList<Commodity>();
 
@@ -23,13 +23,21 @@ public class CommodityDAO {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
+			
+			int offset = (page - 1) * itemsPerPage;
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Commodity";
+			String sql = "SELECT * FROM Commodity WHERE commodity_category = ?　LIMIT ? OFFSET ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+			pStmt.setInt(1, category_id);
+			pStmt.setInt(2, itemsPerPage);//1ぺージの件数
+			pStmt.setInt(3, offset);//開始位置
+			
+			
 			ResultSet rs = pStmt.executeQuery();
-
+			
+			//結果をコレクションにコピー
 			while (rs.next()) {
 				Commodity card = new Commodity(rs.getInt("commodity_id"), rs.getString("commodity_name"),
 						rs.getInt("commodity_price"), rs.getInt("commodity_category"), rs.getString("commodity_image"));
