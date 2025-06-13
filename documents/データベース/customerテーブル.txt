@@ -12,7 +12,12 @@ customer_birthday DATE NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO customer VALUES (NULL,'テストネーム','test@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'あっくん','test1@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'いっちゃん','test2@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'うーたん','test3@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'えななん','test4@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'おかぴ','test5@example.com','password',NOW());
+
 
 /*テーブルデータ確認*/
 SELECT * FROM customer;
