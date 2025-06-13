@@ -9,5 +9,6 @@ import java.util.List;
 import dto.Commodity;
 
 public class CategoryDAO {
+	//
 	
 }
