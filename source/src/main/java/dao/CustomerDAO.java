@@ -11,10 +11,10 @@ import java.util.List;
 import dto.Customer;
 
 public class CustomerDAO {
-	// 引数card指定された項目で検索して、取得されたデータのリストを返す
-	public List<Customer> select(Customer card) {
+	// 引数customer指定された項目で検索して、取得されたデータのリストを返す
+	public List<Customer> select(Customer customer) {
 		Connection conn = null;
-		List<Customer> cardList = new ArrayList<Customer>();
+		List<Customer> customerList = new ArrayList<Customer>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -31,14 +31,13 @@ public class CustomerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			if (card.getCustomer_name() != null) {
-				pStmt.setString(1, "%" + card.getCustomer_name() + "%");
+			if (customer.getCustomer_name() != null) {
+				pStmt.setString(1, "%" + customer.getCustomer_name() + "%");
 			} else {
 				pStmt.setString(1, "%");
 			}
-			// SQL文を完成させる
-			if (card.getCustomer_birthday() != null) {
-				pStmt.setString(2, "%" + card.getCustomer_birthday() + "%");
+			if (customer.getCustomer_birthday() != null) {
+				pStmt.setString(2, "%" + customer.getCustomer_birthday() + "%");
 			} else {
 				pStmt.setString(2, "%");
 			}
@@ -48,17 +47,17 @@ public class CustomerDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Customer ct = new Customer(rs.getInt("customer_id"), rs.getString("customer_name"),
+				Customer ctm = new Customer(rs.getInt("customer_id"), rs.getString("customer_name"),
 						rs.getString("customer_email"), rs.getString("customer_password"),
 						rs.getString("customer_birthday"));
-				cardList.add(ct);
+				customerList.add(ctm);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			cardList = null;
+			customerList = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			cardList = null;
+			customerList = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -66,17 +65,17 @@ public class CustomerDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					cardList = null;
+					customerList = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return cardList;
+		return customerList;
 	}
 
-	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
-	public boolean insert(Customer card) {
+	// 引数customerで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean insert(Customer customer) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -95,10 +94,10 @@ public class CustomerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setString(1, card.getCustomer_name());
-			pStmt.setString(2, card.getCustomer_email());
-			pStmt.setString(3, card.getCustomer_password());
-			pStmt.setString(4, card.getCustomer_birthday());
+			pStmt.setString(1, customer.getCustomer_name());
+			pStmt.setString(2, customer.getCustomer_email());
+			pStmt.setString(3, customer.getCustomer_password());
+			pStmt.setString(4, customer.getCustomer_birthday());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -123,8 +122,8 @@ public class CustomerDAO {
 		return result;
 	}
 
-	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
-	public boolean update(Customer card) {
+	// 引数customerで指定されたレコードを更新し、成功したらtrueを返す
+	public boolean update(Customer customer) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -142,27 +141,27 @@ public class CustomerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			if (card.getCustomer_name() != null) {
-				pStmt.setString(1, card.getCustomer_name());
+			if (customer.getCustomer_name() != null) {
+				pStmt.setString(1, customer.getCustomer_name());
 			} else {
 				pStmt.setString(1, "");
 			}
-			if (card.getCustomer_email() != null) {
-				pStmt.setString(2, card.getCustomer_email());
+			if (customer.getCustomer_email() != null) {
+				pStmt.setString(2, customer.getCustomer_email());
 			} else {
 				pStmt.setString(2, "");
 			}
-			if (card.getCustomer_password() != null) {
-				pStmt.setString(3, card.getCustomer_password());
+			if (customer.getCustomer_password() != null) {
+				pStmt.setString(3, customer.getCustomer_password());
 			} else {
 				pStmt.setString(3, "");
 			}
-			if (card.getCustomer_birthday() != null) {
-				pStmt.setString(4, card.getCustomer_birthday());
+			if (customer.getCustomer_birthday() != null) {
+				pStmt.setString(4, customer.getCustomer_birthday());
 			} else {
 				pStmt.setString(4, "");
 			}
-			pStmt.setInt(15, card.getCustomer_id());
+			pStmt.setInt(15, customer.getCustomer_id());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -187,8 +186,8 @@ public class CustomerDAO {
 		return result;
 	}
 
-	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
-	public boolean delete(Customer card) {
+	// 引数customerで指定された番号のレコードを削除し、成功したらtrueを返す
+	public boolean delete(Customer customer) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -206,7 +205,7 @@ public class CustomerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, card.getCustomer_id());
+			pStmt.setInt(1, customer.getCustomer_id());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
