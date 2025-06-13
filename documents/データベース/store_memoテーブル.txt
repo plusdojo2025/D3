@@ -1,7 +1,6 @@
 /*テーブル削除*/
 DROP TABLE store_memo;
 
-
 /*テーブル作成*/
 CREATE TABLE store_memo (
 store_id INT NOT NULL,
