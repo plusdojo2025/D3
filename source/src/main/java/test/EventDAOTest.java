@@ -26,13 +26,18 @@ public class EventDAOTest {
 
 		// select()のテスト
 		System.out.println("---------- select()のテスト1 ----------");
-		List<Event> cardListSel1 = dao.select();
-		EventDAOTest.showAllData(cardListSel1);
+		List<Event> sel1 = dao.select();
+		EventDAOTest.showAllData(sel1);
 		
 		// insert(Event event)のテスト
 		System.out.println("---------- insert(Event event)のテスト1 ----------");
-		boolean cardListSel2 = dao.insert(new Event(0,0,"","ハロウィン","仮装したらドリンクプレゼント"));
-		System.out.println(cardListSel2);
+		boolean ins1 = dao.insert(new Event(0,1,null,"ハロウィン","仮装したらドリンクプレゼント"));
+		System.out.println(ins1);
+		
+		System.out.println("---------- insert(Event event)のテスト2 ----------");
+		boolean ins2 = dao.insert(new Event(0,1,null,"正月","くじ引きあり"));
+		System.out.println(ins2);
+		
 	}
 
 }

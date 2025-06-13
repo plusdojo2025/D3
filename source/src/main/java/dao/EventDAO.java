@@ -1,9 +1,11 @@
 package dao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,18 +97,16 @@ public class EventDAO {
 				
 				pStmt.setInt(1, event.getStore_id());
 				
-				if (event.getEvent_date() != null) {
-					pStmt.setString(2, event.getEvent_date());
-				} else {
-					pStmt.setString(2, "");
-				}
+				Date today = Date.valueOf(LocalDate.now());
+				pStmt.setDate(2, today);
+				
 				if (event.getEvent_name() != null) {
-					pStmt.setString(3, event.getEvent_date());
+					pStmt.setString(3, event.getEvent_name());
 				} else {
 					pStmt.setString(3, "");
 				}
 				if (event.getEvent_remark() != null) {
-					pStmt.setString(4, event.getEvent_date());
+					pStmt.setString(4, event.getEvent_remark());
 				} else {
 					pStmt.setString(4, "");
 				}
