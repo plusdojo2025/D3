@@ -10,7 +10,7 @@ import java.util.List;
 
 import dto.Order;
 
-public class OrderDAO {
+public class OrderListDAO {
 	
 	//注文画面で注文ボタンを押した時のデータを登録する作業
 	// 引数orderで指定されたレコードを登録し、成功したらtrueを返す
