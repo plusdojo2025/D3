@@ -53,8 +53,8 @@ public class StoreDAO {
                     e.printStackTrace();
                 }
             }
+        
         }
-
         return store; // ログイン成功時はStoreオブジェクト、失敗時はnull
     }
 }
