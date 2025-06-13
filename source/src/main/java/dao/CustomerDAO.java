@@ -161,7 +161,7 @@ public class CustomerDAO {
 			} else {
 				pStmt.setString(4, "");
 			}
-			pStmt.setInt(15, customer.getCustomer_id());
+			pStmt.setInt(5, customer.getCustomer_id());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
