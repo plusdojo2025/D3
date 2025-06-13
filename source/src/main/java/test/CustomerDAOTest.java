@@ -7,7 +7,6 @@ import dto.Customer;
 
 public class CustomerDAOTest {
 
-    // すべてのCustomerオブジェクトを表示するユーティリティメソッド
     public static void showAllData(List<Customer> customerList) {
         for (Customer customer : customerList) {
             System.out.println("顧客ID：" + customer.getCustomer_id());
