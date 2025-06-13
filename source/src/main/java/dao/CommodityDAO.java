@@ -20,14 +20,14 @@ public class CommodityDAO {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースと接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			
 			int offset = (page - 1) * itemsPerPage;
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Commodity WHERE commodity_category = ?　LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM Commodity WHERE commodity_category = ? LIMIT ? OFFSET ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, category_id);
