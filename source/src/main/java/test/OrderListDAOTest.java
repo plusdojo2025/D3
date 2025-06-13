@@ -50,6 +50,8 @@ public class OrderListDAOTest {
 		List<OrderList> sel3 = dao.select_new(new OrderList(-1,1,"",-1));
 		OrderListDAOTest.showAllData(sel3);
 		
+		
+		
 
 	}
 
