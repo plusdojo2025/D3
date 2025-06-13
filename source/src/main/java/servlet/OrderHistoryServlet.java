@@ -1,10 +1,43 @@
 package servlet;
+	
+import java.io.IOException;
 
-public class OrderHistoryServlet {
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
 
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/OrderHistoryServlet")
+public class OrderHistoryServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	*      response)
+	*/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		// ログインページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/OrderHistory.jsp");
+		dispatcher.forward(request, response);
 	}
 
-}
+	/**
+	* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	*      response)
+	*/
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+
+				// ○○ページにフォワードする
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/○○.jsp");
+				//dispatcher.forward(request, response);
+		}
+	}
+	
