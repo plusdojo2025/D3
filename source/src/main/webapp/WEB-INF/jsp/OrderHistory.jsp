@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -22,38 +23,51 @@
 
 <main>
 	<div class="categoryRanking">
-		<p>カテゴリ	品目		個数		日付</p>	
+
 		<table>
-		
+				
+			<tr>
+				<th>ウイスキー</th>
+				<th>（個数）</th>
+				<th>（日付）</th>
+			</tr>
+			<c:forEach var="list2" items="${list2}" varStatus="status">
+			
+			<tr>
+				<td>${list2.commodity_name}</td>
+				<td>${list2Sum[status.index]}</td>
+				<td>${today}</td>
+			</tr>
+			</c:forEach>
 			
 			
 			<tr>
-				<td>ハイボール（変数）</td>
-				<td>40（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<th>カクテル</th>
+				<th>（個数）</th>
+				<th>（日付）</th>
 			</tr>
 			
+			<c:forEach var="list3" items="${list3}" varStatus="status">
 			<tr>
-				<th>カクテル（変数）</th>
-				<th>（）</th>
-				<th>2025/06/06（変数）</th>
+				<td>${list3.commodity_name}</td>
+				<td>${list3Sum[status.index]}</td>
+				<td>${today}</td>
 			</tr>
-			<tr>
-				<td>ジントニック（変数）</td>
-				<td>90（変数）</td>
-				<td>2025/06/06（変数）</td>
-			</tr>
+			</c:forEach>
 			
 			<tr>
-				<th>ビール（変数）</th>
-				<th>（）</th>
-				<th>2025/06/06（変数）</th>
+				<th>ビール</th>
+				<th>（個数）</th>
+				<th>（日付）</th>
 			</tr>
+			
+			<c:forEach var="list4" items="${list4}" varStatus="status">
 			<tr>
-				<td>生ビール中ジョッキ（変数）</td>
-				<td>30（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${list4.commodity_name}</td>
+				<td>${list4Sum[status.index]}</td>
+				<td>${today}</td>
 			</tr>
+			</c:forEach>
 			
 			
 		</table>
@@ -61,6 +75,7 @@
 	
 	<div class="orderRanking">
 		<p>注文ランキング</p>
+		<p>フード</p>
 		<table>
 			<tr>
 				<th>フード</th>
@@ -70,21 +85,21 @@
 			</tr>
 			<tr>
 				<td>1</td>
-				<td>ミックスナッツ（変数）</td>
-				<td>42（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3food[0].commodity_name}</td>
+				<td>${best3foodSum[0]}</td>
+				<td>${today}</td>
 			</tr>
 			<tr>
 				<td>2</td>
-				<td>チーズベーコンピザ（変数）</td>
-				<td>30（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3food[1].commodity_name}</td>
+				<td>${best3foodSum[1]}</td>
+				<td>${today}</td>
 			</tr>
 			<tr>
 				<td>3</td>
-				<td>フライドポテト（変数）</td>
-				<td>28（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3food[2].commodity_name}</td>
+				<td>${best3foodSum[2]}</td>
+				<td>${today}</td>
 			</tr>
 			
 			<tr>
@@ -95,21 +110,21 @@
 			</tr>
 			<tr>
 				<td>1</td>
-				<td>ジントニック（変数）</td>
-				<td>90（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3drink[0].commodity_name}</td>
+				<td>${best3drinkSum[0]}</td>
+				<td>${today}</td>
 			</tr>
 			<tr>
 				<td>2</td>
-				<td>ハイボール（変数）</td>
-				<td>40（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3drink[1].commodity_name}</td>
+				<td>${best3drinkSum[1]}</td>
+				<td>${today}</td>
 			</tr>
 			<tr>
 				<td>3</td>
-				<td>モスコミュール（変数）</td>
-				<td>35（変数）</td>
-				<td>2025/06/06（変数）</td>
+				<td>${best3drink[2].commodity_name}</td>
+				<td>${best3drinkSum[2]}</td>
+				<td>${today}</td>
 			</tr>
 			
 			
