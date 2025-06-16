@@ -7,6 +7,10 @@ import dto.Commodity;
 
 public class CommodityDAOTest {	
 	public static void showAllData(List<Commodity> commodityList) {
+		if (commodityList.isEmpty()) {
+			System.out.println("カテゴリに該当する商品がありません。");
+			return;}
+		
 		for (Commodity commodity : commodityList) {
 			
 			System.out.println("商品ID " + commodity.getCommodity_id());
@@ -26,10 +30,16 @@ public class CommodityDAOTest {
 		List<Commodity> listPaged1 = dao.selectByCategoryWithPage(1,1,3);
 		showAllData(listPaged1);
 		
-		//ページング付きのテスト（カテゴリ＝1,ページ2,3件)
+		//ページング付きのテスト（カテゴリ＝2,ページ2,3件)
 		System.out.println("---------- selectByCategory(2) のテスト ----------");
-		List<Commodity> listPaged2 = dao.selectByCategoryWithPage(1,2,3);
-		showAllData(listPaged2);
+		List<Commodity> listPaged02 = dao.selectByCategoryWithPage(2,1,3);
+		showAllData(listPaged02);
+		
+		//ページング付きのテスト（カテゴリ＝2,ページ2,3件)
+		System.out.println("---------- selectByCategory(2-1) のテスト ----------");
+		List<Commodity> listPaged12 = dao.selectByCategoryWithPage(2,2,3);
+		showAllData(listPaged12);
+		
 		//カテゴリがない場合のテスト
 		System.out.println("---------- selectByCategory(not)のテスト----------");
 		List <Commodity>listPaged999 = dao.selectByCategoryWithPage(999, 1, 1);
