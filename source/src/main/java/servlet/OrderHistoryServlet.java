@@ -1,7 +1,10 @@
 package servlet;
 	
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,14 +35,25 @@ public class OrderHistoryServlet extends HttpServlet {
 
 		
 		OrderListDAO ordDao = new OrderListDAO();
+		
 		Date today = Date.valueOf(LocalDate.now());
-		List<OrderList> ordList = ordDao.select_new(new OrderList(-1,-1,today,-1));
-
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("cardList", ordList);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(today);
+        
+        List<List<OrderList>> list = new ArrayList<List<OrderList>>();
+        //カテゴリnの商品リストの取得
+		//商品ごとの合計値を計算
+        //商品の種類と合計値をセットで送る（日時どうする？）
+       
+        //フードリストの商品コードを指定して合計値を計算
+        //ドリンクリストの商品コードを指定して合計値を計算
+        
+        
+        
+		//request.setAttribute("sum", sum[]);
 
 		
-		// ログインページにフォワードする
+		// 注文履歴ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/OrderHistory.jsp");
 		dispatcher.forward(request, response);
 		

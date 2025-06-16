@@ -15,9 +15,8 @@ public class KeepBottoleDAO {
 	
 	public List<KeepBottole> select(KeepBottole keepBottole) {
 		List<KeepBottole> resultList = new ArrayList<KeepBottole>();
-		
 		String sql = "SELECT commodity.commodity_name, bottole_remaining, bottole_rimit "
-				+ "FROM keep_bottole JOIN commondity ON keep_bottole.commodity_id = commodity.commodity_id "
+				+ "FROM keep_bottole JOIN commodity ON keep_bottole.commodity_id = commodity.commodity_id "
 				+ "WHERE customer_id = ?";
 
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
@@ -66,13 +65,13 @@ public class KeepBottoleDAO {
 		return false;
 	}
 	private int getCommodityIdByName(Connection  conn, String commodityName) throws SQLException{
-		String sql = "SELECT id FROM commodity WHERE name = ?";
+		String sql = "SELECT commodity_id FROM commodity WHERE commodity_name = ?";
 		try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setString(1, commodityName);
 			
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				return rs.getInt("id");
+				return rs.getInt("commodity_id");
 			} else {
 				throw new SQLException("商品名が存在しません" + commodityName);
 			}
