@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.OrderListDAO;
+import dto.OrderList;
 
 
 /**
@@ -37,12 +40,16 @@ public class OrderHistoryServlet extends HttpServlet {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(today);
         
-        
-        //商品一覧を取得
-        //商品が何種類あるか
+        List<List<OrderList>> list = new ArrayList<List<OrderList>>();
+        //カテゴリnの商品リストの取得
 		//商品ごとの合計値を計算
         //商品の種類と合計値をセットで送る（日時どうする？）
        
+        //フードリストの商品コードを指定して合計値を計算
+        //ドリンクリストの商品コードを指定して合計値を計算
+        
+        
+        
 		//request.setAttribute("sum", sum[]);
 
 		
