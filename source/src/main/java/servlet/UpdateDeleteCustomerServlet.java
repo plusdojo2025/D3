@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.CustomerDAO;
 import dto.Customer;
@@ -27,12 +26,12 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		/*// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/D3/LoginServlet");
 			return;
-		}
+		}*/
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");

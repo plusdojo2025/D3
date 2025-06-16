@@ -26,8 +26,7 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Customer "
-					+ "WHERE customer_name LIKE ? AND customer_birthday LIKE ? ORDER BY customer_id";
+			String sql = "SELECT * FROM Customer WHERE customer_name LIKE ? ORDER BY customer_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -35,11 +34,6 @@ public class CustomerDAO {
 				pStmt.setString(1, "%" + customer.getCustomer_name() + "%");
 			} else {
 				pStmt.setString(1, "%");
-			}
-			if (customer.getCustomer_birthday() != null) {
-				pStmt.setString(2, "%" + customer.getCustomer_birthday() + "%");
-			} else {
-				pStmt.setString(2, "%");
 			}
 
 			// SQL文を実行し、結果表を取得する
