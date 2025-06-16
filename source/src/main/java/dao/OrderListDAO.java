@@ -160,7 +160,17 @@ public class OrderListDAO {
 			}
 			
 			//
-			
+			//指定された商品（日時）の個数を返す。
+					public int quantity(int commodity_id,String order_datetime) {
+						OrderListDAO dao = new OrderListDAO();
+						List<OrderList> list = dao.select_new(new OrderList(-1,commodity_id,order_datetime,-1));
+						int sum=0;
+						for(OrderList data:list) {	
+								sum+=data.getOrder_quantity();							
+						}							
+						return sum;
+					}
+					
 			
 			
 
