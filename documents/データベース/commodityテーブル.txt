@@ -11,7 +11,17 @@ commodity_image VARCHAR(100)
 ) ;
 
 /*テストデータ*/
-INSERT INTO commodity VALUES (NULL,'ビール中',200,1,NULL);
+INSERT INTO commodity VALUES (NULL,'ミックスナッツ',550,1,NULL);
+INSERT INTO commodity VALUES (NULL,'チーズベーコンピザ',1500,1,NULL);
+INSERT INTO commodity VALUES (NULL,'フライドポテト',770,1,NULL);
+
+INSERT INTO commodity VALUES (NULL,'山崎',2000,2,NULL);
+INSERT INTO commodity VALUES (NULL,'グレンリベット',1100,2,NULL);
+INSERT INTO commodity VALUES (NULL,'白州',1900,2,NULL);
+INSERT INTO commodity VALUES (NULL,'デュワーズ',1000,2,NULL);
+INSERT INTO commodity VALUES (NULL,'ジントニック',500,3,NULL);
+INSERT INTO commodity VALUES (NULL,'ホワイトレディ',800,3,NULL);
+INSERT INTO commodity VALUES (NULL,'生ビール',800,4,NULL);
 
 /*テーブルデータ確認*/
 SELECT * FROM commodity;

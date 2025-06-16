@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.OrderList;
+import dto.Cart;
 
 
 /**
@@ -41,26 +41,27 @@ public class OrderSubmitServlet extends HttpServlet {
 		
 		// リクエストパラメータを取得する
 				request.setCharacterEncoding("UTF-8");
-				String company = request.getParameter("company");
-				String companysub = request.getParameter("companysub");
-				
-				
-
+			
+				List<Cart> orderList=new ArrayList<Cart>();				
+				if (request.getAttribute("orderList") != null) {
+					orderList = (List<Cart>) request.getAttribute("orderList");
+					// 検索結果をリクエストスコープに格納する
+					request.setAttribute("orderList", orderList);
+					// OrderListServletにリダイレクトする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/OrderListServlet");
+					dispatcher.forward(request, response);
+				}else {
+					// MenuListServletにリダイレクトする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuListServlet");
+					dispatcher.forward(request, response);
+				}
 		
 		
-			List<OrderList> orderlist= new ArrayList<OrderList>();
-			for(int i=0;i<5;i++) {
-				
-				orderlist.add(new OrderList(0,1,null,3));
-			}
 			
-			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("orderList", orderlist);
+			
 			
 
-			// OrderListServletにリダイレクトする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/OrderListServlet");
-			dispatcher.forward(request, response);
+			
 		}
 	}
 	

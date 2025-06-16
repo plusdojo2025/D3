@@ -8,7 +8,15 @@ topic_name VARCHAR(100) NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO topic_tag VALUES (1,'スポーツ');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（野球）');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（サッカー）');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（その他）');
+INSERT INTO topic_tag VALUES (NULL,'音楽（クラシック）');
+INSERT INTO topic_tag VALUES (NULL,'音楽（ＪＰＯＰ）');
+INSERT INTO topic_tag VALUES (NULL,'ニュース（株）');
+INSERT INTO topic_tag VALUES (NULL,'旅行');
+INSERT INTO topic_tag VALUES (NULL,'その他');
+INSERT INTO topic_tag VALUES (NULL,'ＮＧ内容');
 
 /*テーブルデータ確認*/
 SELECT * FROM topic_tag;
