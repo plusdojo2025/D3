@@ -1,1 +1,21 @@
 @charset "UTF-8";
+
+/*テーブル*/
+
+.categoryRankingTable{
+	border-collapse:collapse;
+}
+
+.categoryRankingTable th,.categoryRankingTable td{
+	border:1px solid #DBDBDB;
+	padding: 20px;
+}
+
+.orderRankingTable{
+	border-collapse:collapse;
+}
+
+.orderRankingTable th,.orderRankingTable td{
+	border:1px solid #DBDBDB;
+	padding: 20px;
+}

@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/注文履歴</title>
-<link rel="stylesheet" href="/webapp/css/OrderHistory.css">
+<link rel="stylesheet" href="css/OrderHistory.css">
 </head>
 
 
@@ -23,13 +23,13 @@
 
 <main>
 	<div class="categoryRanking">
-
-		<table>
+	<h2>カテゴリランキング</h2>
+		<table class="categoryRankingTable">
 				
 			<tr>
 				<th>ウイスキー</th>
-				<th>（個数）</th>
-				<th>（日付）</th>
+				<th>個数</th>
+				<th>日付</th>
 			</tr>
 			<c:forEach var="list2" items="${list2}" varStatus="status">
 			
@@ -43,8 +43,8 @@
 			
 			<tr>
 				<th>カクテル</th>
-				<th>（個数）</th>
-				<th>（日付）</th>
+				<th>個数</th>
+				<th>日付</th>
 			</tr>
 			
 			<c:forEach var="list3" items="${list3}" varStatus="status">
@@ -57,8 +57,8 @@
 			
 			<tr>
 				<th>ビール</th>
-				<th>（個数）</th>
-				<th>（日付）</th>
+				<th>個数</th>
+				<th>日付</th>
 			</tr>
 			
 			<c:forEach var="list4" items="${list4}" varStatus="status">
@@ -74,14 +74,14 @@
 	</div>
 	
 	<div class="orderRanking">
-		<p>注文ランキング</p>
-		<p>フード</p>
-		<table>
+		<h2>注文ランキング</h2>
+
+		<table class="orderRankingTable">
 			<tr>
 				<th>フード</th>
-				<th>（）</th>
-				<th>（）</th>
-				<th>（）</th>
+				<th>品目</th>
+				<th>個数</th>
+				<th>日付</th>
 			</tr>
 			<tr>
 				<td>1</td>
@@ -104,9 +104,9 @@
 			
 			<tr>
 				<th>ドリンク</th>
-				<th>（）</th>
-				<th>（）</th>
-				<th>（）</th>
+				<th>品目</th>
+				<th>個数</th>
+				<th>日付</th>
 			</tr>
 			<tr>
 				<td>1</td>
