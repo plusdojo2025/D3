@@ -3,19 +3,19 @@ package dto;
 import java.io.Serializable;
 
 public class Cart implements Serializable{
-	private int commodityId;
+	private Commodity commodity;
 	private int quantity;
 	
 	public Cart() {};
-	public Cart(int id, int quantity) {
-		this.setCommodityId(id);
+	public Cart(Commodity commodity, int quantity) {
+		this.setCommodity(commodity);
 		this.setQuantity(quantity);
 	}
-	public int getCommodityId() {
-		return commodityId;
+	public Commodity getCommodity() {
+		return commodity;
 	}
-	public void setCommodityId(int commodityId) {
-		this.commodityId = commodityId;
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
 	}
 	public int getQuantity() {
 		return quantity;
