@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/accounting")
+@WebServlet("/Accounting")
 public class AccountingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,27 +19,34 @@ public class AccountingServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// 商品名と価格のパラメータを受け取る
-		String[] itemNames = request.getParameterValues("itemName");
-		String[] itemPrices = request.getParameterValues("itemPrice");
-
+		String[] commodity_name = request.getParameterValues("commodity_name");//商品の名前
+		String[] commodity_price = request.getParameterValues("commodity_price");//商品の値段
+		String[] order_quantity = request.getParameterValues("order_quantity");//商品の個数
+		
 		// 合計金額を計算
 		int total = 0;
-		if (itemPrices != null) {
-			for (String priceStr : itemPrices) {
+		if (commodity_price != null && order_quantity != null) {
+			for (int i = 0; i < commodity_price.length; i++) {	
 				try {
-					total += Integer.parseInt(priceStr);
+					int price = Integer.parseInt(commodity_price[i].trim());
+					int quantity = Integer.parseInt(order_quantity[i].trim());
+					total += price * quantity;
 				} catch (NumberFormatException e) {
 					// 無効な数値はスキップ
 				}
 			}
 		}
-
+			
 		// request にデータを格納して JSP に渡す
-		request.setAttribute("itemNames", itemNames);
-		request.setAttribute("itemPrices", itemPrices);
+		request.setAttribute("commodity_name",commodity_name );
+		request.setAttribute("commodity_price",commodity_price );
+		request.setAttribute("order_quantity",order_quantity );
 		request.setAttribute("total", total);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkout.jsp");
+		// メニューページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/Accounting.jsp");
 		dispatcher.forward(request, response);
+		
+		
+				
 	}
 }
