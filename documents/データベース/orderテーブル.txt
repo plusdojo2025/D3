@@ -4,18 +4,19 @@ DROP TABLE orderlist;
 /*テーブル作成*/
 CREATE TABLE orderlist(
 order_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
 commodity_id INT NOT NULL,
 order_datetime DATE NOT NULL,
 order_quantity INT NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO orderlist VALUES (NULL,1,CURRENT_TIMESTAMP,42);
-INSERT INTO orderlist VALUES (NULL,2,CURRENT_TIMESTAMP,30);
-INSERT INTO orderlist VALUES (NULL,3,CURRENT_TIMESTAMP,28);
-INSERT INTO orderlist VALUES (NULL,4,CURRENT_TIMESTAMP,40);
-INSERT INTO orderlist VALUES (NULL,5,CURRENT_TIMESTAMP,90);
-INSERT INTO orderlist VALUES (NULL,6,CURRENT_TIMESTAMP,30);
+INSERT INTO orderlist VALUES (NULL,1,1,CURRENT_TIMESTAMP,42);
+INSERT INTO orderlist VALUES (NULL,1,2,CURRENT_TIMESTAMP,30);
+INSERT INTO orderlist VALUES (NULL,1,3,CURRENT_TIMESTAMP,58);
+INSERT INTO orderlist VALUES (NULL,2,4,CURRENT_TIMESTAMP,40);
+INSERT INTO orderlist VALUES (NULL,2,5,CURRENT_TIMESTAMP,90);
+INSERT INTO orderlist VALUES (NULL,3,6,CURRENT_TIMESTAMP,30);
 
 
 /*テーブルデータ確認*/
@@ -23,3 +24,6 @@ SELECT * FROM orderlist;
 
 /*commodityテーブルとの結合*/
 SELECT * FROM orderlist LEFT JOIN commodity ON commodity.commodity_category = orderlist.commodity_id;
+
+/*customerテーブルとの結合*/
+SELECT * FROM customer LEFT JOIN orderlist ON customer.customer_id = orderlist.customer_id;

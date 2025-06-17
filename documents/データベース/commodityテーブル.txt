@@ -14,6 +14,7 @@ commodity_image VARCHAR(100)
 INSERT INTO commodity VALUES (NULL,'ミックスナッツ',550,1,NULL);
 INSERT INTO commodity VALUES (NULL,'チーズベーコンピザ',1500,1,NULL);
 INSERT INTO commodity VALUES (NULL,'フライドポテト',770,1,NULL);
+INSERT INTO commodity VALUES (NULL,'サラダ',600,1,NULL);
 
 INSERT INTO commodity VALUES (NULL,'山崎',2000,2,NULL);
 INSERT INTO commodity VALUES (NULL,'グレンリベット',1100,2,NULL);
