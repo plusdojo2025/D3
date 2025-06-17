@@ -21,13 +21,28 @@ public class MenuListServlet extends HttpServlet {
 			throws ServletException, IOException {
 				
 		request.setCharacterEncoding("UTF-8");
-		String categoryIdStr = request.getParameter("category_id");//商品の種類をボタンで管理
-		if(categoryIdStr==null) {
-			categoryIdStr="1";
-		}
+		String categoryIdStr = request.getParameter("category");//商品の種類をボタンで管理
+		int category_id=3;
+		if(categoryIdStr!=null) {
 		
-		//
-		int category_id = Integer.parseInt(categoryIdStr);
+			if(categoryIdStr.equals("cocktail")) {
+				category_id=3;
+			}	
+			else if(categoryIdStr.equals("whisky")) {
+				category_id=2;
+			}
+			else if(categoryIdStr.equals("beer")) {
+				category_id=4;
+			}
+			else if(categoryIdStr.equals("food")) {
+				category_id=1;
+				}
+			}
+			else {
+				category_id=3;
+			}
+		
+
 
 		//選ばれたカテゴリのデータを10個取り出す
 		CommodityDAO dao = new CommodityDAO();

@@ -26,12 +26,12 @@
 
 <main>
 <h1>メニュー</h1>
-<ul>
-<li>カクテル</li>
-<li>ウイスキー</li>
-<li>ビール</li>
-<li>フード</li>
-</ul>
+<form method="GET" action="/D3/MenuListServlet">
+<input type="submit" value="cocktail" name="category">
+<input type="submit" value="whisky" name="category">
+<input type="submit" value="beer" name="category">
+<input type="submit" value="food" name="category">
+</form>
 
 
 <div>
