@@ -29,8 +29,8 @@ public class KeepBottleDAO {
 				Commodity commodity = new Commodity(
 					0, rs.getString("commodity.commodity_name"), 0, 0, "");
 				kb.setCommodity(commodity);
-				kb.setBottole_remaining(rs.getInt("bottle_remaining"));
-				kb.setBottole_rimit(rs.getTimestamp("bottle_rimit"));
+				kb.setBottle_remaining(rs.getInt("bottle_remaining"));
+				kb.setBottle_rimit(rs.getTimestamp("bottle_rimit"));
 				resultList.add(keepBottle);
 			}
 			
@@ -52,8 +52,8 @@ public class KeepBottleDAO {
 		
 			pStmt.setInt(1, keepBottle.getCustomer().getCustomer_id());
 			pStmt.setInt(2, commodityId);
-			pStmt.setInt(3, keepBottle.getBottole_remaining());
-			pStmt.setTimestamp(4, keepBottle.getBottole_rimit());
+			pStmt.setInt(3, keepBottle.getBottle_remaining());
+			pStmt.setTimestamp(4, keepBottle.getBottle_rimit());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
@@ -84,8 +84,8 @@ public class KeepBottleDAO {
 				+ "bottle_remaining = ? "
 				+ "WHERE bottle_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setInt(1, keepBottle.getBottole_remaining());
-			pStmt.setInt(2, keepBottle.getBottole_id());
+			pStmt.setInt(1, keepBottle.getBottle_remaining());
+			pStmt.setInt(2, keepBottle.getBottle_id());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
@@ -101,7 +101,7 @@ public class KeepBottleDAO {
 	public boolean delete(KeepBottle keepBottle) {
 		String sql = "DELETE FROM keep_bottole WHERE bottole_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setInt(1, keepBottle.getBottole_id());
+			pStmt.setInt(1, keepBottle.getBottle_id());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
