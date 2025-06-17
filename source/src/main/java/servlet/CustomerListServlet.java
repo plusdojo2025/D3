@@ -53,11 +53,9 @@ public class CustomerListServlet extends HttpServlet {
 		String customer_name = request.getParameter("customer_name");
 		VisitorDAO dao = new VisitorDAO();
 		String every = dao.getModeOrderByCustomerId(1);
-		TalkDAO talkDao = new TalkDAO();
-		List<Talk> allTalks = talkDao.selectAllWithTopicName(); // 全顧客分まとめて取得
-		request.setAttribute("allTalks", allTalks);
-
 		
+		TalkDAO talkDao = new TalkDAO();
+		List<Talk> talkList = talkDao.select(new Talk()); // 全件取得または条件を指定して取得
 
 		CustomerDAO cDao = new CustomerDAO();
 		List<Customer> customerList = cDao.select(new Customer(0, customer_name, "", "", ""));
@@ -72,6 +70,7 @@ public class CustomerListServlet extends HttpServlet {
 
 		request.setAttribute("every", every);//いつもの
 		request.setAttribute("customerList", customerList);
+		request.setAttribute("talkList", talkList);
 		request.setAttribute("keepBottleMap", keepBottleMap);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");

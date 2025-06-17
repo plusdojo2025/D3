@@ -18,6 +18,14 @@
         メールアドレス: <input type="text" name="customer_email" value="${e.customer_email}"><br>
         いつもの: <input type="text" name="every" value="${every}"><br>
         
+        <p>会話内容:</p>
+    <c:forEach var="t" items="${talkList}">
+        <c:if test="${t.customer_id == e.customer_id}">
+            ・<strong>タグID:</strong> ${t.topic_id}<br>
+            ・<strong>内容:</strong> ${t.talk_remark}<br><br>
+        </c:if>
+    </c:forEach>
+        
            <!-- ここに注文履歴といつもの商品を表示 -->
           <p>注文履歴：</p>
         <c:forEach var="order" items="${orderHistoryMap[e.customer_id]}">
