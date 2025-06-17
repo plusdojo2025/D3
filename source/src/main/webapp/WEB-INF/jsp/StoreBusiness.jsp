@@ -51,6 +51,7 @@
 <h2>注文</h2>
 <div style="height: 100px; overflow-y: scroll; border: 1px solid #ccc;">
 <ul>
+
 <li>ユーザー１：${orderData.get(0)}<span class="delete-btn" onclick="removeItem(this)">×</span></li>
 <li>ユーザー２：ハイボール（変数）<span class="delete-btn" onclick="removeItem(this)">×</span></li>
 </ul>
