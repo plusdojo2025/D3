@@ -76,12 +76,13 @@
 
 <div>
 
-<a href="/D3/MenuListServlet"><button>1(変数)</button></a>
-<a href="/D3/MenuListServlet"><button>2(変数)</button></a>
-<a href="/D3/MenuListServlet"><button>3(変数)</button></a>
-<a href="/D3/MenuListServlet"><button>4(変数)</button></a>
-<a href="/D3/MenuListServlet"><button>5(変数)</button></a>
-
+<form method="GET" action="/D3/MenuListServlet">
+<c:forEach var="page" items="${pagenumber}" varStatus="status">
+<c:if test="${(status.index) <5}">
+<input type=submit value="${page}" name="number">
+</c:if>
+</c:forEach>
+</form>
 </div>
 
 
@@ -95,7 +96,7 @@
 <table>
 			
 <tr>
-<td>画像(変数)</td>
+<td><img src="変数" alt="変数未定義"></td>
 <tr>
 <td>ジントニック(変数)</td>
 </tr>

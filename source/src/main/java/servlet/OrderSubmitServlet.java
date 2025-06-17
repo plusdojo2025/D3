@@ -32,7 +32,7 @@ public class OrderSubmitServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("orderList", orderList);
-			response.sendRedirect("OrderListServlet");
+			response.sendRedirect("/OrderListServlet");
 		} else {
 			// MenuListServletにリダイレクトする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuListServlet");
