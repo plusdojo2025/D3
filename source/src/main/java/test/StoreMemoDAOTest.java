@@ -2,8 +2,8 @@ package test;
 
 import java.util.List;
 
-import javaDrill.plusdojo2025.D3.source.src.main.java.dao.StoreMemoDAO;
-
+import dao.StoreMemoDAO;
+import dto.StoreMemo;
 public class StoreMemoDAOTest {
     public static void main(String[] args) {
         StoreMemoDAO dao = new StoreMemoDAO();
@@ -11,7 +11,7 @@ public class StoreMemoDAOTest {
         // insertテスト
         StoreMemo newMemo = new StoreMemo(0, "2025-06-16", "これはテストメモです。");
         boolean insertResult = dao.insert(newMemo);
-        System.out.println("Insert結果: " + insertResult);
+        System.out.println("結果: " + insertResult);
 
         // selectテスト
         StoreMemo searchCriteria = new StoreMemo(0, "2025", "テスト");
@@ -26,7 +26,7 @@ public class StoreMemoDAOTest {
         // updateテスト
         if (!results.isEmpty()) {
             StoreMemo toUpdate = results.get(0);
-            toUpdate.setStore_remark("メモ内容を更新しました。");
+            toUpdate.setStore_remark("内容を更新しました。");
             boolean updateResult = dao.update(toUpdate);
             System.out.println("Update結果: " + updateResult);
         }
