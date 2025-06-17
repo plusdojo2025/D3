@@ -17,10 +17,8 @@ import dto.Visitor;
 public class VisitorDAO {
 
 	public List<Visitor> getVisitorByCustomerId(Timestamp ts) {
-		String sql = "SELECT customer.customer_name, customer.customer_id "
-				+ "FROM orderList "
-				+ "JOIN customer on orderList.customer_id = customer.customer_id"
-				+ "WHERE ? < order_datetime";
+		String sql = "SELECT customer.customer_name, customer.customer_id " + "FROM orderList "
+				+ "JOIN customer on orderList.customer_id = customer.customer_id" + "WHERE ? < order_datetime";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setTimestamp(1, ts);
 
@@ -28,20 +26,20 @@ public class VisitorDAO {
 			List<Visitor> visitorList = new ArrayList<Visitor>();
 			while (rs.next()) {
 				int id = rs.getInt("customer.customer_id");
-				
+
 				Visitor visitor = new Visitor();
 				Customer customer = new Customer();
 				customer.setCustomer_name(rs.getString("customer_name"));
 				visitor.setCustomer(customer);
-				
+
 				Commodity commodity = new Commodity(0, "", 0, 0, "");
 				commodity.setCommodity_name(getModeOrderByCustomerId(conn, id));
 				visitor.setCommodity(commodity);
-				
+
 				TopicTag topic = new TopicTag(0, "");
 				topic.setTopic_name(getModeTopicByCustomerId(conn, id));
 				visitor.setTopic(topic);
-				
+
 				visitorList.add(visitor);
 			}
 
@@ -54,40 +52,53 @@ public class VisitorDAO {
 	}
 
 	private String getModeOrderByCustomerId(Connection conn, int id) throws SQLException {
-		String sql = "SELECT commodity.commodity_name "
-				+ "FROM orderList "
+		String sql = "SELECT commodity.commodity_name " + "FROM orderList "
 				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
-				+ "WHERE orderList.customer_id = ? "
-				+ "GROUP BY commodity.commodity_id, commodity.commodity_name "
+				+ "WHERE orderList.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
 				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setInt(1, id);
-			
+
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
 				return rs.getString("commodity.commodity_name");
-			}
-			else {
+			} else {
 				throw new SQLException("IDが存在しません" + id);
 			}
 		}
 	}
+
+	public String getModeOrderByCustomerId(int id) {
+		String result = "";
+		String sql = "SELECT commodity.commodity_name " + "FROM orderList "
+				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
+				+ "WHERE orderList.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
+				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, id);
+
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getString("commodity.commodity_name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+
 	private String getModeTopicByCustomerId(Connection conn, int id) throws SQLException {
-		String sql = "SELECT topic_tag.topic_name "
-				+ "FROM talk "
-				+ "JOIN topic_tag on talk.topic_id = topic_tag.topic_id "
-				+ "WHERE talk.customer_id = ? "
-				+ "GROUP BY topic_tag.topic_id, topic_tag.topic_name "
-				+ "ORDER BY COUNT(*) DESC "
-				+ "LIMIT 1";
+		String sql = "SELECT topic_tag.topic_name " + "FROM talk "
+				+ "JOIN topic_tag on talk.topic_id = topic_tag.topic_id " + "WHERE talk.customer_id = ? "
+				+ "GROUP BY topic_tag.topic_id, topic_tag.topic_name " + "ORDER BY COUNT(*) DESC " + "LIMIT 1";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setInt(1, id);
-			
+
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
 				return rs.getString("topic_tag.topic_name");
-			}
-			else {
+			} else {
 				throw new SQLException("IDが存在しません" + id);
 			}
 		}
