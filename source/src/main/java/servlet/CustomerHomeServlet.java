@@ -17,7 +17,6 @@ import dto.Customer;
 import dto.KeepBottle;
 import dto.Talk;
 
-
 @WebServlet("/CustomerHomeServlet")
 public class CustomerHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +35,7 @@ public class CustomerHomeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
 
-		// ログインしていない場合はログイン画面へ
+		// ログインしていない場合はログイン画面へリダイレクト
 		if (loginCustomer == null) {
 			response.sendRedirect("/D3/LoginServlet");
 			return;
@@ -47,16 +46,12 @@ public class CustomerHomeServlet extends HttpServlet {
 		request.setAttribute("nickname", nickname);
 
 		// お知らせ取得（最新3件）
-		List<Talk> noticeList = TalkDAO.selectLatest(3);
+		List<Talk> talkList = TalkDAO.selectLatest(3);
 		request.setAttribute("talkList", talkList);
 
 		// キープボトル情報取得
 		List<KeepBottle> bottleList = KeepBottleDAO.selectByCustomerId(loginCustomer.getId());
 		request.setAttribute("bottleList", bottleList);
-
-		// ドリンクランキング（TOP3）
-		List<Ranking> rankingList = RankingDAO.selectTopDrinks(3);
-		request.setAttribute("rankingList", rankingList);
 
 		// 顧客ホーム画面へフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customer_home.jsp");
