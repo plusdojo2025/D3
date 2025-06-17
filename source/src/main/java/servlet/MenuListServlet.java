@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CommodityDAO;
 import dto.Commodity;
@@ -21,25 +22,51 @@ public class MenuListServlet extends HttpServlet {
 			throws ServletException, IOException {
 				
 		request.setCharacterEncoding("UTF-8");
-		String categoryIdStr = request.getParameter("category");//商品の種類をボタンで管理
-		int category_id=3;
-		if(categoryIdStr!=null) {
+		HttpSession session = request.getSession();
+		String categoryIdStr = (String)session.getAttribute("category");//商品の種類をボタンで管理
+		request.getParameter("category");//商品の種類をボタンで管理
+		// リクエストスコープにデータを格納する
 		
-			if(categoryIdStr.equals("cocktail")) {
+
+		int category_id=3;
+		if(request.getParameter("category")!=null) {
+		
+			if(request.getParameter("category").equals("cocktail")) {
 				category_id=3;
+				session.setAttribute("category", request.getParameter("category"));
 			}	
-			else if(categoryIdStr.equals("whisky")) {
+			else if(request.getParameter("category").equals("whisky")) {
 				category_id=2;
+				session.setAttribute("category", request.getParameter("category"));
 			}
-			else if(categoryIdStr.equals("beer")) {
+			else if(request.getParameter("category").equals("beer")) {
 				category_id=4;
+				session.setAttribute("category", request.getParameter("category"));
 			}
-			else if(categoryIdStr.equals("food")) {
+			else if(request.getParameter("category").equals("food")) {
 				category_id=1;
+				session.setAttribute("category", request.getParameter("category"));
 				}
 			}
-			else {
-				category_id=3;
+			else if(categoryIdStr!=null){
+				
+				if(categoryIdStr.equals("cocktail")) {
+					category_id=3;
+					
+				}	
+				else if(categoryIdStr.equals("whisky")) {
+					category_id=2;
+					
+				}
+				else if(categoryIdStr.equals("beer")) {
+					category_id=4;
+					
+				}
+				else if(categoryIdStr.equals("food")) {
+					category_id=1;
+					
+					}
+				
 			}
 		
 
@@ -58,7 +85,7 @@ public class MenuListServlet extends HttpServlet {
 		int[]pagenumber=new int[page];
 		
 		
-		//まだ存在しないページが表示されるため途中
+		//
 		if(request.getParameter("number")!=null) {
 			int num=Integer.parseInt(request.getParameter("number"));
 			menuList = dao.selectByCategoryWithPage(category_id, num, 9);//何ページ目かと一枚当たりのデータ数
