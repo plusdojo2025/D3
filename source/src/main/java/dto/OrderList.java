@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class OrderList implements Serializable{
 
 	private int order_id;//注文ID 
-	private int customer_id;//顧客ID
-	private int commodity_id;//商品ID
+	private Customer customer;//顧客ID
+	private Commodity commodity;//商品ID
 	private String order_datetime;//日時
 	private int order_quantity;//個数
 	
 	
-	public OrderList(int order_id, int customer_id,int commodity_id, String order_datetime, int order_quantity) {
+	public OrderList(int order_id, Customer customer, Commodity commodity, String order_datetime, int order_quantity) {
 		super();
 		this.order_id = order_id;
-		this.customer_id = customer_id;
-		this.commodity_id = commodity_id;
+		this.customer = customer;
+		this.commodity = commodity;
 		this.order_datetime = order_datetime;
 		this.order_quantity = order_quantity;
 	}
@@ -23,8 +23,8 @@ public class OrderList implements Serializable{
 	public OrderList() {
 		super();
 		this.order_id = 0;
-		this.customer_id = 0;
-		this.commodity_id = 0;
+		this.customer = new Customer();
+		this.commodity = new Commodity(0, "", 0, 0, "");
 		this.order_datetime = "";
 		this.order_quantity = 0;
 	}
@@ -39,19 +39,19 @@ public class OrderList implements Serializable{
 	
 	
 	
-	public int getCustomer_id() {
-		return customer_id;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public int getCommodity_id() {
-		return commodity_id;
+	public Commodity getCommodity() {
+		return commodity;
 	}
-	public void setCommodity_id(int commodity_id) {
-		this.commodity_id = commodity_id;
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
 	}
 	public String getOrder_datetime() {
 		return order_datetime;

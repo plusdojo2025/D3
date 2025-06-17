@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.Cart;
+import dto.OrderList;
 
 @WebServlet("/OrderSubmitServlet")
 @SuppressWarnings("unchecked")
@@ -26,9 +26,9 @@ public class OrderSubmitServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
-		List<Cart> orderList = new ArrayList<Cart>();
+		List<OrderList> orderList = new ArrayList<OrderList>();
 		if (request.getAttribute("orderList") != null) {
-			orderList = (List<Cart>) request.getAttribute("orderList");
+			orderList = (List<OrderList>) request.getAttribute("orderList");
 
 			HttpSession session = request.getSession();
 			session.setAttribute("orderList", orderList);

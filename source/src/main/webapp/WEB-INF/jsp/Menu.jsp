@@ -46,7 +46,7 @@
 		<table>
 			
 			<tr>
-				<td><img src="${menu.commodity_image}" alt="メニュー"></td>
+				<td><img src="/D3/img/${menu.commodity_image}" alt="メニュー" width="150" height="150"></td>
 			</tr>
 			<tr>
 				<td>${menu.commodity_name}</td>
@@ -90,22 +90,18 @@
 
 
 
-<div>
+
 <br><br><br><br><br>
+	
 <form>
-<table>
-			
-<tr>
-<td><img src="変数" alt="変数未定義"></td>
-<tr>
-<td>ジントニック(変数)</td>
-</tr>
-<tr>
-<td>￥金額(変数)</td>
-</tr>
+<div>
+<p><img src="画像変数" alt="メニュー"></p>
+<p>商品名(変数)</p>
+<p>￥金額(変数)</p>
+</div>
 
 			
-</table>
+
 <select name="options">
     <option value="1">1</option>
     <option value="2">2</option>
@@ -121,7 +117,7 @@
 <input type=button value="キャンセル">
 
 </form>
-</div>
+
 
 </main>
 

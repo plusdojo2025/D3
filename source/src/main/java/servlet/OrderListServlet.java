@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CartDAO;
 import dao.OrderListDAO;
-import dto.Cart;
+import dto.Commodity;
+import dto.Customer;
 import dto.OrderList;
 
 @WebServlet("/OrderListServlet")
@@ -27,20 +27,15 @@ public class OrderListServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		List<Cart> cartList = new ArrayList<Cart>();
+		List<OrderList> orderList = new ArrayList<OrderList>();
 		if (session.getAttribute("orderList") != null) {
-			cartList = (List<Cart>) session.getAttribute("orderList");
+			orderList = (List<OrderList>) session.getAttribute("orderList");
 		}
-
-		CartDAO cartDAO = new CartDAO();
-		List<Cart> orderList = new ArrayList<Cart>();
-
-		for (Cart cart : cartList) {
-			int commodityId = cart.getCommodity().getCommodity_id();
-			cart.setCommodity(cartDAO.getCommodityById(commodityId));
-			orderList.add(cart);
-		}
-
+		
+		// テストデータ
+		OrderList order = new OrderList(0, new Customer(1, "", "", "", ""), new Commodity(1, "ビール中", 0, 0, ""), "", 3);
+		orderList.add(order);
+		
 		request.setAttribute("orderList", orderList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/OrderList.jsp");
 		dispatcher.forward(request, response);
@@ -50,21 +45,29 @@ public class OrderListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		String[] customerIds = request.getParameterValues("customerId");
 		String[] commodityIds = request.getParameterValues("commodityId");
 		String[] quantitys = request.getParameterValues("commodityQuantity");
 
-		List<OrderList> orderListArray = new ArrayList<OrderList>();
-		for (int i = 0; i < commodityIds.length; i++) {
-			OrderList orderList = new OrderList();
-			orderList.setCommodity_id(Integer.parseInt(commodityIds[i]));
-			orderList.setOrder_quantity(Integer.parseInt(quantitys[i]));
-			orderListArray.add(orderList);
-		}
-
 		OrderListDAO orderListDAO = new OrderListDAO();
-		orderListDAO.insert(orderListArray);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuServlet");
+		List<OrderList> orderList = new ArrayList<OrderList>();
+		for (int i = 0; i < commodityIds.length; i++) {
+			OrderList order = new OrderList();
+			
+			int commodityId = Integer.parseInt(commodityIds[i]);
+			Commodity commodity = orderListDAO.getCommodityById(commodityId);
+			order.setCommodity(commodity);
+			
+			String customerName = orderListDAO.getCustomerNameById(Integer.parseInt(customerIds[i]));
+			order.setCustomer(new Customer(0, customerName, "", "", ""));
+			
+			order.setOrder_quantity(Integer.parseInt(quantitys[i]));
+			orderList.add(order);
+		}
+		orderListDAO.insert(orderList);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/StoreBusinessServlet");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuServlet");
 		dispatcher.forward(request, response);
 	}
 }
