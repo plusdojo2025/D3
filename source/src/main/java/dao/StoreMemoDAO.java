@@ -25,7 +25,7 @@ public class StoreMemoDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM StoreMemo" 
+			String sql = "SELECT * FROM store_memo " 
 					 +"WHERE store_date LIKE ? AND store_remark LIKE ? ORDER BY store_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -88,20 +88,21 @@ public class StoreMemoDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO StoreMemo (store_date,store_remark) VALUES (?, ?)";
+			String sql = "INSERT INTO store_memo (store_id,store_date,store_remark) VALUES (?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
+			pStmt.setInt(1, card.getStore_id());
 			if (card.getStore_date() != null) {
-				pStmt.setString(1, card.getStore_date());
+				pStmt.setString(2, card.getStore_date());
 			} else {
-				pStmt.setString(1, "");
+				pStmt.setString(2, "");
 			}
 			
 			if (card.getStore_remark() != null) {
-				pStmt.setString(2, card.getStore_remark());
+				pStmt.setString(3, card.getStore_remark());
 			} else {
-				pStmt.setString(2, "");
+				pStmt.setString(3, "");
 			}
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -141,7 +142,7 @@ public class StoreMemoDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "UPDATE StoreMemo SET store_date=?, store_remark=? WHERE store_id=?";
+			String sql = "UPDATE store_memo SET store_date=?, store_remark=? WHERE store_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -197,7 +198,7 @@ public class StoreMemoDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM StoreMemo WHERE store_id=?";
+			String sql = "DELETE FROM Store_Memo WHERE store_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
