@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import dto.OrderList;
@@ -31,17 +32,16 @@ public class OrderListDAO {
 					for(int i=0;i<order.size();i++) {
 						
 						// SQL文を準備する
-						String sql = "INSERT INTO OrderList VALUES (0, ?,NOW(), ?)";
+						String sql = "INSERT INTO OrderList VALUES (0, ?, ?,NOW(), ?)";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						// SQL文を完成させる
 						
 							pStmt.setInt(1, order.get(i).getCommodity_id());
 						
-							//Date today = Date.valueOf(LocalDate.now());
-							//pStmt.setDate(2, today);
+							pStmt.setInt(2, order.get(i).getCustomer_id());
 						
-							pStmt.setInt(2, order.get(i).getOrder_quantity());
+							pStmt.setInt(3, order.get(i).getOrder_quantity());
 						
 							
 
@@ -94,7 +94,7 @@ public class OrderListDAO {
 						
 						
 						String sql = "SELECT * FROM OrderList "
-								+ "WHERE order_id LIKE ? AND commodity_id LIKE ? AND order_datetime LIKE ? AND order_quantity LIKE ? "
+								+ "WHERE order_id LIKE ? AND customer_id LIKE ? AND commodity_id LIKE ? AND order_datetime LIKE ? AND order_quantity LIKE ? "
 								+ "ORDER BY order_datetime DESC";
 						
 						PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -106,20 +106,25 @@ public class OrderListDAO {
 						} else {
 							pStmt.setString(1, "%");
 						}
-						if (order.getCommodity_id() != -1) {//入力がなかった場合を-1として持ってきます
-							pStmt.setString(2,  String.valueOf(order.getCommodity_id()) );
+						if (order.getCustomer_id() != -1) {//入力がなかった場合を-1として持ってきます
+							pStmt.setString(2, String.valueOf(order.getCustomer_id()));
 						} else {
 							pStmt.setString(2, "%");
-						}
-						if (order.getOrder_datetime() != "") {
-							pStmt.setString(3, order.getOrder_datetime());
+						}	
+						if (order.getCommodity_id() != -1) {//入力がなかった場合を-1として持ってきます
+							pStmt.setString(3,  String.valueOf(order.getCommodity_id()) );
 						} else {
 							pStmt.setString(3, "%");
 						}
-						if (order.getOrder_quantity() != -1) {//入力がなかった場合を-1として持ってきます
-							pStmt.setString(4, String.valueOf(order.getOrder_quantity()));
+						if (order.getOrder_datetime() != "") {
+							pStmt.setString(4, order.getOrder_datetime());
 						} else {
 							pStmt.setString(4, "%");
+						}
+						if (order.getOrder_quantity() != -1) {//入力がなかった場合を-1として持ってきます
+							pStmt.setString(5, String.valueOf(order.getOrder_quantity()));
+						} else {
+							pStmt.setString(5, "%");
 						}
 							
 						// SQL文を実行し、結果表を取得する
@@ -130,6 +135,7 @@ public class OrderListDAO {
 							while (rs.next()) {
 								OrderList ord = new OrderList(
 										rs.getInt("order_id"), 
+										rs.getInt("customer_id"), 
 										rs.getInt("commodity_id"),
 										rs.getString("order_datetime"),
 										rs.getInt("order_quantity")													
@@ -163,13 +169,34 @@ public class OrderListDAO {
 			//指定された商品（日時）の個数を返す。
 					public int quantity(int commodity_id,String order_datetime) {
 						OrderListDAO dao = new OrderListDAO();
-						List<OrderList> list = dao.select_new(new OrderList(-1,commodity_id,order_datetime,-1));
+						List<OrderList> list = dao.select_new(new OrderList(-1,-1,commodity_id,order_datetime,-1));
 						int sum=0;
 						for(OrderList data:list) {	
 								sum+=data.getOrder_quantity();							
 						}							
 						return sum;
 					}
+					
+			//
+			//指定された顧客のいつもの商品IDを返す。
+			public int customerOrder(int customer_id) {
+				OrderListDAO dao = new OrderListDAO();
+				List<OrderList> list = dao.select_new(new OrderList(-1,customer_id,-1,"",-1));
+				int sum[]=new int[100];
+				Arrays.fill(sum, -1);
+				int max=0;
+				int id=-1;
+				for(OrderList data:list) {	
+					sum[data.getCommodity_id()]+=data.getOrder_quantity();					
+				}
+				for(int i=0;i<100;i++) {
+					if(sum[i]>max) {
+						max=sum[i];
+						id=i;
+					}
+				}
+				return id;
+			}
 					
 			
 			
