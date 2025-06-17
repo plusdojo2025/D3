@@ -9,28 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.Commodity;
-import dto.KeepBottole;
+import dto.KeepBottle;
 
-public class KeepBottoleDAO {
+
+public class KeepBottleDAO {
 	
-	public List<KeepBottole> select(KeepBottole keepBottole) {
-		List<KeepBottole> resultList = new ArrayList<KeepBottole>();
-		String sql = "SELECT commodity.commodity_name, bottole_remaining, bottole_rimit "
-				+ "FROM keep_bottole JOIN commodity ON keep_bottole.commodity_id = commodity.commodity_id "
+	public List<KeepBottle> select(KeepBottle keepBottle) {
+		List<KeepBottle> resultList = new ArrayList<KeepBottle>();
+		String sql = "SELECT commodity.commodity_name, bottle_remaining, bottle_rimit "
+				+ "FROM keep_bottle JOIN commodity ON keep_bottle.commodity_id = commodity.commodity_id "
 				+ "WHERE customer_id = ?";
 
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setInt(1, keepBottole.getCustomer().getCustomer_id());
+			pStmt.setInt(1, keepBottle.getCustomer().getCustomer_id());
 			
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
-				KeepBottole kb = new KeepBottole();
+				KeepBottle kb = new KeepBottle();
 				Commodity commodity = new Commodity(
 					0, rs.getString("commodity.commodity_name"), 0, 0, "");
 				kb.setCommodity(commodity);
-				kb.setBottole_remaining(rs.getInt("bottole_remaining"));
-				kb.setBottole_rimit(rs.getTimestamp("bottole_rimit"));
-				resultList.add(keepBottole);
+				kb.setBottole_remaining(rs.getInt("bottle_remaining"));
+				kb.setBottole_rimit(rs.getTimestamp("bottle_rimit"));
+				resultList.add(keepBottle);
 			}
 			
 		} catch (SQLException e) {
@@ -41,18 +42,18 @@ public class KeepBottoleDAO {
 		return resultList;
 	}
 	
-	public boolean insert(KeepBottole keepBottole) {
-		String sql = "INSERT INTO keep_bottole (customer_id, commodity_id, bottole_remaining, bottole_rimit) "
+	public boolean insert(KeepBottle keepBottle) {
+		String sql = "INSERT INTO keep_bottle (customer_id, commodity_id, bottle_remaining, bottle_rimit) "
 				+ "VALUES (?, ?, ?, ?)";
 		
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			String commodityName = keepBottole.getCommodity().getCommodity_name();
+			String commodityName = keepBottle.getCommodity().getCommodity_name();
 			int commodityId = getCommodityIdByName(conn, commodityName);
 		
-			pStmt.setInt(1, keepBottole.getCustomer().getCustomer_id());
+			pStmt.setInt(1, keepBottle.getCustomer().getCustomer_id());
 			pStmt.setInt(2, commodityId);
-			pStmt.setInt(3, keepBottole.getBottole_remaining());
-			pStmt.setTimestamp(4, keepBottole.getBottole_rimit());
+			pStmt.setInt(3, keepBottle.getBottole_remaining());
+			pStmt.setTimestamp(4, keepBottle.getBottole_rimit());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
@@ -78,13 +79,13 @@ public class KeepBottoleDAO {
 		}
 	}
 	
-	public boolean update(KeepBottole keepBottole) {
-		String sql = "UPDATE keep_bottole SET "
-				+ "bottole_remaining = ? "
-				+ "WHERE bottole_id = ?";
+	public boolean update(KeepBottle keepBottle) {
+		String sql = "UPDATE keep_bottle SET "
+				+ "bottle_remaining = ? "
+				+ "WHERE bottle_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setInt(1, keepBottole.getBottole_remaining());
-			pStmt.setInt(2, keepBottole.getBottole_id());
+			pStmt.setInt(1, keepBottle.getBottole_remaining());
+			pStmt.setInt(2, keepBottle.getBottole_id());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
@@ -97,10 +98,10 @@ public class KeepBottoleDAO {
 		return false;
 	}
 	
-	public boolean delete(KeepBottole keepBottole) {
+	public boolean delete(KeepBottle keepBottle) {
 		String sql = "DELETE FROM keep_bottole WHERE bottole_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setInt(1, keepBottole.getBottole_id());
+			pStmt.setInt(1, keepBottle.getBottole_id());
 			
 			if (pStmt.executeUpdate() == 1) {
 				return true;
