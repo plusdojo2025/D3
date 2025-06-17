@@ -15,7 +15,7 @@
   <!-- メイン（ここまで） -->
   <!-- フッター（ここから） -->
   <div id="footer">
-    <p>&copy;Copyright plusDOJO(SE plus). All rights reserved.</p>
+    <p>&copy;おかゆ</p>
   </div>
   <!-- フッター（ここまで） -->
 </body>
