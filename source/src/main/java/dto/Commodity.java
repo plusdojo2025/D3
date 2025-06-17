@@ -10,7 +10,7 @@ public class Commodity implements Serializable{
 	private int commodity_category;	/*カテゴリ*/
 	private String commodity_image;	/*イメージ*/
 	
-	
+	public Commodity() {}
 
 	public Commodity(int commodity_id, String commodity_name, int commodity_price, int commodity_category,
 			String commodity_image) {
