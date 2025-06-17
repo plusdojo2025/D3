@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.Talk;
+
 public class TalkDAO {
 	// 引数card指定された項目で検索して、取得されたデータのリストを返す
 	public List<Talk> select(Talk card) {
@@ -23,7 +25,7 @@ public class TalkDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM StoreMemo " 
+			String sql = "SELECT * FROM Talk " 
 					 +"WHERE topic_id LIKE ? AND talk_remark LIKE ? ORDER BY customer_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -90,16 +92,22 @@ public class TalkDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			if (card.getTopic_id() != null) {
-				pStmt.setString(1, card.getTopic_id());
+			if (card.getCustomer_id() != null) {
+			    pStmt.setInt(1, card.getCustomer_id());
 			} else {
-				pStmt.setString(1, "");
+			    pStmt.setNull(1, java.sql.Types.INTEGER);
 			}
-			
-			if (card.getTalk_remark() != null) {
-				pStmt.setString(2, card.getTalk_remark());
+
+			if (card.getTopic_id() != null) {
+			    pStmt.setInt(2, card.getTopic_id());
 			} else {
-				pStmt.setString(2, "");
+			    pStmt.setNull(2, java.sql.Types.INTEGER);
+			}
+
+			if (card.getTalk_remark() != null) {
+			    pStmt.setString(3, card.getTalk_remark());
+			} else {
+			    pStmt.setString(3, "");
 			}
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -144,7 +152,7 @@ public class TalkDAO {
 
 			// SQL文を完成させる
 			if (card.getTopic_id() != null) {
-				pStmt.setString(1, card.getTopic_id());
+				pStmt.setInt(1, card.getTopic_id());
 			} else {
 				pStmt.setString(1, "");
 			}
