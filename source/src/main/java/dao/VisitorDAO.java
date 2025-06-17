@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +15,14 @@ import dto.Visitor;
 
 public class VisitorDAO {
 
-	public List<Visitor> getVisitorByCustomerId(Timestamp ts) {
-		String sql = "SELECT customer.customer_name, customer.customer_id " + "FROM orderList "
-				+ "JOIN customer on orderList.customer_id = customer.customer_id" + "WHERE ? < order_datetime";
+	public List<Visitor> getVisitorByDate(String date) {
+		String sql = "SELECT customer.customer_name, customer.customer_id "
+				+ "FROM orderList "
+				+ "JOIN customer on orderList.customer_id = customer.customer_id "
+				+ "WHERE order_datetime >= ? "
+				+ "GROUP BY customer.customer_name, customer.customer_id";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
-			pStmt.setTimestamp(1, ts);
+			pStmt.setString(1, date);
 
 			ResultSet rs = pStmt.executeQuery();
 			List<Visitor> visitorList = new ArrayList<Visitor>();
