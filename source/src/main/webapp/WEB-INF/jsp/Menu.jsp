@@ -1,7 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="dto.Cart" %>
+<%@ page import="dto.Commodity" %>
+<%@ page import="dao.CartDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 
+<%@ page session="true" %>
+<%
+    List<Cart> cart = (List<Cart>) session.getAttribute("cart");
+    if (cart == null) {
+        cart = new ArrayList<Cart>();
+        session.setAttribute("cart", cart);
+    }
+
+    String action = request.getParameter("action");
+    String product = request.getParameter("product");
+
+    if ("add".equals(action) && product != null) {
+    	int id=Integer.parseInt(request.getParameter("id"));
+    	String name=request.getParameter("name");
+    	int price=Integer.parseInt(request.getParameter("price"));
+    	int category=Integer.parseInt(request.getParameter("category"));
+    	String image=request.getParameter("image");
+    	
+    	int num=Integer.parseInt(request.getParameter("num"));
+    	CartDAO dao = new CartDAO();
+    	Commodity data=dao.getCommodityById(id);
+    	cart.add(new Cart(data,num));
+    	session.setAttribute("cart", cart);
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +100,7 @@
 </table>
 </div>
 
-<form method="POST" action="/D3/OrderSubmitServlet">
+<form method="post" action="<%= request.getContextPath() %>/OrderSubmitServlet">
 <input type=submit value="注文する">
 </form>
 
@@ -92,17 +122,23 @@
 
 
 <br><br><br><br><br>
-	
-<form>
-<div>
-<p><img src="画像変数" alt="メニュー"></p>
-<p>商品名(変数)</p>
-<p>￥金額(変数)</p>
-</div>
 
+
+<form method="get" action="#">
+
+<p><img src="/D3/img/1.jpg" alt="メニュー"  width="150" height="150"></p>
+<input type="text" value="フライドポテト(変数)" name="name" readonly><br>
+<input type="text" value="￥770(変数)" name="price1" readonly><br>
+
+
+<input type="hidden" value="3" name="id" readonly>
+<input type="hidden" value="1gpg" name="image" readonly>
+<input type="hidden" value="770" name="price" readonly>
+<input type="hidden" value="1" name="category" readonly>
+<input type="hidden" name="action" value="add"><br>
 			
 
-<select name="options">
+<select name="num">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
