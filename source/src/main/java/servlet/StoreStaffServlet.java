@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,7 @@ public class StoreStaffServlet extends HttpServlet {
 		if(ins1==true) {
 			List<Event>sel = eventDao.select();
 			request.setAttribute("eventList",("新しいイベントを登録しました。"));
-			eventDao.showAllData(sel);
+			//eventDao.showAllData(sel);
 		}else {
 			
 		}
@@ -41,6 +42,9 @@ public class StoreStaffServlet extends HttpServlet {
 		
 		
 	//注文履歴
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
+		dispatcher.forward(request,response);
 	}
 
 }
