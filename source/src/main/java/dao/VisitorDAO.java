@@ -16,10 +16,8 @@ import dto.Visitor;
 public class VisitorDAO {
 
 	public List<Visitor> getVisitorByDate(String date) {
-		String sql = "SELECT customer.customer_name, customer.customer_id "
-				+ "FROM orderList "
-				+ "JOIN customer on orderList.customer_id = customer.customer_id "
-				+ "WHERE order_datetime >= ? "
+		String sql = "SELECT customer.customer_id, customer.customer_name, customer.customer_id " + "FROM orderList "
+				+ "JOIN customer on orderList.customer_id = customer.customer_id " + "WHERE order_datetime >= ? "
 				+ "GROUP BY customer.customer_name, customer.customer_id";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setString(1, date);
@@ -30,7 +28,9 @@ public class VisitorDAO {
 				int id = rs.getInt("customer.customer_id");
 
 				Visitor visitor = new Visitor();
+
 				Customer customer = new Customer();
+				customer.setCustomer_id(rs.getInt("customer_id"));
 				customer.setCustomer_name(rs.getString("customer_name"));
 				visitor.setCustomer(customer);
 
