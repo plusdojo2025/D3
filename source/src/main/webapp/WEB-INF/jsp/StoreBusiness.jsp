@@ -29,61 +29,63 @@
 		<h1>業務画面</h1>
 	</header>
 
-	<%-- 編集前です --%>
-	<button id="">O</button>
-	<button id="">X</button>
-	<div id="">
-		<a href="/D3/StoreBusiness">業務画面</a><br> <a href="/D3/StoreStaff">事務画面</a><br>
-		<a href="/D3/">ログアウト</a>
+	<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/HomeServlet">ホーム</a><br>
+		<a href="${pageContext.request.contextPath}/MenuServlet">メニュー</a><br> <a
+			href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a>
 	</div>
+	<p id="clock">time</p>
 
 
 	<main>
 
 		<div>
 			<h2>連絡事項</h2>
-
-			<ul>
-				<li>連絡１（変数）</li>
-				<li>連絡２（変数）</li>
-			</ul>
-		</div>
-
-		<%-- 仮でcss記入してます --%>
-		<h2>注文</h2>
-		<div
-			style="height: 100px; overflow-y: scroll; border: 1px solid #ccc;">
-			<div id="orderList">
-				<c:if test="${empty orderData}">
-					<p>注文なし</p>
+			<div id="visitors">
+				<c:if test="${empty visitors}">
+					<p>来店者なし</p>
 				</c:if>
-
-				<c:forEach var="order" items="${orderData}">
-					<div class="order">
-						${order.customer.customer_name}
-						${order.commodity.commodity_name}
-						${order.order_quantity}
-						<button class="deleteBtn" onclick="removeItem(this)">X</button>
-					</div>
+				
+				<c:forEach var="memo" items="${memoList}">
+				<div class="memo">
+				${memo.store_remark}
+				</div>
 				</c:forEach>
 			</div>
 		</div>
 
 		<%-- 仮でcss記入してます --%>
+		<h2>注文</h2>
+		<label> <input type="checkbox" id="showComplete">
+			完了も表示
+		</label>
+		<div id="orderList"></div>
+
+		<%-- 仮でcss記入してます --%>
 		<h2>来店者一覧</h2>
-		<div style="height: 100px; overflow-y: scroll; border: 1px solid #ccc;">
+		<div
+			style="height: 100px; overflow-y: scroll; border: 1px solid #ccc;">
 			<div id="visitors">
-			<c:if test="${empty visitors}">
-			<p>来店者なし</p>
-			</c:if>
-			
-			<c:forEach var="visitor" items="${visitors}">
-			<div class="visitor">
-			${visitor.customer.customer_name}
-			${visitor.commodity.commodity_name}
-			${visitor.topic.topic_name}
-			</div>
-			</c:forEach>
+				<c:if test="${empty visitors}">
+					<p>来店者なし</p>
+				</c:if>
+
+				<c:forEach var="visitor" items="${visitors}">
+					<div class="visitor">
+						<button class="toggleBtn">▽</button>
+						<a
+							href="${pageContext.request.contextPath}/CustomerListServlet?customerId=${visitor.customer.customer_id}">
+							${visitor.customer.customer_name}<br>
+						</a>
+						<div class="viditorDetails" style="display: none;">
+							${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
+							<button class="payment" onclick="postAndRedirectPayment(${visitor.customer.customer_id})">会計
+							</button>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</main>
@@ -94,10 +96,8 @@
 		</div>
 	</footer>
 
-
-
-
 	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 
 </html>

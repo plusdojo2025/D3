@@ -235,6 +235,81 @@ public class OrderListDAO {
 			return null;
 		}
 	}
+	
+	public List<OrderList> getTodayOrderByCustomerId(int id, String date) {
+		String sql = "SELECT order_id, order_datetime, order_quantity, customer.customer_name, commodity.commodity_name "
+				+ "FROM orderList "
+				+ "JOIN customer ON orderList.customer_id = customer.customer_id "
+				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
+				+ "WHERE orderList.customer_id = ? AND order_datetime >= ? "
+				+ "ORDER BY order_datetime DESC";
+		List<OrderList> orderList = new ArrayList<OrderList>();
+		
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, id);
+			pStmt.setString(2, date);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while (rs.next()) {
+				OrderList order = new OrderList();
+				
+				order.setOrder_id(rs.getInt("order_id"));
+				order.setOrder_datetime(rs.getString("order_datetime"));
+				order.setOrder_quantity(rs.getInt("order_quantity"));
+
+				Customer customer = new Customer();
+				customer.setCustomer_name(rs.getString("customer.customer_name"));
+				order.setCustomer(customer);
+				
+				Commodity commodity = new Commodity();
+				commodity.setCommodity_name(rs.getString("commodity.commodity_name"));
+				order.setCommodity(commodity);
+				
+				orderList.add(order);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderList;
+	}
+	public List<OrderList> getTodayOrderByStoreId(int id, String date) {
+		String sql = "SELECT order_id, order_datetime, order_quantity, customer.customer_name, commodity.commodity_name "
+				+ "FROM orderList "
+				+ "JOIN customer ON orderList.customer_id = customer.customer_id "
+				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
+				+ "WHERE orderList.store_id = ? AND order_datetime >= ? "
+				+ "ORDER BY order_datetime DESC";
+		List<OrderList> orderList = new ArrayList<OrderList>();
+		
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, id);
+			pStmt.setString(2, date);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while (rs.next()) {
+				OrderList order = new OrderList();
+				
+				order.setOrder_id(rs.getInt("order_id"));
+				order.setOrder_datetime(rs.getString("order_datetime"));
+				order.setOrder_quantity(rs.getInt("order_quantity"));
+
+				Customer customer = new Customer();
+				customer.setCustomer_name(rs.getString("customer.customer_name"));
+				order.setCustomer(customer);
+				
+				Commodity commodity = new Commodity();
+				commodity.setCommodity_name(rs.getString("commodity.commodity_name"));
+				order.setCommodity(commodity);
+				
+				orderList.add(order);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderList;
+	}
 
 	static {
 		try {
