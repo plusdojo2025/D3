@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,13 +62,13 @@ public class StoreStaffServlet extends HttpServlet {
 		message = "業務連絡の登録に失敗しました。";	
 		}
 		
-		
-
-		
 	//顧客一覧
 		
 		
 	//注文履歴
 	}
 
+	
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
+	
 }
