@@ -226,4 +226,58 @@ public class StoreMemoDAO {
 		// 結果を返す
 		return result;
 	}
+	
+	public List<StoreMemo> getStoreMemoByDate(int id, String date) {
+		Connection conn = null;
+		List<StoreMemo> memoList = new ArrayList<StoreMemo>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM store_memo " 
+					 +"WHERE store_id = ? AND store_date >= ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, id);
+			pStmt.setString(2, date);
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				StoreMemo stm = new StoreMemo(
+						rs.getInt("store_id"),
+						rs.getString("store_date"),
+						rs.getString("store_remark"));
+				memoList.add(stm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			memoList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			memoList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					memoList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return memoList;
+	}
 }
