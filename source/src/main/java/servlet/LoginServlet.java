@@ -18,64 +18,52 @@ import dto.Store;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
-        super();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
 
-        String userType = request.getParameter("userType"); // "store" または "customer"
+        String userType = request.getParameter("userType");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (email == null || email.isEmpty() ||
-            password == null || password.isEmpty() ||
-            userType == null || userType.isEmpty()) {
-            // 入力不足 → ログインページにフォワード
-            request.setAttribute("errorMsg", "メールアドレス、パスワード、ユーザー種別は必須です。");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        // 入力チェック
+        if (userType == null || email == null || password == null ||
+            email.isEmpty() || password.isEmpty()) {
+            request.setAttribute("errorMsg", "すべての項目を入力してください。");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
         HttpSession session = request.getSession();
 
         if ("store".equals(userType)) {
-            StoreDAO storeDAO = new StoreDAO();
-            Store store = storeDAO.login(email, password);
-
+            Store store = new StoreDAO().login(email, password);
             if (store != null) {
                 session.setAttribute("store", store);
                 response.sendRedirect("storeHome.jsp");
             } else {
-                request.setAttribute("errorMsg", "店舗：メールアドレスまたはパスワードが正しくありません。");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.setAttribute("errorMsg", "店舗ログイン失敗。メールアドレスまたはパスワードが間違っています。");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-
         } else if ("customer".equals(userType)) {
-            CustomerDAO customerDAO = new CustomerDAO();
-            Customer customer = customerDAO.login(email, password);
-
+            Customer customer = new CustomerDAO().login(email, password);
             if (customer != null) {
                 session.setAttribute("customer", customer);
                 response.sendRedirect("customerHome.jsp");
             } else {
-                request.setAttribute("errorMsg", "顧客：メールアドレスまたはパスワードが正しくありません。");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.setAttribute("errorMsg", "顧客ログイン失敗。メールアドレスまたはパスワードが間違っています。");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-
         } else {
             request.setAttribute("errorMsg", "不正なユーザー種別です。");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // GETでアクセスされたらログインページへフォワード
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        // GETリクエストはログインページに転送
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 }
