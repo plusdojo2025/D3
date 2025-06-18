@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CustomerDAO;
 import dao.KeepBottleDAO2;
-import dao.TalkDAO;
 import dto.Customer;
 import dto.Result;
 
@@ -30,7 +29,6 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 
 		CustomerDAO cDao = new CustomerDAO();
 		KeepBottleDAO2 kbDao = new KeepBottleDAO2();
-		TalkDAO talkDao = new TalkDAO();
 
 		String action = request.getParameter("action");
 
