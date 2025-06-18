@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.KeepBottleDAO;
-import dao.TalkDAO;
+import dao.EventDAO;
+import dao.KeepBottleDAO2;
 import dto.Customer;
+import dto.Event;
 import dto.KeepBottle;
-import dto.Talk;
 
 @WebServlet("/CustomerHomeServlet")
 public class CustomerHomeServlet extends HttpServlet {
@@ -42,15 +42,17 @@ public class CustomerHomeServlet extends HttpServlet {
 		}
 
 		// ニックネーム表示用にセット
-		String nickname = loginCustomer.getNickname();
+		String nickname = loginCustomer.getCustomer_name();
 		request.setAttribute("nickname", nickname);
 
 		// お知らせ取得（最新3件）
-		List<Talk> talkList = TalkDAO.selectLatest(3);
-		request.setAttribute("talkList", talkList);
+		EventDAO dao = new EventDAO();
+		List<Event> eventList =dao.select();
+		request.setAttribute("eventList", eventList);
 
 		// キープボトル情報取得
-		List<KeepBottle> bottleList = KeepBottleDAO.selectByCustomerId(loginCustomer.getId());
+		KeepBottleDAO2 dao2 = new KeepBottleDAO2();
+		List<KeepBottle> bottleList = dao2.selectByCustomerId(loginCustomer.getCustomer_id());
 		request.setAttribute("bottleList", bottleList);
 
 		// 顧客ホーム画面へフォワード
