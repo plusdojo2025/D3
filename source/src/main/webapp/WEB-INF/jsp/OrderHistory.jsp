@@ -1,7 +1,7 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -15,8 +15,14 @@
 
 <body>
 
+
+<p id="clock">time</p>
+
+<a href="/D3/StoreStaffServlet">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" width="200" height="100">
+</a>
+
 <header>
-	<h1>注文履歴</h1>
 </header>
 
 
@@ -141,8 +147,10 @@
 </div>
 </footer>
 
-
-
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
 
 </body>
+
+
+
 </html>
