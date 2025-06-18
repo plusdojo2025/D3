@@ -5,25 +5,25 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.KeepBottoleDAO;
+import dao.KeepBottleDAO;
 import dto.Commodity;
 import dto.Customer;
-import dto.KeepBottole;
+import dto.KeepBottle;
 
-public class KeepBottoleDAOTest {
+public class KeepBottleDAOTest {
 
-	public static void showAllData(List<KeepBottole> keepBottole) {
-		for (KeepBottole kb : keepBottole) {
-			System.out.println(kb.getBottole_id());
-			System.out.println(kb.getBottole_remaining());
-			System.out.println(kb.getBottole_rimit());
+	public static void showAllData(List<KeepBottle> keepBottle) {
+		for (KeepBottle kb : keepBottle) {
+			System.out.println(kb.getBottle_id());
+			System.out.println(kb.getBottle_remaining());
+			System.out.println(kb.getBottle_rimit());
 			System.out.println();
 		}
 	}
 	
 	public static void main(String[] args) {
-		KeepBottoleDAO dao = new KeepBottoleDAO();
-		KeepBottole kb = new KeepBottole();
+		KeepBottleDAO dao = new KeepBottleDAO();
+		KeepBottle kb = new KeepBottle();
 		Customer customer = new Customer();
 		customer.setCustomer_id(1);
 		Commodity commodity = new Commodity(1, "ビール中", 100, 1, "");
@@ -31,7 +31,7 @@ public class KeepBottoleDAOTest {
 
 		// select
 		System.out.println("select test");
-		List<KeepBottole> list= new ArrayList<KeepBottole>();
+		List<KeepBottle> list= new ArrayList<KeepBottle>();
 		list = dao.select(kb);
 		System.out.println(list);
 		
@@ -39,15 +39,15 @@ public class KeepBottoleDAOTest {
 		System.out.println("insert test");
 		kb.setCustomer(customer);
 		kb.setCommodity(commodity);
-		kb.setBottole_remaining(100);
-		kb.setBottole_rimit(Timestamp.valueOf(LocalDateTime.now()));
+		kb.setBottle_remaining(100);
+		kb.setBottle_rimit(Timestamp.valueOf(LocalDateTime.now()));
 		boolean result = dao.insert(kb);
 		System.out.println(result);
 		
 		// update
 		System.out.println("update test");
-		kb.setBottole_id(1);
-		kb.setBottole_remaining(50);
+		kb.setBottle_id(1);
+		kb.setBottle_remaining(50);
 		result = dao.update(kb);
 		System.out.println(result);
 		
