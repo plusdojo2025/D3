@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.OrderList;
+import dto.Cart;
 
 @WebServlet("/OrderSubmitServlet")
+
 @SuppressWarnings("unchecked")
 
 public class OrderSubmitServlet extends HttpServlet {
@@ -22,17 +22,19 @@ public class OrderSubmitServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		
+		List<Cart> cart = (List<Cart>) session.getAttribute("cart");
+		
+		if (cart != null) {
+			response.sendRedirect(request.getContextPath() + "/OrderListServlet");
+			//RequestDispatcher dispatcher = request.getRequestDispatcher("/OrderListServlet");
+			//dispatcher.forward(request, response);
 
-		List<OrderList> orderList = new ArrayList<OrderList>();
-		if (request.getAttribute("orderList") != null) {
-			orderList = (List<OrderList>) request.getAttribute("orderList");
-
-			HttpSession session = request.getSession();
-			session.setAttribute("orderList", orderList);
-			response.sendRedirect("/OrderListServlet");
+			
 		} else {
 			// MenuListServletにリダイレクトする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuListServlet");
