@@ -96,9 +96,6 @@
 		</div>
 	</footer>
 
-
-
-
 	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>

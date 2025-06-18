@@ -17,17 +17,10 @@ import dao.VisitorDAO;
 import dto.OrderList;
 import dto.Visitor;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/VisitorOrderServlet")
 public class VisitorOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -35,8 +28,7 @@ public class VisitorOrderServlet extends HttpServlet {
 		String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 		VisitorDAO visitorDAO = new VisitorDAO();
         OrderListDAO orderListDAO = new OrderListDAO();
-        // TODO 削除
-        date = "2025-06-17";
+
         List<Visitor> visitors = visitorDAO.getVisitorByDate(date);
         for (Visitor v: visitors) {
         	List<OrderList> orders = orderListDAO.getTodayOrderByCustomerId(v.getCustomer().getCustomer_id(), date);

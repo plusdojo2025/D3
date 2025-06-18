@@ -17,17 +17,10 @@ import dao.VisitorDAO;
 import dto.StoreMemo;
 import dto.Visitor;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/StoreBusinessServlet")
 public class StoreBusinessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -36,14 +29,12 @@ public class StoreBusinessServlet extends HttpServlet {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String date = dateFormat.format(timestamp);
 		// TODO 現時点注文済みの客の情報のみ表示
-
-		date = "2025-06-17";
 		VisitorDAO dao = new VisitorDAO();
 		List<Visitor> visitor = dao.getVisitorByDate(date);
 
 		request.setAttribute("visitors", visitor);
 
-		// TODO 連絡事項
+		// 連絡事項
 		int storeId = 1;
 		StoreMemoDAO storeMemoDAO = new StoreMemoDAO();
 		List<StoreMemo> memoList = storeMemoDAO.getStoreMemoByDate(storeId, date);
@@ -52,21 +43,5 @@ public class StoreBusinessServlet extends HttpServlet {
 		// 業務画面ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 業務画面ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
-		dispatcher.forward(request, response);
-
-		// ○○ページにフォワードする
-		// RequestDispatcher dispatcher =
-		// request.getRequestDispatcher("/WEB-INF/jsp/○○.jsp");
-		// dispatcher.forward(request, response);
 	}
 }
