@@ -38,6 +38,13 @@ public class StoreStaffServlet extends HttpServlet {
 		}else {
 		message = "イベントの登録に失敗しました。";	
 		}
+		//イベント更新
+		/*if (request.getParameter("update").equals("更新")) {
+			if(eventDao.update(new Event(0, 0, eventdate,eventname,eventremark))) {
+				message = ("イベント内容を更新しました。");
+			}
+		}*/
+
 		
 		//業務連絡登録
 		request.setCharacterEncoding("UTF-8");
@@ -45,6 +52,7 @@ public class StoreStaffServlet extends HttpServlet {
 		String storeremark = request.getParameter("store_remark");
 		
 		StoreMemoDAO storemDao = new StoreMemoDAO();
+		
 		
 		
 
