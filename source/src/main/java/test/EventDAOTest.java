@@ -33,6 +33,8 @@ public class EventDAOTest {
 		System.out.println("---------- insert(Event event)のテスト1 ----------");
 		boolean ins1 = dao.insert(new Event(0,1,null,"ハロウィン","仮装したらドリンクプレゼント"));
 		System.out.println(ins1);
+		List<Event> sel2 = dao.select();
+		EventDAOTest.showAllData(sel2);
 		
 		System.out.println("---------- insert(Event event)のテスト2 ----------");
 		boolean ins2 = dao.insert(new Event(0,1,null,"正月","くじ引きあり"));
