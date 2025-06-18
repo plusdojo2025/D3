@@ -12,12 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Accounting")
 public class AccountingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().println("<h2>このページはフォームからのPOST送信専用です。</h2>");
+    }
+	 // POSTリクエストの処理（フォーム送信された場合など）
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
 		// 商品名と価格のパラメータを受け取る
 		String[] commodity_name = request.getParameterValues("commodity_name");//商品の名前
 		String[] commodity_price = request.getParameterValues("commodity_price");//商品の値段
