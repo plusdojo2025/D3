@@ -3,20 +3,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>店舗事務画面</title>
+<title>BARLOOP/店舗事務</title>
 </head>
+
+
 <body>
- <h2>顧客検索</h2>
-<hr>
+<header>
+<h2>店舗事務画面</h2>
+</header>
+
+<main>
+<div>
+イベント
+<form>
+	<input type="text" name="event" placeholder="イベント名">
+	<input type="text" name="event" placeholder="備考">
+	<input type="date" name="event" >
+	<input type="submit" name="event">
+</form>
+</div>
+
+<div>
+業務連絡
+<form>
+	<input type="text" name="info" placeholder="連絡内容">
+	<input type="date" name="info" >
+	<input type="submit" name="info">
+</form>
+<br><br><br><br>
+</div>
+
+
+
+<div>
+<a href="/D3/CustomerListServlet">
+<button>顧客リスト</button>
+</a>
 <form method="POST" action="/D3/CustomerListServlet">
-ユーザーネーム<input type="text" name="customer_name"><br>
+<input type="text" name="customer_name" placeholder="ニックネーム"><br>
+<input type="text" name="customer_name" placeholder="いつもの"><br>
+
 <input type="submit" name="submit" value="検索"><br>
 </form>
-  <!-- メイン（ここまで） -->
-  <!-- フッター（ここから） -->
-  <div id="footer">
-    <p>&copy;おかゆ</p>
-  </div>
-  <!-- フッター（ここまで） -->
+<br>
+</div>
+
+<div>
+<p>今日来店したお客様</p>
+<ul>
+<li>ニックネーム（変数）</li>
+<li>ニックネーム（変数）</li>
+</ul>
+<br><br><br><br><br>
+</div>
+	
+<div>
+<a href="/D3/OrderHistoryServlet">
+<button>注文履歴</button>
+</a>
+</div>
+	
+</main>
+
+<footer>
+<div id="footer">
+<p>&copy;おかゆ</p>
+</div>
+</footer>
+
 </body>
+
+
 </html>
