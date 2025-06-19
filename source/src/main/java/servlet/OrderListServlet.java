@@ -72,8 +72,7 @@ public class OrderListServlet extends HttpServlet {
 			orderList.add(order);
 		}
 		orderListDAO.insert(orderList);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/StoreBusinessServlet");
-		dispatcher.forward(request, response);
+
+		response.sendRedirect(request.getContextPath() + "/MenuListServlet");
 	}
 }
