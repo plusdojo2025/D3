@@ -39,7 +39,7 @@
 <a href="/D3/CustomerListServlet">
 <button>顧客リスト</button>
 </a>
-<form method="POST" action="/D3/CustomerListServlet">
+<form method="POST" action="/D3/StoreStaffServlet">
 <input type="text" name="customer_name" placeholder="ニックネーム"><br>
 <input type="text" name="customer_name" placeholder="いつもの"><br>
 
