@@ -14,6 +14,13 @@ public class Talk implements Serializable {
 		this.topic_id = topic_id;
 		this.talk_remark = talk_remark;
 	}
+	// null 許容のコンストラクタ
+	public Talk(Integer customer_id, Integer topic_id, String talk_remark) {
+	    this.customer_id = customer_id;
+	    this.topic_id = topic_id;
+	    this.talk_remark = talk_remark;
+	}
+
 
 // ゲッター／セッター
 	public Integer getCustomer_id() {

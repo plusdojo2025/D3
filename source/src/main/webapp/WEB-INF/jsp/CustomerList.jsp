@@ -26,27 +26,24 @@
 	
 
 	<p>会話内容:</p>
-	<c:forEach var="t" items="${talkList}">
-		<c:if test="${t.customer_id == e.customer_id}">
-        ・<strong>タグ:</strong>
-			<select name="talk_topic_id_${t.topic_id}">
-				<c:forEach var="tag" items="${topicTagList}">
-					<option value="${tag.topic_id}"
-						<c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>${tag.topic_name}</option>
-				</c:forEach>
-			</select>
-			<br>
-        ・<strong>内容:</strong>
-			<input type="text" name="talk_remark_${t.topic_id}"
-				value="${t.talk_remark}">
-			<br>
-			<button type="submit" name="action" value="update_talk_${t.topic_id}">会話更新</button>
-			<button type="submit" name="action" value="delete_talk_${t.topic_id}"
-				onclick="return confirm('削除しますか？');">会話削除</button>
-			<br>
-			<br>
-		</c:if>
-	</c:forEach>
+	<c:forEach var="t" items="${talkMap[e.customer_id]}">
+    ・<strong>会話タグ:</strong>
+    <select name="talk_topic_id_${t.topic_id}">
+        <c:forEach var="tag" items="${topicTagList}">
+            <option value="${tag.topic_id}" <c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>
+                ${tag.topic_name}
+            </option>
+        </c:forEach>
+    </select>
+    <br>
+    ・<strong>内容:</strong>
+    <input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}">
+    <br>
+    <button type="submit" name="action" value="update_talk_${t.topic_id}">会話更新</button>
+    <button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');">会話削除</button>
+    <br><br>
+</c:forEach>
+
 
 	<!-- 新規登録欄 -->
 	<p>会話新規登録:</p>

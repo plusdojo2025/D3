@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,88 +10,207 @@ import java.util.List;
 import dto.Talk;
 
 public class TalkDAO2 {
+	// 引数card指定された項目で検索して、取得されたデータのリストを返す
+	public List<Talk> select(Talk card) {
+	    Connection conn = null;
+	    List<Talk> cardList = new ArrayList<>();
 
-	static {
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
+
+	        // ★ customer_id を必須条件に加える
+	        String sql = "SELECT * FROM Talk WHERE customer_id = ?";
+
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+
+	        pStmt.setInt(1, card.getCustomer_id());
+
+	        ResultSet rs = pStmt.executeQuery();
+
+	        while (rs.next()) {
+	            Talk tk = new Talk(
+	                    rs.getInt("customer_id"),
+	                    rs.getInt("topic_id"),
+	                    rs.getString("talk_remark"));
+	            cardList.add(tk);
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        cardList = null;
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return cardList;
+	}
+
+
+	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean insert(Talk card) {
+		Connection conn = null;
+		boolean result = false;
+
 		try {
+			// JDBCドライバを読み込む
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 
-	private Connection connectDatabase() throws SQLException {
-		String url = "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9";
-		String user = "root";
-		String password = "password";
-		return DriverManager.getConnection(url, user, password);
-	}
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
-	// 全件取得
-	public List<Talk> selectAll() {
-		List<Talk> list = new ArrayList<>();
-		String sql = "SELECT customer_id, topic_id, talk_remark FROM talk";
-		try (Connection conn = connectDatabase();
-			 PreparedStatement ps = conn.prepareStatement(sql);
-			 ResultSet rs = ps.executeQuery()) {
+			// SQL文を準備する
+			String sql = "INSERT INTO Talk (customer_id, topic_id, talk_remark) VALUES (?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			while (rs.next()) {
-				Talk t = new Talk(
-					rs.getInt("customer_id"),
-					rs.getInt("topic_id"),
-					rs.getString("talk_remark")
-				);
-				list.add(t);
+			// SQL文を完成させる
+			if (card.getCustomer_id() != null) {
+			    pStmt.setInt(1, card.getCustomer_id());
+			} else {
+			    pStmt.setNull(1, java.sql.Types.INTEGER);
+			}
+
+			if (card.getTopic_id() != null) {
+			    pStmt.setInt(2, card.getTopic_id());
+			} else {
+			    pStmt.setNull(2, java.sql.Types.INTEGER);
+			}
+
+			if (card.getTalk_remark() != null) {
+			    pStmt.setString(3, card.getTalk_remark());
+			} else {
+			    pStmt.setString(3, "");
+			}
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		return list;
+
+		// 結果を返す
+		return result;
 	}
 
-	// 新規登録
-	public boolean insert(Talk talk) {
-		String sql = "INSERT INTO talk (customer_id, topic_id, talk_remark) VALUES (?, ?, ?)";
-		try (Connection conn = connectDatabase();
-			 PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setInt(1, talk.getCustomer_id());
-			ps.setInt(2, talk.getTopic_id());
-			ps.setString(3, talk.getTalk_remark());
-			int result = ps.executeUpdate();
-			return result == 1;
+	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
+	public boolean update(Talk card) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "UPDATE Talk SET topic_id=?, talk_remark=? WHERE customer_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			if (card.getTopic_id() != null) {
+				pStmt.setInt(1, card.getTopic_id());
+			} else {
+				pStmt.setNull(1, java.sql.Types.INTEGER);
+			}
+			
+			if (card.getTalk_remark() != null) {
+				pStmt.setString(2, card.getTalk_remark());
+			} else {
+				pStmt.setString(2, "");
+			}
+			
+			pStmt.setInt(3, card.getCustomer_id());
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+
+		// 結果を返す
+		return result;
 	}
 
-	// 更新
-	public boolean update(Talk talk) {
-		String sql = "UPDATE talk SET talk_remark = ? WHERE customer_id = ? AND topic_id = ?";
-		try (Connection conn = connectDatabase();
-			 PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setString(1, talk.getTalk_remark());
-			ps.setInt(2, talk.getCustomer_id());
-			ps.setInt(3, talk.getTopic_id());
-			int result = ps.executeUpdate();
-			return result == 1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
+	public boolean delete(Talk card) {
+		Connection conn = null;
+		boolean result = false;
 
-	// 削除
-	public boolean delete(Talk talk) {
-		String sql = "DELETE FROM talk WHERE customer_id = ? AND topic_id = ?";
-		try (Connection conn = connectDatabase();
-			 PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setInt(1, talk.getCustomer_id());
-			ps.setInt(2, talk.getTopic_id());
-			int result = ps.executeUpdate();
-			return result == 1;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM Talk WHERE customer_id=? AND topic_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, card.getCustomer_id());
+			pStmt.setInt(2, card.getTopic_id());
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+
+		// 結果を返す
+		return result;
 	}
 }
