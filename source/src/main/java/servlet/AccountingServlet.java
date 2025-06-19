@@ -44,7 +44,7 @@ public class AccountingServlet extends HttpServlet {
 			}
 		}
 			
-		// request にデータを格納して JSP に渡す
+		// requestにデータを格納してJSPに渡す
 		request.setAttribute("commodity_name",commodity_name );
 		request.setAttribute("commodity_price",commodity_price );
 		request.setAttribute("order_quantity",order_quantity );

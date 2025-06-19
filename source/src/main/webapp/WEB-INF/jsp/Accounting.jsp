@@ -56,9 +56,15 @@
             background: rgba(0,0,0,0.3);
             z-index: 9998;
         }
+
+        /* エラーメッセージスタイル */
+        #errorMessage {
+            color: red;
+            margin-top: 5px;
+        }
     </style>
 </head>
-<body>
+<body data-context="${pageContext.request.contextPath}">
 
 <h2>会計内容の確認</h2>
 
@@ -95,8 +101,11 @@
     <!-- 支払い方法フォーム -->
     <form id="paymentForm">
         <p>支払い方法を選択：</p>
-        <label><input type="radio" name="payment_method" value="現金" required> 現金</label><br>
-        <label><input type="radio" name="payment_method" value="paypay"> paypay</label><br><br>
+        <label><input type="radio" name="payment_method" value="現金"> 現金</label><br>
+        <label><input type="radio" name="payment_method" value="paypay"> paypay</label><br>
+
+        <!-- エラーメッセージ表示場所 -->
+        <div id="errorMessage"></div>
 
         <% for (int i = 0; i < commodity_name.length; i++) { %>
             <input type="hidden" name="commodity_name" value="<%= commodity_name[i] %>">
@@ -105,6 +114,7 @@
         <% } %>
         <input type="hidden" name="total" value="<%= total %>">
 
+        <br>
         <input type="button" value="会計を確定する" onclick="submitPayment()">
     </form>
 <% } else { %>
@@ -118,39 +128,8 @@
     <button onclick="closePopup()">閉じる</button>
 </div>
 
-<script>
-function submitPayment() {
-    const form = document.getElementById('paymentForm');
-    const formData = new FormData(form);
-
-    fetch('<%= request.getContextPath() %>/PaymentComplete', {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.text())
-    .then(html => {
-        document.getElementById('popupContent').innerHTML = html;
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    })
-    .catch(err => {
-        alert("エラーが発生しました：" + err);
-    });
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-
-    // 🔽 閉じた後にページ遷移する
-    window.location.href = '<%= request.getContextPath() %>/menu.jsp';
-}
-</script>
+<!-- 外部JSファイル読み込み -->
+<script src="js/Accounting.js"></script>
 
 </body>
 </html>

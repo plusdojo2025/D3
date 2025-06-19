@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.EventDAO;
+import dao.OrderListDAO;
 import dao.StoreMemoDAO;
 import dao.VisitorDAO;
 import dto.Event;
+import dto.OrderList;
 import dto.StoreMemo;
 import dto.Visitor;
+
 
 @WebServlet("/StoreStaffServlet")
 public class StoreStaffServlet extends HttpServlet {
@@ -47,7 +50,6 @@ public class StoreStaffServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		// e_actionリクエストパラメータを取得する（insert,update,deleteを区別する）
 		// イベント登録
 		String message = "";
 
@@ -84,11 +86,7 @@ public class StoreStaffServlet extends HttpServlet {
 		if (storedate != null && !storedate.equals("") && !storeremark.equals("")) {
 			StoreMemoDAO storemDao = new StoreMemoDAO();
 			boolean ins1 = storemDao.insert(new StoreMemo(0, storedate, storeremark));
-			if (ins1 == true) {
-				message = ("新しい業務連絡を登録しました。");
-			} else {
-				message = "業務連絡の登録に失敗しました。";
-			}
+			
 
 			if (ins1) {
 				// 空のStoreMemoを渡して全件取得（DAO変更なしで実現）
@@ -111,11 +109,20 @@ public class StoreStaffServlet extends HttpServlet {
 		// TODO 現時点注文済みの客の情報のみ表示
 		VisitorDAO dao = new VisitorDAO();
 		List<Visitor> visitor = dao.getVisitorByDate(dateString);
-		
-		
-
 		request.setAttribute("visitor", visitor);
+		
+		//ニックネーム検索
+		String searchName = request.getParameter("customer_name_search");
+		if(searchName != null &&!searchName.trim().isEmpty()) {
+			
+		}
 
+		//注文履歴
+		OrderListDAO orderDao = new OrderListDAO();
+		List<OrderList> order = orderDao.getTodayOrderByStoreId(0,dateString);
+		request.setAttribute("OrderList", order);
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
 		dispatcher.forward(request, response);
 	}
