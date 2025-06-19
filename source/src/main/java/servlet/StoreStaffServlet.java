@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CustomerDAO;
 import dao.EventDAO;
 import dao.OrderListDAO;
 import dao.StoreMemoDAO;
 import dao.VisitorDAO;
+import dto.Customer;
 import dto.Event;
 import dto.OrderList;
 import dto.StoreMemo;
@@ -114,7 +116,19 @@ public class StoreStaffServlet extends HttpServlet {
 		//ニックネーム検索
 		String searchName = request.getParameter("customer_name_search");
 		if(searchName != null &&!searchName.trim().isEmpty()) {
-			
+			Customer customer = new Customer();
+		    customer.setCustomer_name(searchName.trim());
+
+		    CustomerDAO customerDao = new CustomerDAO();
+		    List<Customer> customerList = customerDao.select(customer);
+
+		    request.setAttribute("customerList", customerList);
+		    request.setAttribute("every", customerList);
+		    
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
+		    dispatcher.forward(request, response);
+		    return;
+
 		}
 
 		//注文履歴
