@@ -1,1 +1,108 @@
 @charset "UTF-8";
+/* 共通設定 */
+html {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(227, 208, 149);
+    background-color: rgb(14, 33, 72);
+    text-align: center;
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 20px 0 60px 0;
+}
+
+/* ヘッダー */
+h1 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: rgb(227, 208, 149);
+}
+
+div[style*="text-align: right"] {
+    margin-bottom: 40px;
+}
+
+div[style*="text-align: right"] a {
+    color: rgb(227, 208, 149);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+div[style*="text-align: right"] a:hover {
+    text-decoration: underline;
+}
+
+/* セクション見出し */
+h2 {
+    color: rgb(227, 208, 149);
+    margin-bottom: 20px;
+}
+
+/* お知らせ・イベント・キープボトルの各ブロック */
+p, form {
+    background-color: rgba(14, 33, 72, 0.85);
+    border: 1px solid rgb(227, 208, 149);
+    padding: 15px 20px;
+    margin: 10px auto 25px auto;
+    max-width: 700px;
+    border-radius: 6px;
+    color: rgb(227, 208, 149);
+    text-align: left;
+    font-size: 16px;
+}
+
+/* キープボトルフォーム内のinputは読み取り専用だが見やすく */
+form input[type="text"] {
+    width: 100%;
+    background-color: rgb(14, 33, 72);
+    border: 1px solid rgb(227, 208, 149);
+    color: rgb(227, 208, 149);
+    padding: 7px 10px;
+    margin: 4px 0 10px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+/* もし空の場合のメッセージ */
+p:empty::before {
+    content: "情報がありません。";
+    color: rgb(227, 208, 149);
+    font-style: italic;
+}
+
+/* フッター */
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(14, 33, 72);
+    color: rgb(227, 208, 149);
+    padding: 20px 0;
+    font-size: 13px;
+    border-top: 1px solid rgb(227, 208, 149);
+}
+
+/* テーブル風に見せたい場合の例（もし使うなら） */
+.table-like {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 700px;
+}
+
+.table-like th,
+.table-like td {
+    border: 1px solid rgb(227, 208, 149);
+    padding: 10px 15px;
+    color: rgb(227, 208, 149);
+}
+
+.table-like th {
+    background-color: rgb(227, 208, 149);
+    color: rgb(14, 33, 72);
+    font-weight: bold;
+}

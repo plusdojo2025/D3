@@ -1,1 +1,86 @@
 @charset "UTF-8";
+/* すべてのページに適用される設定 */
+html {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(227, 208, 149);
+    background-color: rgb(14, 33, 72);
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 0;
+}
+
+/* フォーム共通設定 */
+form {
+    background-color: rgba(14, 33, 72, 0.85);
+    padding: 30px 25px;
+    margin: 30px auto;
+    width: 320px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(227, 208, 149);
+}
+
+/* フォーム内タイトル */
+form h2 {
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: rgb(227, 208, 149);
+}
+
+/* ラベルと入力 */
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+    width: 90%;
+    padding: 10px 8px;
+    margin-bottom: 18px;
+    border: 1px solid rgb(227, 208, 149);
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    color: rgb(14, 33, 72);
+    background-color: rgb(227, 208, 149);
+}
+
+/* ボタン（グラデーション＆ホバー） */
+button {
+    width: 95%;
+    padding: 12px 0;
+    margin-top: 10px;
+    background: linear-gradient(45deg, rgb(227, 208, 149), rgb(255, 240, 180));
+    border: none;
+    border-radius: 6px;
+    color: rgb(14, 33, 72);
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.35);
+    transition: background 0.3s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, rgb(255, 230, 120), rgb(255, 255, 200));
+    transform: scale(1.05);
+}
+
+/* ゲストログインのボタン幅調整 */
+.guest-login-btn {
+    width: 320px;
+    margin: 40px auto 0;
+    display: block;
+}
+
+/* エラーメッセージ（必要なら） */
+.error-message {
+    color: #ff6666;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
