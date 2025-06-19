@@ -25,9 +25,6 @@ public class CustomerHomeServlet extends HttpServlet {
 		super();
 	}
 
-	/**
-	 * 顧客ホーム画面表示（GETリクエスト対応）
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -41,29 +38,25 @@ public class CustomerHomeServlet extends HttpServlet {
 			return;
 		}
 
-		// ニックネーム表示用
+		// ニックネームの取得（customer_nameで代用）
 		String nickname = loginCustomer.getCustomer_name();
 		request.setAttribute("nickname", nickname);
 
-		// お知らせ取得（最新順で3件）
+		// お知らせ取得（最新順）
 		EventDAO eventDao = new EventDAO();
-		List<Event> eventList = eventDao.select(); 
+		List<Event> eventList = eventDao.select();
 		request.setAttribute("eventList", eventList);
 
-		// キープボトル取得（そのユーザーの）
+		// キープボトル情報取得
 		KeepBottleDAO2 bottleDao = new KeepBottleDAO2();
 		List<KeepBottle> bottleList = bottleDao.selectByCustomerId(loginCustomer.getCustomer_id());
 		request.setAttribute("bottleList", bottleList);
 
-
-		// フォワード先を指定（WEB-INF配下）
+		// 顧客ホーム画面へフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customer_home.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	/**
-	 * POSTはGETと同じ処理を行う
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
