@@ -56,6 +56,12 @@
             background: rgba(0,0,0,0.3);
             z-index: 9998;
         }
+
+        /* エラーメッセージスタイル */
+        #errorMessage {
+            color: red;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -95,8 +101,11 @@
     <!-- 支払い方法フォーム -->
     <form id="paymentForm">
         <p>支払い方法を選択：</p>
-        <label><input type="radio" name="payment_method" value="現金" required> 現金</label><br>
-        <label><input type="radio" name="payment_method" value="paypay"> paypay</label><br><br>
+        <label><input type="radio" name="payment_method" value="現金"> 現金</label><br>
+        <label><input type="radio" name="payment_method" value="paypay"> paypay</label><br>
+
+        <!-- エラーメッセージ表示場所 -->
+        <div id="errorMessage"></div>
 
         <% for (int i = 0; i < commodity_name.length; i++) { %>
             <input type="hidden" name="commodity_name" value="<%= commodity_name[i] %>">
@@ -105,6 +114,7 @@
         <% } %>
         <input type="hidden" name="total" value="<%= total %>">
 
+        <br>
         <input type="button" value="会計を確定する" onclick="submitPayment()">
     </form>
 <% } else { %>
@@ -121,33 +131,43 @@
 <script>
 function submitPayment() {
     const form = document.getElementById('paymentForm');
+    const errorDiv = document.getElementById('errorMessage');
+
+    // エラーメッセージ初期化
+    errorDiv.textContent = '';
+
+    // 支払い方法が選択されているかチェック
+    const selectedPayment = form.querySelector('input[name="payment_method"]:checked');
+    if (!selectedPayment) {
+        errorDiv.textContent = "※ 支払い方法を選択してください。";
+        return;
+    }
+
     const formData = new FormData(form);
 
     fetch('<%= request.getContextPath() %>/PaymentComplete', {
         method: 'POST',
         body: formData
     })
-    .then(res => res.text())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("サーバーエラーが発生しました。");
+        }
+        return response.text();
+    })
     .then(html => {
         document.getElementById('popupContent').innerHTML = html;
         document.getElementById('popup').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
     })
-    .catch(err => {
-        alert("エラーが発生しました：" + err);
+    .catch(error => {
+        alert("エラー: " + error.message);
     });
 }
 
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-
-    // 🔽 閉じた後にページ遷移する
     window.location.href = '<%= request.getContextPath() %>/menu.jsp';
 }
 </script>
