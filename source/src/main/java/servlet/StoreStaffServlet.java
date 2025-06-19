@@ -19,14 +19,15 @@ import dto.StoreMemo;
 public class StoreStaffServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		
+	String action = request.getParameter("action");
+
+		if ("insertEvent".equals(action)) {
 		//イベント登録
 		request.setCharacterEncoding("UTF-8");
-		//e_actionリクエストパラメータを取得する（insert,update,deleteを区別する）
-		String message ="";
 		
 		String eventdate = request.getParameter("event_date");
 		String eventname = request.getParameter("event_name");
@@ -37,38 +38,23 @@ public class StoreStaffServlet extends HttpServlet {
 		if(ins==true) {
 			List<Event>sel = eventDao.select();
 
-			request.setAttribute("eventList",("新しいイベントを登録しました。"));
-			//eventDao.showAllData(sel);
-		message = ("新しいイベントを登録しました。");
-		}else {
-		message = "イベントの登録に失敗しました。";	
-		}
-		//イベント更新
-		/*if (request.getParameter("update").equals("更新")) {
-			if(eventDao.update(new Event(0, 0, eventdate,eventname,eventremark))) {
-				message = ("イベント内容を更新しました。");
-			}
-		}*/
+			request.setAttribute("eventList",eventDao.select());
+		}}
+		if ("insertMemo".equals(action)) {
 
-		
 		//業務連絡登録
-		request.setCharacterEncoding("UTF-8");
 		String storedate = request.getParameter("store_date");
 		String storeremark = request.getParameter("store_remark");
 		
 		StoreMemoDAO storemDao = new StoreMemoDAO();
 		boolean ins1 = storemDao.insert(new StoreMemo(0,storedate,storeremark));
 		if(ins1==true) {
-			List<Event>sel1 = eventDao.select();
-		message = ("新しい業務連絡を登録しました。");
-		}else {
-		message = "業務連絡の登録に失敗しました。";	
+			List<Event>sel1 = storemDao.select();
 		}
+		}
+	//顧客一覧		
 		
-	//顧客一覧
 		
-		
-	//注文履歴
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
 		dispatcher.forward(request,response);
 	}
