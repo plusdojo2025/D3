@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CustomerDAO;
 import dao.KeepBottleDAO2;
+import dao.TalkDAO2;
 import dto.Customer;
 import dto.Result;
+import dto.Talk;
 
 @WebServlet("/UpdateDeleteCustomerServlet")
 public class UpdateDeleteCustomerServlet extends HttpServlet {
@@ -29,6 +30,7 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 
 		CustomerDAO cDao = new CustomerDAO();
 		KeepBottleDAO2 kbDao = new KeepBottleDAO2();
+		TalkDAO2 talkDao = new TalkDAO2();
 
 		String action = request.getParameter("action");
 
@@ -43,21 +45,21 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 					int bottleId = Integer.parseInt(action.replace("delete_bottle_", ""));
 					kbDao.deleteBottle(bottleId);
 					request.setAttribute("result", new Result("ボトルを削除しました。", "/D3/CustomerListServlet"));
-				/*} else if (action.startsWith("update_talk_")) {
+				} else if (action.startsWith("update_talk_")) {
 					int topicId = Integer.parseInt(action.replace("update_talk_", ""));
 					int selectedTopicId = Integer.parseInt(request.getParameter("talk_topic_id_" + topicId));
 					String remark = request.getParameter("talk_remark_" + topicId);
 					talkDao.update(new Talk(customer_id, selectedTopicId, remark));
 					request.setAttribute("result", new Result("会話情報を更新しました。", "/D3/CustomerListServlet"));
 				} else if (action.startsWith("delete_talk_")) {
-					int topicId = Integer.parseInt(action.replace("delete_talk_", ""));
-					talkDao.delete(customer_id, topicId);
-					request.setAttribute("result", new Result("会話情報を削除しました。", "/D3/CustomerListServlet"));
+				    int topicId = Integer.parseInt(action.replace("delete_talk_", ""));
+				    talkDao.delete(new Talk(customer_id, topicId, null));  // ← 修正ポイント
+				    request.setAttribute("result", new Result("会話情報を削除しました。", "/D3/CustomerListServlet"));
 				} else if (action.equals("insert_talk")) {
 					int topicId = Integer.parseInt(request.getParameter("new_topic_id"));
 					String remark = request.getParameter("new_talk_remark");
 					talkDao.insert(new Talk(customer_id, topicId, remark));
-					request.setAttribute("result", new Result("会話情報を追加しました。", "/D3/CustomerListServlet"));*/
+					request.setAttribute("result", new Result("会話情報を追加しました。", "/D3/CustomerListServlet"));
 				}
 			} else {
 				// 顧客更新・削除
@@ -82,7 +84,6 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 			request.setAttribute("result", new Result("エラーが発生しました。", "/D3/CustomerListServlet"));
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Result.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("/D3/CustomerListServlet");
 	}
 }
