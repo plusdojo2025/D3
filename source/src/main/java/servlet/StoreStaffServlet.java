@@ -110,6 +110,12 @@ public class StoreStaffServlet extends HttpServlet {
 		VisitorDAO dao = new VisitorDAO();
 		List<Visitor> visitor = dao.getVisitorByDate(dateString);
 		request.setAttribute("visitor", visitor);
+		
+		//ニックネーム検索
+		String searchName = request.getParameter("customer_name_search");
+		if(searchName != null &&!searchName.trim().isEmpty()) {
+			
+		}
 
 		//注文履歴
 		OrderListDAO orderDao = new OrderListDAO();
