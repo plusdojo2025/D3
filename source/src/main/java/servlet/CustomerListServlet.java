@@ -35,7 +35,7 @@ public class CustomerListServlet extends HttpServlet {
 		 */
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
-		dispatcher.forward(request, response);
+	    dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
