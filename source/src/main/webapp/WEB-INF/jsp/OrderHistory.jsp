@@ -18,11 +18,12 @@
 
 <p id="clock">time</p>
 
-<a href="/D3/StoreStaffServlet">
-<img src="/D3/img/BARLOOP.png" alt="BARLOOP" width="200" height="100">
-</a>
+
 
 <header>
+<a href="/D3/StoreStaffServlet">
+<img src="/D3/img/BARLOOP_6.png" alt="BARLOOP" class="icon" width="250">
+</a>
 </header>
 
 

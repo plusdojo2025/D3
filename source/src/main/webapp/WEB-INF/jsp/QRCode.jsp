@@ -5,13 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BARLOOP/QRコード</title>
+<link rel="stylesheet" href="css/QRCode.css">
+
 </head>
 <body>
 	<header>
 	<!-- >画像リンク -->
+	<a href="/D3/Servlet">
+	<img src="/D3/img/BARLOOP_6.png" alt="BARLOOP" class="icon" width="250">
+	</a>
 	</header>
-	
+	<div class="menu">
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
 	<div id="siteMapPanel">
@@ -19,6 +24,7 @@
 	<a href="${pageContext.request.contextPath}/MenuServlet">メニュー</a><br>
 	<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a>
 	<p>${store_id}</p>
+	</div>
 	</div>
 	<!-- ?storeId=${store_id} -->
 	
