@@ -29,7 +29,7 @@
 業務連絡
 <form method="POST" action="/D3/StoreStaffServlet">
 	<input type="text" name="store_remark" placeholder="連絡内容">
-	<input type="date" name="store_date" >
+	<input type="date" name="store_date" id="store_date" >
 	<input type="submit" name="info">
 </form>
 <br><br><br><br>
@@ -38,9 +38,8 @@
 
 
 <div>
-<a href="/D3/CustomerListServlet">
-<button>顧客リスト</button>
-</a>
+
+<h2>顧客リスト</h2>
 <form method="POST" action="/D3/CustomerListServlet">
 <input type="text" name="customer_name" placeholder="ニックネーム"><br>
 
@@ -54,11 +53,10 @@
 <ul>
 <c:forEach var="vis" items="${visitor}">
 <li>${vis.customer.customer_name }</li>
-<li>ニックネーム（変数）</li>
 </c:forEach>
-
+<li>ニックネーム（変数）</li>
 </ul>
-<br><br><br><br><br>
+
 </div>
 	
 <div>
@@ -76,6 +74,5 @@
 </footer>
 
 </body>
-
 
 </html>
