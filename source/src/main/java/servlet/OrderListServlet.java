@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.OrderListDAO;
+import dto.Cart;
 import dto.Commodity;
 import dto.Customer;
 import dto.OrderList;
@@ -27,16 +28,22 @@ public class OrderListServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		List<OrderList> orderList = new ArrayList<OrderList>();
-		if (session.getAttribute("orderList") != null) {
-			orderList = (List<OrderList>) session.getAttribute("orderList");
+		
+		List<Cart> cartList = (List<Cart>) session.getAttribute("cart");
+		if (cartList == null) {
+			cartList = new ArrayList<>();
+		}
+
+		List<OrderList> orderList = new ArrayList<>();
+		for (Cart cart : cartList) {
+			OrderList order = new OrderList();
+			order.setCommodity(cart.getCommodity());
+			order.setOrder_quantity(cart.getQuantity());
+			orderList.add(order);
 		}
 		
-		// テストデータ
-		OrderList order = new OrderList(0, new Customer(1, "", "", "", ""), new Commodity(1, "ビール中", 0, 0, ""), "", 3);
-		orderList.add(order);
-		
 		request.setAttribute("orderList", orderList);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/OrderList.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -67,7 +74,6 @@ public class OrderListServlet extends HttpServlet {
 		orderListDAO.insert(orderList);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/StoreBusinessServlet");
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuServlet");
 		dispatcher.forward(request, response);
 	}
 }
