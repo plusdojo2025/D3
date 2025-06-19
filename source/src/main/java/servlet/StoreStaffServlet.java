@@ -84,11 +84,7 @@ public class StoreStaffServlet extends HttpServlet {
 		if (storedate != null && !storedate.equals("") && !storeremark.equals("")) {
 			StoreMemoDAO storemDao = new StoreMemoDAO();
 			boolean ins1 = storemDao.insert(new StoreMemo(0, storedate, storeremark));
-			if (ins1 == true) {
-				message = ("新しい業務連絡を登録しました。");
-			} else {
-				message = "業務連絡の登録に失敗しました。";
-			}
+			
 
 			if (ins1) {
 				// 空のStoreMemoを渡して全件取得（DAO変更なしで実現）
