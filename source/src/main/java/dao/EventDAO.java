@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,25 +89,33 @@ public class EventDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO Event VALUES (0, ?, NOW(), ?, ?)";
+				String sql = "INSERT INTO Event VALUES (0, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
 				
 				pStmt.setInt(1, event.getStore_id());
 				
-				//Date today = Date.valueOf(LocalDate.now());
-				//pStmt.setDate(2, today);
+				String inputDate = event.getEvent_date();
+				java.sql.Date sqlDate;
+
+				if (inputDate != null && !inputDate.trim().isEmpty()) {
+				    sqlDate = java.sql.Date.valueOf(inputDate); // フォーマットが不正な場合は例外になるので注意
+				} else {
+				    sqlDate = java.sql.Date.valueOf(LocalDate.now());
+				}
+
+				pStmt.setDate(2, sqlDate);
 				
 				if (event.getEvent_name() != null) {
-					pStmt.setString(2, event.getEvent_name());
-				} else {
-					pStmt.setString(2, "");
-				}
-				if (event.getEvent_remark() != null) {
-					pStmt.setString(3, event.getEvent_remark());
+					pStmt.setString(3, event.getEvent_name());
 				} else {
 					pStmt.setString(3, "");
+				}
+				if (event.getEvent_remark() != null) {
+					pStmt.setString(4, event.getEvent_remark());
+				} else {
+					pStmt.setString(4, "");
 				}
 				
 
