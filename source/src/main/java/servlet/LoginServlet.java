@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,9 +30,9 @@ public class LoginServlet extends HttpServlet {
 
         // 入力チェック
         if (userType == null || email == null || password == null ||
-            email.isEmpty() || password.isEmpty()) {
+                email.isEmpty() || password.isEmpty()) {
             request.setAttribute("errorMsg", "すべての項目を入力してください。");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
             return;
         }
 
@@ -44,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("storeHome.jsp");
             } else {
                 request.setAttribute("errorMsg", "店舗ログイン失敗。メールアドレスまたはパスワードが間違っています。");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
             }
         } else if ("customer".equals(userType)) {
             Customer customer = new CustomerDAO().login(email, password);
@@ -53,17 +54,17 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("customerHome.jsp");
             } else {
                 request.setAttribute("errorMsg", "顧客ログイン失敗。メールアドレスまたはパスワードが間違っています。");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("errorMsg", "不正なユーザー種別です。");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // GETリクエストはログインページに転送
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+        dispatcher.forward(request, response);
     }
 }
