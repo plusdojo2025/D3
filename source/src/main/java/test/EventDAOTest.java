@@ -37,7 +37,7 @@ public class EventDAOTest {
 		EventDAOTest.showAllData(sel2);
 		
 		System.out.println("---------- insert(Event event)のテスト2 ----------");
-		boolean ins2 = dao.insert(new Event(0,1,"2025-01-01","正月","くじ引きあり"));
+		boolean ins2 = dao.insert(new Event(0,1,null,"正月","くじ引きあり"));
 		System.out.println(ins2);
 		
 	}

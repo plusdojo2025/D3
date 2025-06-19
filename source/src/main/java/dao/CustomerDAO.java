@@ -5,13 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> e1d7b97728210f17a6c685121d7c631bb2896d46
 
 import dto.Customer;
 
 public class CustomerDAO {
-
+<<<<<<< HEAD
 	// 引数customer指定された項目で検索して、取得されたデータのリストを返す
 	public List<Customer> select(Customer customer) {
 		Connection conn = null;
@@ -225,7 +228,7 @@ public class CustomerDAO {
 		return result;
 	}
 
-
+=======
 
     // 顧客ログイン（メールとパスワードで認証）
     public Customer login(String email, String password) {
@@ -271,5 +274,5 @@ public class CustomerDAO {
 
         return customer;  // nullならログイン失敗
     }
-
+>>>>>>> e1d7b97728210f17a6c685121d7c631bb2896d46
 }
