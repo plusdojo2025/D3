@@ -36,12 +36,10 @@ public class StoreStaffServlet extends HttpServlet {
 		boolean ins = eventDao.insert(new Event(0,0,eventdate,eventname,eventremark));
 		if(ins==true) {
 			List<Event>sel = eventDao.select();
-<<<<<<< HEAD
+
 			request.setAttribute("eventList",("新しいイベントを登録しました。"));
 			//eventDao.showAllData(sel);
-=======
 		message = ("新しいイベントを登録しました。");
->>>>>>> e1d7b97728210f17a6c685121d7c631bb2896d46
 		}else {
 		message = "イベントの登録に失敗しました。";	
 		}
@@ -71,12 +69,10 @@ public class StoreStaffServlet extends HttpServlet {
 		
 		
 	//注文履歴
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
 		dispatcher.forward(request,response);
 	}
 
 	
-	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
-	
+		
 }
