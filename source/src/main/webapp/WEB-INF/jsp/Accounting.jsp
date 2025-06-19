@@ -64,7 +64,7 @@
         }
     </style>
 </head>
-<body>
+<body data-context="${pageContext.request.contextPath}">
 
 <h2>会計内容の確認</h2>
 
@@ -128,49 +128,8 @@
     <button onclick="closePopup()">閉じる</button>
 </div>
 
-<script>
-function submitPayment() {
-    const form = document.getElementById('paymentForm');
-    const errorDiv = document.getElementById('errorMessage');
-
-    // エラーメッセージ初期化
-    errorDiv.textContent = '';
-
-    // 支払い方法が選択されているかチェック
-    const selectedPayment = form.querySelector('input[name="payment_method"]:checked');
-    if (!selectedPayment) {
-        errorDiv.textContent = "※ 支払い方法を選択してください。";
-        return;
-    }
-
-    const formData = new FormData(form);
-
-    fetch('<%= request.getContextPath() %>/PaymentComplete', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("サーバーエラーが発生しました。");
-        }
-        return response.text();
-    })
-    .then(html => {
-        document.getElementById('popupContent').innerHTML = html;
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    })
-    .catch(error => {
-        alert("エラー: " + error.message);
-    });
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    window.location.href = '<%= request.getContextPath() %>/menu.jsp';
-}
-</script>
+<!-- 外部JSファイル読み込み -->
+<script src="js/Accounting.js"></script>
 
 </body>
 </html>
