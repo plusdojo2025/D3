@@ -22,12 +22,11 @@ public class StoreStaffServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
+	request.setCharacterEncoding("UTF-8");
 	String action = request.getParameter("action");
 
 		if ("insertEvent".equals(action)) {
 		//イベント登録
-		request.setCharacterEncoding("UTF-8");
 		
 		String eventdate = request.getParameter("event_date");
 		String eventname = request.getParameter("event_name");
@@ -37,10 +36,12 @@ public class StoreStaffServlet extends HttpServlet {
 		boolean ins = eventDao.insert(new Event(0,0,eventdate,eventname,eventremark));
 		if(ins==true) {
 			List<Event>sel = eventDao.select();
-
-			request.setAttribute("eventList",eventDao.select());
+			request.setAttribute("eventList",sel);
+			request.setAttribute("message", "イベントを登録しました。");
+		}else {
+		    request.setAttribute("message", "イベントの登録に失敗しました。");
 		}}
-		if ("insertMemo".equals(action)) {
+		else if ("insertMemo".equals(action)) {
 
 		//業務連絡登録
 		String storedate = request.getParameter("store_date");
@@ -49,9 +50,9 @@ public class StoreStaffServlet extends HttpServlet {
 		StoreMemoDAO storemDao = new StoreMemoDAO();
 		boolean ins1 = storemDao.insert(new StoreMemo(0,storedate,storeremark));
 		if(ins1==true) {
-			List<Event>sel1 = storemDao.select();
-		}
-		}
+			List<StoreMemo>sel1 = storemDao.select();
+			request.setAttribute("memoList", sel1());
+		}}
 	//顧客一覧		
 		
 		
