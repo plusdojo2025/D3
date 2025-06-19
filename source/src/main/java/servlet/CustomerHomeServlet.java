@@ -26,46 +26,46 @@ public class CustomerHomeServlet extends HttpServlet {
 	}
 
 	/**
-	 * 顧客ホーム画面表示処理（GET）
+	 * 顧客ホーム画面表示（GETリクエスト対応）
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		// セッションからログイン中の顧客情報を取得
 		HttpSession session = request.getSession();
-		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+		Customer loginCustomer = (Customer) session.getAttribute("customer");
 
-		// ログインしていない場合はログイン画面へリダイレクト
+		// 未ログインならログインページへリダイレクト
 		if (loginCustomer == null) {
-			response.sendRedirect("/D3/LoginServlet");
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 		}
 
-		// ニックネーム表示用にセット
+		// ニックネーム表示用
 		String nickname = loginCustomer.getCustomer_name();
 		request.setAttribute("nickname", nickname);
 
-		// お知らせ取得（最新3件）
-		EventDAO dao = new EventDAO();
-		List<Event> eventList =dao.select();
+		// お知らせ取得（最新順で3件）
+		EventDAO eventDao = new EventDAO();
+		List<Event> eventList = eventDao.select(); 
 		request.setAttribute("eventList", eventList);
 
-		// キープボトル情報取得
-		KeepBottleDAO2 dao2 = new KeepBottleDAO2();
-		List<KeepBottle> bottleList = dao2.selectByCustomerId(loginCustomer.getCustomer_id());
+		// キープボトル取得（そのユーザーの）
+		KeepBottleDAO2 bottleDao = new KeepBottleDAO2();
+		List<KeepBottle> bottleList = bottleDao.selectByCustomerId(loginCustomer.getCustomer_id());
 		request.setAttribute("bottleList", bottleList);
 
-		// 顧客ホーム画面へフォワード
+
+		// フォワード先を指定（WEB-INF配下）
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customer_home.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	/**
-	 * POSTはGETと同じ処理にする
+	 * POSTはGETと同じ処理を行う
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 }
-
