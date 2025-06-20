@@ -27,7 +27,7 @@
 <body>
 
 
-
+<p id="clock">time</p>
 <header>
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </header>

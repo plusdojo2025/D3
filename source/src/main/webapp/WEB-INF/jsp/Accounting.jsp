@@ -66,9 +66,9 @@
 </head>
 
 <body>
+
+	<p id="clock">time</p>
 <header>
-
-
 <a href="<c:url value='/StoreBusinessServlet' />">
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
@@ -83,7 +83,7 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 		
 	</div>
-	<p id="clock">time</p>
+
 
 <main data-context="${pageContext.request.contextPath}">
 <h2>会計内容の確認</h2>

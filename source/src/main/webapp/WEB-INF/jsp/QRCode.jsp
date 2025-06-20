@@ -10,6 +10,7 @@
 
 </head>
 <body>
+<p id="clock">time</p>
 	<header>
 		<a href="<c:url value='/CustomerHomeServlet' />">
 		<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
@@ -25,7 +26,6 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 		
 	</div>
-	<p id="clock">time</p>
 	<!-- ?storeId=${store_id} -->
 	
 <main>

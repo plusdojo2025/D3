@@ -9,7 +9,7 @@
 <title>BARLOOP/顧客一覧</title>
 </head>
 <body>
-
+<p id="clock">time</p>
 <header>
 <a href="<c:url value='/StoreBusinessServlet' />">
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
