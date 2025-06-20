@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dto.Store;
 
 @WebServlet("/Accounting")
 public class AccountingServlet extends HttpServlet {
@@ -23,6 +26,17 @@ public class AccountingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+    	
+    	// セッションからログイン中の顧客情報を取得
+    		HttpSession session = request.getSession();
+    		Store loginStore = (Store) session.getAttribute("store");
+
+		// ログインしていない場合はログイン画面へリダイレクト
+		if (loginStore == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}
 
         request.setCharacterEncoding("UTF-8");
 		// 商品名と価格のパラメータを受け取る

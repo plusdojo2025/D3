@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CommodityDAO2;
 import dao.CustomerDAO;
@@ -21,6 +22,7 @@ import dao.VisitorDAO;
 import dto.Commodity;
 import dto.Customer;
 import dto.KeepBottle;
+import dto.Store;
 import dto.Talk;
 import dto.TopicTag;
 
@@ -30,11 +32,17 @@ public class CustomerListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * // もしもログインしていなかったらログインサーブレットにリダイレクトする HttpSession session =
-		 * request.getSession(); if (session.getAttribute("id") == null) {
-		 * response.sendRedirect("/D3/LoginServlet"); return; }
-		 */
+		
+		
+		// セッションからログイン中の顧客情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
 	    dispatcher.forward(request, response);

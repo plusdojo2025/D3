@@ -50,7 +50,9 @@ public class LoginServlet extends HttpServlet {
 			Store store = new StoreDAO().login(email, password);
 			if (store != null) {
 				session.setAttribute("store", store);
-				response.sendRedirect("storeHome.jsp");
+				 //response.sendRedirect("/WEB-INF/jsp/CustomerHome.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
+    			dispatcher.forward(request, response);
 			} else {
 				request.setAttribute("errorMsg", "店舗ログイン失敗。メールアドレスまたはパスワードが間違っています。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
