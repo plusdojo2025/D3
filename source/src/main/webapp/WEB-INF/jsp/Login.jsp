@@ -35,7 +35,7 @@
 
         function guestLogin() {
             if (confirm("20歳以上ですか？")) {
-                window.location.href = "customerHome.jsp"; // ゲストの遷移先
+                window.location.href = "/D3/CustomerHomeServlet"; // ゲストの遷移先
             }
         }
     </script>
