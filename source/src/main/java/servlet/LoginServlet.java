@@ -51,7 +51,9 @@ public class LoginServlet extends HttpServlet {
             Customer customer = new CustomerDAO().login(email, password);
             if (customer != null) {
                 session.setAttribute("customer", customer);
-                response.sendRedirect("customerHome.jsp");
+                //response.sendRedirect("/WEB-INF/jsp/CustomerHome.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
+    			dispatcher.forward(request, response);
             } else {
                 request.setAttribute("errorMsg", "顧客ログイン失敗。メールアドレスまたはパスワードが間違っています。");
                 request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);

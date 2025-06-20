@@ -41,7 +41,9 @@ public class StoreBusinessServlet extends HttpServlet {
 		request.setAttribute("memoList", memoList);
 
 		// 業務画面ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/StoreBusiness.jsp");
+		
 		dispatcher.forward(request, response);
 	}
 }
