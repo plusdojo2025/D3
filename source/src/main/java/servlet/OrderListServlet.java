@@ -63,9 +63,7 @@ public class OrderListServlet extends HttpServlet {
 			Commodity commodity = orderListDAO.getCommodityById(commodityId);
 			order.setCommodity(commodity);
 
-			String customerName = orderListDAO.getCustomerNameById(Integer.parseInt(customerIds[i]));
-			order.setCustomer(new Customer(0, customerName, "", "", ""));
-
+			order.setCustomer(new Customer(Integer.parseInt(customerIds[i]), "", "", "", ""));
 			order.setOrder_quantity(Integer.parseInt(quantitys[i]));
 			orderList.add(order);
 		}

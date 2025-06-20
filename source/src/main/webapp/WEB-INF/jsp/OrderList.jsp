@@ -24,8 +24,7 @@
 	<!-- onclick="RedirectQR(${store_id})" -->
 	<main>
 		<p>ご注文リスト</p>
-		<form action="${pageContext.request.contextPath}/OrderListServlet"
-			method="POST">
+		<form id="orderForm" action="<%= request.getContextPath() %>/OrderListServlet" method="POST">
 			<div id="orderList">
 				<c:forEach var="order" items="${orderList}">
 					<div class="order" onclick="">
@@ -38,17 +37,16 @@
 							name="commodityQuantity" value="${order.order_quantity}" readonly>
 					</div>
 				</c:forEach>
-				<input type="submit" name="submit" value="注文確定する">
+				<button type="button" onclick="submitOrder()">注文確定する</button>
 			</div>
-			<input type="submit" name="menu" value="メニューに戻る"
-				onclick="RedirectMenu(1)"> <input type="submit" name="call"
-				value="店員呼び出し" onclick="TODO"> <input type="submit"
-				name="accounting" value="会計" onclick="RedirectAccounting()">
+			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)">
+			<input type="submit" name="call" value="店員呼び出し" onclick="TODO">
 		</form>
 	</main>
 	<script>
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	<script src="${pageContext.request.contextPath}/js/OrderList.js"></script>
 </body>
 </html>
