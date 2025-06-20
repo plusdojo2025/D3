@@ -17,7 +17,10 @@
 
 <body>
 <header>
-	<!-- >画像リンク -->
+
+<a href="<c:url value='/CustomerHomeServlet' />">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+</a>
 </header>
 
 <button id="openSiteMap">O</button>

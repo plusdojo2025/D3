@@ -9,7 +9,14 @@
 <title>顧客一覧</title>
 </head>
 <body>
-	<h1>顧客一覧</h1>
+
+<header>
+<a href="<c:url value='/StoreBusinessServlet' />">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+</a>
+</header>
+<main>
+	<h1>BARLOOP/顧客一覧</h1>
 
 	<c:forEach var="e" items="${customerList}" varStatus="status">
 
@@ -95,9 +102,12 @@
 	<c:if test="${empty customerList}">
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
+</main>
 
+<footer>
 	<div id="footer">
 		<p>&copy; おかゆ</p>
 	</div>
+</footer>
 </body>
 </html>

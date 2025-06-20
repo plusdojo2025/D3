@@ -11,11 +11,11 @@
 </head>
 <body>
 	<header>
-	<!-- >画像リンク -->
-	<a href="/D3/Servlet">
-	<img src="/D3/img/BARLOOP_6.png" alt="BARLOOP" class="icon" width="250">
-	</a>
+		<a href="<c:url value='/CustomerHomeServlet' />">
+		<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+		</a>
 	</header>
+	
 	<div class="menu">
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
@@ -33,6 +33,14 @@
 		<img src="${pageContext.request.contextPath}/qr/${fileName}" alt="QR" />
 	</a>
 </main>
+
+<footer>
+<div class="copyright">
+<p>&copy;おかゆ</p>
+</div>
+</footer>
+	
+
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>

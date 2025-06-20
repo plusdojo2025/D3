@@ -26,9 +26,13 @@
 
 <body>
 
-	<header>
+
+
+<header>
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+</header>
+
 		<h1>業務画面</h1>
-	</header>
 
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>

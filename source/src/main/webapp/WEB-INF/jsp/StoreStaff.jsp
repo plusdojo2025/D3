@@ -6,13 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BARLOOP/店舗事務</title>
+<title>BARLOOP/事務画面</title>
 </head>
 
 
 <body>
 <header>
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+
+
 <h2>店舗事務画面</h2>
+</header>
+
+
 <button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
 	<div id="siteMapPanel">
@@ -21,7 +27,7 @@
 		
 	</div>
 	<p id="clock">time</p>
-</header>
+
 
 <main>
 <div>

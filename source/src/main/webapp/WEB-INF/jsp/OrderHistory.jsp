@@ -21,8 +21,9 @@
 
 
 <header>
-<a href="/D3/StoreStaffServlet">
-<img src="/D3/img/BARLOOP_6.png" alt="BARLOOP" class="icon" width="250">
+
+<a href="<c:url value='/StoreStaffServlet' />">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
 

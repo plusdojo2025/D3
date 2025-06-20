@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>結果</title>
+<title>BARLOOP/結果</title>
 </head>
 <body>
 	<p>
