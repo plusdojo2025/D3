@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>顧客一覧</title>
+<title>BARLOOP/顧客一覧</title>
 </head>
 <body>
 
@@ -15,8 +15,20 @@
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
+
+<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/StoreBusinessServlet">業務</a><br>
+		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
+		<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a><br>
+		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
+		
+	</div>
+	<p id="clock">time</p>
+
 <main>
-	<h1>BARLOOP/顧客一覧</h1>
+	<h1>顧客一覧</h1>
 
 	<c:forEach var="e" items="${customerList}" varStatus="status">
 

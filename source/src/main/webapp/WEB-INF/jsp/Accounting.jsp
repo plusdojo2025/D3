@@ -74,6 +74,17 @@
 </a>
 </header>
 
+<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/StoreBusinessServlet">業務</a><br>
+		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
+		<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a><br>
+		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
+		
+	</div>
+	<p id="clock">time</p>
+
 <main data-context="${pageContext.request.contextPath}">
 <h2>会計内容の確認</h2>
 

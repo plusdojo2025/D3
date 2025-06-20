@@ -15,11 +15,17 @@
 </a>
 </header>
 <!-- ヘッダー -->
+<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">ホーム</a><br>
+		<a href="${pageContext.request.contextPath}/MenuListServlet">メニュー</a><br>
+		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
+	</div>
+
+
 <h1>${nickname} さん、ようこそ！</h1>
-<div style="text-align: right;">
-    <a href="<c:url value='/CustomerHomeServlet' />">☰ </a>
-    <a href="<c:url value='/QRCodeServlet' />">メニュー </a>
-</div>
+
 
 <!-- お知らせ・イベント情報 -->
 <h2>📢お知らせ・イベント</h2>
