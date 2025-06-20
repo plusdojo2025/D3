@@ -6,6 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/ホーム</title>
+
+<style>
+#siteMapPanel {
+    display: none;
+    background: #f0f0f0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    z-index: 1000;
+}
+
+#closeSiteMap {
+    display: none;
+}
+.siteMap {
+text-align: right;
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -14,20 +34,17 @@
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
-<!-- ヘッダー -->
-<button id="openSiteMap">O</button>
-	<button id="closeSiteMap">X</button>
-	<div id="siteMapPanel">
-		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">ホーム</a><br>
-		<a href="${pageContext.request.contextPath}/MenuListServlet">メニュー</a><br>
-		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
-	</div>
+
 
 
 <h1>${nickname} さん、ようこそ！</h1>
-<div style="text-align: right;">
-    <a href="<c:url value='/CustomerHomeServlet' />">☰ </a>
+<div class="siteMap">
+<button id="openSiteMap">☰</button>
+<button id="closeSiteMap">X</button>
+<div id="siteMapPanel" class="siteMap">
+    <a href="<c:url value='/CustomerHomeServlet' />">HOME</a>
     <a href="<c:url value='/QRCodeServlet' />">メニュー </a>
+</div>
 </div>
 
 <!-- お知らせ・イベント情報 -->
@@ -63,6 +80,6 @@
 <div id="footer">
 	<p>&copy; plusDOJO(SE plus). All rights reserved.</p>
 </div>
-
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>

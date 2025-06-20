@@ -1,24 +1,24 @@
 
 // サイトマップ
+
+
 const siteMapPanel = document.getElementById("siteMapPanel");
 const openSiteMap = document.getElementById("openSiteMap");
 const closeSiteMap = document.getElementById("closeSiteMap");
 
-closeSiteMap.style.display = "none";
-
 openSiteMap.addEventListener("click", () => {
-	siteMapPanel.classList.add("open");
-
-	openSiteMap.style.display = "none";
-	closeSiteMap.style.display = "block";
+    siteMapPanel.style.display = "block";
+    openSiteMap.style.display = "none";
+    closeSiteMap.style.display = "inline";
 });
 
 closeSiteMap.addEventListener("click", () => {
-	siteMapPanel.classList.remove("open");
-
-	openSiteMap.style.display = "block";
-	closeSiteMap.style.display = "none";
+    siteMapPanel.style.display = "none";
+    openSiteMap.style.display = "inline";
+    closeSiteMap.style.display = "none";
 });
+
+
 
 // 現在時刻表示
 function updateClock() {
