@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BARLOOP/ご注文</title>
 </head>
 <body>
 	<header>
-		<!-- >画像リンク -->
+		<a href="<c:url value='/CustomerHomeServlet' />">
+		<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+		</a>
 	</header>
 
 	<button id="openSiteMap">O</button>
@@ -43,6 +45,14 @@
 			<input type="submit" name="call" value="店員呼び出し" onclick="TODO">
 		</form>
 	</main>
+	
+<footer>
+<div class="copyright">
+<p>&copy;おかゆ</p>
+</div>
+</footer>
+	
+	
 	<script>
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>

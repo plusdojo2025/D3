@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>会計確認</title>
+    <title>BARLOOP/会計確認</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -64,8 +64,17 @@
         }
     </style>
 </head>
-<body data-context="${pageContext.request.contextPath}">
 
+<body>
+<header>
+
+
+<a href="<c:url value='/StoreBusinessServlet' />">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+</a>
+</header>
+
+<main data-context="${pageContext.request.contextPath}">
 <h2>会計内容の確認</h2>
 
 <%
@@ -127,6 +136,13 @@
     <div id="popupContent">読み込み中...</div>
     <button onclick="closePopup()">閉じる</button>
 </div>
+</main>
+
+<footer>
+	<div id="footer">
+		<p>&copy; おかゆ</p>
+	</div>
+</footer>
 
 <!-- 外部JSファイル読み込み -->
 <script src="js/Accounting.js"></script>

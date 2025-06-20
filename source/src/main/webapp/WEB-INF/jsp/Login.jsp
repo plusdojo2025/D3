@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ログイン画面</title>
+<title>BARLOOP/ログイン</title>
 
 <style>
 .overlay {
@@ -31,6 +31,14 @@
 
 </head>
 <body>
+
+<header>
+
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+
+</header>
+
+<main>
 	<h1>ログイン画面</h1>
 
 	<%-- エラーメッセージ表示 --%>
@@ -113,6 +121,13 @@
 	<div id="guest">
 		<button onclick="guestLogin()">ゲストでログイン</button>
 	</div>
+	</main>
+	
+	<footer>
+		<div class="copyright">
+			<p>&copy;おかゆ</p>
+		</div>
+	</footer>
 
 	<script>
 		const contextPath = "${pageContext.request.contextPath}";

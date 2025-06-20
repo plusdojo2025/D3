@@ -5,10 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>顧客ホーム</title>
+<title>BARLOOP/ホーム</title>
 </head>
 <body>
+<header>
 
+<a href="<c:url value='/CustomerHomeServlet' />">
+<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+</a>
+</header>
 <!-- ヘッダー -->
 <h1>${nickname} さん、ようこそ！</h1>
 <div style="text-align: right;">
@@ -48,9 +53,11 @@
 </c:if>
 
 <!-- フッター -->
-<div id="footer">
-	<p>&copy; plusDOJO(SE plus). All rights reserved.</p>
-</div>
+	<footer>
+		<div class="copyright">
+			<p>&copy;おかゆ</p>
+		</div>
+	</footer>
 
 </body>
 </html>
