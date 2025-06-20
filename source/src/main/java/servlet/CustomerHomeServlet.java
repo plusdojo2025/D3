@@ -56,7 +56,7 @@ public class CustomerHomeServlet extends HttpServlet {
 		request.setAttribute("bottleList", bottleList);
 
 		// 顧客ホーム画面へフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customer_home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Customer_home.jsp");
 		dispatcher.forward(request, response);
 	}
 
