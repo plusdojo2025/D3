@@ -84,6 +84,6 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 			request.setAttribute("result", new Result("エラーが発生しました。", "/D3/CustomerListServlet"));
 		}
 
-		response.sendRedirect("/D3/CustomerListServlet");
+		response.sendRedirect(request.getContextPath() +"/CustomerListServlet");
 	}
 }

@@ -52,9 +52,10 @@ public class OrderSubmitServlet extends HttpServlet {
 
 		if (cartList != null) {
 			response.sendRedirect(request.getContextPath() + "/OrderListServlet");
-		} else {
+		} 
+		else {
 			// MenuListServletにリダイレクトする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/MenuListServlet");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() +"/MenuListServlet");
 			dispatcher.forward(request, response);
 		}
 	}

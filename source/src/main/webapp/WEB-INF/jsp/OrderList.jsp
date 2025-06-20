@@ -16,7 +16,7 @@
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
 	<div id="siteMapPanel">
-		<a href="${pageContext.request.contextPath}/MenuListServlet">HOME</a><br>
+		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">HOME</a><br>
 		<a href="${pageContext.request.contextPath}/MenuListServlet">メニュー</a><br>
 		<a href="${pageContext.request.contextPath}/MenuListServlet">ログアウト</a><br>
 	</div>
