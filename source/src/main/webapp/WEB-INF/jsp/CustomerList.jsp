@@ -25,7 +25,7 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 		
 	</div>
-	<p id="clock">time</p>
+
 
 <main>
 	<h1>顧客一覧</h1>
