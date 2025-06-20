@@ -30,16 +30,31 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-function RedirectQR(storeId) {
+function RedirectMenu(storeId) {
 	const form = document.createElement("form");
 	form.method = "GET";
-	form.action = "/QRCodeServlet";
-	
+	form.action = `${contextPath}/MenuListServlet`;
+	console.log(contextPath);
+
 	const input = document.createElement("input");
 	input.name = "storeId";
 	storeId = 1;
 	input.value = storeId;
-	
+
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function RedirectQR(storeId) {
+	const form = document.createElement("form");
+	form.method = "GET";
+	form.action = "/QRCodeServlet";
+
+	const input = document.createElement("input");
+	input.name = "storeId";
+	input.value = storeId;
+
 	form.appendChild(input);
 	document.body.appendChild(form);
 	form.submit();

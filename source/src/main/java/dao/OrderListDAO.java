@@ -38,9 +38,9 @@ public class OrderListDAO {
 
 				// SQL文を完成させる
 
-				pStmt.setInt(1, order.get(i).getCommodity().getCommodity_id());
+				pStmt.setInt(1, order.get(i).getCustomer().getCustomer_id());
 
-				pStmt.setInt(2, order.get(i).getCustomer().getCustomer_id());
+				pStmt.setInt(2, order.get(i).getCommodity().getCommodity_id());
 
 				pStmt.setInt(3, order.get(i).getOrder_quantity());
 
