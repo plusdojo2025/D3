@@ -25,21 +25,21 @@ public class VisitorDAO {
 			ResultSet rs = pStmt.executeQuery();
 			List<Visitor> visitorList = new ArrayList<Visitor>();
 			while (rs.next()) {
-				int id = rs.getInt("customer.customer_id");
+				int customerId = rs.getInt("customer.customer_id");
 
 				Visitor visitor = new Visitor();
 
 				Customer customer = new Customer();
-				customer.setCustomer_id(rs.getInt("customer_id"));
+				customer.setCustomer_id(customerId);
 				customer.setCustomer_name(rs.getString("customer_name"));
 				visitor.setCustomer(customer);
 
 				Commodity commodity = new Commodity(0, "", 0, 0, "");
-				commodity.setCommodity_name(getModeOrderByCustomerId(conn, id));
+				commodity.setCommodity_name(getModeOrderByCustomerId(conn, customerId));
 				visitor.setCommodity(commodity);
 
 				TopicTag topic = new TopicTag(0, "");
-				topic.setTopic_name(getModeTopicByCustomerId(conn, id));
+				topic.setTopic_name(getModeTopicByCustomerId(conn, customerId));
 				visitor.setTopic(topic);
 
 				visitorList.add(visitor);
@@ -54,9 +54,11 @@ public class VisitorDAO {
 	}
 
 	private String getModeOrderByCustomerId(Connection conn, int id) throws SQLException {
-		String sql = "SELECT commodity.commodity_name " + "FROM orderList "
+		String sql = "SELECT commodity.commodity_name "
+				+ "FROM orderList "
 				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
-				+ "WHERE orderList.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
+				+ "WHERE orderList.customer_id = ? "
+				+ "GROUP BY commodity.commodity_id, commodity.commodity_name "
 				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setInt(1, id);

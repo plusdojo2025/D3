@@ -50,9 +50,11 @@ public class OrderListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		String[] customerIds = request.getParameterValues("customerId");
 		String[] commodityIds = request.getParameterValues("commodityId");
 		String[] quantitys = request.getParameterValues("commodityQuantity");
+		
+		HttpSession session = request.getSession();
+		Customer customer = (Customer)session.getAttribute("customer");
 
 		OrderListDAO orderListDAO = new OrderListDAO();
 		List<OrderList> orderList = new ArrayList<OrderList>();
@@ -63,7 +65,7 @@ public class OrderListServlet extends HttpServlet {
 			Commodity commodity = orderListDAO.getCommodityById(commodityId);
 			order.setCommodity(commodity);
 
-			order.setCustomer(new Customer(Integer.parseInt(customerIds[i]), "", "", "", ""));
+			order.setCustomer(new Customer(customer.getCustomer_id(), "", "", "", ""));
 			order.setOrder_quantity(Integer.parseInt(quantitys[i]));
 			orderList.add(order);
 		}
