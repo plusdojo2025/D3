@@ -14,13 +14,7 @@
 <title>BARLOOP/メニュー</title>
 </head>
 
-<button id="openSiteMap">O</button>
-	<button id="closeSiteMap">X</button>
-	<div id="siteMapPanel">
-		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">ホーム</a><br>
-		<a href="${pageContext.request.contextPath}/MenuListServlet">メニュー</a><br>
-		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
-	</div>
+
 
 <body>
 <header>
@@ -33,9 +27,9 @@
 <button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
 	<div id="siteMapPanel">
-		<a href="/D3/CustomerHomeServlet">ホーム</a><br> <a
-			href="/D3/MenuListServlet">メニュー</a><br> <a
-			href="/D3/QRCodeServlet">QRコード</a>
+		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">ホーム</a><br>
+		<a href="${pageContext.request.contextPath}/MenuListServlet">メニュー</a><br>
+		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 	</div>
 
 

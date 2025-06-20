@@ -23,7 +23,6 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 	</div>
 	
-	<p id="clock">time</p>
 	<!-- onclick="RedirectQR(${store_id})" -->
 	<main>
 		<p>ご注文リスト</p>
