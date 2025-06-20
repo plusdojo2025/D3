@@ -44,7 +44,6 @@
 	</c:forEach>
 
 
-	<!-- 新規登録欄 -->
 	<p>会話新規登録:</p>
 	話題タグ:
 	<select name="new_topic_id">
@@ -56,17 +55,6 @@
 	内容:<input type="text" name="new_talk_remark">
 	<br>
 	<button type="submit" name="action" value="insert_talk">新規登録</button>
-
-
-	<!-- ここに注文履歴といつもの商品を表示 -->
-	<p>注文履歴：</p>
-	<c:forEach var="order" items="${orderHistoryMap[e.customer_id]}">
-            ・${order.commodity.commodity_name} （注文日: <fmt:formatDate
-			value="${order.order_date}" pattern="yyyy-MM-dd" />）<br>
-	</c:forEach>
-	<c:if test="${empty orderHistoryMap[e.customer_id]}">
-            注文履歴はありません。<br>
-	</c:if>
 
 	<p>キープボトル情報：</p>
 	<c:set var="customerId" value="${e.customer_id}" />
@@ -83,7 +71,15 @@
 		</c:if>
 	</c:forEach>
 	
-	
+	<p>キープボトル新規登録:</p>
+    <select name="new_commodity_id">
+        <c:forEach var="item" items="${commodityList}">
+            <option value="${item.commodity_id}">${item.commodity_name}</option>
+        </c:forEach>
+    </select>
+    <input type="number" name="new_bottle_remaining" placeholder="残量">
+    <input type="date" name="new_bottle_rimit" placeholder="期限">
+    <button type="submit" name="action" value="insert_bottle">ボトル登録</button>
 
 	<input type="submit" name="submit" value="顧客情報更新">
 	<input type="submit" name="submit" value="顧客情報削除">

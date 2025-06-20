@@ -103,6 +103,22 @@ public class KeepBottleDAO2 {
 	    }
 	}
 	
+	public void insertBottle(KeepBottle bottle) {
+	    String sql = "INSERT INTO keep_bottole (customer_id, commodity_id, bottole_remaining, bottole_rimit) VALUES (?, ?, ?, ?)";
+	    try (Connection conn = connectDatabase();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setInt(1, bottle.getCustomer().getCustomer_id());
+	        stmt.setInt(2, bottle.getCommodity().getCommodity_id());
+	        stmt.setInt(3, bottle.getBottle_remaining());
+	        stmt.setTimestamp(4, bottle.getBottle_rimit());
+	        stmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
