@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CommodityDAO2;
 import dao.CustomerDAO;
 import dao.KeepBottleDAO2;
 import dao.TalkDAO2;
 import dao.TopicTagDAO;
 import dao.VisitorDAO;
+import dto.Commodity;
 import dto.Customer;
 import dto.KeepBottle;
 import dto.Talk;
@@ -78,12 +80,17 @@ public class CustomerListServlet extends HttpServlet {
 	    // すべてのキープボトル情報取得
 	    KeepBottleDAO2 kbDao = new KeepBottleDAO2();
 	    List<KeepBottle> keepBottleList = kbDao.selectAll();
+	    
+	    //キープボトル登録
+	    CommodityDAO2 commodityDao = new CommodityDAO2();
+	    List<Commodity> commodityList = commodityDao.selectAll();
 
 	    request.setAttribute("talkMap", talkMap);
 	    request.setAttribute("topicTagList", topicTagList);
 	    request.setAttribute("every", every);
 	    request.setAttribute("customerList", customerList);
 	    request.setAttribute("keepBottleList", keepBottleList);
+	    request.setAttribute("commodityList", commodityList);
 
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
 	    dispatcher.forward(request, response);
