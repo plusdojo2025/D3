@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CommodityDAO2;
 import dao.CustomerDAO;
-import dao.KeepBottleDAO2;
-import dao.TalkDAO2;
+import dao.KeepBottleDAO;
+import dao.TalkDAO;
 import dao.TopicTagDAO;
 import dao.VisitorDAO;
 import dto.Commodity;
@@ -60,7 +60,7 @@ public class CustomerListServlet extends HttpServlet {
 	    List<Customer> customerList = cDao.select(new Customer(0, customer_name, "", "", ""));
 
 	 // TalkとTopicTagの取得処理を追加
-	    TalkDAO2 talkDao = new TalkDAO2();
+	    TalkDAO talkDao = new TalkDAO();
 	    Map<Integer, List<Talk>> talkMap = new HashMap<>();//顧客数ごとに表示されてしまうのでMAP
 
 	    for (Customer customer : customerList) {
@@ -78,7 +78,7 @@ public class CustomerListServlet extends HttpServlet {
 	    }
 
 	    // すべてのキープボトル情報取得
-	    KeepBottleDAO2 kbDao = new KeepBottleDAO2();
+	    KeepBottleDAO kbDao = new KeepBottleDAO();
 	    List<KeepBottle> keepBottleList = kbDao.selectAll();
 	    
 	    //キープボトル登録

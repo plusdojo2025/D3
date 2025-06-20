@@ -29,7 +29,7 @@ public class EventDAO {
 
 					// SQL文を準備する
 					
-					String sql = "SELECT * FROM Event ORDER BY event_date DESC";
+					String sql = "SELECT * FROM event ORDER BY event_date DESC";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 
 					// SQL文を実行し、結果表を取得する

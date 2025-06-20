@@ -8,16 +8,16 @@ public class KeepBottle implements Serializable{
 	private Customer customer;			// 顧客ID
 	private Commodity commodity;		// 商品ID
 	private int bottle_remaining;		// 残量
-	private Timestamp bottle_rimit;	// 期限
+	private Timestamp bottle_limit;	// 期限
 	
 	
 	
 	public KeepBottle() {};
-	public KeepBottle(int bottleId, Customer customer, Commodity commodity, int bottleRemaining, Timestamp bottleRimit) {
+	public KeepBottle(int bottleId, Customer customer, Commodity commodity, int bottleRemaining, Timestamp bottleLimit) {
 		this.bottle_id = bottleId;
 		this.customer = customer;
 		this.commodity = commodity;
-		this.bottle_rimit = bottleRimit;
+		this.bottle_limit = bottleLimit;
 	}
 	public int getBottle_id() {
 		return this.bottle_id;
@@ -43,10 +43,10 @@ public class KeepBottle implements Serializable{
 	public void setBottle_remaining(int bottle_remaining) {
 		this.bottle_remaining = bottle_remaining;
 	}
-	public Timestamp getBottle_rimit() {
-		return this.bottle_rimit;
+	public Timestamp getBottle_limit() {
+		return this.bottle_limit;
 	}
-	public void setBottle_rimit(Timestamp bottle_rimit) {
-		this.bottle_rimit = bottle_rimit;
+	public void setBottle_limit(Timestamp bottle_limit) {
+		this.bottle_limit = bottle_limit;
 	}
 }

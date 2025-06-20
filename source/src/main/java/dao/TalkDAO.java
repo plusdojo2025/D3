@@ -12,66 +12,47 @@ import dto.Talk;
 public class TalkDAO {
 	// 引数card指定された項目で検索して、取得されたデータのリストを返す
 	public List<Talk> select(Talk card) {
-		Connection conn = null;
-		List<Talk> cardList = new ArrayList<Talk>();
+	    Connection conn = null;
+	    List<Talk> cardList = new ArrayList<>();
 
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("com.mysql.cj.jdbc.Driver");
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
 
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
+	        // ★ customer_id を必須条件に加える
+	        String sql = "SELECT * FROM Talk WHERE customer_id = ?";
 
-			// SQL文を準備する
-			String sql = "SELECT * FROM Talk " 
-					 +"WHERE topic_id LIKE ? AND talk_remark LIKE ? ORDER BY customer_id";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
-			if (card.getTopic_id() != null) {
-				pStmt.setString(1, "%" + card.getTopic_id() + "%");
-			} else {
-				pStmt.setString(1, "%");
-			}
-			if (card.getTalk_remark() != null) {
-				pStmt.setString(2, "%" + card.getTalk_remark() + "%");
-			} else {
-				pStmt.setString(2, "%");
-			}
-			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+	        pStmt.setInt(1, card.getCustomer_id());
 
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-				Talk tk = new Talk(
-						rs.getInt("customer_id"),
-						rs.getInt("topic_id"),
-						rs.getString("talk_remark"));
-				cardList.add(tk);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			cardList = null;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			cardList = null;
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					cardList = null;
-				}
-			}
-		}
+	        ResultSet rs = pStmt.executeQuery();
 
-		// 結果を返す
-		return cardList;
+	        while (rs.next()) {
+	            Talk tk = new Talk(
+	                    rs.getInt("customer_id"),
+	                    rs.getInt("topic_id"),
+	                    rs.getString("talk_remark"));
+	            cardList.add(tk);
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        cardList = null;
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return cardList;
 	}
+
 
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Talk card) {
@@ -154,7 +135,7 @@ public class TalkDAO {
 			if (card.getTopic_id() != null) {
 				pStmt.setInt(1, card.getTopic_id());
 			} else {
-				pStmt.setString(1, "");
+				pStmt.setNull(1, java.sql.Types.INTEGER);
 			}
 			
 			if (card.getTalk_remark() != null) {
@@ -203,11 +184,12 @@ public class TalkDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Talk WHERE customer_id=?";
+			String sql = "DELETE FROM Talk WHERE customer_id=? AND topic_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setInt(1, card.getCustomer_id());
+			pStmt.setInt(2, card.getTopic_id());
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

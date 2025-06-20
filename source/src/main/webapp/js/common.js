@@ -34,11 +34,9 @@ function RedirectMenu(storeId) {
 	const form = document.createElement("form");
 	form.method = "GET";
 	form.action = `${contextPath}/MenuListServlet`;
-	console.log(contextPath);
 
 	const input = document.createElement("input");
 	input.name = "storeId";
-	storeId = 1;
 	input.value = storeId;
 
 	form.appendChild(input);

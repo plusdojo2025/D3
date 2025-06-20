@@ -12,12 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import dto.Store;
 
 @WebServlet("/QRCodeServlet")
 public class QRCodeServlet extends HttpServlet {
@@ -26,9 +29,10 @@ public class QRCodeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String storeId = request.getParameter("storeId");
-		System.out.println(storeId);
-		storeId = "1";
+		HttpSession session = request.getSession();
+		Store store = (Store)session.getAttribute("store");
+		int storeId = store.getStore_id();
+		
 		// 保存先パス
 		String saveDir = getServletContext().getRealPath("/qr");
 		File dir = new File(saveDir);

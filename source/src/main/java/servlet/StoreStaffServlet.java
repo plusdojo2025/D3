@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.EventDAO;
 import dao.OrderListDAO;
@@ -19,6 +20,7 @@ import dao.StoreMemoDAO;
 import dao.VisitorDAO;
 import dto.Event;
 import dto.OrderList;
+import dto.Store;
 import dto.StoreMemo;
 import dto.Visitor;
 
@@ -57,9 +59,13 @@ public class StoreStaffServlet extends HttpServlet {
 		String eventname = request.getParameter("event_name");
 		String eventremark = request.getParameter("event_remark");
 
+		HttpSession session = request.getSession();
+		Store store = (Store)session.getAttribute("store");
+		int storeId = store.getStore_id();
+		
 		if (eventdate != null && !eventdate.equals("") && !eventname.equals("") && !eventremark.equals("")) {
-			EventDAO eventDao = new EventDAO();
-			boolean ins = eventDao.insert(new Event(0, 1, eventdate, eventname, eventremark));
+			EventDAO eventDao = new EventDAO();			
+			boolean ins = eventDao.insert(new Event(0, storeId, eventdate, eventname, eventremark));
 			if (ins == true) {
 
 				request.setAttribute("eventList", ("新しいイベントを登録しました。"));
@@ -85,12 +91,12 @@ public class StoreStaffServlet extends HttpServlet {
 
 		if (storedate != null && !storedate.equals("") && !storeremark.equals("")) {
 			StoreMemoDAO storemDao = new StoreMemoDAO();
-			boolean ins1 = storemDao.insert(new StoreMemo(0, storedate, storeremark));
+			boolean ins1 = storemDao.insert(new StoreMemo(storeId, storedate, storeremark));
 			
 
 			if (ins1) {
 				// 空のStoreMemoを渡して全件取得（DAO変更なしで実現）
-				List<StoreMemo> memoList = storemDao.select(new StoreMemo(0, "", ""));
+				List<StoreMemo> memoList = storemDao.select(new StoreMemo(storeId, "", ""));
 				request.setAttribute("storememoList", memoList);
 				request.setAttribute("message", "業務連絡を登録しました。");
 			} else {
@@ -119,7 +125,7 @@ public class StoreStaffServlet extends HttpServlet {
 
 		//注文履歴
 		OrderListDAO orderDao = new OrderListDAO();
-		List<OrderList> order = orderDao.getTodayOrderByStoreId(0,dateString);
+		List<OrderList> order = orderDao.getTodayOrderByStoreId(storeId, dateString);
 		request.setAttribute("OrderList", order);
 		
 		

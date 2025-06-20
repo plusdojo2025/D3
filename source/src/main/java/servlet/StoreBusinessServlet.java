@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.StoreMemoDAO;
 import dao.VisitorDAO;
+import dto.Store;
 import dto.StoreMemo;
 import dto.Visitor;
 
@@ -35,7 +37,9 @@ public class StoreBusinessServlet extends HttpServlet {
 		request.setAttribute("visitors", visitor);
 
 		// 連絡事項
-		int storeId = 1;
+		HttpSession session = request.getSession();
+		Store store = (Store)session.getAttribute("store");
+		int storeId = store.getStore_id();
 		StoreMemoDAO storeMemoDAO = new StoreMemoDAO();
 		List<StoreMemo> memoList = storeMemoDAO.getStoreMemoByDate(storeId, date);
 		request.setAttribute("memoList", memoList);

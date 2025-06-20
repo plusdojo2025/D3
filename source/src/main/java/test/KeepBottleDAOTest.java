@@ -16,7 +16,7 @@ public class KeepBottleDAOTest {
 		for (KeepBottle kb : keepBottle) {
 			System.out.println(kb.getBottle_id());
 			System.out.println(kb.getBottle_remaining());
-			System.out.println(kb.getBottle_rimit());
+			System.out.println(kb.getBottle_limit());
 			System.out.println();
 		}
 	}
@@ -40,7 +40,7 @@ public class KeepBottleDAOTest {
 		kb.setCustomer(customer);
 		kb.setCommodity(commodity);
 		kb.setBottle_remaining(100);
-		kb.setBottle_rimit(Timestamp.valueOf(LocalDateTime.now()));
+		kb.setBottle_limit(Timestamp.valueOf(LocalDateTime.now()));
 		boolean result = dao.insert(kb);
 		System.out.println(result);
 		

@@ -25,7 +25,10 @@
 
 
 <h1>${nickname} さん、ようこそ！</h1>
-
+<div style="text-align: right;">
+    <a href="<c:url value='/CustomerHomeServlet' />">☰ </a>
+    <a href="<c:url value='/QRCodeServlet' />">メニュー </a>
+</div>
 
 <!-- お知らせ・イベント情報 -->
 <h2>📢お知らせ・イベント</h2>
@@ -46,11 +49,9 @@
 <c:if test="${not empty bottleList}">
 	<c:forEach var="bottle" items="${bottleList}">
 		<form>
-			ボトル名：<input type="text" value="${fn:escapeXml(bottle.name)}" readonly><br>
-			ニックネーム：<input type="text" value="${fn:escapeXml(bottle.nickname)}" readonly><br>
-			キープ日：<input type="text" value="${bottle.keepDate}" readonly><br>
-			残量：<input type="text" value="${bottle.remain}ml" readonly><br>
-			備考：<input type="text" value="${fn:escapeXml(bottle.note)}" readonly><br><br>
+			ボトル名：<input type="text" value="${bottle.commodity.commodity_name}" readonly><br>
+			期限：<input type="text" value="${bottle.bottle_limit}" readonly><br>
+			残量：<input type="text" value="${bottle.bottle_remaining}ml" readonly><br>
 		</form>
 	</c:forEach>
 </c:if>
@@ -59,11 +60,9 @@
 </c:if>
 
 <!-- フッター -->
-	<footer>
-		<div class="copyright">
-			<p>&copy;おかゆ</p>
-		</div>
-	</footer>
+<div id="footer">
+	<p>&copy; plusDOJO(SE plus). All rights reserved.</p>
+</div>
 
 </body>
 </html>

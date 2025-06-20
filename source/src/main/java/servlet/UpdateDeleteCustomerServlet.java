@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CustomerDAO;
-import dao.KeepBottleDAO2;
-import dao.TalkDAO2;
+import dao.KeepBottleDAO;
+import dao.TalkDAO;
 import dto.Commodity;
 import dto.Customer;
 import dto.KeepBottle;
@@ -32,8 +32,8 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 		String customer_birthday = request.getParameter("customer_birthday");
 
 		CustomerDAO cDao = new CustomerDAO();
-		KeepBottleDAO2 kbDao = new KeepBottleDAO2();
-		TalkDAO2 talkDao = new TalkDAO2();
+		KeepBottleDAO kbDao = new KeepBottleDAO();
+		TalkDAO talkDao = new TalkDAO();
 
 		String action = request.getParameter("action");
 
@@ -53,7 +53,7 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 				} else if (action.equals("insert_bottle")) {
 					int commodityId = Integer.parseInt(request.getParameter("new_commodity_id"));
 					int remaining = Integer.parseInt(request.getParameter("new_bottle_remaining"));
-					Timestamp rimit = Timestamp.valueOf(request.getParameter("new_bottle_rimit") + " 00:00:00");
+					Timestamp limit = Timestamp.valueOf(request.getParameter("new_bottle_limit") + " 00:00:00");
 
 					KeepBottle newBottle = new KeepBottle();
 					newBottle.setCustomer(new Customer(customer_id, null, null, null, null));
@@ -63,7 +63,7 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 					newBottle.setCommodity(commodity);
 
 					newBottle.setBottle_remaining(remaining);
-					newBottle.setBottle_rimit(rimit);
+					newBottle.setBottle_limit(limit);
 
 					kbDao.insertBottle(newBottle);
 					request.setAttribute("result", new Result("ボトルを登録しました。", "/D3/CustomerListServlet"));
