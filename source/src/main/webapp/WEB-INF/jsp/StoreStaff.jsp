@@ -13,6 +13,14 @@
 <body>
 <header>
 <h2>店舗事務画面</h2>
+<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/StoreBusinessServlet">業務</a><br>
+		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
+		
+	</div>
+	<p id="clock">time</p>
 </header>
 
 <main>
