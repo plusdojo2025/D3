@@ -42,7 +42,7 @@
 					<p><strong>ユーザーネーム:</strong> <input type="text" name="customer_name" value="${e.customer_name}"></p>
 					<p><strong>誕生日:</strong> <input type="text" name="customer_birthday" value="${e.customer_birthday}"></p>
 					<p><strong>メールアドレス:</strong> <input type="text" name="customer_email" value="${e.customer_email}"></p>
-					<p><strong>いつもの:</strong> <input type="text" name="every" value="${every[status.index]}"></p>
+					<p><strong>いつもの:</strong> <input type="text" name="every" value="${every[status.index]}"readonly></p>
 				</div>
 
 				<!-- 会話 -->
@@ -82,7 +82,7 @@
 						<c:if test="${kb.customer.customer_id == e.customer_id}">
 							<p>
 								商品名: ${kb.commodity.commodity_name}　<br>
-								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min="0" style="width: 70px;">ml<br>
+								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml<br>
 								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
 								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
 								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');" class="cool-submit-mini">削除</button>
@@ -97,7 +97,7 @@
 								<option value="${item.commodity_id}">${item.commodity_name}</option>
 							</c:forEach>
 						</select>
-						<input type="number" name="new_bottle_remaining" placeholder="残量">
+						<input type="number" name="new_bottle_remaining" placeholder="残量" min=0>
 						<input type="date" name="new_bottle_limit" placeholder="期限">
 						<button type="submit" name="action" value="insert_bottle" class="cool-submit-mini">ボトル登録</button>
 					</p>
