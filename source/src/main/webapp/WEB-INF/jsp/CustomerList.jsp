@@ -50,7 +50,7 @@
 					<p><strong>会話内容:</strong></p>
 					<c:forEach var="t" items="${talkMap[e.customer_id]}">
 						<p>
-							・<select name="talk_topic_id_${t.topic_id}">
+							<select name="talk_topic_id_${t.topic_id}">
 								<c:forEach var="tag" items="${topicTagList}">
 									<option value="${tag.topic_id}" <c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>
 										${tag.topic_name}
@@ -58,8 +58,8 @@
 								</c:forEach>
 							</select>
 							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}">
-							<button type="submit" name="action" value="update_talk_${t.topic_id}">更新</button>
-							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');">削除</button>
+							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
+							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');"class="cool-submit-mini">削除</button>
 						</p>
 					</c:forEach>
 
