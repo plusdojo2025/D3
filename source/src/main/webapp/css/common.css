@@ -15,6 +15,9 @@ body{
     margin: 0;
 }
 
+h1{
+	text-align:center;
+}
 
 /*header*/
 .icon{
@@ -28,7 +31,20 @@ body{
 #clock{
 	text-align: left;
 }
-
+/*menu*/
+#openSiteMap{
+	position:fixed;
+	top:10px;
+	right:10px;
+}
+#closeSiteMap{
+	position:fixed;
+	top:10px;
+	right:50px;
+}
+#siteMapPanel{
+	text-align:right;
+}
 /*main*/
 
 /*footer*/
