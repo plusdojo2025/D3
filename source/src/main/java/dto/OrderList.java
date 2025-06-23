@@ -9,6 +9,7 @@ public class OrderList implements Serializable{
 	private Commodity commodity;//商品ID
 	private String order_datetime;//日時
 	private int order_quantity;//個数
+	private int visit_id;//来店ID
 	
 	
 	public OrderList(int order_id, Customer customer, Commodity commodity, String order_datetime, int order_quantity) {
@@ -27,6 +28,7 @@ public class OrderList implements Serializable{
 		this.commodity = new Commodity(0, "", 0, 0, "");
 		this.order_datetime = "";
 		this.order_quantity = 0;
+		this.visit_id = 0;
 	}
 	
 	
@@ -64,6 +66,14 @@ public class OrderList implements Serializable{
 	}
 	public void setOrder_quantity(int order_quantity) {
 		this.order_quantity = order_quantity;
+	}
+
+	public int getVisit_id() {
+		return visit_id;
+	}
+
+	public void setVisit_id(int visit_id) {
+		this.visit_id = visit_id;
 	}
 	
 	
