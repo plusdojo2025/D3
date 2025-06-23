@@ -65,20 +65,12 @@ th {
 </head>
 
 <body>
-
-<<<<<<< HEAD
+<p id="clock">time</p>
 <header>
   <a href="/D3/StoreStaffServlet">
 <img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
-=======
-	<header>
-		<a href="/D3/StoreStaffServlet"> <img src="/D3/img/BARLOOP.png"
-			alt="BARLOOP" class="icon" width="250">
-		</a>
-	</header>
->>>>>>> 46d034ba08439c296d63aa492705ea64dfea1edb
 
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
