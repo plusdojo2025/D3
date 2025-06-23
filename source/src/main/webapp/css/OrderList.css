@@ -27,8 +27,11 @@ main{
 }
 
 .orderListSub{
-	margin:10px 410px;
-	padding:0px;
+	margin: 20px auto;
+	max-width: 800px;
+	background-color: rgb(25, 47, 97);
+	padding:20px;
+	border-radius: 5px;
 	border:1px solid rgb(227, 208, 149);
 }
 
@@ -135,3 +138,6 @@ main{
   pointer-events: none;  /* 入力不可を明確に（マウスも反応しない） */
   width: auto;        /* 文字幅に合わせる */
 }
+
+
+

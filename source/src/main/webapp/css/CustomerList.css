@@ -43,6 +43,10 @@ main{
 	margin: 20px;
 	gap: 20px;
 	flex-wrap: wrap;
+
+	background-color: rgb(25, 47, 97);
+
+	border-radius: 5px;
 }
 
 .customer-info,
@@ -150,3 +154,6 @@ input::placeholder {
 }
 
 /**/
+.keep{
+	border: 1px solid rgb(227, 208, 149);
+}
