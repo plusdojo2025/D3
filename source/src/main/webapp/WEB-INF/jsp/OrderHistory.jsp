@@ -5,18 +5,18 @@
 <html>
 
 <head>
-<<<<<<< HEAD
+
 <meta charset="UTF-8">
 <title>BARLOOP/注文履歴</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css' />">
 <link rel="stylesheet" href="<c:url value='/css/OrderHistory.css' />">
 
 </head>
-=======
+
   <meta charset="UTF-8">
   <title>BARLOOP/注文履歴</title>
   <link rel="stylesheet" href="css/OrderHistory.css">
->>>>>>> 84d4912fb098ae9f78390912be3fc1b8064a9a91
+
 
   <style>
     /* 見出しの色反転：ウイスキー、カクテル、ビールなど */
@@ -66,7 +66,7 @@
 
 <header>
   <a href="/D3/StoreStaffServlet">
-    <img src="/D3/img/BARLOOP_6.png" alt="BARLOOP" class="icon" width="250">
+    <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
   </a>
 </header>
 
