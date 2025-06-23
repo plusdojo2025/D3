@@ -90,7 +90,7 @@
 		<form id="orderForm" method="POST" action="<%= request.getContextPath() %>/OrderSubmitServlet">
 			<div id="cartInputs"></div>
 
-			<button type="button" onclick="submitOrder()">注文する</button>
+			<button id="submitOrderButton" type="button" onclick="submitOrder()">注文する</button>
 		</form>
 
 		<div>
