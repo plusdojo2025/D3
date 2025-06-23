@@ -59,7 +59,7 @@
 							</select>
 							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}"><br>
 							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
-							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');"class="cool-submit-mini">削除</button>
+							<button type="submit" name="action" value="delete_talk_${t.topic_id}"class="cool-submit-mini">削除</button>
 						</p>
 					</c:forEach>
 
@@ -85,7 +85,7 @@
 								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml<br>
 								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
 								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
-								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');" class="cool-submit-mini">削除</button>
+								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" class="cool-submit-mini">削除</button>
 							</p>
 						</c:if>
 					</c:forEach>
@@ -106,7 +106,7 @@
 				<!-- ボタン -->
 				<div class="action-section">
 					<input type="submit" name="submit" value="顧客情報更新" class="cool-submit-small">
-					<input type="submit" name="submit" value="顧客情報削除" onclick="return confirm('本当に削除しますか？');" class="cool-submit-small">
+					<input type="submit" name="submit" value="顧客情報削除" class="cool-submit-small">
 				</div>
 			</div>
 		</form>
