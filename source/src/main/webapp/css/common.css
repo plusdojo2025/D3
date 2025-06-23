@@ -5,7 +5,7 @@ html {
     font-family:'Courier New', Courier, monospace; 
     color: rgb(227, 208, 149); 
     background-color:rgb(14, 33, 72) ;
-    text-align: center;
+
 }
 
 *{
@@ -18,20 +18,17 @@ body{
 
 /*header*/
 .icon{
-	
-}
-/*main*/
-.categoryRanking{
-	margin:50px;
+  margin: auto;
+  display: block;
 }
 
-.orderRanking{
-	margin:50px;
+#logotitle{
+	text-align: center;
 }
+#clock{
+	text-align: left;
+}
+
+/*main*/
 
 /*footer*/
-.copyright{
-	padding-top:75px;
-	padding-bottom:75px;
-	
-}
