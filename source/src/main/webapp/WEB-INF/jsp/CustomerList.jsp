@@ -43,7 +43,12 @@
 					<p><strong>誕生日:</strong> <input type="text" name="customer_birthday" value="${e.customer_birthday}"></p>
 					<p><strong>メールアドレス:</strong> <input type="text" name="customer_email" value="${e.customer_email}"></p>
 					<p><strong>いつもの:</strong> <input type="text" name="every" value="${every[status.index]}"readonly></p>
+				<input type="submit" name="submit" value="顧客情報更新" class="cool-submit-small">
+					<input type="submit" name="submit" value="顧客情報削除" class="cool-submit-small">
+				
 				</div>
+				
+				
 
 				<!-- 会話 -->
 				<div class="talk-section">
@@ -104,10 +109,7 @@
 				</div>
 
 				<!-- ボタン -->
-				<div class="action-section">
-					<input type="submit" name="submit" value="顧客情報更新" class="cool-submit-small">
-					<input type="submit" name="submit" value="顧客情報削除" class="cool-submit-small">
-				</div>
+				
 			</div>
 		</form>
 	</c:forEach>
