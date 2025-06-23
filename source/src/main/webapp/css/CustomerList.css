@@ -1,8 +1,46 @@
 @charset "UTF-8";
+@charset "UTF-8";
+/* すべてのページに適用される設定 */
+html{
+text-align: center;  /* 横中央に配置 */
+}
+
+.menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: top right;  /* 右上基準で縮小 */
+}
+
+
+
+/*header*/
+
+#siteMapPanel,#openSiteMap,#closeSiteMap {
+	float: right;          /* パネルを右に配置 */
+    text-align: left;      /* 中の文字は左揃え */
+    margin-left: 20px;     /* 必要に応じて調整 */
+    
+}
+
+/*main*/
+
+
+
+/*footer*/
+
+	
+
+
+
+
+
+
+/*個別*/
 .customer-row {
 	display: flex;
 	flex-direction: row;
-	border: 1px solid #ccc;
+	border: 1px solid rgb(227, 208, 149);
 	padding: 15px;
 	margin-bottom: 20px;
 	gap: 20px;
@@ -31,4 +69,61 @@ select {
 	width: 90%;
 	padding: 4px;
 	box-sizing: border-box;
+}
+
+/*サブボタン*/
+.cool-submit-small {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 6px 16px;           /* 小さめサイズ */
+  font-size: 14px;             /* 少し小さめ */
+  font-weight: 600;
+  border-radius: 8px;          /* 丸み控えめ、やや四角 */
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(37, 117, 252, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.cool-submit-small:hover {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+  transform: scale(1.05);
+}
+
+.cool-submit-small:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+}
+
+
+
+
+/*ミニボタン*/
+.cool-submit-mini {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 4px 10px;           /* さらに小さいサイズ */
+  font-size: 12px;             /* フォントも小さめに */
+  font-weight: 500;
+  border-radius: 6px;          /* 丸み少なめでコンパクトに */
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 117, 252, 0.4);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.cool-submit-mini:hover {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  box-shadow: 0 1px 4px rgb(227, 208, 149);
+  transform: scale(1.05);
+}
+
+.cool-submit-mini:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgb(227, 208, 149);
 }
