@@ -88,6 +88,7 @@
 
 
 <main data-context="${pageContext.request.contextPath}">
+${nickname}様
 <h2>会計内容の確認</h2>
 
 <%

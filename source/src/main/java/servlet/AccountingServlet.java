@@ -64,7 +64,7 @@ public class AccountingServlet extends HttpServlet {
 		request.setAttribute("order_quantity",order_quantity );
 		request.setAttribute("total", total);
 		// メニューページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/Accounting.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Accounting.jsp");
 		dispatcher.forward(request, response);
 		
 		
