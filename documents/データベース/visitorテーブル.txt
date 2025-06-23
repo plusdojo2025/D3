@@ -1,0 +1,21 @@
+/*テーブル削除*/
+DROP TABLE visitor;
+
+/*テーブル作成*/
+CREATE TABLE visitor(
+visit_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+store_id INT NOT NULL,
+visit_time TIMESTAMP NOT NULL,
+exit_time TIMESTAMP
+);
+
+/*テストデータ*/
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 1, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 1, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 1, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (4, 1, NOW());
+
+/*テーブルデータ確認*/
+SELECT * FROM visitor;
+

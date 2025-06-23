@@ -67,7 +67,7 @@ public class VisitorDAO {
 			if (rs.next()) {
 				return rs.getString("commodity.commodity_name");
 			} else {
-				throw new SQLException("IDが存在しません" + id);
+				return "?";
 			}
 		}
 	}
@@ -103,8 +103,85 @@ public class VisitorDAO {
 			if (rs.next()) {
 				return rs.getString("topic_tag.topic_name");
 			} else {
-				throw new SQLException("IDが存在しません" + id);
+				return "?";
 			}
+		}
+	}
+	
+	public boolean insertVisitor(int customerId, int storeId) {
+		String sql = "INSERT INTO visitor "
+				+ "(customer_id, store_id, visit_time) "
+				+ "VALUES (?, ?, NOW())";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, customerId);
+			pStmt.setInt(2, storeId);
+			
+			if (pStmt.executeUpdate() == 1)
+				return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return false;
+	}
+	
+	public boolean updateVisitorExit(int visitId) {
+		String sql = "UPDATE visitor "
+				+ "SET exit_time = NOW() "
+				+ "WHERE visit_id = ?";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, visitId);
+			
+			if (pStmt.executeUpdate() == 1)
+				return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
+	public List<Visitor> getCurrentVisitorByStoreId(int storeId) {
+		String sql = "SELECT visit_id, customer.customer_id, customer.customer_name, customer.customer_id "
+				+ "FROM visitor "
+				+ "JOIN customer on visitor.customer_id = customer.customer_id "
+				+ "WHERE visitor.store_id = ? "
+				+ "AND visitor.exit_time IS NULL";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, storeId);
+			
+			ResultSet rs = pStmt.executeQuery();
+			List<Visitor> visitorList = new ArrayList<Visitor>();
+			while (rs.next()) {
+				int customerId = rs.getInt("customer.customer_id");
+
+				Visitor visitor = new Visitor();
+				visitor.setVisit_id(rs.getInt("visit_id"));
+
+				Customer customer = new Customer();
+				customer.setCustomer_id(customerId);
+				customer.setCustomer_name(rs.getString("customer_name"));
+				visitor.setCustomer(customer);
+
+				Commodity commodity = new Commodity(0, "", 0, 0, "");
+				commodity.setCommodity_name(getModeOrderByCustomerId(conn, customerId));
+				visitor.setCommodity(commodity);
+
+				TopicTag topic = new TopicTag(0, "");
+				topic.setTopic_name(getModeTopicByCustomerId(conn, customerId));
+				visitor.setTopic(topic);
+
+				visitorList.add(visitor);
+			}
+
+			return visitorList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
