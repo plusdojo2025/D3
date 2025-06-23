@@ -224,6 +224,12 @@ public class CustomerDAO {
 		// 結果を返す
 		return result;
 	}
+	
+	// 全件取得
+	public List<Customer> selectAll() {
+	    return select(new Customer()); // 初期化されたCustomerは全件検索と同義
+	}
+
 
 
 
