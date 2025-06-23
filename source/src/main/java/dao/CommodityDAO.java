@@ -57,4 +57,33 @@ public class CommodityDAO {
 		}
 		return commodityList;
 	}
+	
+	// 全件取得
+	public List<Commodity> selectAll() {
+	    List<Commodity> commodityList = new ArrayList<>();
+
+	    try (Connection conn = DriverManager.getConnection(
+	                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	                "root", "password");
+	         PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM Commodity");
+	         ResultSet rs = pStmt.executeQuery()) {
+
+	        while (rs.next()) {
+	            Commodity commodity = new Commodity(
+	                rs.getInt("commodity_id"),
+	                rs.getString("commodity_name"),
+	                rs.getInt("commodity_price"),
+	                rs.getInt("commodity_category"),
+	                rs.getString("commodity_image")
+	            );
+	            commodityList.add(commodity);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return commodityList;
+	}
+
 }

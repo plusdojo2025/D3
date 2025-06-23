@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommodityDAO2;
+import dao.CommodityDAO;
 import dao.CustomerDAO;
 import dao.KeepBottleDAO;
 import dao.TalkDAO;
@@ -90,7 +90,7 @@ public class CustomerListServlet extends HttpServlet {
 	    List<KeepBottle> keepBottleList = kbDao.selectAll();
 	    
 	    //キープボトル登録
-	    CommodityDAO2 commodityDao = new CommodityDAO2();
+	    CommodityDAO commodityDao = new CommodityDAO();
 	    List<Commodity> commodityList = commodityDao.selectAll();
 
 	    request.setAttribute("talkMap", talkMap);

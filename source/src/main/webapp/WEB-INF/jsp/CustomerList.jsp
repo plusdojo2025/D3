@@ -81,7 +81,7 @@
 		<c:if test="${kb.customer.customer_id == customerId}">
       商品名: ${kb.commodity.commodity_name}<br>
       残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min="0"><br>
-      期限: <fmt:formatDate value="${kb.bottle_rimit}" pattern="yyyy-MM-dd" /><br>
+      期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
 			<button type="submit" name="action" value="update_bottle_${kb.bottle_id}">更新</button>
 			<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');">削除</button>
 			<br>
@@ -97,7 +97,7 @@
         </c:forEach>
     </select>
     <input type="number" name="new_bottle_remaining" placeholder="残量">
-    <input type="date" name="new_bottle_rimit" placeholder="期限">
+    <input type="date" name="new_bottle_limit" placeholder="期限">
     <button type="submit" name="action" value="insert_bottle">ボトル登録</button>
 
 	<input type="submit" name="submit" value="顧客情報更新">

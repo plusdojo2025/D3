@@ -112,7 +112,7 @@ public class KeepBottleDAO {
 	}
 	
 	public void insertBottle(KeepBottle bottle) {
-	    String sql = "INSERT INTO keep_bottole (customer_id, commodity_id, bottole_remaining, bottole_rimit) VALUES (?, ?, ?, ?)";
+	    String sql = "INSERT INTO keep_bottle (customer_id, commodity_id, bottle_remaining, bottle_limit) VALUES (?, ?, ?, ?)";
 	    try (Connection conn = connectDatabase();
 	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -195,7 +195,7 @@ public class KeepBottleDAO {
 	}
 	
 	public boolean delete(KeepBottle keepBottle) {
-		String sql = "DELETE FROM keep_bottole WHERE bottole_id = ?";
+		String sql = "DELETE FROM keep_bottle WHERE bottole_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, keepBottle.getBottle_id());
 			
