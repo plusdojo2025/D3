@@ -5,7 +5,7 @@ html {
     font-family:'Courier New', Courier, monospace; 
     color: rgb(227, 208, 149); 
     background-color:rgb(14, 33, 72) ;
-    text-align: center;
+
 }
 
 *{
@@ -18,7 +18,12 @@ body{
 
 /*header*/
 .icon{
-	
+  margin: auto;
+  display: block;
+}
+
+#logotitle{
+	text-align: center;
 }
 #clock{
 	text-align: left;
