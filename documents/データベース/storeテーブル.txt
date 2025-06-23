@@ -9,8 +9,10 @@ store_password VARCHAR(100) NOT NULL
 ) ;
 
 
-/*テストデータ*/
+/*テストデータ １店舗前提で作っているので本番は下の店舗だけ登録してください*/
 INSERT INTO store VALUES (NULL,'id','password');
+INSERT INTO store VALUES (NULL,'dojouser1','#SEplus2025SEplus
+');
 
 /*テーブルデータ確認*/
 SELECT * FROM store;
