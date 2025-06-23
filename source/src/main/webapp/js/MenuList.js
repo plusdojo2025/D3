@@ -7,10 +7,19 @@ popup.style.display = "none";
 function popupCommodity(id, image, name, price) {
 	popup.classList.add("open");
 	document.getElementById("commodityId").value = id;
-	document.getElementById("commodityImage").value = image;
-	document.getElementById("commodityName").value = name;
-	document.getElementById("commodityPrice").value = price;
-
+	
+	const cImg  =document.getElementById("commodityImage");
+	const cName = document.getElementById("commodityName");
+	const cPrice = document.getElementById("commodityPrice");
+	
+	cImg.innerHTML = "";
+	cName.innerHTML = "";
+	cPrice.innerHTML = "";
+	
+	cImg.textContent = `${image}`;
+	cName.textContent = `${name}`;
+	cPrice.textContent = `${price}`;
+	
 	var nowQuantity = window.sessionStorage.getItem([id]);
 	if (nowQuantity != null) {
 		nowQuantity = parseInt(nowQuantity);
