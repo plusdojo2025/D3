@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>BARLOOP/メニュー</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css' />">
-<link rel="stylesheet" href="<c:url value='/css/Menu.css' />">
+<link rel="stylesheet" href="<c:url value='/css/MenuList.css' />">
 </head>
 
 
