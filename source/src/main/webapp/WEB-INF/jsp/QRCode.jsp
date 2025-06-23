@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/QRコード</title>
-<link rel="stylesheet" href="css/QRCode.css">
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/QRCode.css' />">
+
 
 </head>
 <body>
@@ -29,9 +31,11 @@
 	<!-- ?storeId=${store_id} -->
 	
 <main>
+<div class="QR">
 	<a href="${pageContext.request.contextPath}/MenuListServlet?store_id=${store_id}">
 		<img src="${pageContext.request.contextPath}/qr/${fileName}" alt="QR" />
 	</a>
+</div>
 </main>
 
 <footer>
