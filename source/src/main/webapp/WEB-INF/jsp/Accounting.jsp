@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/accounting.css">
+
     <title>BARLOOP/会計確認</title>
     <style>
         body {
