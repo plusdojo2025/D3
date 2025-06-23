@@ -31,9 +31,11 @@
 	<!-- ?storeId=${store_id} -->
 	
 <main>
+<div class="QR">
 	<a href="${pageContext.request.contextPath}/MenuListServlet?store_id=${store_id}">
 		<img src="${pageContext.request.contextPath}/qr/${fileName}" alt="QR" />
 	</a>
+</div>
 </main>
 
 <footer>

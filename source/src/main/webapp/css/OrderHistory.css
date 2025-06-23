@@ -1,19 +1,5 @@
 @charset "UTF-8";
 /* すべてのページに適用される設定 */
-html {
-    font-size: 16px;
-    font-family:'Courier New', Courier, monospace; 
-    color: rgb(227, 208, 149); 
-    background-color:rgb(14, 33, 72) ;
-    text-align: center;
-}
-
-*{
-    box-sizing:border-box;
-}
-body{
-    margin: 0;
-}
 
 
 /*header*/

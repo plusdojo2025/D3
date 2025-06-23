@@ -27,24 +27,25 @@
 	
 	<!-- onclick="RedirectQR(${store_id})" -->
 	<main>
-		<p>ご注文リスト</p>
+		<h2>ご注文リスト</h2>
 		<form id="orderForm" action="<%= request.getContextPath() %>/OrderListServlet" method="POST">
 			<div id="orderList">
 				<c:forEach var="order" items="${orderList}">
 					<div class="order" onclick="">
-						<input type="hidden" name="customerId"
-							value="${order.customer.customer_id}"> <input
-							type="hidden" name="commodityId"
-							value="${order.commodity.commodity_id}"> <input
-							value="${order.commodity.commodity_name}" readonly> <input
-							value="${order.commodity.commodity_price}" readonly> <input
-							name="commodityQuantity" value="${order.order_quantity}" readonly>
+						<input type="hidden" name="customerId" value="${order.customer.customer_id}">
+						<input type="hidden" name="commodityId" value="${order.commodity.commodity_id}"> 
+						<input value="${order.commodity.commodity_name}" readonly class="inputMenu"> 
+						￥<input value="${order.commodity.commodity_price}" readonly class="inputMenu">
+						×<input name="commodityQuantity" value="${order.order_quantity}" readonly class="inputMenu">
+							
 					</div>
 				</c:forEach>
-				<button type="button" onclick="submitOrder()">注文確定する</button>
+				<button type="button" onclick="submitOrder()"class="cool-submit">注文確定する</button>
 			</div>
-			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)">
+			<div class="subButton">
+			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)" >
 			<input type="submit" name="call" value="店員呼び出し" onclick="TODO">
+			</div>
 		</form>
 	</main>
 	

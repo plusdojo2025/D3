@@ -1,19 +1,6 @@
 @charset "UTF-8";
 /* すべてのページに適用される設定 */
-html {
-    font-size: 16px;
-    font-family:'Courier New', Courier, monospace; 
-    color: rgb(227, 208, 149); 
-    background-color:rgb(14, 33, 72) ;
-    text-align: center;
-}
 
-*{
-    box-sizing:border-box;
-}
-body{
-    margin: 0;
-}
 
 .menu{
   position: absolute;
@@ -25,14 +12,26 @@ body{
 
 
 /*header*/
+#clock {
+  text-align: left;
+  margin-left: 20px;
+}
+
+#siteMapPanel,#openSiteMap,#closeSiteMap {
+	float: right;          /* パネルを右に配置 */
+    text-align: left;      /* 中の文字は左揃え */
+    margin-left: 20px;     /* 必要に応じて調整 */
+    
+}
+
 /*main*/
+.QR{
+	padding:50px;
+	margin: 100px auto;
+}
 
 /*footer*/
-.copyright{
-	padding-top:75px;
-	padding-bottom:75px;
-	
-}
+
 
 
 /*個別*/
