@@ -4,12 +4,6 @@ html{
 text-align: center;  /* 横中央に配置 */
 }
 
-.menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform-origin: top right;  /* 右上基準で縮小 */
-}
 
 
 
@@ -34,6 +28,14 @@ main{
 .subButton{
 	margin:20px;
 }
+
+.menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: top right;  /* 右上基準で縮小 */
+}
+
 
 
 

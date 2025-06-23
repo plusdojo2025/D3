@@ -13,7 +13,7 @@
 <body>
 <p id="clock">time</p>
 <header>
-<a href="<c:url value='/StoreBusinessServlet' />">
+<a href="<c:url value='/StoreStaffServlet' />">
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
@@ -57,7 +57,7 @@
 									</option>
 								</c:forEach>
 							</select>
-							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}">
+							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}"><br>
 							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
 							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');"class="cool-submit-mini">削除</button>
 						</p>
@@ -70,7 +70,7 @@
 								<option value="${tag.topic_id}">${tag.topic_name}</option>
 							</c:forEach>
 						</select>
-						<input type="text" name="new_talk_remark">
+						<input type="text" name="new_talk_remark"><br>
 						<button type="submit" name="action" value="insert_talk" class="cool-submit-mini">登録</button>
 					</p>
 				</div>
@@ -115,6 +115,14 @@
 	<c:if test="${empty customerList}">
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
+	
+	<form method="GET" action="/D3/CustomerListServlet">
+		<c:forEach var="page" items="${pagenumber}" varStatus="status">
+			<c:if test="${(status.index) <5}">
+				<input type=submit value="${page}" name="number">
+			</c:if>
+		</c:forEach>
+	</form>
 </main>
 
 <footer>
@@ -122,6 +130,7 @@
 		<p>&copy; おかゆ</p>
 	</div>
 </footer>
+<script src="${pageContext.request.contextPath}/js/CustomerList.js"></script>
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>
