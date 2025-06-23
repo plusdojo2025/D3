@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/メニュー</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/Menu.css' />">
 </head>
 
 
@@ -88,7 +90,7 @@
 		<form id="orderForm" method="POST" action="<%= request.getContextPath() %>/OrderSubmitServlet">
 			<div id="cartInputs"></div>
 
-			<button type="button" onclick="submitOrder()">注文する</button>
+			<button id="submitOrderButton" type="button" onclick="submitOrder()">注文する</button>
 		</form>
 
 		<div>
