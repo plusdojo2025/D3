@@ -111,5 +111,12 @@
 		</div>
 	</footer>
 	<script src="${pageContext.request.contextPath}/js/MenuList.js"></script>
+<script>
+		const contextPath = "${pageContext.request.contextPath}";
+	</script>
+
+	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>
+
 </body>
 </html>
