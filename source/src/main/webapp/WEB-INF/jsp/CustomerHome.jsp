@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/ホーム</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/CustomerHome.css' />">
 </head>
 <body>
 <header>
@@ -23,7 +25,7 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 	</div>
 
-
+<main>
 <h1>${nickname} さん、ようこそ！</h1>
 
 <!-- お知らせ・イベント情報 -->
@@ -54,11 +56,13 @@
 <c:if test="${empty bottleList}">
 	<p>キープ中のボトルはありません。</p>
 </c:if>
-
+</main>
 <!-- フッター -->
-<div id="footer">
-	<p>&copy; plusDOJO(SE plus). All rights reserved.</p>
-</div>
+<footer>
+		<div class="copyright">
+			<p>&copy;おかゆ</p>
+		</div>
+	</footer>
 
 </body>
 </html>
