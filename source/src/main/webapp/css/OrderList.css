@@ -1,6 +1,8 @@
 @charset "UTF-8";
 /* すべてのページに適用される設定 */
-
+html{
+text-align: center;  /* 横中央に配置 */
+}
 
 .menu{
   position: absolute;
@@ -32,6 +34,8 @@ main{
 .subButton{
 	margin:20px;
 }
+
+
 
 /*footer*/
 
@@ -67,7 +71,34 @@ main{
   box-shadow: 0 2px 8px rgb(227, 208, 149);
 }
 
+/*サブボタン*/
+.cool-submit-small {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 6px 16px;           /* 小さめサイズ */
+  font-size: 14px;             /* 少し小さめ */
+  font-weight: 600;
+  border-radius: 8px;          /* 丸み控えめ、やや四角 */
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(37, 117, 252, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+}
 
+.cool-submit-small:hover {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+  transform: scale(1.05);
+}
+
+.cool-submit-small:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+}
+
+/*inputの枠消去*/
 .inputMenu {
   border: none;
   background-color: transparent;

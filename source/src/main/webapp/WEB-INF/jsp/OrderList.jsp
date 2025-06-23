@@ -43,8 +43,8 @@
 				<button type="button" onclick="submitOrder()"class="cool-submit">注文確定する</button>
 			</div>
 			<div class="subButton">
-			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)" >
-			<input type="submit" name="call" value="店員呼び出し" onclick="TODO">
+			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)" class="cool-submit-small">
+			<input type="submit" name="call" value="店員呼び出し" onclick="TODO" class="cool-submit-small">
 			</div>
 		</form>
 	</main>

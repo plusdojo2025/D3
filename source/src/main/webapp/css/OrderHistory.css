@@ -1,6 +1,8 @@
 @charset "UTF-8";
 /* すべてのページに適用される設定 */
-
+html{
+text-align: center;  /* 横中央に配置 */
+}
 
 /*header*/
 .icon{
