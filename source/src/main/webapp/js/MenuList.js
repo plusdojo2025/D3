@@ -1,5 +1,8 @@
 const popup = document.getElementById("popupCommodity");
+const btn = document.getElementById("submitOrderButton");
+
 popup.style.display = "none";
+
 
 function popupCommodity(id, image, name, price) {
 	popup.classList.add("open");
@@ -16,7 +19,7 @@ function popupCommodity(id, image, name, price) {
 	else {
 		document.getElementById("quantity").value = 0;
 	}
-	
+
 	document.getElementById("commodityPrice").value = price;
 
 	popup.style.display = "block";
@@ -28,15 +31,29 @@ function addCart() {
 	quantity = parseInt(quantity);
 
 	window.sessionStorage.setItem([id], [quantity]);
+	
+	if (quantity < 1) {
+		sessionStorage.removeItem([id]);
+	}
 
-	popup.style.display = "none";
+	closePopup();
 }
 
 function closePopup() {
 	popup.style.display = "none";
+	
+	if (0 < sessionStorage.length) {
+		btn.style.display = "block";
+	}
+	else {
+		btn.style.display = "none";
+	}
 }
 
 function submitOrder() {
+	if (sessionStorage.length < 1)
+		return;
+
 	const cartInputs = document.getElementById("cartInputs");
 	cartInputs.innerHTML = "";
 
@@ -55,3 +72,12 @@ function submitOrder() {
 
 	document.getElementById("orderForm").submit();
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+	if (0 < sessionStorage.length) {
+		btn.style.display = "block"
+	}
+	else {
+		btn.style.display = "none"
+	}
+});

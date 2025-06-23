@@ -6,6 +6,9 @@ const siteMapPanel = document.getElementById("siteMapPanel");
 const openSiteMap = document.getElementById("openSiteMap");
 const closeSiteMap = document.getElementById("closeSiteMap");
 
+siteMapPanel.style.display = "none";
+closeSiteMap.style.display = "none";
+
 openSiteMap.addEventListener("click", () => {
     siteMapPanel.style.display = "block";
     openSiteMap.style.display = "none";
