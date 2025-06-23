@@ -32,6 +32,16 @@ public class StoreStaffServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+    	// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
+		
 		// 来店者一覧
 
 		Date today = Date.valueOf(LocalDate.now());
