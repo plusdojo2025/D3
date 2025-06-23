@@ -66,8 +66,8 @@
 
 <header>
   <a href="/D3/StoreStaffServlet">
-    <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
-  </a>
+<img src=<c:url value='/D3/img/BARLOOP.png' /> alt="BARLOOP" class="icon" width="250">    
+</a>
 </header>
 
 <button id="openSiteMap">O</button>

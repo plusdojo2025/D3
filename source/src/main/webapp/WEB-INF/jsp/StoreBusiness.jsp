@@ -30,8 +30,8 @@
 
 	<p id="clock">time</p>
 	<header>
-		<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
-	</header>
+<img src=<c:url value='/D3/img/BARLOOP.png' /> alt="BARLOOP" class="icon" width="250">		
+</header>
 
 	<h1>業務画面</h1>
 

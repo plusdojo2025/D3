@@ -37,8 +37,7 @@
 
 <header>
 
-<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
-
+<img src=<c:url value='/D3/img/BARLOOP.png' /> alt="BARLOOP" class="icon" width="250">
 </header>
 
 <main>
