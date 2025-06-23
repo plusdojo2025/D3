@@ -15,7 +15,7 @@
 <p id="clock">time</p>
 	<header>
 		<a href="<c:url value='/StoreBusinessServlet' />">
-<img src=<c:url value='/D3/img/BARLOOP.png' /> alt="BARLOOP" class="icon" width="250">		
+<img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
 </a>
 	</header>
 	
