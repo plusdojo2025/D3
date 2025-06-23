@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommodityDAO2;
+import dao.CommodityDAO;
 import dao.CustomerDAO;
 import dao.KeepBottleDAO;
 import dao.TalkDAO;
@@ -28,80 +28,112 @@ import dto.TopicTag;
 
 @WebServlet("/CustomerListServlet")
 public class CustomerListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		
-		// セッションからログイン中の顧客情報を取得
-		HttpSession session = request.getSession();
-		Store loginStore = (Store) session.getAttribute("store");
+    // 顧客一覧表示：GETで呼ばれたときの処理
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	// ログインしていない場合はログイン画面へリダイレクト
-	if (loginStore == null) {
-		response.sendRedirect(request.getContextPath() + "/LoginServlet");
-		return;
-	}
+        HttpSession session = request.getSession();
+        Store loginStore = (Store) session.getAttribute("store");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreStaff.jsp");
-	    dispatcher.forward(request, response);
-	}
+        // 未ログインならログイン画面へ
+        if (loginStore == null) {
+            response.sendRedirect(request.getContextPath() + "/LoginServlet");
+            return;
+        }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    /*
-	     * // もしもログインしていなかったらログインサーブレットにリダイレクトする
-	     * HttpSession session = request.getSession();
-	     * if (session.getAttribute("id") == null) {
-	     *     response.sendRedirect("/D3/LoginServlet");
-	     *     return;
-	     * }
-	     */
+        // 顧客全件取得
+        CustomerDAO cDao = new CustomerDAO();
+        List<Customer> customerList = cDao.selectAll();
 
-	    request.setCharacterEncoding("UTF-8");
-	    String customer_name = request.getParameter("customer_name");
-	    VisitorDAO dao = new VisitorDAO();
+        // 会話情報の取得
+        TalkDAO talkDao = new TalkDAO();
+        Map<Integer, List<Talk>> talkMap = new HashMap<>();
+        for (Customer customer : customerList) {
+            List<Talk> talks = talkDao.select(new Talk(customer.getCustomer_id(), null, ""));
+            talkMap.put(customer.getCustomer_id(), talks);
+        }
 
-	    // 顧客基本情報取得
-	    CustomerDAO cDao = new CustomerDAO();
-	    List<Customer> customerList = cDao.select(new Customer(0, customer_name, "", "", ""));
+        // トピックタグ一覧取得
+        TopicTagDAO tagDao = new TopicTagDAO();
+        List<TopicTag> topicTagList = tagDao.select(new TopicTag());
 
-	 // TalkとTopicTagの取得処理を追加
-	    TalkDAO talkDao = new TalkDAO();
-	    Map<Integer, List<Talk>> talkMap = new HashMap<>();//顧客数ごとに表示されてしまうのでMAP
+        // モード取得
+        VisitorDAO visitorDao = new VisitorDAO();
+        String[] every = new String[customerList.size()];
+        for (int i = 0; i < customerList.size(); i++) {
+            every[i] = visitorDao.getModeOrderByCustomerId(customerList.get(i).getCustomer_id());
+        }
 
-	    for (Customer customer : customerList) {
-	        List<Talk> talks = talkDao.select(new Talk(customer.getCustomer_id(), null, ""));
-	        talkMap.put(customer.getCustomer_id(), talks);
-	    }
+        // キープボトル情報・商品情報取得
+        KeepBottleDAO kbDao = new KeepBottleDAO();
+        List<KeepBottle> keepBottleList = kbDao.selectAll();
 
-	    TopicTagDAO tagDao = new TopicTagDAO();
-	    List<TopicTag> topicTagList = tagDao.select(new TopicTag());
+        CommodityDAO commodityDao = new CommodityDAO();
+        List<Commodity> commodityList = commodityDao.selectAll();
 
+        // JSPへデータを渡す
+        request.setAttribute("customerList", customerList);
+        request.setAttribute("talkMap", talkMap);
+        request.setAttribute("topicTagList", topicTagList);
+        request.setAttribute("every", every);
+        request.setAttribute("keepBottleList", keepBottleList);
+        request.setAttribute("commodityList", commodityList);
 
-	    String[] every = new String[customerList.size()];
-	    for (int i = 0; i < customerList.size(); i++) {
-	        every[i] = dao.getModeOrderByCustomerId(customerList.get(i).getCustomer_id());
-	    }
+        // 顧客一覧画面へフォワード
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
+        dispatcher.forward(request, response);
+    }
 
-	    // すべてのキープボトル情報取得
-	    KeepBottleDAO kbDao = new KeepBottleDAO();
-	    List<KeepBottle> keepBottleList = kbDao.selectAll();
-	    
-	    //キープボトル登録
-	    CommodityDAO2 commodityDao = new CommodityDAO2();
-	    List<Commodity> commodityList = commodityDao.selectAll();
+    // 検索時：POSTで呼ばれたときの処理
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	    request.setAttribute("talkMap", talkMap);
-	    request.setAttribute("topicTagList", topicTagList);
-	    request.setAttribute("every", every);
-	    request.setAttribute("customerList", customerList);
-	    request.setAttribute("keepBottleList", keepBottleList);
-	    request.setAttribute("commodityList", commodityList);
+        HttpSession session = request.getSession();
+        Store loginStore = (Store) session.getAttribute("store");
 
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
-	    dispatcher.forward(request, response);
-	}
+        if (loginStore == null) {
+            response.sendRedirect(request.getContextPath() + "/LoginServlet");
+            return;
+        }
 
+        request.setCharacterEncoding("UTF-8");
+        String customer_name = request.getParameter("customer_name");
+
+        CustomerDAO cDao = new CustomerDAO();
+        List<Customer> customerList = cDao.select(new Customer(0, customer_name, "", "", ""));
+
+        TalkDAO talkDao = new TalkDAO();
+        Map<Integer, List<Talk>> talkMap = new HashMap<>();
+        for (Customer customer : customerList) {
+            List<Talk> talks = talkDao.select(new Talk(customer.getCustomer_id(), null, ""));
+            talkMap.put(customer.getCustomer_id(), talks);
+        }
+
+        TopicTagDAO tagDao = new TopicTagDAO();
+        List<TopicTag> topicTagList = tagDao.select(new TopicTag());
+
+        VisitorDAO dao = new VisitorDAO();
+        String[] every = new String[customerList.size()];
+        for (int i = 0; i < customerList.size(); i++) {
+            every[i] = dao.getModeOrderByCustomerId(customerList.get(i).getCustomer_id());
+        }
+
+        KeepBottleDAO kbDao = new KeepBottleDAO();
+        List<KeepBottle> keepBottleList = kbDao.selectAll();
+
+        CommodityDAO commodityDao = new CommodityDAO();
+        List<Commodity> commodityList = commodityDao.selectAll();
+
+        request.setAttribute("customerList", customerList);
+        request.setAttribute("talkMap", talkMap);
+        request.setAttribute("topicTagList", topicTagList);
+        request.setAttribute("every", every);
+        request.setAttribute("keepBottleList", keepBottleList);
+        request.setAttribute("commodityList", commodityList);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
+        dispatcher.forward(request, response);
+    }
 }
