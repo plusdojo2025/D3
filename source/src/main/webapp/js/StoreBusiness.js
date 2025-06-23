@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	button.forEach(btn => {
 		btn.addEventListener("click", () => {
 			const details = btn.closest(".visitor").querySelector(".visitorDetails");
-			var isVisible = details.style.display === "display";
+			var isVisible = details.style.display === "block";
 
 			details.style.display = isVisible ? "none" : "block";
 			btn.textContent = isVisible ? "▽" : "△";

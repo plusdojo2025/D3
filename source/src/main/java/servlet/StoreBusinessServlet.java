@@ -35,7 +35,7 @@ public class StoreBusinessServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 		}
-		
+
 		int storeId = loginStore.getStore_id();
 
 		// 来店者表示
@@ -52,7 +52,7 @@ public class StoreBusinessServlet extends HttpServlet {
 
 		StoreMemoDAO storeMemoDAO = new StoreMemoDAO();
 		List<StoreMemo> memoList = storeMemoDAO.getStoreMemoByDate(storeId, date);
-		
+
 		request.setAttribute("memoList", memoList);
 
 		// 業務画面ページにフォワードする
