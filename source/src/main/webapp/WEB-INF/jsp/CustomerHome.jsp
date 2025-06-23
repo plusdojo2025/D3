@@ -25,10 +25,6 @@
 
 
 <h1>${nickname} さん、ようこそ！</h1>
-<div style="text-align: right;">
-    <a href="<c:url value='/CustomerHomeServlet' />">☰ </a>
-    <a href="<c:url value='/QRCodeServlet' />">メニュー </a>
-</div>
 
 <!-- お知らせ・イベント情報 -->
 <h2>📢お知らせ・イベント</h2>

@@ -28,7 +28,7 @@ public class AccountingServlet extends HttpServlet {
             throws ServletException, IOException {
 
     	
-    	// セッションからログイン中の顧客情報を取得
+    	// セッションからログイン中の店舗情報を取得
     		HttpSession session = request.getSession();
     		Store loginStore = (Store) session.getAttribute("store");
 

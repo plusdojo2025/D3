@@ -43,7 +43,7 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 		
 	</div>
-	<p id="clock">time</p>
+
 
 
 	<main>

@@ -1,1 +1,38 @@
 @charset "UTF-8";
+
+html {
+    font-size: 16px;
+    font-family:'Courier New', Courier, monospace; 
+    color: rgb(227, 208, 149); 
+    background-color:rgb(14, 33, 72) ;
+    text-align: center;
+}
+
+*{
+    box-sizing:border-box;
+}
+body{
+    margin: 0;
+}
+
+
+/*header*/
+.icon{
+	
+	
+}
+/*main*/
+.categoryRanking{
+	margin:50px;
+}
+
+.orderRanking{
+	margin:50px;
+}
+
+/*footer*/
+.copyright{
+	padding-top:75px;
+	padding-bottom:75px;
+	
+}
