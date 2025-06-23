@@ -45,7 +45,42 @@ public class CustomerListServlet extends HttpServlet {
 
         // 顧客全件取得
         CustomerDAO cDao = new CustomerDAO();
-        List<Customer> customerList = cDao.selectAll();
+        List<Customer> allCustomerList = cDao.selectAll();
+
+        // ページング処理
+        int total = allCustomerList.size(); // 全件数
+        int pageSize = 10; // 1ページあたりの件数
+        int maxPage = (total - 1) / pageSize + 1;
+
+        int page = 1; // 初期ページ
+        if (request.getParameter("number") != null) {
+            try {
+                page = Integer.parseInt(request.getParameter("number"));
+                if (page < 1) page = 1;
+                if (page > maxPage) page = maxPage;
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+        }
+
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, total);
+        List<Customer> customerList = allCustomerList.subList(startIndex, endIndex);
+
+        // ページ番号リストの作成
+        int[] pagenumber;
+        if (maxPage <= 5) {
+            pagenumber = new int[maxPage];
+            for (int i = 0; i < maxPage; i++) {
+                pagenumber[i] = i + 1;
+            }
+        } else {
+            pagenumber = new int[5];
+            int start = Math.max(1, Math.min(page - 2, maxPage - 4));
+            for (int i = 0; i < 5; i++) {
+                pagenumber[i] = start + i;
+            }
+        }
 
         // 会話情報の取得
         TalkDAO talkDao = new TalkDAO();
@@ -80,6 +115,7 @@ public class CustomerListServlet extends HttpServlet {
         request.setAttribute("every", every);
         request.setAttribute("keepBottleList", keepBottleList);
         request.setAttribute("commodityList", commodityList);
+        request.setAttribute("pagenumber", pagenumber);
 
         // 顧客一覧画面へフォワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerList.jsp");
