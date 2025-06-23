@@ -34,7 +34,7 @@ public class CustomerListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		// セッションからログイン中の顧客情報を取得
+    	// セッションからログイン中の店舗情報を取得
 		HttpSession session = request.getSession();
 		Store loginStore = (Store) session.getAttribute("store");
 
@@ -50,14 +50,15 @@ public class CustomerListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    /*
-	     * // もしもログインしていなかったらログインサーブレットにリダイレクトする
-	     * HttpSession session = request.getSession();
-	     * if (session.getAttribute("id") == null) {
-	     *     response.sendRedirect("/D3/LoginServlet");
-	     *     return;
-	     * }
-	     */
+    	// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
 
 	    request.setCharacterEncoding("UTF-8");
 	    String customer_name = request.getParameter("customer_name");
