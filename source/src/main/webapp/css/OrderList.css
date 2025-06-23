@@ -4,12 +4,6 @@ html{
 text-align: center;  /* 横中央に配置 */
 }
 
-.menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform-origin: top right;  /* 右上基準で縮小 */
-}
 
 
 
@@ -29,10 +23,40 @@ main{
 
 .order{
 	margin:10px;
+	
+}
+
+.orderListSub{
+	margin:10px 410px;
+	padding:0px;
+	border:1px solid rgb(227, 208, 149);
 }
 
 .subButton{
 	margin:20px;
+}
+
+.menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: top right;  /* 右上基準で縮小 */
+}
+
+.order {
+  text-align: center; /* 要素全体を中央に配置 */
+}
+
+.inputMenu {
+	width: 160px; /* 必要に応じて統一 */
+  display: inline-block;
+  text-align: left;     /* ← テキストは左寄せ */
+  padding: 4px 8px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 160px;          /* 必要に応じて横幅指定 */
 }
 
 

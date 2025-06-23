@@ -1,8 +1,5 @@
 未着手
 テストデータ
-・category
-・commodity
-・event
 ・keep_bottle
 ・store_memo
 ・talk
@@ -111,4 +108,63 @@ INSERT INTO topic_tag VALUES (NULL,'ニュース（株）');
 INSERT INTO topic_tag VALUES (NULL,'旅行');
 INSERT INTO topic_tag VALUES (NULL,'その他');
 INSERT INTO topic_tag VALUES (NULL,'ＮＧ内容');
+
+
+INSERT INTO commodity VALUES (NULL,'ミックスナッツ',550,1,NULL);
+INSERT INTO commodity VALUES (NULL,'チーズベーコンピザ',1500,1,NULL);
+INSERT INTO commodity VALUES (NULL,'フライドポテト',770,1,NULL);
+INSERT INTO commodity VALUES (NULL,'サラダ',600,1,NULL);
+INSERT INTO commodity VALUES (NULL,'燻製',1500,1,NULL);
+INSERT INTO commodity VALUES (NULL,'オリーブ',600,1,NULL);
+INSERT INTO commodity VALUES (NULL,'チーズ３種',700,1,NULL);
+INSERT INTO commodity VALUES (NULL,'ビーフジャーキー',1100,1,NULL);
+INSERT INTO commodity VALUES (NULL,'レーズンバター',800,1,NULL);
+
+INSERT INTO commodity VALUES (NULL,'山崎',2000,2,NULL);
+INSERT INTO commodity VALUES (NULL,'白州',1900,2,NULL);
+INSERT INTO commodity VALUES (NULL,'グレンリベット',1200,2,NULL);
+INSERT INTO commodity VALUES (NULL,'デュワーズ',1000,2,NULL);
+INSERT INTO commodity VALUES (NULL,'MAKER'sMARK',1100,2,NULL);
+INSERT INTO commodity VALUES (NULL,'ワイルドターキー',900,2,NULL);
+INSERT INTO commodity VALUES (NULL,'カバラン',1200,2,NULL);
+INSERT INTO commodity VALUES (NULL,'ラフロイグ',1900,2,NULL);
+INSERT INTO commodity VALUES (NULL,'キングオブスコッチ',1700,2,NULL);
+
+INSERT INTO commodity VALUES (NULL,'ジントニック',500,3,NULL);
+INSERT INTO commodity VALUES (NULL,'ホワイトレディ',800,3,NULL);
+INSERT INTO commodity VALUES (NULL,'ゴットファザー',900,3,NULL);
+INSERT INTO commodity VALUES (NULL,'モスコミュール',800,3,NULL);
+INSERT INTO commodity VALUES (NULL,'XYZ',1000,3,NULL);
+INSERT INTO commodity VALUES (NULL,'ダイキリ',900,3,NULL);
+INSERT INTO commodity VALUES (NULL,'テキーラサンライズ',800,3,NULL);
+INSERT INTO commodity VALUES (NULL,'マルガリータ',900,3,NULL);
+INSERT INTO commodity VALUES (NULL,'ピュアラブ',800,3,NULL);
+
+INSERT INTO commodity VALUES (NULL,'生ビール',800,4,NULL);
+INSERT INTO commodity VALUES (NULL,'バドワイザー',800,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ハイネケン',800,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ハートランド',900,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ドスエキス',900,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ヒューガルデンホワイト',800,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ヒューガルデンロゼ',800,4,NULL);
+INSERT INTO commodity VALUES (NULL,'ギネス',900,4,NULL);
+
+INSERT INTO commodity VALUES (NULL,'山崎',25000,5,NULL);
+INSERT INTO commodity VALUES (NULL,'白州',15000,5,NULL);
+INSERT INTO commodity VALUES (NULL,'グレンリベット',8000,5,NULL);
+INSERT INTO commodity VALUES (NULL,'デュワーズ',5000,5,NULL);
+INSERT INTO commodity VALUES (NULL,'ゴードン',800,5,NULL);
+INSERT INTO commodity VALUES (NULL,'白酒',80000,5,NULL);
+
+
+INSERT INTO category VALUES (NULL,'フード');
+INSERT INTO category VALUES (NULL,'ウイスキー');
+INSERT INTO category VALUES (NULL,'カクテル');
+INSERT INTO category VALUES (NULL,'ビール');
+INSERT INTO category VALUES (NULL,'キープボトル');
+
+INSERT INTO event VALUES (NULL,1,NOW(),'七夕','7月7日限定フードあり');
+
+INSERT INTO event VALUES (NULL,1,NOW(),'夏祭り','イベント専用ドリンクあり');
+INSERT INTO event VALUES (NULL,1,NOW(),'流しそうめん','毎年恒例の流しそうめんイベント☀参加費用１人5,000円（ドリンク別料金）');
 

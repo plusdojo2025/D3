@@ -18,11 +18,30 @@ body{
 h1{
 	text-align:center;
 }
+/*リンクの色*/
+a:link{
+	color:rgb(227, 208, 149);
+	text-decoration:none;
+}
+a:visited {
+    color: rgb(227, 208, 149);
+    text-decoration:none;
+}
+
+a:hover {
+    color: rgb(227, 208, 050);
+    text-decoration: underline;
+}
+
+a:active {
+    color: #ffffff;
+    text-decoration: underline;
+}
 
 /*header*/
 .icon{
   margin: auto;
-  display: block;
+  display:block;
 }
 
 #logotitle{
@@ -43,8 +62,17 @@ h1{
 	right:50px;
 }
 #siteMapPanel{
-	text-align:right;
+	text-align:center;
+	position: fixed;
+	top: 50px;
+	right: 10px;
+	background: rgb(14, 33, 72);
+	border: 1px solid #ccc;
+	padding: 10px;
+	display: none;
+	
 }
 /*main*/
+
 
 /*footer*/

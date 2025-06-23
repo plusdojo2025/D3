@@ -4,11 +4,22 @@ html{
 text-align: center;  /* 横中央に配置 */
 }
 
+#siteMapPanel,#openSiteMap,#closeSiteMap {
+	float: right;          /* パネルを右に配置 */
+    text-align: left;      /* 中の文字は左揃え */
+    margin-left: 20px;     /* 必要に応じて調整 */
+    
+}
+
 /*header*/
 .icon{
 	
 }
 /*main*/
+main{
+	margin-top:100px;
+}
+
 .categoryRanking{
 	margin:50px;
 }
@@ -54,18 +65,18 @@ text-align: center;  /* 横中央に配置 */
 	color:rgb(14, 33, 72) ;
 }
 
-.orderRankingTable{
+.accordion-content{
 	border-collapse:collapse;
 	margin: 0 auto;
 	width: 650px;
 }
 
-.orderRankingTable th,.orderRankingTable td{
+.accordion-content th,.accordion-content td{
 	border:1px solid rgb(227, 208, 149);
 	padding: 20px;
 }
 
-.orderRankingTable th{
+.accordion-content th{
 	border:1px solid rgb(14, 33, 72);
 	padding: 20px;
 	background-color:rgb(227, 208, 149);
@@ -78,11 +89,13 @@ text-align: center;  /* 横中央に配置 */
 }
 
 .accordion-toggle {
+  width: 650px;
+  margin: 20px auto 0 auto; /* 上マージン＋中央寄せ */
+  display: block;
   cursor: pointer;
-  background-color: rgb(14, 33, 72); /* 背景色を全体と合わせる */
-  color: rgb(227, 208, 149); /* 文字色を全体と合わせる */
+  background-color: rgb(14, 33, 72);
+  color: rgb(227, 208, 149);
   padding: 10px;
   font-weight: bold;
-  border: 1px solid rgb(227, 208, 149); /* 枠線も統一感出す */
-  margin-top: 20px;
+  border: 1px solid rgb(227, 208, 149);
 }

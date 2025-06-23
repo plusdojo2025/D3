@@ -57,7 +57,7 @@
 									</option>
 								</c:forEach>
 							</select>
-							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}">
+							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}"><br>
 							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
 							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');"class="cool-submit-mini">削除</button>
 						</p>
@@ -70,7 +70,7 @@
 								<option value="${tag.topic_id}">${tag.topic_name}</option>
 							</c:forEach>
 						</select>
-						<input type="text" name="new_talk_remark">
+						<input type="text" name="new_talk_remark"><br>
 						<button type="submit" name="action" value="insert_talk" class="cool-submit-mini">登録</button>
 					</p>
 				</div>

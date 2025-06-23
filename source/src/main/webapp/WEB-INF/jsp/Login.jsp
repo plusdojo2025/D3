@@ -4,7 +4,9 @@
 <head>
 <title>BARLOOP/ログイン</title>
 <link rel="stylesheet" href="<c:url value='/css/common.css' />">
-<link rel="stylesheet" href="<c:url value='/css/Login.css' />">
+<link rel="stylesheet" href="<c:url value='/css/login.css' />">
+
+
 <style>
 .overlay {
 	position: fixed;
