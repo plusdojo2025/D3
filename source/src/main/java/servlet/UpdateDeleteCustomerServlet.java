@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CustomerDAO;
 import dao.KeepBottleDAO;
@@ -16,6 +17,7 @@ import dto.Commodity;
 import dto.Customer;
 import dto.KeepBottle;
 import dto.Result;
+import dto.Store;
 import dto.Talk;
 
 @WebServlet("/UpdateDeleteCustomerServlet")
@@ -24,6 +26,16 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    	// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
+		
 		request.setCharacterEncoding("UTF-8");
 		int customer_id = Integer.parseInt(request.getParameter("customer_id"));
 		String customer_name = request.getParameter("customer_name");
