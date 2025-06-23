@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/注文履歴</title>
-<link rel="stylesheet" href="css/OrderHistory.css">
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/OrderHistory.css' />">
+
 </head>
 
 

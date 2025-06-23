@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/ご注文</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/OrderList.css' />">
 </head>
 <body>
 	<header>

@@ -3,7 +3,8 @@
 <html>
 <head>
 <title>BARLOOP/ログイン</title>
-
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/Login.css' />">
 <style>
 .overlay {
 	position: fixed;

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/事務画面</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/StoreStaff.css' />">
 </head>
 
 
