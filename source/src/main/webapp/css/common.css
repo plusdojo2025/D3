@@ -19,20 +19,11 @@ body{
 /*header*/
 .icon{
 	
-	
 }
-/*main*/
-.categoryRanking{
-	margin:50px;
+#clock{
+	text-align: left;
 }
 
-.orderRanking{
-	margin:50px;
-}
+/*main*/
 
 /*footer*/
-.copyright{
-	padding-top:75px;
-	padding-bottom:75px;
-	
-}
