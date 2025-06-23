@@ -12,6 +12,8 @@ INSERT INTO category VALUES (NULL,'フード');
 INSERT INTO category VALUES (NULL,'ウイスキー');
 INSERT INTO category VALUES (NULL,'カクテル');
 INSERT INTO category VALUES (NULL,'ビール');
+INSERT INTO category VALUES (NULL,'キープボトル');
+
 
 /*テーブルデータ確認*/
 SELECT * FROM category;
