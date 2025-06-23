@@ -1,1 +1,112 @@
 @charset "UTF-8";
+/* すべてのページに適用される設定 */
+html{
+text-align: center;  /* 横中央に配置 */
+}
+
+.menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: top right;  /* 右上基準で縮小 */
+}
+
+
+
+/*header*/
+
+#siteMapPanel,#openSiteMap,#closeSiteMap {
+	float: right;          /* パネルを右に配置 */
+    text-align: left;      /* 中の文字は左揃え */
+    margin-left: 20px;     /* 必要に応じて調整 */
+    
+}
+
+/*main*/
+main{
+	margin-top:100px;
+}
+
+.order{
+	margin:10px;
+}
+
+.subButton{
+	margin:20px;
+}
+
+
+
+/*footer*/
+
+	
+
+
+
+/*個別*/
+/*注文ボタン*/
+.cool-submit {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  font-family:'Courier New', Courier, monospace; 
+}
+
+.cool-submit:hover {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  box-shadow: 0 2px 8px rgb(227, 208, 149);
+  transform: scale(1.05);
+}
+
+.cool-submit:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgb(227, 208, 149);
+}
+
+/*サブボタン*/
+.cool-submit-small {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 6px 16px;           /* 小さめサイズ */
+  font-size: 14px;             /* 少し小さめ */
+  font-weight: 600;
+  border-radius: 8px;          /* 丸み控えめ、やや四角 */
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(37, 117, 252, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.cool-submit-small:hover {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+  transform: scale(1.05);
+}
+
+.cool-submit-small:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+}
+
+/*inputの枠消去*/
+.inputMenu {
+  border: none;
+  background-color: transparent;
+  color: rgb(227, 208, 149);           /* 文字色は適宜調整 */
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  outline: none;         /* フォーカス時の青枠も消す */
+  pointer-events: none;  /* 入力不可を明確に（マウスも反応しない） */
+  width: auto;        /* 文字幅に合わせる */
+}
