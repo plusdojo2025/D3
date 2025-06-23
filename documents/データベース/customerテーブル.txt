@@ -12,11 +12,17 @@ customer_birthday DATE NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO customer VALUES ('1','あっくん','test1@example.com','password',NOW());
-INSERT INTO customer VALUES ('2','いっちゃん','test2@example.com','password',NOW());
-INSERT INTO customer VALUES ('3','うーたん','test3@example.com','password',NOW());
-INSERT INTO customer VALUES ('4','えなこ','test4@example.com','password',NOW());
-INSERT INTO customer VALUES ('5','おかぴ','test5@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'あっくん','test1@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'いっちゃん','test2@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'うーたん','test3@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'えなこ','test4@example.com','password',NOW());
+INSERT INTO customer VALUES (NULL,'おかぴ','test5@example.com','password',NOW());
+
+INSERT INTO customer VALUES (NULL,'PLUS DOJO1','dojouser1@plusdojo.jp','#SEplus2025SEplus','1990-01-01');
+
+INSERT INTO customer VALUES (NULL,'PLUS DOJO2','dojouser2@plusdojo.jp','#SEplus2025SEplus','1990-02-01');
+
+INSERT INTO customer VALUES (NULL,'PLUS DOJO3','dojouser3@plusdojo.jp','#SEplus2025SEplus','1990-03-01');
 
 
 /*テーブルデータ確認*/

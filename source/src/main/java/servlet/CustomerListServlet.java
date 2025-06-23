@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommodityDAO2;
+import dao.CommodityDAO;
 import dao.CustomerDAO;
 import dao.KeepBottleDAO;
 import dao.TalkDAO;
@@ -34,7 +34,7 @@ public class CustomerListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		// セッションからログイン中の顧客情報を取得
+    	// セッションからログイン中の店舗情報を取得
 		HttpSession session = request.getSession();
 		Store loginStore = (Store) session.getAttribute("store");
 
@@ -50,14 +50,15 @@ public class CustomerListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    /*
-	     * // もしもログインしていなかったらログインサーブレットにリダイレクトする
-	     * HttpSession session = request.getSession();
-	     * if (session.getAttribute("id") == null) {
-	     *     response.sendRedirect("/D3/LoginServlet");
-	     *     return;
-	     * }
-	     */
+    	// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
 
 	    request.setCharacterEncoding("UTF-8");
 	    String customer_name = request.getParameter("customer_name");
@@ -90,7 +91,7 @@ public class CustomerListServlet extends HttpServlet {
 	    List<KeepBottle> keepBottleList = kbDao.selectAll();
 	    
 	    //キープボトル登録
-	    CommodityDAO2 commodityDao = new CommodityDAO2();
+	    CommodityDAO commodityDao = new CommodityDAO();
 	    List<Commodity> commodityList = commodityDao.selectAll();
 
 	    request.setAttribute("talkMap", talkMap);

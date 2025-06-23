@@ -28,8 +28,17 @@ public class QRCodeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+    	// セッションからログイン中の店舗情報を取得
 		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
+	
+		
 		Store store = (Store)session.getAttribute("store");
 		int storeId = store.getStore_id();
 		

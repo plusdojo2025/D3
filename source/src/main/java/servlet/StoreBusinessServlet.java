@@ -26,6 +26,16 @@ public class StoreBusinessServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+    	// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
+
+	// ログインしていない場合はログイン画面へリダイレクト
+	if (loginStore == null) {
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		return;
+	}
+	
 		// 来店者表示
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -37,7 +47,7 @@ public class StoreBusinessServlet extends HttpServlet {
 		request.setAttribute("visitors", visitor);
 
 		// 連絡事項
-		HttpSession session = request.getSession();
+		
 		Store store = (Store)session.getAttribute("store");
 		int storeId = store.getStore_id();
 		StoreMemoDAO storeMemoDAO = new StoreMemoDAO();
