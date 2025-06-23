@@ -72,10 +72,12 @@ window.addEventListener("DOMContentLoaded", () => {
 // 来店者
 document.addEventListener("DOMContentLoaded", () => {
 	const button = document.querySelectorAll(".toggleBtn");
+
 	button.forEach(btn => {
 		btn.addEventListener("click", () => {
-			const details = btn.closest(".visitor").querySelector(".viditorDetails");
-			const isVisible = details.style.display === "block";
+			const details = btn.closest(".visitor").querySelector(".visitorDetails");
+			var isVisible = details.style.display === "block";
+
 			details.style.display = isVisible ? "none" : "block";
 			btn.textContent = isVisible ? "▽" : "△";
 		});
@@ -83,17 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 会計
-function postAndRedirectPayment(customerId) {
-	const form = document.createElement("form");
-	form.method = "GET";
-	form.action = `${location.origin}${location.pathname.replace(/\/[^\/]*$/, '')}/PaymentCompleteServlet`;
-	
+function AccountingGet(visitId) {
+	const accountingInputs = document.getElementById("accountingInput");
+	accountingInputs.innerHTML = "";
+
 	const input = document.createElement("input");
 	input.type = "hidden";
-	input.name = "customerId";
-	input.value = customerId;
-	
-	form.appendChild(input);
-	document.body.appendChild(form);
-	form.submit();
+	input.name = "visitId";
+	input.value = visitId;
+	accountingInputs.appendChild(input);
+
+	document.getElementById("accountingForm").submit();
 }

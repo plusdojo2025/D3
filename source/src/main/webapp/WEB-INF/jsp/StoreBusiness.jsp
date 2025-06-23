@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/業務画面</title>
-<link rel="stylesheet" href="<c:url value='/css/common.css' />">
 <link rel="stylesheet" href="<c:url value='/css/StoreBusiness.css' />">
+
 
 <%-- 仮でcss記入してます --%>
 <style>
@@ -27,12 +27,12 @@
 <body>
 
 
-<p id="clock">time</p>
-<header>
-<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
-</header>
+	<p id="clock">time</p>
+	<header>
+		<img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+	</header>
 
-		<h1>業務画面</h1>
+	<h1>業務画面</h1>
 
 	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
@@ -41,7 +41,7 @@
 		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
 		<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a><br>
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
-		
+
 	</div>
 
 
@@ -50,15 +50,13 @@
 
 		<div>
 			<h2>連絡事項</h2>
-			<div id="visitors">
-				<c:if test="${empty visitors}">
-					<p>来店者なし</p>
+			<div id="remarks">
+				<c:if test="${empty memoList}">
+					<p>連絡事項なし</p>
 				</c:if>
-				
+
 				<c:forEach var="memo" items="${memoList}">
-				<div class="memo">
-				${memo.store_remark}
-				</div>
+					<div class="memo">${memo.store_remark}</div>
 				</c:forEach>
 			</div>
 		</div>
@@ -82,15 +80,23 @@
 				<c:forEach var="visitor" items="${visitors}">
 					<div class="visitor">
 						<button class="toggleBtn">▽</button>
+
 						<a
 							href="${pageContext.request.contextPath}/CustomerListServlet?customerId=${visitor.customer.customer_id}">
 							${visitor.customer.customer_name}<br>
 						</a>
-						<div class="viditorDetails" style="display: none;">
+
+						<div class="visitorDetails" style="display: none;">
 							${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
-							<button class="payment" onclick="postAndRedirectPayment(${visitor.customer.customer_id})">会計
-							</button>
+
+							<form id="accountingForm" method="GET"
+								action="<%=request.getContextPath()%>/AccountingServlet">
+								<div id="accountingInput"></div>
+								<button type="button" onclick="AccountingGet(${visitor.visit_id})">会計</button>
+
+							</form>
 						</div>
+
 					</div>
 				</c:forEach>
 			</div>
@@ -102,6 +108,10 @@
 			<p>&copy;おかゆ</p>
 		</div>
 	</footer>
+
+	<script>
+		const contextPath = "${pageContext.request.contextPath}";
+	</script>
 
 	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>

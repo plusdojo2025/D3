@@ -108,6 +108,5 @@ main{
   margin: 0;
   outline: none;         /* フォーカス時の青枠も消す */
   pointer-events: none;  /* 入力不可を明確に（マウスも反応しない） */
-  width: auto;           /* 文字幅に合わせる */
+  width: auto;        /* 文字幅に合わせる */
 }
-

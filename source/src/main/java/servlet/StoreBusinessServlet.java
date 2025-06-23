@@ -26,38 +26,38 @@ public class StoreBusinessServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-    	// セッションからログイン中の店舗情報を取得
+		// セッションからログイン中の店舗情報を取得
 		HttpSession session = request.getSession();
 		Store loginStore = (Store) session.getAttribute("store");
 
-	// ログインしていない場合はログイン画面へリダイレクト
-	if (loginStore == null) {
-		response.sendRedirect(request.getContextPath() + "/LoginServlet");
-		return;
-	}
-	
+		// ログインしていない場合はログイン画面へリダイレクト
+		if (loginStore == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}
+
+		int storeId = loginStore.getStore_id();
+
 		// 来店者表示
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String date = dateFormat.format(timestamp);
-		// TODO 現時点注文済みの客の情報のみ表示
 		VisitorDAO dao = new VisitorDAO();
-		List<Visitor> visitor = dao.getVisitorByDate(date);
+		// List<Visitor> visitor = dao.getVisitorByDate(date);
+		List<Visitor> visitor = dao.getCurrentVisitorByStoreId(storeId);
 
 		request.setAttribute("visitors", visitor);
 
 		// 連絡事項
-		
-		Store store = (Store)session.getAttribute("store");
-		int storeId = store.getStore_id();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String date = dateFormat.format(timestamp);
+
 		StoreMemoDAO storeMemoDAO = new StoreMemoDAO();
 		List<StoreMemo> memoList = storeMemoDAO.getStoreMemoByDate(storeId, date);
+
 		request.setAttribute("memoList", memoList);
 
 		// 業務画面ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
-		//RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/StoreBusiness.jsp");
-		
+
 		dispatcher.forward(request, response);
 	}
 }

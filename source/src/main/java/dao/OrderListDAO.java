@@ -310,6 +310,37 @@ public class OrderListDAO {
 		
 		return orderList;
 	}
+	
+	public List<OrderList> getOrderByVisitId(int id) {
+		String sql = "SELECT orderList.order_quantity, commodity.commodity_name, commodity.commodity_price"
+				+ " FROM orderList "
+				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
+				+ "WHERE orderList.visit_id = ?";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, id);
+
+			ResultSet rs = pStmt.executeQuery();
+			List<OrderList> orderList = new ArrayList<OrderList>();
+			while(rs.next()) {
+				OrderList order = new OrderList();
+				Commodity commodity = new Commodity();
+				commodity.setCommodity_name(rs.getString("commodity.commodity_name"));
+				commodity.setCommodity_price(rs.getInt("commodity.commodity_price"));
+				order.setCommodity(commodity);
+				
+				order.setOrder_quantity(rs.getInt("orderList.order_quantity"));
+				order.setOrder_id(id);
+				
+				orderList.add(order);
+			}
+
+			return orderList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	static {
 		try {

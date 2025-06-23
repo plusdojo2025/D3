@@ -71,7 +71,7 @@
 							</c:forEach>
 						</select>
 						<input type="text" name="new_talk_remark">
-						<button type="submit" name="action" value="insert_talk">登録</button>
+						<button type="submit" name="action" value="insert_talk" class="cool-submit-mini">登録</button>
 					</p>
 				</div>
 
@@ -81,11 +81,11 @@
 					<c:forEach var="kb" items="${keepBottleList}">
 						<c:if test="${kb.customer.customer_id == e.customer_id}">
 							<p>
-								商品名: ${kb.commodity.commodity_name}　
-								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min="0">
-								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" />
-								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}">更新</button>
-								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');">削除</button>
+								商品名: ${kb.commodity.commodity_name}　<br>
+								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min="0" style="width: 70px;">ml<br>
+								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
+								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
+								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');" class="cool-submit-mini">削除</button>
 							</p>
 						</c:if>
 					</c:forEach>
@@ -99,14 +99,14 @@
 						</select>
 						<input type="number" name="new_bottle_remaining" placeholder="残量">
 						<input type="date" name="new_bottle_limit" placeholder="期限">
-						<button type="submit" name="action" value="insert_bottle">ボトル登録</button>
+						<button type="submit" name="action" value="insert_bottle" class="cool-submit-mini">ボトル登録</button>
 					</p>
 				</div>
 
 				<!-- ボタン -->
 				<div class="action-section">
-					<input type="submit" name="submit" value="顧客情報更新">
-					<input type="submit" name="submit" value="顧客情報削除" onclick="return confirm('本当に削除しますか？');">
+					<input type="submit" name="submit" value="顧客情報更新" class="cool-submit-small">
+					<input type="submit" name="submit" value="顧客情報削除" onclick="return confirm('本当に削除しますか？');" class="cool-submit-small">
 				</div>
 			</div>
 		</form>
