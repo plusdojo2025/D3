@@ -1,95 +1,156 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<<<<<<< HEAD
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/accounting.css">
+<title>BARLOOP/会計確認</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 40px;
+}
 
-=======
-    <meta charset="UTF-8">
->>>>>>> 353fee9e1f75952ac192727c947c142a1e959cac
-    <title>BARLOOP/会計確認</title>
-    <link rel="stylesheet" href="<c:url value='/css/common.css' />">
-    <link rel="stylesheet" href="<c:url value='/css/Accounting.css' />">
+table {
+	border-collapse: collapse;
+	width: 60%;
+}
+
+th, td {
+	border: 1px solid #aaa;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #ddd;
+}
+
+.total {
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #333;
+}
+
+/* ポップアップスタイル */
+#popup {
+	display: none;
+	position: fixed;
+	top: 20%;
+	left: 30%;
+	width: 40%;
+	background: #fff;
+	border: 2px solid #333;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	z-index: 9999;
+}
+
+#popupContent {
+	margin-bottom: 10px;
+}
+
+#popup button {
+	padding: 5px 10px;
+}
+
+#overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 9998;
+}
+
+/* エラーメッセージスタイル */
+#errorMessage {
+	color: red;
+	margin-top: 5px;
+}
+</style>
 </head>
-<body data-context="${pageContext.request.contextPath}">
 
-<header>
-    <a href="<c:url value='/StoreBusinessServlet' />">
-        <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
-    </a>
-</header>
+<body>
 
-<main>
-    <p>${nickname} 様</p>
-    <h2>会計内容の確認</h2>
+	<p id="clock">time</p>
+	<header>
+		<a href="<c:url value='/StoreBusinessServlet' />"> <img
+			src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
+		</a>
+	</header>
 
-    <c:if test="${not empty orderDetails}">
-        <table>
-            <tr>
-                <th>商品名</th>
-                <th>価格（円）</th>
-                <th>数量</th>
-            </tr>
-            <c:forEach var="item" items="${orderDetails}">
-                <tr>
-                    <td>${item.commodity_name}</td>
-                    <td>${item.commodity_price}</td>
-                    <td>${item.order_quantity}</td>
-                </tr>
-            </c:forEach>
-            <tr>
-                <td class="total">合計</td>
-                <td class="total">${total} 円</td>
-                <td></td>
-            </tr>
-        </table>
+	<button id="openSiteMap">O</button>
+	<button id="closeSiteMap">X</button>
+	<div id="siteMapPanel">
+		<a href="${pageContext.request.contextPath}/StoreBusinessServlet">業務</a><br>
+		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
+		<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a><br>
+		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 
-        <br><hr><br>
-
-        <form id="paymentForm">
-            <p>支払い方法を選択：</p>
-            <label><input type="radio" name="payment_method" value="現金"> 現金</label><br>
-            <label><input type="radio" name="payment_method" value="paypay"> PayPay</label><br>
-
-            <div id="errorMessage" style="color:red;"></div>
-
-            <c:forEach var="item" items="${orderDetails}">
-                <input type="hidden" name="commodity_id" value="${item.commodity_id}" />
-                <input type="hidden" name="order_quantity" value="${item.order_quantity}" />
-            </c:forEach>
-            <input type="hidden" name="total" value="${total}" />
-
-            <br>
-            <!-- 普通のsubmitではなくボタンでJSのsubmitPayment()を呼び出す -->
-            <input type="button" value="会計を確定する" onclick="submitPayment()">
-        </form>
-    </c:if>
-
-    <c:if test="${empty orderDetails}">
-        <p>注文情報がありません。</p>
-    </c:if>
-
-    <!-- 既存の会計内容表示・フォームのコード -->
-
-    <!-- ここにポップアップ用のHTMLを追加 -->
-    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; z-index:999;"></div>
-
-    <div id="popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
-        background:#fff; padding:20px; border-radius:8px; z-index:1000; max-width:400px;">
-        <div id="popupContent"></div>
-        <button onclick="closePopup()">閉じる</button>
-    </div>
-</main>
+	</div>
 
 
-<footer>
-    <div class="copyright">
-        <p>&copy; おかゆ</p>
-    </div>
-</footer>
+	<main data-context="${pageContext.request.contextPath}">
+		<h2>会計内容の確認</h2>
 
-<script src="<c:url value='/js/Accounting.js' />"></script>
+		<form action="<%=request.getContextPath()%>/AccountingServlet"
+			method="POST">
+			<table>
+				<tr>
+					<th>商品名</th>
+					<th>価格（円）</th>
+					<th>数量</th>
+				</tr>
+				<c:forEach var="order" items="${orderList}">
+					<tr>
+						<td>${order.commodity.commodity_name}</td>
+						<td>${order.commodity.commodity_price}</td>
+						<td>${order.order_quantity}</td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td class="total">合計</td>
+					<td class="total">${total}</td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+
+		<br>
+		<hr>
+		<br>
+
+		<!-- 支払い方法フォーム -->
+		<form id="paymentForm" action="<%= request.getContextPath() %>/AccountingServlet" method="POST">
+			<p>支払い方法を選択：</p>
+			<input type="hidden" name="visitId" value="${visitId}">
+			<label><input type="radio" name="payment_method" value="現金">現金</label><br>
+			<label><input type="radio" name="payment_method" value="paypay"> paypay</label><br>
+
+			<!-- エラーメッセージ表示場所 -->
+			<div id="errorMessage"></div>
+
+			<button type="submit">会計</button>
+		</form>
+
+		<!-- ポップアップとオーバーレイ -->
+		<div id="overlay"></div>
+		<div id="popup">
+			<div id="popupContent">読み込み中...</div>
+			<button onclick="closePopup()">閉じる</button>
+		</div>
+	</main>
+
+	<footer>
+		<div id="footer">
+			<p>&copy; おかゆ</p>
+		</div>
+	</footer>
+
+	<!-- 外部JSファイル読み込み -->
+	<script src="js/Accounting.js"></script>
+
 </body>
 </html>

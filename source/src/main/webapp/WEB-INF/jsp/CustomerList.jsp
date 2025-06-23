@@ -13,7 +13,7 @@
 <body>
 <p id="clock">time</p>
 <header>
-<a href="<c:url value='/StoreBusinessServlet' />">
+<a href="<c:url value='/StoreStaffServlet' />">
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
@@ -42,7 +42,7 @@
 					<p><strong>ユーザーネーム:</strong> <input type="text" name="customer_name" value="${e.customer_name}"></p>
 					<p><strong>誕生日:</strong> <input type="text" name="customer_birthday" value="${e.customer_birthday}"></p>
 					<p><strong>メールアドレス:</strong> <input type="text" name="customer_email" value="${e.customer_email}"></p>
-					<p><strong>いつもの:</strong> <input type="text" name="every" value="${every[status.index]}"></p>
+					<p><strong>いつもの:</strong> <input type="text" name="every" value="${every[status.index]}"readonly></p>
 				</div>
 
 				<!-- 会話 -->
@@ -50,7 +50,7 @@
 					<p><strong>会話内容:</strong></p>
 					<c:forEach var="t" items="${talkMap[e.customer_id]}">
 						<p>
-							・<select name="talk_topic_id_${t.topic_id}">
+							<select name="talk_topic_id_${t.topic_id}">
 								<c:forEach var="tag" items="${topicTagList}">
 									<option value="${tag.topic_id}" <c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>
 										${tag.topic_name}
@@ -58,8 +58,8 @@
 								</c:forEach>
 							</select>
 							<input type="text" name="talk_remark_${t.topic_id}" value="${t.talk_remark}">
-							<button type="submit" name="action" value="update_talk_${t.topic_id}">更新</button>
-							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');">削除</button>
+							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
+							<button type="submit" name="action" value="delete_talk_${t.topic_id}" onclick="return confirm('削除しますか？');"class="cool-submit-mini">削除</button>
 						</p>
 					</c:forEach>
 
@@ -82,7 +82,7 @@
 						<c:if test="${kb.customer.customer_id == e.customer_id}">
 							<p>
 								商品名: ${kb.commodity.commodity_name}　<br>
-								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min="0" style="width: 70px;">ml<br>
+								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml<br>
 								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
 								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
 								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" onclick="return confirm('削除しますか？');" class="cool-submit-mini">削除</button>
@@ -97,7 +97,7 @@
 								<option value="${item.commodity_id}">${item.commodity_name}</option>
 							</c:forEach>
 						</select>
-						<input type="number" name="new_bottle_remaining" placeholder="残量">
+						<input type="number" name="new_bottle_remaining" placeholder="残量" min=0>
 						<input type="date" name="new_bottle_limit" placeholder="期限">
 						<button type="submit" name="action" value="insert_bottle" class="cool-submit-mini">ボトル登録</button>
 					</p>
@@ -115,6 +115,14 @@
 	<c:if test="${empty customerList}">
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
+	
+	<form method="GET" action="/D3/CustomerListServlet">
+		<c:forEach var="page" items="${pagenumber}" varStatus="status">
+			<c:if test="${(status.index) <5}">
+				<input type=submit value="${page}" name="number">
+			</c:if>
+		</c:forEach>
+	</form>
 </main>
 
 <footer>
@@ -122,6 +130,7 @@
 		<p>&copy; おかゆ</p>
 	</div>
 </footer>
+<script src="${pageContext.request.contextPath}/js/CustomerList.js"></script>
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>

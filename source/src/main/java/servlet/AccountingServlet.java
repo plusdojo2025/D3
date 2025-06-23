@@ -1,14 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,86 +10,62 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.OrderListDAO;
+import dao.VisitorDAO;
+import dto.OrderList;
+import dto.Store;
 
 @WebServlet("/AccountingServlet")
 public class AccountingServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    // DB接続情報は適宜書き換えてください
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9";
-    private static final String DB_USER = "root";
-    private static final String DB_PASS = "password";
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int visitId = Integer.parseInt(request.getParameter("visitId"));
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+		OrderListDAO orderListDAO = new OrderListDAO();
+		List<OrderList> orderList = orderListDAO.getOrderByVisitId(visitId);
+		if (orderList == null)
+			orderList = new ArrayList<OrderList>();
 
-        request.setCharacterEncoding("UTF-8");
+		int total = 0;
+		for (OrderList order : orderList) {
+			total += (order.getCommodity().getCommodity_price() * order.getOrder_quantity());
+		}
 
-        // 商品IDと数量をPOSTパラメータから取得
-        String[] commodityIds = request.getParameterValues("commodity_id");
-        String[] orderQuantities = request.getParameterValues("order_quantity");
+		request.setAttribute("orderList", orderList);
+		request.setAttribute("visitId", visitId);
+		request.setAttribute("total", total);
 
-        if (commodityIds == null || orderQuantities == null || commodityIds.length != orderQuantities.length) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "商品IDまたは数量のパラメータが不正です。");
-            return;
-        }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Accounting.jsp");
+		dispatcher.forward(request, response);
+	}
 
-        List<Map<String, Object>> orderDetails = new ArrayList<>();
-        int total = 0;
+	// POSTリクエストの処理（フォーム送信された場合など）
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+		// セッションからログイン中の店舗情報を取得
+		HttpSession session = request.getSession();
+		Store loginStore = (Store) session.getAttribute("store");
 
-            try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-                String sql = "SELECT commodity_name, commodity_price FROM Commodity WHERE commodity_id = ?";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+		// ログインしていない場合はログイン画面へリダイレクト
+		if (loginStore == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}
 
-                    for (int i = 0; i < commodityIds.length; i++) {
-                        int commodityId = Integer.parseInt(commodityIds[i]);
-                        int quantity = Integer.parseInt(orderQuantities[i]);
+		request.setCharacterEncoding("UTF-8");
 
-                        ps.setInt(1, commodityId);
+		// 退店登録
+		int visitId = Integer.parseInt(request.getParameter("visitId"));
+		VisitorDAO visitorDAO = new VisitorDAO();
+		visitorDAO.updateVisitorExit(visitId);
 
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                String name = rs.getString("commodity_name");
-                                int price = rs.getInt("commodity_price");
-
-                                // 合計金額計算
-                                total += price * quantity;
-
-                                Map<String, Object> item = new HashMap<>();
-                                item.put("commodity_id", commodityId);
-                                item.put("commodity_name", name);
-                                item.put("commodity_price", price);
-                                item.put("order_quantity", quantity);
-                                orderDetails.add(item);
-                            } else {
-                                // 商品IDに該当なしのケースは無視 or エラー処理
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new ServletException("データベースエラーが発生しました。", e);
-        }
-
-        // JSPにデータを渡す
-        request.setAttribute("orderDetails", orderDetails);
-        request.setAttribute("total", total);
-
-        // JSPにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Accounting.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    // GETリクエストはエラーメッセージ表示のみ（POST専用）
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().println("<h2>このページはフォームからのPOST送信専用です。</h2>");
-    }
+		response.sendRedirect("/StoreBusinessServlet");
+	}
 }
