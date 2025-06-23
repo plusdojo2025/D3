@@ -3,7 +3,8 @@
 <html>
 <head>
 <title>BARLOOP/ログイン</title>
-
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/Login.css' />">
 <style>
 .overlay {
 	position: fixed;
@@ -65,7 +66,7 @@
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" onsubmit="return validateLoginForm('store')">
 			<input type="hidden" id="store_userType" name="userType"
-				value="store" /> メールアドレス: <input type="text" id="store_email"
+				value="store" /> ID: <input type="text" id="store_email"
 				name="email"><br /> パスワード: <input type="password"
 				id="store_password" name="password"><br /> <input
 				type="submit" value="ログイン">

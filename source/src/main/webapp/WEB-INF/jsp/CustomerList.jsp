@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/顧客一覧</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/CustomerList.css' />">
 </head>
 <body>
 <p id="clock">time</p>

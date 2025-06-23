@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>BARLOOP/QRコード</title>
-<link rel="stylesheet" href="css/QRCode.css">
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/QRCode.css' />">
+
 
 </head>
 <body>

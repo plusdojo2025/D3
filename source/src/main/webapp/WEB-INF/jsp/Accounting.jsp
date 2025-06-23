@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>BARLOOP/会計確認</title>
+    <link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/Accounting.css' />">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,6 +88,7 @@
 
 
 <main data-context="${pageContext.request.contextPath}">
+${nickname}様
 <h2>会計内容の確認</h2>
 
 <%
