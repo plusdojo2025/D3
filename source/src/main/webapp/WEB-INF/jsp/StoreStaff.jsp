@@ -19,7 +19,7 @@
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 
 
-<h2>店舗事務画面</h2>
+<h1>店舗事務画面</h1>
 </header>
 
 

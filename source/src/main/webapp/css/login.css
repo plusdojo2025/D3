@@ -1,1 +1,85 @@
 @charset "UTF-8";
+
+/* 全体レイアウト */
+html {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(227, 208, 149);
+    background-color: rgb(14, 33, 72);
+    text-align: center;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 見出し */
+h1, h2 {
+    color: rgb(227, 208, 149);
+    margin-bottom: 20px;
+}
+
+/* フォーム全体 */
+form {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgb(227, 208, 149);
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px auto;
+    width: 400px;
+}
+
+/* 入力フィールド */
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgb(227, 208, 149);
+    background-color: rgb(14, 33, 72);
+    color: rgb(227, 208, 149);
+    border-radius: 5px;
+}
+
+input[type="submit"],
+button {
+    background-color: rgb(227, 208, 149);
+    color: rgb(14, 33, 72);
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: rgb(200, 180, 120);
+}
+
+/* エラーメッセージ */
+p[style*="color:red"] {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* ゲストログイン */
+button {
+    margin-top: 20px;
+}
+
+/* フッター*/
+footer {
+    padding: 50px 0;
+    color: rgb(227, 208, 149);
+    font-size: 0.9em;
+}
+
+

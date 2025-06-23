@@ -70,9 +70,10 @@
 		</c:if>
 		<div id="popupCommodity">
 			<input type="hidden" id="commodityId" value="" readonly><br>
-			<input id="commodityImage" value="" readonly><br> <input
-				id="commodityName" value="" readonly><br> <input
-				id="commodityPrice" value="" readonly> <select id="quantity">
+			<p id="commodityImage"></p><br>
+			<p id="commodityName"></p><br>
+			<p id="commodityPrice"></p>
+			<select id="quantity">
 				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -90,7 +91,7 @@
 		<form id="orderForm" method="POST" action="<%= request.getContextPath() %>/OrderSubmitServlet">
 			<div id="cartInputs"></div>
 
-			<button type="button" onclick="submitOrder()">注文する</button>
+			<button id="submitOrderButton" type="button" onclick="submitOrder()">注文する</button>
 		</form>
 
 		<div>
