@@ -1,0 +1,114 @@
+未着手
+テストデータ
+・category
+・commodity
+・event
+・keep_bottle
+・store_memo
+・talk
+・visitor
+
+
+
+CREATE TABLE category (
+category_id INT AUTO_INCREMENT PRIMARY KEY,
+category_name VARCHAR(100) NOT NULL
+) ;
+
+CREATE TABLE commodity (
+commodity_id INT AUTO_INCREMENT PRIMARY KEY,
+commodity_name VARCHAR(100) NOT NULL,
+commodity_price INT NOT NULL,
+commodity_category INT NOT NULL,
+commodity_image VARCHAR(100)
+) ;
+
+CREATE TABLE customer (
+customer_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_name VARCHAR(20) NOT NULL,
+customer_email VARCHAR(100) NOT NULL,
+customer_password VARCHAR(100) NOT NULL,
+customer_birthday DATE NOT NULL
+) ;
+
+CREATE TABLE event (
+event_id INT AUTO_INCREMENT PRIMARY KEY,
+store_id INT NOT NULL,
+event_date DATE NOT NULL,
+event_name VARCHAR(100) NOT NULL,
+event_remark VARCHAR(100) NOT NULL
+) ;
+
+CREATE TABLE keep_bottle (
+bottle_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+commodity_id INT NOT NULL,
+bottle_remaining INT NOT NULL,
+bottle_limit DATE NOT NULL
+) ;
+
+CREATE TABLE orderlist(
+order_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+commodity_id INT NOT NULL,
+order_datetime DATE NOT NULL,
+order_quantity INT NOT NULL,
+visit_id INT NOT NULL
+) ;
+
+CREATE TABLE store_memo (
+store_id INT NOT NULL,
+store_date DATE NOT NULL,
+store_remark VARCHAR(100)
+) ;
+
+CREATE TABLE store (
+store_id INT AUTO_INCREMENT PRIMARY KEY,
+store_name VARCHAR(100) NOT NULL,
+store_password VARCHAR(100) NOT NULL
+) ;
+
+CREATE TABLE talk(
+customer_id INT NOT NULL,
+topic_id INT NOT NULL,
+talk_remark VARCHAR(200) NOT NULL
+) ;
+
+CREATE TABLE topic_tag(
+topic_id INT AUTO_INCREMENT PRIMARY KEY,
+topic_name VARCHAR(100) NOT NULL
+) ;
+
+CREATE TABLE visitor(
+visit_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT NOT NULL,
+store_id INT NOT NULL,
+visit_time TIMESTAMP NOT NULL,
+exit_time TIMESTAMP
+);
+
+
+
+INSERT INTO customer VALUES (NULL,'PLUS DOJO1','dojouser1@plusdojo.jp','#SEplus2025SEplus','1990-01-01');
+INSERT INTO customer VALUES (NULL,'PLUS DOJO2','dojouser2@plusdojo.jp','#SEplus2025SEplus','1990-02-01');
+INSERT INTO customer VALUES (NULL,'PLUS DOJO3','dojouser3@plusdojo.jp','#SEplus2025SEplus','1990-03-01');
+
+INSERT INTO orderlist VALUES (NULL,1,1,CURRENT_TIMESTAMP,42, 1);
+INSERT INTO orderlist VALUES (NULL,1,2,CURRENT_TIMESTAMP,30, 2);
+INSERT INTO orderlist VALUES (NULL,1,3,CURRENT_TIMESTAMP,58, 1);
+INSERT INTO orderlist VALUES (NULL,2,4,CURRENT_TIMESTAMP,40, 1);
+INSERT INTO orderlist VALUES (NULL,2,5,CURRENT_TIMESTAMP,90, 1);
+INSERT INTO orderlist VALUES (NULL,3,6,CURRENT_TIMESTAMP,30, 1);
+
+INSERT INTO store VALUES (NULL,'dojouser1','#SEplus2025SEplus');
+
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（野球）');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（サッカー）');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ（その他）');
+INSERT INTO topic_tag VALUES (NULL,'音楽（クラシック）');
+INSERT INTO topic_tag VALUES (NULL,'音楽（ＪＰＯＰ）');
+INSERT INTO topic_tag VALUES (NULL,'ニュース（株）');
+INSERT INTO topic_tag VALUES (NULL,'旅行');
+INSERT INTO topic_tag VALUES (NULL,'その他');
+INSERT INTO topic_tag VALUES (NULL,'ＮＧ内容');
+

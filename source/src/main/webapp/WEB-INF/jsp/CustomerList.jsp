@@ -13,7 +13,7 @@
 <body>
 <p id="clock">time</p>
 <header>
-<a href="<c:url value='/StoreBusinessServlet' />">
+<a href="<c:url value='/StoreStaffServlet' />">
 <img src="/D3/img/BARLOOP.png" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
@@ -115,6 +115,14 @@
 	<c:if test="${empty customerList}">
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
+	
+	<form method="GET" action="/D3/CustomerListServlet">
+		<c:forEach var="page" items="${pagenumber}" varStatus="status">
+			<c:if test="${(status.index) <5}">
+				<input type=submit value="${page}" name="number">
+			</c:if>
+		</c:forEach>
+	</form>
 </main>
 
 <footer>
@@ -122,6 +130,7 @@
 		<p>&copy; おかゆ</p>
 	</div>
 </footer>
+<script src="${pageContext.request.contextPath}/js/CustomerList.js"></script>
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>

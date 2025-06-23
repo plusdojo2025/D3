@@ -224,57 +224,133 @@ public class CustomerDAO {
 		// 結果を返す
 		return result;
 	}
-	
+
 	// 全件取得
 	public List<Customer> selectAll() {
-	    return select(new Customer()); // 初期化されたCustomerは全件検索と同義
+		return select(new Customer()); // 初期化されたCustomerは全件検索と同義
 	}
 
+	// 顧客ログイン（メールとパスワードで認証）
+	public Customer login(String email, String password) {
+		Connection conn = null;
+		Customer customer = null;
 
+		try {
+			// JDBCドライバ読み込み
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
+			// DB接続情報は環境に合わせて変更してください
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
+					"password");
 
-    // 顧客ログイン（メールとパスワードで認証）
-    public Customer login(String email, String password) {
-        Connection conn = null;
-        Customer customer = null;
+			// SQL文準備
+			String sql = "SELECT * FROM customer WHERE customer_email = ? AND customer_password = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, email);
+			pStmt.setString(2, password);
 
-        try {
-            // JDBCドライバ読み込み
-            Class.forName("com.mysql.cj.jdbc.Driver");
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
 
-            // DB接続情報は環境に合わせて変更してください
-            conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
-                "root", "password");
+			// 結果があればCustomerオブジェクトにセット
+			if (rs.next()) {
+				customer = new Customer();
+				customer.setCustomer_id(rs.getInt("customer_id"));
+				customer.setCustomer_name(rs.getString("customer_name"));
+				customer.setCustomer_email(rs.getString("customer_email"));
+				customer.setCustomer_password(rs.getString("customer_password"));
+				customer.setCustomer_birthday(rs.getString("customer_birthday"));
+			}
 
-            // SQL文準備
-            String sql = "SELECT * FROM customer WHERE customer_email = ? AND customer_password = ?";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, email);
-            pStmt.setString(2, password);
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// 接続解除
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-            // SQL実行
-            ResultSet rs = pStmt.executeQuery();
+		return customer; // nullならログイン失敗
+	}
 
-            // 結果があればCustomerオブジェクトにセット
-            if (rs.next()) {
-                customer = new Customer();
-                customer.setCustomer_id(rs.getInt("customer_id"));
-                customer.setCustomer_name(rs.getString("customer_name"));
-                customer.setCustomer_email(rs.getString("customer_email"));
-                customer.setCustomer_password(rs.getString("customer_password"));
-                customer.setCustomer_birthday(rs.getString("customer_birthday"));
-            }
+	// ページング付きで顧客一覧取得
+	public List<Customer> selectByPage(String name, int page, int limit) {
+		Connection conn = null;
+		List<Customer> customerList = new ArrayList<>();
+		int offset = (page - 1) * limit;
 
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            // 接続解除
-            if (conn != null) {
-                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
-        }
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
+					"password");
 
-        return customer;  // nullならログイン失敗
-    }
+			String sql = "SELECT * FROM Customer WHERE customer_name LIKE ? ORDER BY customer_id LIMIT ? OFFSET ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
+			pStmt.setInt(2, limit);
+			pStmt.setInt(3, offset);
+
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				Customer ctm = new Customer(rs.getInt("customer_id"), rs.getString("customer_name"),
+						rs.getString("customer_email"), rs.getString("customer_password"),
+						rs.getString("customer_birthday"));
+				customerList.add(ctm);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return customerList;
+	}
+
+	// 総件数取得
+	public int countByName(String name) {
+		Connection conn = null;
+		int count = 0;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
+					"password");
+
+			String sql = "SELECT COUNT(*) FROM Customer WHERE customer_name LIKE ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
+
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+
 }
