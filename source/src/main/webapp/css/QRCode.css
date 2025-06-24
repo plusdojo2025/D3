@@ -4,32 +4,48 @@ html{
 text-align: center;  /* 横中央に配置 */
 }
 
-.menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform-origin: top right;  /* 右上基準で縮小 */
-}
 
 
 
 /*header*/
-#clock {
-  text-align: left;
-  margin-left: 20px;
-}
 
-#siteMapPanel,#openSiteMap,#closeSiteMap {
-	float: right;          /* パネルを右に配置 */
-    text-align: left;      /* 中の文字は左揃え */
-    margin-left: 20px;     /* 必要に応じて調整 */
-    
-}
+
+
 
 /*main*/
-.QR{
-	padding:50px;
-	margin: 100px auto;
+main {
+  
+  display: flex;
+  justify-content: center; /* 横方向中央 */
+  align-items: center;     /* 縦方向中央 */
+  
+}
+
+
+
+
+.QR {
+	margin:100px 0;
+	width: 400px;
+	justify-content: center; /* 横中央 */
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(227, 208, 149, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.QR:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(227, 208, 149, 0.7);
+}
+
+.QR img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 /*footer*/

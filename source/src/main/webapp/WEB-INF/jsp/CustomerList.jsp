@@ -87,8 +87,9 @@
 						<c:if test="${kb.customer.customer_id == e.customer_id}">
 							<p class="keep">
 								商品名: ${kb.commodity.commodity_name}　<br>
-								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml
-								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /><br>
+								
+								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" />
+								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml<br>
 								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
 								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" class="cool-submit-mini">削除</button>
 							</p>

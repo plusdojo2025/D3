@@ -9,26 +9,18 @@ text-align: center;  /* 横中央に配置 */
 
 /*header*/
 
-#siteMapPanel,#openSiteMap,#closeSiteMap {
-	float: right;          /* パネルを右に配置 */
-    text-align: left;      /* 中の文字は左揃え */
-    margin-left: 20px;     /* 必要に応じて調整 */
-    
-}
+
+
 
 /*main*/
 main{
 	margin-top:100px;
 }
 
-.order{
-	margin:10px;
-	
-}
 
-.orderListSub{
+#orderList{
 	margin: 20px auto;
-	max-width: 800px;
+	max-width: 500px;
 	background-color: rgb(25, 47, 97);
 	padding:20px;
 	border-radius: 5px;
@@ -39,29 +31,25 @@ main{
 	margin:20px;
 }
 
-.menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform-origin: top right;  /* 右上基準で縮小 */
-}
 
 .order {
   text-align: center; /* 要素全体を中央に配置 */
 }
 
-.inputMenu {
-	width: 160px; /* 必要に応じて統一 */
-  display: inline-block;
-  text-align: left;     /* ← テキストは左寄せ */
-  padding: 4px 8px;
-  margin: 2px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 160px;          /* 必要に応じて横幅指定 */
+/*テーブル*/
+table{
+	margin: 0 auto;
+	text-align: left;
+	
+	border-collapse: separate;
+  border-spacing: 0;
 }
 
+td {
+  border-bottom: 1px solid rgb(227, 208, 149);
+  padding: 10px 10px; 
+  
+}
 
 
 /*footer*/
@@ -85,6 +73,7 @@ main{
   transition: background 0.3s ease, transform 0.2s ease;
   user-select: none;
   font-family:'Courier New', Courier, monospace; 
+  margin:10px;
 }
 
 .cool-submit:hover {
@@ -124,19 +113,6 @@ main{
 .cool-submit-small:active {
   transform: scale(0.95);
   box-shadow: 0 2px 6px rgb(227, 208, 149);
-}
-
-/*inputの枠消去*/
-.inputMenu {
-  border: none;
-  background-color: transparent;
-  color: rgb(227, 208, 149);           /* 文字色は適宜調整 */
-  font-size: 16px;
-  padding: 0;
-  margin: 0;
-  outline: none;         /* フォーカス時の青枠も消す */
-  pointer-events: none;  /* 入力不可を明確に（マウスも反応しない） */
-  width: auto;        /* 文字幅に合わせる */
 }
 
 
