@@ -113,6 +113,47 @@ input[name="cancel"] {
 	font-family: 'Courier New', Courier, monospace;
 }
 
+.Pagination {
+  display: flex;
+  align-items: center;     /* 縦方向中央（高さがある場合に有効） */
+  justify-content: center; /* ← 横方向中央揃え */
+  text-align: center;
+}
+.Pagination input[type="submit"] {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  box-shadow: 0 2px 6px rgba(37, 117, 252, 0.4);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  padding: 0;
+}
+
+.Pagination input[type="submit"]:hover:not(.isActive) {
+  background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+  color: #111;
+  transform: scale(1.05);
+  box-shadow: 0 2px 6px rgb(227, 208, 149);
+}
+
+
+
+.Pagination > * + * {
+  margin-left: 8px;
+}
+
+
 /* オーバーレイ全体 */
 #overlay {
 	position: fixed;
