@@ -57,6 +57,18 @@
 <c:if test="${empty bottleList}">
 	<p>キープ中のボトルはありません。</p>
 </c:if>
+
+<h2>ドリンクランキング</h2>
+
+<table>
+<c:forEach var="drink" items="${best3drink}" varStatus="status">
+<tr>
+<td>${drink.commodity_name}</td>
+<td>${best3drinkSum[status.index]}</td>
+</tr>
+</c:forEach>
+</table>
+
 </main>
 <!-- フッター -->
 <footer>
