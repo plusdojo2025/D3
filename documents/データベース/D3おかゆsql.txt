@@ -98,6 +98,8 @@ INSERT INTO orderlist VALUES (NULL,3,6,CURRENT_TIMESTAMP,30, 1);
 
 INSERT INTO store VALUES (NULL,'dojouser1','#SEplus2025SEplus');
 
+INSERT INTO store_memo VALUES (1,NOW(),'テストメモ');
+
 INSERT INTO topic_tag VALUES (NULL,'スポーツ（野球）');
 INSERT INTO topic_tag VALUES (NULL,'スポーツ（サッカー）');
 INSERT INTO topic_tag VALUES (NULL,'スポーツ（その他）');
