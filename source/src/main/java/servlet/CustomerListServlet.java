@@ -43,42 +43,57 @@ public class CustomerListServlet extends HttpServlet {
             return;
         }
 
-        // 顧客全件取得
         CustomerDAO cDao = new CustomerDAO();
-        List<Customer> allCustomerList = cDao.selectAll();
 
-        // ページング処理
-        int total = allCustomerList.size(); // 全件数
-        int pageSize = 10; // 1ページあたりの件数
-        int maxPage = (total - 1) / pageSize + 1;
+        // 来店者から飛ぶ用
+        String customerIdStr = request.getParameter("customerId");
+        List<Customer> customerList;
+        int[] pagenumber = new int[0];
 
-        int page = 1; // 初期ページ
-        if (request.getParameter("number") != null) {
+        if (customerIdStr != null && !customerIdStr.isEmpty()) {
             try {
-                page = Integer.parseInt(request.getParameter("number"));
-                if (page < 1) page = 1;
-                if (page > maxPage) page = maxPage;
+                int customerId = Integer.parseInt(customerIdStr);
+                Customer customer = cDao.selectById(customerId);
+                if (customer != null) {
+                    customerList = List.of(customer); // 1件だけのリスト
+                } else {
+                    customerList = List.of(); // 該当なし
+                }
             } catch (NumberFormatException e) {
-                page = 1;
-            }
-        }
-
-        int startIndex = (page - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize, total);
-        List<Customer> customerList = allCustomerList.subList(startIndex, endIndex);
-
-        // ページ番号リストの作成
-        int[] pagenumber;
-        if (maxPage <= 5) {
-            pagenumber = new int[maxPage];
-            for (int i = 0; i < maxPage; i++) {
-                pagenumber[i] = i + 1;
+                customerList = List.of(); // 無効なIDなら空リスト
             }
         } else {
-            pagenumber = new int[5];
-            int start = Math.max(1, Math.min(page - 2, maxPage - 4));
-            for (int i = 0; i < 5; i++) {
-                pagenumber[i] = start + i;
+            // 顧客全件からページングで取得
+            int pageSize = 10; // 1ページあたりの件数
+            int page = 1; // 初期ページ
+
+            if (request.getParameter("number") != null) {
+                try {
+                    page = Integer.parseInt(request.getParameter("number"));
+                    if (page < 1) page = 1;
+                } catch (NumberFormatException e) {
+                    page = 1;
+                }
+            }
+
+            int total = cDao.countByName(null); // 全件数取得
+            int maxPage = (total - 1) / pageSize + 1;
+            if (page > maxPage) page = maxPage;
+
+            customerList = cDao.selectByPage(null, page, pageSize);
+
+            // ページ番号リストの作成
+            if (maxPage <= 5) {
+                pagenumber = new int[maxPage];
+                for (int i = 0; i < maxPage; i++) {
+                    pagenumber[i] = i + 1;
+                }
+            } else {
+                pagenumber = new int[5];
+                int start = Math.max(1, Math.min(page - 2, maxPage - 4));
+                for (int i = 0; i < 5; i++) {
+                    pagenumber[i] = start + i;
+                }
             }
         }
 

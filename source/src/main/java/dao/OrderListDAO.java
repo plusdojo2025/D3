@@ -247,8 +247,7 @@ public class OrderListDAO {
 
 				// SQL文を準備する
 
-				String sql = "SELECT order_quantity FROM OrderList "
-						+ "WHERE commodity_id = ?";
+				String sql = "SELECT order_quantity FROM OrderList WHERE commodity_id = ?";
 				
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);

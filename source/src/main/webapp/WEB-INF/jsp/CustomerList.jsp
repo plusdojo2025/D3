@@ -75,7 +75,7 @@
 								<option value="${tag.topic_id}">${tag.topic_name}</option>
 							</c:forEach>
 						</select>
-						<input type="text" name="new_talk_remark"><br>
+						<input type="text" name="new_talk_remark" placeholder="会話内容"><br>
 						<button type="submit" name="action" value="insert_talk" class="cool-submit-mini">登録</button>
 					</p>
 				</div>
@@ -103,7 +103,7 @@
 								<option value="${item.commodity_id}">${item.commodity_name}</option>
 							</c:forEach>
 						</select>
-						<input type="number" name="new_bottle_remaining" placeholder="残量" min=0>
+						<input type="number" name="new_bottle_remaining" placeholder="残量[ml]" min=0>
 						<input type="date" name="new_bottle_limit" placeholder="期限">
 						<button type="submit" name="action" value="insert_bottle" class="cool-submit-mini">ボトル登録</button>
 					</p>
