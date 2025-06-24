@@ -170,6 +170,9 @@ INSERT INTO event VALUES (NULL,1,NOW(),'七夕','7月7日限定フードあり')
 INSERT INTO event VALUES (NULL,1,NOW(),'夏祭り','イベント専用ドリンクあり');
 INSERT INTO event VALUES (NULL,1,NOW(),'流しそうめん','毎年恒例の流しそうめんイベント☀参加費用１人5,000円（ドリンク別料金）');
 
+INSERT INTO keep_bottle VALUES (NULL,1,35,100,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
+INSERT INTO keep_bottle VALUES (NULL,2,36,200,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
+
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 1, NOW());
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 1, NOW());
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 1, NOW());
