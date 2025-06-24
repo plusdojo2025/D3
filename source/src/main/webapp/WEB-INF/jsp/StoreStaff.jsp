@@ -50,7 +50,6 @@
 <form method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="store_remark" placeholder="連絡内容">
 	<input type="date" name="store_date" >
-	<input type="date" name="store_date" id="store_date" >
 	<input type="submit" name="info">
 </form>
 <br><br><br><br>

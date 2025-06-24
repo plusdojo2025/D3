@@ -119,11 +119,13 @@
 	</c:if>
 	
 	<form method="GET" action="/D3/CustomerListServlet">
+	<div class="Pagination">
 		<c:forEach var="page" items="${pagenumber}" varStatus="status">
 			<c:if test="${(status.index) <5}">
-				<input type=submit value="${page}" name="number">
+				<input type=submit value="${page}" name="number" class="page">
 			</c:if>
 		</c:forEach>
+		</div>
 	</form>
 </main>
 
