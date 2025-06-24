@@ -85,5 +85,36 @@ public class CommodityDAO {
 
 	    return commodityList;
 	}
+	
+	//キープボトルカテゴリ用
+	public List<Commodity> selectKeepBottleCommodities() {
+	    List<Commodity> commodityList = new ArrayList<>();
+	    int keepBottleCategoryId = 5;
 
+	    try (Connection conn = DriverManager.getConnection(
+	                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	                "root", "password");
+	         PreparedStatement pStmt = conn.prepareStatement(
+	             "SELECT * FROM Commodity WHERE commodity_category = ?")) {
+
+	        pStmt.setInt(1, keepBottleCategoryId);
+	        ResultSet rs = pStmt.executeQuery();
+
+	        while (rs.next()) {
+	            Commodity commodity = new Commodity(
+	                rs.getInt("commodity_id"),
+	                rs.getString("commodity_name"),
+	                rs.getInt("commodity_price"),
+	                rs.getInt("commodity_category"),
+	                rs.getString("commodity_image")
+	            );
+	            commodityList.add(commodity);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return commodityList;
+	}
 }
