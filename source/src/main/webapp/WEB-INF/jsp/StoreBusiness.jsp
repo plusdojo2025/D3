@@ -71,8 +71,7 @@
 
 		<%-- 仮でcss記入してます --%>
 		<h2>来店者一覧</h2>
-		<div
-			style="height: 100px; overflow-y: scroll; border: 1px solid #ccc;">
+		<div id="visitorsbox">
 			<div id="visitors">
 				<c:if test="${empty visitors}">
 					<p>来店者なし</p>

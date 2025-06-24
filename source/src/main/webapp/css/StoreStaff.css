@@ -2,68 +2,9 @@
 
 /*共通スタイル*/
 html {
-	font-size:16px;
-	font-family: 'Cousier New', Cousier, monospace;
-	color: rgb(227, 208, 149);
-	background-color: rg(14, 33, 72);
 	text-align: center;
 }
 
-body {
-	margin: 0;
-	padding: 0;
-}
-
-/*　ヘッダー*/
-header{
-	padding:20px;
-	border-bottom: 1px solid rgb(227, 108, 149);
-}
-
-.icon {
-	width: 250px;
-}
-
-/*時計表示*/
-time{
-text-align:left;
-margin: 10px 20px;
-font-size: 0.9rem;
-color: rgb(227, 208, 149);
-}
-
-/* サイトマップボタン*/
-#openSiteMap, #closeSiteMap{
-	position: fixed;
-	top: 10px;
-	margin: 5px;
-	background-color: rgb(227, 208, 149);
-	color: rgb(14, 33, 72);
-	border: none;
-	padding: 8px 12px;
-	cursor: pointer;
-	z-index:10000;
-	font-weight:hold;
-}
-#SiteMapPanel{
-	position: fixed;
-	top: 50px;
-	right: 10px;
-	background-color:rgb(227, 208, 149);
-	color: rgb(14, 33, 72);
-	padding: 15px;
-	border-radius: 5px;
-	display: none;
-	text-align:left;
-	z-index: 10001;
-}
-
-#siteMapPanel a {
-		display: block;
-		margin:8px 0;
-		color:rgb(14, 33, 72);
-		text-decoration: none;
-}
 /* フォーム全体*/
 form{
 	margin: 20px auto;

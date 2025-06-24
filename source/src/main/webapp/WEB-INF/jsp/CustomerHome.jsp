@@ -30,15 +30,16 @@
 
 <!-- お知らせ・イベント情報 -->
 <h2>📢お知らせ・イベント</h2>
-<c:if test="${not empty talkList}">
-	<c:forEach var="talk" items="${talkList}">
+<c:if test="${not empty eventList}">
+	<c:forEach var="event" items="${eventList}">
 		<p>
-			<strong>タイトル：</strong> ${fn:escapeXml(talk.title)}<br>
-			<strong>本文：</strong> ${fn:escapeXml(talk.body)}
+			<strong>イベント名：</strong> ${event.event_name}<br>
+			<strong>日程：</strong> ${event.event_date}<br>
+			<strong>内容：</strong> ${event.event_remark}
 		</p>
 	</c:forEach>
 </c:if>
-<c:if test="${empty talkList}">
+<c:if test="${empty eventList}">
 	<p>現在お知らせはありません。</p>
 </c:if>
 
@@ -56,6 +57,18 @@
 <c:if test="${empty bottleList}">
 	<p>キープ中のボトルはありません。</p>
 </c:if>
+
+<h2>ドリンクランキング</h2>
+
+<table>
+<c:forEach var="drink" items="${best3drink}" varStatus="status">
+<tr>
+<td>${drink.commodity_name}</td>
+<td>${best3drinkSum[status.index]}</td>
+</tr>
+</c:forEach>
+</table>
+
 </main>
 <!-- フッター -->
 <footer>

@@ -18,7 +18,10 @@
 
 
 
-<body data-guest="${isGuest}">
+<body data-visitor="${isVisitor ? 'true' : 'false'}"
+	data-login="${isLogin ? 'true' : 'false'}">
+	
+	<div id="overlay" style="display: none"></div>
 	<header>
 
 		<a href="<c:url value='/CustomerHomeServlet' />"> <img
@@ -35,6 +38,23 @@
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 	</div>
 
+	<div id="loginPopup">
+		<div id="loginChoice">
+			<button type="button" onclick="showLoginForm()">ログイン</button>
+			<button type="submit" onclick="postAndRedirectMenuAccess()">ゲスト</button>
+		</div>
+
+		<div id="loginForm">
+			<button type="button" onclick="backLoginChoice()">X</button>
+			<form action="<%=request.getContextPath()%>/MenuAccessServlet"
+				method="POST">
+				<input type="text" name="email" placeholder="メールアドレス" required><br>
+				<input type="password" name="password" placeholder="パスワード" required><br>
+				<button type="submit">送信</button>
+			</form>
+		</div>
+	</div>
+
 
 	<main>
 		<h1>メニュー</h1>
@@ -47,23 +67,23 @@
 
 
 		<div class="commority-container">
-			
-				<c:forEach var="menu" items="${menuList}" varStatus="status">
 
-					<c:if test="${status.index % 3 == 0}">
-					</c:if>
+			<c:forEach var="menu" items="${menuList}" varStatus="status">
 
-					<div class="commodity"
-						onclick="popupCommodity(${menu.commodity_id}, '${menu.commodity_image}', '${menu.commodity_name}', ${menu.commodity_price})">
-						<img src="/D3/img/${menu.commodity_image}" alt="メニュー" width="150"
-							height="150"> <br>${menu.commodity_name}
-						￥${menu.commodity_price}
-					</div>
+				<c:if test="${status.index % 3 == 0}">
+				</c:if>
 
-					<c:if test="${(status.index + 1) % 3 == 0}">
-					</c:if>
-				</c:forEach>
-			
+				<div class="commodity"
+					onclick="popupCommodity(${menu.commodity_id}, '${menu.commodity_image}', '${menu.commodity_name}', ${menu.commodity_price})">
+					<img src="/D3/img/${menu.commodity_image}" alt="メニュー" width="150"
+						height="150"> <br>${menu.commodity_name}
+					￥${menu.commodity_price}
+				</div>
+
+				<c:if test="${(status.index + 1) % 3 == 0}">
+				</c:if>
+			</c:forEach>
+
 		</div>
 
 		<!-- ポップアップ用 -->
@@ -77,7 +97,7 @@
 			<br>
 			<p id="commodityPrice"></p>
 
-			<div class="guestLogin">
+			<div class="visitor">
 				<select id="quantity">
 					<option value="0">0</option>
 					<option value="1">1</option>
@@ -89,13 +109,12 @@
 					<option value="7">7</option>
 					<option value="8">8</option>
 					<option value="9">9</option>
-				</select>
-				<input type=submit value="追加" name = "add" onclick="addCart()">
+				</select> <input type=submit value="追加" name="add" onclick="addCart()">
 			</div>
-			<input type=button value="キャンセル" name = "cancel" onclick="closePopup()">
+			<input type=button value="キャンセル" name="cancel" onclick="closePopup()">
 		</div>
 
-		<div class="guestLogin">
+		<div class="visitor">
 			<form id="orderForm" method="POST"
 				action="<%=request.getContextPath()%>/OrderSubmitServlet">
 				<div id="cartInputs"></div>
