@@ -297,14 +297,14 @@ public class OrderListDAO {
 		OrderList orderList = new OrderList();
 		orderList.setCustomer(new Customer(customer_id, "", "", "", ""));
 		List<OrderList> list = dao.select_new(orderList);
-		int sum[] = new int[100];
+		int sum[] = new int[300];
 		Arrays.fill(sum, -1);
 		int max = 0;
 		int id = -1;
 		for (OrderList data : list) {
 			sum[data.getCommodity().getCommodity_id()] += data.getOrder_quantity();
 		}
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 300; i++) {
 			if (sum[i] > max) {
 				max = sum[i];
 				id = i;
