@@ -38,7 +38,7 @@
 
 	<main>
 		<h1>メニュー</h1>
-		<form id="catgorys" method="GET" action="/D3/MenuListServlet">
+		<form id="categorys" method="GET" action="/D3/MenuListServlet">
 			<input type="submit" value="cocktail" name="category"> <input
 				type="submit" value="whisky" name="category"> <input
 				type="submit" value="beer" name="category"> <input
@@ -90,9 +90,9 @@
 					<option value="8">8</option>
 					<option value="9">9</option>
 				</select>
-				<input type=submit value="追加" onclick="addCart()">
+				<input type=submit value="追加" name = "add" onclick="addCart()">
 			</div>
-			<input type=button value="キャンセル" onclick="closePopup()">
+			<input type=button value="キャンセル" name = "cancel" onclick="closePopup()">
 		</div>
 
 		<div class="guestLogin">
