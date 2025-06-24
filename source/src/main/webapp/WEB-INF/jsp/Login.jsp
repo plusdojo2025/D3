@@ -120,7 +120,7 @@
 	</div>
 
 	<%-- ゲストログイン --%>
-	<h2>ゲストログイン</h2>
+	
 	<div id="guest">
 		<button onclick="guestLogin()">ゲストでログイン</button>
 	</div>
