@@ -155,19 +155,70 @@ public class OrderListDAO {
 		// 結果を返す
 		return orderList;
 	}
+	
+	
+	
 
 	//
 	// 指定された商品（日時）の個数を返す。
 	public int quantity(int commodity_id, String order_datetime) {
-		OrderListDAO dao = new OrderListDAO();
-		OrderList orderList = new OrderList();
-		orderList.setCommodity(new Commodity(commodity_id, "", 0, 0, ""));
-		orderList.setOrder_datetime(order_datetime);
-		List<OrderList> list = dao.select_new(orderList);
-		int sum = 0;
-		for (OrderList data : list) {
-			sum += data.getOrder_quantity();
+		
+		
+		Connection conn = null;
+		int sum =0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+
+			String sql = "SELECT order_quantity FROM OrderList "
+					+ "WHERE commodity_id = ? AND order_datetime = ? ";
+			
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, String.valueOf(commodity_id));
+			pStmt.setString(2, order_datetime);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			int i=0;
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				
+						
+				sum+=(rs.getInt("order_quantity"));
+				
+			} // while終了
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			sum = 0;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			sum = 0;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					sum = 0;
+				}
+			}
 		}
+
+		
 		return sum;
 	}
 
