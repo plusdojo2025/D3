@@ -1,9 +1,11 @@
 package dao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class EventDAO {
 
 					// SQL文を準備する
 					
-					String sql = "SELECT * FROM event ORDER BY event_date DESC";
+					String sql = "SELECT * FROM event WHERE event_date >= CURDATE() ORDER BY event_date ASC";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 
 					// SQL文を実行し、結果表を取得する
@@ -88,25 +90,29 @@ public class EventDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO Event VALUES (0, ?, NOW(), ?, ?)";
+				String sql = "INSERT INTO Event VALUES (0, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
 				
 				pStmt.setInt(1, event.getStore_id());
-				
+				if (event.getEvent_date() != null) {
+					pStmt.setString(2, event.getEvent_date());
+				} else {
+					pStmt.setDate(2, Date.valueOf(LocalDate.now()));
+				}
 				//Date today = Date.valueOf(LocalDate.now());
 				//pStmt.setDate(2, today);
 				
 				if (event.getEvent_name() != null) {
-					pStmt.setString(2, event.getEvent_name());
-				} else {
-					pStmt.setString(2, "");
-				}
-				if (event.getEvent_remark() != null) {
-					pStmt.setString(3, event.getEvent_remark());
+					pStmt.setString(3, event.getEvent_name());
 				} else {
 					pStmt.setString(3, "");
+				}
+				if (event.getEvent_remark() != null) {
+					pStmt.setString(4, event.getEvent_remark());
+				} else {
+					pStmt.setString(4, "");
 				}
 				
 

@@ -11,10 +11,10 @@ event_remark VARCHAR(100) NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO event VALUES (NULL,1,NOW(),'七夕','7月7日限定フードあり');
+INSERT INTO event VALUES (NULL,1,'2025-07-07','七夕','7月7日限定フードあり');
 
-INSERT INTO event VALUES (NULL,1,NOW(),'夏祭り','イベント専用ドリンクあり');
-INSERT INTO event VALUES (NULL,1,NOW(),'流しそうめん','毎年恒例の流しそうめんイベント☀参加費用１人5,000円（ドリンク別料金）');
+INSERT INTO event VALUES (NULL,1,'2025-08-08','夏祭り','イベント専用ドリンクあり');
+INSERT INTO event VALUES (NULL,1,'2025-08-31','流しそうめん','毎年恒例の流しそうめんイベント☀参加費用１人5,000円（ドリンク別料金）');
 
 /*テーブルデータ確認*/
 SELECT * FROM event;
