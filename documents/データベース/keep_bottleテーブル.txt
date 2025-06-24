@@ -11,8 +11,9 @@ bottle_limit DATE NOT NULL
 ) ;
 
 /*テストデータ*/
-INSERT INTO keep_bottle VALUES (NULL,1,1,100,DATE_ADD(CURDATE(), INTERVAL 3 MONTH) );
-/*サンプルは登録日の３か月後が期限です。*/
+INSERT INTO keep_bottle VALUES (NULL,1,35,100,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
+INSERT INTO keep_bottle VALUES (NULL,2,36,200,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
+/*サンプルは登録日の1年後が期限です。*/
 
 /*テーブルデータ確認*/
 SELECT * FROM keep_bottle;
