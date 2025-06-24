@@ -10,7 +10,36 @@
 <link rel="stylesheet" href="<c:url value='/css/common.css' />">
 <link rel="stylesheet" href="<c:url value='/css/StoreStaff.css' />">
 </head>
+<style>
+.accordion-toggle {
+	cursor: pointer;
+	color: rgb(227, 208, 149);
+	background-color: rgb(14, 33, 72);
+	padding: 10px;
+	border: 1px solid rgb(227, 208, 149);
+	border-radius: 4px;
+	margin: 20px auto;
+	width: 80%;
+	max-width: 500px;
+}
 
+.accordion-toggle.active {
+	background-color: rgb(25, 47, 97); /* 少し明るいネイビーで開いたことを示す */
+}
+
+.accordion-content {
+	display: none;
+	padding: 15px;
+	background-color: rgb(25, 47, 97); /* フォームと同じ */
+	color: rgb(227, 208, 149);         /* ゴールド文字 */
+	border: 1px solid rgb(227, 208, 149);
+	border-radius: 4px;
+	margin: 10px auto;
+	width: 80%;
+	max-width: 500px;
+	text-align: left;
+}
+</style>
 
 <body>
 
@@ -69,25 +98,15 @@
 <br>
 </div>
 
-<div>
-<p>今日来店したお客様</p>
-<ul>
-  <c:forEach var="vis" items="${visitor}" varStatus="status">
-    <li>
-      <form id="customerForm_${status.index}" method="POST" action="${pageContext.request.contextPath}/CustomerListServlet" style="display: none;">
-        <input type="hidden" name="customer_name" value="${vis.customer.customer_name}" />
-      </form>
-
-      <a href="#" onclick="document.getElementById('customerForm_${status.index}').submit(); return false;">
-        ${vis.customer.customer_name}
-      </a>
-    </li>
-  </c:forEach>
-</ul>
-
-<br><br><br><br><br>
-
+<h2 class="accordion-toggle">今日来店したお客様 ▼</h2>
+<div class="accordion-content" style="display: none; padding: 10px; background: #f1f1f1; border: 1px solid #ccc;">
+    <ul>
+        <li>山田太郎</li>
+        <li>田中花子</li>
+    </ul>
 </div>
+
+
 	
 <div>
 <a href="/D3/OrderHistoryServlet">
@@ -106,9 +125,11 @@
 	<script>
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>
+	<script src="${pageContext.request.contextPath}/js/StoreStaff.js"></script>
 
 	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
+	
 </body>
 
 
