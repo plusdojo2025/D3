@@ -101,8 +101,17 @@
 <h2 class="accordion-toggle">今日来店したお客様 ▼</h2>
 <div class="accordion-content" style="display: none; padding: 10px; background: #f1f1f1; border: 1px solid #ccc;">
     <ul>
-        <li>山田太郎</li>
-        <li>田中花子</li>
+        <c:forEach var="vis" items="${visitor}" varStatus="status">
+    <li>
+      <form id="customerForm_${status.index}" method="POST" action="${pageContext.request.contextPath}/CustomerListServlet" style="display: none;">
+        <input type="hidden" name="customer_name" value="${vis.customer.customer_name}" />
+      </form>
+
+      <a href="#" onclick="document.getElementById('customerForm_${status.index}').submit(); return false;">
+        ${vis.customer.customer_name}
+      </a>
+    </li>
+  </c:forEach>
     </ul>
 </div>
 
