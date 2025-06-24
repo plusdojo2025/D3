@@ -229,6 +229,44 @@ public class CustomerDAO {
 	public List<Customer> selectAll() {
 		return select(new Customer()); // 初期化されたCustomerは全件検索と同義
 	}
+	
+	// IDで顧客を1件取得する
+	public Customer selectById(int customerId) {
+	    Connection conn = null;
+	    Customer customer = null;
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection(
+	            "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	            "root", "password");
+
+	        String sql = "SELECT * FROM Customer WHERE customer_id = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, customerId);
+
+	        ResultSet rs = pStmt.executeQuery();
+	        if (rs.next()) {
+	            customer = new Customer(
+	                rs.getInt("customer_id"),
+	                rs.getString("customer_name"),
+	                rs.getString("customer_email"),
+	                rs.getString("customer_password"),
+	                rs.getString("customer_birthday")
+	            );
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return customer;
+	}
 
 	// 顧客ログイン（メールとパスワードで認証）
 	public Customer login(String email, String password) {
