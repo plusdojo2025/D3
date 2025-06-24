@@ -76,6 +76,7 @@ select {
 
 /*サブボタン*/
 .cool-submit-small {
+	margin:0 20px;
   background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
   border: none;
   color: white;
@@ -107,6 +108,7 @@ select {
 
 /*ミニボタン*/
 .cool-submit-mini {
+	margin:0 20px;
   background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
   border: none;
   color: white;

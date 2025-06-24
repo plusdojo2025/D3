@@ -24,7 +24,7 @@
 	<div id="siteMapPanel">
 		<a href="${pageContext.request.contextPath}/StoreBusinessServlet">業務</a><br>
 		<a href="${pageContext.request.contextPath}/StoreStaffServlet">事務</a><br>
-		<a href="${pageContext.request.contextPath}/QRCodeServlet">QRコード</a><br>
+		
 		<a href="${pageContext.request.contextPath}/LogoutServlet">ログアウト</a><br>
 		
 	</div>
@@ -32,8 +32,8 @@
 	
 <main>
 <div class="QR">
-	<a href="${pageContext.request.contextPath}/MenuListServlet?store_id=${store_id}">
-		<img src="${pageContext.request.contextPath}/qr/${fileName}" alt="QR" />
+	<a href="${pageContext.request.contextPath}/MenuAccessServlet?store_id=${store_id}">
+		 <img src="data:image/png;base64,${qrBase64}" alt="QRコード" />
 	</a>
 </div>
 </main>
