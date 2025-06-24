@@ -4,72 +4,7 @@
 <html>
 <head>
 <title>BARLOOP/会計確認</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	margin: 40px;
-}
 
-table {
-	border-collapse: collapse;
-	width: 60%;
-}
-
-th, td {
-	border: 1px solid #aaa;
-	padding: 8px;
-	text-align: left;
-}
-
-th {
-	background-color: #ddd;
-}
-
-.total {
-	font-weight: bold;
-	font-size: 1.2em;
-	color: #333;
-}
-
-/* ポップアップスタイル */
-#popup {
-	display: none;
-	position: fixed;
-	top: 20%;
-	left: 30%;
-	width: 40%;
-	background: #fff;
-	border: 2px solid #333;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-	padding: 20px;
-	z-index: 9999;
-}
-
-#popupContent {
-	margin-bottom: 10px;
-}
-
-#popup button {
-	padding: 5px 10px;
-}
-
-#overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-	z-index: 9998;
-}
-
-/* エラーメッセージスタイル */
-#errorMessage {
-	color: red;
-	margin-top: 5px;
-}
-</style>
 </head>
 
 <body>
