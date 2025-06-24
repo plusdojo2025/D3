@@ -46,8 +46,8 @@
 		</form>
 
 
-		<div>
-			<table>
+		<div class="commority-container">
+			
 				<c:forEach var="menu" items="${menuList}" varStatus="status">
 
 					<c:if test="${status.index % 3 == 0}">
@@ -56,14 +56,14 @@
 					<div class="commodity"
 						onclick="popupCommodity(${menu.commodity_id}, '${menu.commodity_image}', '${menu.commodity_name}', ${menu.commodity_price})">
 						<img src="/D3/img/${menu.commodity_image}" alt="メニュー" width="150"
-							height="150"> ${menu.commodity_name}
+							height="150"> <br>${menu.commodity_name}
 						￥${menu.commodity_price}
 					</div>
 
 					<c:if test="${(status.index + 1) % 3 == 0}">
 					</c:if>
 				</c:forEach>
-			</table>
+			
 		</div>
 
 		<!-- ポップアップ用 -->
