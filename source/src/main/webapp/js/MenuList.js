@@ -2,7 +2,43 @@ const popup = document.getElementById("popupCommodity");
 const btn = document.getElementById("submitOrderButton");
 
 popup.style.display = "none";
-const isGuest = document.body.dataset.guest === "true";
+
+const isVisitor = document.body.dataset.visitor === "true";
+const isLogin = document.body.dataset.login === "true";
+
+
+
+window.addEventListener("DOMContentLoaded", () => {
+	if (0 < sessionStorage.length) {
+		btn.style.display = "block"
+	}
+	else {
+		btn.style.display = "none"
+	}
+
+
+
+	const loginElement = document.getElementById("loginPopup");
+	const overlay = document.getElementById("overlay");
+	const loginForm = document.getElementById("loginForm");
+	loginForm.style.display = "none";
+
+	if (!isVisitor) {
+		loginElement.style.display = "none";
+		overlay.style.display = "none";
+		return;
+	}
+
+	if (!isLogin) {
+		loginElement.style.display = "block";
+		overlay.style.display = "block";
+	}
+	else {
+		loginElement.style.display = "none";
+		overlay.style.display = "none";
+	}
+});
+
 
 
 function popupCommodity(id, image, name, price) {
@@ -23,10 +59,10 @@ function popupCommodity(id, image, name, price) {
 
 	popup.style.display = "block";
 
-	if (isGuest) {
-		const guestElements = document.getElementsByClassName("guestLogin");
-		for (let i = 0; i < guestElements.length; i++) {
-			guestElements[i].style.display = "none";
+	if (!isVisitor) {
+		const visitorElements = document.getElementsByClassName("visitor");
+		for (let i = 0; i < visitorElements.length; i++) {
+			visitorElements[i].style.display = "none";
 		}
 		return;
 	}
@@ -89,11 +125,29 @@ function submitOrder() {
 	document.getElementById("orderForm").submit();
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-	if (0 < sessionStorage.length) {
-		btn.style.display = "block"
-	}
-	else {
-		btn.style.display = "none"
-	}
-});
+
+
+function showLoginForm() {
+	document.getElementById("overlay").style.display = "block";
+	document.getElementById("loginChoice").style.display = "none";
+	document.getElementById("loginForm").style.display = "block";
+}
+function backLoginChoice() {
+	document.getElementById("loginChoice").style.display = "block";
+	document.getElementById("loginForm").style.display = "none";
+}
+
+function postAndRedirectMenuAccess() {
+	const form = document.createElement("form");
+	form.method = "POST";
+	form.action = `${contextPath}/MenuAccessServlet`;
+
+	const input = document.createElement("input");
+	input.type = "hidden";
+	input.name = "userType";
+	input.value = "guest";
+
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
+}

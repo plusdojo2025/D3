@@ -36,17 +36,24 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("isVisitor") == null)
+			session.setAttribute("isVisitor", false);
+		
+		
 
 		// ゲストログイン時
 		if ("guest".equals(userType)) {
 			Customer customer = new Customer();
 			customer.setCustomer_id(0);
 			customer.setCustomer_name("ゲスト");
-			
+
 			session.setAttribute("customer", customer);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
 			dispatcher.forward(request, response);
 		}
+
+		
 		
 		// 入力チェック
 		if ("store".equals(userType) || "customer".equals(userType)) {
@@ -56,9 +63,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 		}
-		
-		
-		
+
 		// 店舗ログイン
 		if ("store".equals(userType)) {
 			Store store = new StoreDAO().login(email, password);
@@ -69,21 +74,20 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("errorMsg", "店舗ログイン失敗。メールアドレスまたはパスワードが間違っています。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}
-			
-		// 顧客ログイン
+
+			// 顧客ログイン
 		} else if ("customer".equals(userType)) {
 			Customer customer = new CustomerDAO().login(email, password);
 			if (customer != null) {
 				session.setAttribute("customer", customer);
-				// response.sendRedirect("/WEB-INF/jsp/CustomerHome.jsp");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
 				dispatcher.forward(request, response);
 			} else {
 				request.setAttribute("errorMsg", "顧客ログイン失敗。メールアドレスまたはパスワードが間違っています。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}
-		
-		// 新規登録
+
+			// 新規登録
 		} else if ("register".equals(userType)) {
 			String name = request.getParameter("name");
 			String regEmail = request.getParameter("email");
@@ -121,6 +125,9 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
 		dispatcher.forward(request, response);
 	}

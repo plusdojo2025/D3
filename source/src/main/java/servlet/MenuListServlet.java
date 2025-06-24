@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.CommodityDAO;
 import dto.Commodity;
-import dto.Customer;
 
 @WebServlet("/MenuListServlet")
 public class MenuListServlet extends HttpServlet {
@@ -25,20 +24,6 @@ public class MenuListServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
-		// 顧客IDの取得
-		Customer customer = (Customer)session.getAttribute("customer");
-		if (customer.getCustomer_id() != 0) {
-			String name = "ゲスト";
-			
-			request.setAttribute("isGuest", false);
-		}
-		// ログインページからゲストログイン
-		else {
-			request.setAttribute("isGuest", true);
-		}
-		
-		
 		
 		String categoryIdStr = (String) session.getAttribute("category");// 商品の種類をボタンで管理
 		request.getParameter("category");// 商品の種類をボタンで管理
