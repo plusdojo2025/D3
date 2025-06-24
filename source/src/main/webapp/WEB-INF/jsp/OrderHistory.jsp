@@ -85,11 +85,11 @@ th {
 
 		<!-- カテゴリランキング -->
 		<div class="categoryRanking">
-			<h2>カテゴリランキング</h2>
+			<h2>カテゴリ</h2>
 
 			<!-- ウイスキー -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">ウイスキー</h3>
+				<h3 class="accordion-toggle">WHUSKY</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 						<tr>
@@ -110,7 +110,7 @@ th {
 
 			<!-- カクテル -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">カクテル</h3>
+				<h3 class="accordion-toggle">COCKTAIL</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 						<tr>
@@ -131,7 +131,7 @@ th {
 
 			<!-- ビール -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">ビール</h3>
+				<h3 class="accordion-toggle">BEER</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 						<tr>
@@ -157,7 +157,7 @@ th {
 
 			<!-- フード -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">フード</h3>
+				<h3 class="accordion-toggle">FOOD</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 
@@ -191,7 +191,7 @@ th {
 
 			<!-- ドリンク -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">ドリンク</h3>
+				<h3 class="accordion-toggle">DRINK</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 

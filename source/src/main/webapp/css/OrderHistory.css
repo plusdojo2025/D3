@@ -2,6 +2,7 @@
 /* すべてのページに適用される設定 */
 html{
 text-align: center;  /* 横中央に配置 */
+
 }
 
 #siteMapPanel,#openSiteMap,#closeSiteMap {
@@ -56,13 +57,18 @@ main{
 .categoryRankingTable th,.categoryRankingTable td{
 	border:1px solid rgb(227, 208, 149);
 	padding: 20px;
+	
 }
 
 .categoryRankingTable th{
 	border:1px solid rgb(14, 33, 72);
 	padding: 20px;
-	background-color:rgb(227, 208, 149);
+
 	color:rgb(14, 33, 72) ;
+}
+
+.categoryRankingTable td {
+	background: linear-gradient(90deg, rgb(14, 33, 72), rgb(25, 47, 97));
 }
 
 .accordion-content{
@@ -79,9 +85,14 @@ main{
 .accordion-content th{
 	border:1px solid rgb(14, 33, 72);
 	padding: 20px;
-	background-color:rgb(227, 208, 149);
+
 	color:rgb(14, 33, 72) ;
 }
+
+.accordion-content td{
+	background-color: rgb(25, 47, 97);
+}
+
 
 .accordion-section {
   width: 650px; /* テーブルと揃える */
@@ -93,7 +104,7 @@ main{
   margin: 20px auto 0 auto; /* 上マージン＋中央寄せ */
   display: block;
   cursor: pointer;
-  background-color: rgb(14, 33, 72);
+
   color: rgb(227, 208, 149);
   padding: 10px;
   font-weight: bold;
