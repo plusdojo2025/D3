@@ -29,6 +29,18 @@ import dto.Store;
 public class OrderHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public class Pair<K, V> {
+	    private K key;
+	    private V value;
+
+	    public Pair(K key, V value) {
+	        this.key = key;
+	        this.value = value;
+	    }
+
+	    public K getKey() { return key; }
+	    public V getValue() { return value; }
+	}
 	/**
 	* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	*      response)
@@ -84,19 +96,92 @@ public class OrderHistoryServlet extends HttpServlet {
 		}
 		
 		
+		
+		// Step 1: Commodity + 注文数をペアにする
+				List<Pair<Commodity, Integer>> ranked1 = new ArrayList<>();
+				for (int i = 0; i < list2.size(); i++) {
+				    ranked1.add(new Pair<>(list1food.get(i), list1foodSum[i]));
+				}
+
+				// Step 2: 注文数の降順でソート
+				ranked1.sort((a, b) -> b.getValue() - a.getValue());
+
+				// Step 3: 分離して並び替え済リストに変換
+				List<Commodity> sortedList1 = new ArrayList<>();
+				int[] sortedSum1 = new int[ranked1.size()];
+				for (int i = 0; i < ranked1.size(); i++) {
+				    sortedList1.add(ranked1.get(i).getKey());
+				    sortedSum1[i] = ranked1.get(i).getValue();
+				}
+		
+		// Step 1: Commodity + 注文数をペアにする
+		List<Pair<Commodity, Integer>> ranked2 = new ArrayList<>();
+		for (int i = 0; i < list2.size(); i++) {
+		    ranked2.add(new Pair<>(list2.get(i), list2Sum[i]));
+		}
+
+		// Step 2: 注文数の降順でソート
+		ranked2.sort((a, b) -> b.getValue() - a.getValue());
+
+		// Step 3: 分離して並び替え済リストに変換
+		List<Commodity> sortedList2 = new ArrayList<>();
+		int[] sortedSum2 = new int[ranked2.size()];
+		for (int i = 0; i < ranked2.size(); i++) {
+		    sortedList2.add(ranked2.get(i).getKey());
+		    sortedSum2[i] = ranked2.get(i).getValue();
+		}
+		
+		
+		// Step 1: Commodity + 注文数をペアにする
+				List<Pair<Commodity, Integer>> ranked3 = new ArrayList<>();
+				for (int i = 0; i < list3.size(); i++) {
+				    ranked3.add(new Pair<>(list3.get(i), list3Sum[i]));
+				}
+
+				// Step 2: 注文数の降順でソート
+				ranked3.sort((a, b) -> b.getValue() - a.getValue());
+
+				// Step 3: 分離して並び替え済リストに変換
+				List<Commodity> sortedList3 = new ArrayList<>();
+				int[] sortedSum3 = new int[ranked3.size()];
+				for (int i = 0; i < ranked3.size(); i++) {
+				    sortedList3.add(ranked3.get(i).getKey());
+				    sortedSum3[i] = ranked3.get(i).getValue();
+				}
+				
+				// Step 1: Commodity + 注文数をペアにする
+				List<Pair<Commodity, Integer>> ranked4 = new ArrayList<>();
+				for (int i = 0; i < list4.size(); i++) {
+				    ranked4.add(new Pair<>(list4.get(i), list4Sum[i]));
+				}
+
+				// Step 2: 注文数の降順でソート
+				ranked4.sort((a, b) -> b.getValue() - a.getValue());
+
+				// Step 3: 分離して並び替え済リストに変換
+				List<Commodity> sortedList4 = new ArrayList<>();
+				int[] sortedSum4 = new int[ranked4.size()];
+				for (int i = 0; i < ranked4.size(); i++) {
+				    sortedList4.add(ranked4.get(i).getKey());
+				    sortedSum4[i] = ranked4.get(i).getValue();
+				}
+				
+		
+
+	
 
 		//商品の種類と合計値をセットで送る（上半分）
 		request.setAttribute("today", dateString);
 		
-		request.setAttribute("list1food", list1food);
-		request.setAttribute("list2", list2);
-		request.setAttribute("list3", list3);
-		request.setAttribute("list4", list4);
+		request.setAttribute("list1food", sortedList1);
+		request.setAttribute("list2", sortedList2);
+		request.setAttribute("list3", sortedList3);
+		request.setAttribute("list4", sortedList4);
 		
-		request.setAttribute("list1foodSum", list1foodSum);
-		request.setAttribute("list2Sum", list2Sum);
-		request.setAttribute("list3Sum", list3Sum);
-		request.setAttribute("list4Sum", list4Sum);
+		request.setAttribute("list1foodSum", sortedSum1);
+		request.setAttribute("list2Sum", sortedSum2);
+		request.setAttribute("list3Sum", sortedSum3);
+		request.setAttribute("list4Sum", sortedSum4);
 		
         
 	       
