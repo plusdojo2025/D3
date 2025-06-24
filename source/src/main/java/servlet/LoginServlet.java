@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
 				dispatcher.forward(request, response);
 			} else {
-				request.setAttribute("errorMsg", "顧客ログイン失敗。");
+				request.setAttribute("errorMsg", "このメールアドレスは登録済です。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}
 		} else {
