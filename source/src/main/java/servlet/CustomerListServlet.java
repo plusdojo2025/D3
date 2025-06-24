@@ -48,7 +48,7 @@ public class CustomerListServlet extends HttpServlet {
         // 来店者から飛ぶ用
         String customerIdStr = request.getParameter("customerId");
         List<Customer> customerList;
-        int[] pagenumber = new int[0]; // 初期化しておく（必要なら後で作成）
+        int[] pagenumber = new int[0];
 
         if (customerIdStr != null && !customerIdStr.isEmpty()) {
             try {

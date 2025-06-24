@@ -277,7 +277,6 @@ public class CustomerDAO {
 			// JDBCドライバ読み込み
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// DB接続情報は環境に合わせて変更してください
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
