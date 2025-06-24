@@ -46,7 +46,7 @@
 			</div>
 			<div class="subButton">
 			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)" class="cool-submit-small">
-			<input type="submit" name="call" value="店員呼び出し" onclick="TODO" class="cool-submit-small">
+			
 			</div>
 		</form>
 	</main>

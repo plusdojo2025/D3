@@ -4,8 +4,8 @@
 html {
     font-size: 16px;
     font-family: 'Courier New', Courier, monospace;
-    color: rgb(227, 208, 149);
     background-color: rgb(14, 33, 72);
+    color: rgb(227, 208, 149);
     text-align: center;
 }
 
@@ -30,96 +30,97 @@ form {
     border: 1px solid rgb(227, 208, 149);
     border-radius: 10px;
     padding: 30px;
-    margin: 60px auto;
+    margin: 80px auto;
     width: 90%;
     max-width: 400px;
 }
 
-/* 入力フィールド */
+/* === 入力フィールド === */
 input[type="text"],
 input[type="password"],
-input[type="email"],
-input[type="date"] {
+input[type="email"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border: 1px solid rgb(227, 208, 149);
     background-color: rgb(14, 33, 72);
     color: rgb(227, 208, 149);
     border-radius: 5px;
     font-family: inherit;
+    font-size: 16px;
 }
 
-/* ログインボタン */
+/* === ボタン（共通）=== */
 input[type="submit"],
-button {
+button,
+.guest-login-button {
     background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
     color: white;
     padding: 12px 30px;
-    margin-top: 15px;
+    margin-top: 20px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    font-family: inherit;
+    font-family: 'Courier New', Courier, monospace;
     box-shadow: 0 4px 15px rgba(37, 117, 252, 0.5);
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 input[type="submit"]:hover,
-button:hover {
+button:hover,
+.guest-login-button:hover {
     background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
     color: rgb(14, 33, 72);
-    box-shadow: 0 2px 8px rgb(227, 208, 149);
     transform: scale(1.05);
+    box-shadow: 0 2px 8px rgb(227, 208, 149);
 }
 
 input[type="submit"]:active,
-button:active {
+button:active,
+.guest-login-button:active {
     transform: scale(0.95);
     box-shadow: 0 2px 8px rgb(227, 208, 149);
 }
 
-/* エラーメッセージ */
+/* === リンク型ボタン（店舗／顧客／新規登録など） === */
+.gradient-button {
+    background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+    color: white;
+    padding: 12px 30px;
+    margin-top: 15px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.5);
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.gradient-button:hover {
+    background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+    color: rgb(14, 33, 72);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgb(227, 208, 149);
+}
+
+.gradient-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgb(227, 208, 149);
+}
+
+/* === エラーメッセージ === */
 p[style*="color:red"] {
     font-weight: bold;
     font-size: 14px;
     margin-top: 10px;
 }
 
-/* ゲストログイン専用ボタン */
-.guest-login-button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 14px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.guest-login-button:hover {
-    background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
-    color: rgb(14, 33, 72);
-}
-
-/* 入力枠：読み取り専用風 */
-.inputMenu {
-    border: none;
-    background-color: transparent;
-    color: rgb(227, 208, 149);
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    pointer-events: none;
-    width: auto;
-}
-
-/* フッター */
+/* === フッター === */
 footer {
     padding: 50px 0;
     color: rgb(227, 208, 149);

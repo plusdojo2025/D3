@@ -160,8 +160,9 @@ input::placeholder {
 }
 
 /*キープボトル情報*/
-.keep{
+p.keep{
 	padding: 10px 0px;
+	margin: 0px 30px;
 	color: rgb(14, 33, 72);
 	border: 1px solid rgb(246, 246, 246);
 	border-radius: 6px;     
