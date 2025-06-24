@@ -2,24 +2,35 @@ const popup = document.getElementById("popupCommodity");
 const btn = document.getElementById("submitOrderButton");
 
 popup.style.display = "none";
+const isGuest = document.body.dataset.guest === "true";
 
 
 function popupCommodity(id, image, name, price) {
 	popup.classList.add("open");
 	document.getElementById("commodityId").value = id;
-	
-	const cImg  =document.getElementById("commodityImage");
+
+	const cImg = document.getElementById("commodityImage");
 	const cName = document.getElementById("commodityName");
 	const cPrice = document.getElementById("commodityPrice");
-	
+
 	cImg.innerHTML = "";
 	cName.innerHTML = "";
 	cPrice.innerHTML = "";
-	
+
 	cImg.textContent = `${image}`;
 	cName.textContent = `${name}`;
 	cPrice.textContent = `${price}`;
-	
+
+	popup.style.display = "block";
+
+	if (isGuest) {
+		const guestElements = document.getElementsByClassName("guestLogin");
+		for (let i = 0; i < guestElements.length; i++) {
+			guestElements[i].style.display = "none";
+		}
+		return;
+	}
+
 	var nowQuantity = window.sessionStorage.getItem([id]);
 	if (nowQuantity != null) {
 		nowQuantity = parseInt(nowQuantity);
@@ -28,10 +39,6 @@ function popupCommodity(id, image, name, price) {
 	else {
 		document.getElementById("quantity").value = 0;
 	}
-
-	document.getElementById("commodityPrice").value = price;
-
-	popup.style.display = "block";
 }
 
 function addCart() {
@@ -40,7 +47,7 @@ function addCart() {
 	quantity = parseInt(quantity);
 
 	window.sessionStorage.setItem([id], [quantity]);
-	
+
 	if (quantity < 1) {
 		sessionStorage.removeItem([id]);
 	}
@@ -50,7 +57,7 @@ function addCart() {
 
 function closePopup() {
 	popup.style.display = "none";
-	
+
 	if (0 < sessionStorage.length) {
 		btn.style.display = "block";
 	}

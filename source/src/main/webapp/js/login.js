@@ -118,14 +118,13 @@ function guestLogin() {
 	}
 
 	const form = document.createElement("form");
-	form.method = "GET";
-	form.action = `${contextPath}/CustomerHomeServlet`;
-	console.log(contextPath);
+	form.method = "POST";
+	form.action = `${contextPath}/LoginServlet`;
 
 	const input = document.createElement("input");
 	input.type = "hidden";
-	input.name = "customerId";
-	input.value = -1;
+	input.name = "userType";
+	input.value = "guest";
 
 	form.appendChild(input);
 	document.body.appendChild(form);
