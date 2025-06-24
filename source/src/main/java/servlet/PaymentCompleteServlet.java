@@ -17,7 +17,7 @@ public class PaymentCompleteServlet extends HttpServlet {
 
         response.setContentType("text/html; charset=UTF-8");
 
-        // 会計処理が終わったことをシンプルに表示
+        // 会計処理が終わったことを表示
         response.getWriter().println("<html><head><title>会計完了</title></head><body>");
         response.getWriter().println("<h2>会計処理が完了しました。</h2>");
         response.getWriter().println("<p>ご利用ありがとうございました。</p>");
