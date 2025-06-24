@@ -37,7 +37,7 @@
 
 	<main>
 		<h1>メニュー</h1>
-		<form method="GET" action="/D3/MenuListServlet">
+		<form id="catgorys" method="GET" action="/D3/MenuListServlet">
 			<input type="submit" value="cocktail" name="category"> <input
 				type="submit" value="whisky" name="category"> <input
 				type="submit" value="beer" name="category"> <input
