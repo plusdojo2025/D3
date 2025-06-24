@@ -51,12 +51,7 @@ a:active {
 	text-align: left;
 }
 /*menu*/
-#openSiteMap{
-	position:fixed;
-	top:10px;
-	right:10px;
-}
-#closeSiteMap{
+#openSiteMap,#closeSiteMap{
 	position:fixed;
 	top:10px;
 	right:50px;
