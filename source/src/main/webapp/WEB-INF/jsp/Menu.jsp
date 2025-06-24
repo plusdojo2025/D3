@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="dto.Cart" %>
-<%@ page import="dto.Commodity" %>
-<%@ page import="dao.CartDAO" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
+<%@ page import="dto.Cart"%>
+<%@ page import="dto.Commodity"%>
+<%@ page import="dao.CartDAO"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 
 <!DOCTYPE html>
 <html>
@@ -18,15 +18,16 @@
 
 
 
-<body>
-<header>
+<body data-guest="${isGuest}">
+	<header>
 
-<a href="<c:url value='/CustomerHomeServlet' />">
-<img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
-</a>
-</header>
+		<a href="<c:url value='/CustomerHomeServlet' />"> <img
+			src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon"
+			width="250">
+		</a>
+	</header>
 
-<button id="openSiteMap">O</button>
+	<button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>
 	<div id="siteMapPanel">
 		<a href="${pageContext.request.contextPath}/CustomerHomeServlet">ホーム</a><br>
@@ -37,7 +38,7 @@
 
 	<main>
 		<h1>メニュー</h1>
-		<form method="GET" action="/D3/MenuListServlet">
+		<form id="catgorys" method="GET" action="/D3/MenuListServlet">
 			<input type="submit" value="cocktail" name="category"> <input
 				type="submit" value="whisky" name="category"> <input
 				type="submit" value="beer" name="category"> <input
@@ -70,29 +71,38 @@
 		</c:if>
 		<div id="popupCommodity">
 			<input type="hidden" id="commodityId" value="" readonly><br>
-			<p id="commodityImage"></p><br>
-			<p id="commodityName"></p><br>
+			<p id="commodityImage"></p>
+			<br>
+			<p id="commodityName"></p>
+			<br>
 			<p id="commodityPrice"></p>
-			<select id="quantity">
-				<option value="0">0</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-			</select> <input type=submit value="追加" onclick="addCart()"> <input
-				type=button value="キャンセル" onclick="closePopup()">
+
+			<div class="guestLogin">
+				<select id="quantity">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+				</select>
+				<input type=submit value="追加" onclick="addCart()">
+			</div>
+			<input type=button value="キャンセル" onclick="closePopup()">
 		</div>
 
-		<form id="orderForm" method="POST" action="<%= request.getContextPath() %>/OrderSubmitServlet">
-			<div id="cartInputs"></div>
+		<div class="guestLogin">
+			<form id="orderForm" method="POST"
+				action="<%=request.getContextPath()%>/OrderSubmitServlet">
+				<div id="cartInputs"></div>
 
-			<button id="submitOrderButton" type="button" onclick="submitOrder()">注文する</button>
-		</form>
+				<button id="submitOrderButton" type="button" onclick="submitOrder()">注文する</button>
+			</form>
+		</div>
 
 		<div>
 			<form method="GET" action="/D3/MenuListServlet">
@@ -111,7 +121,7 @@
 		</div>
 	</footer>
 	<script src="${pageContext.request.contextPath}/js/MenuList.js"></script>
-<script>
+	<script>
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>
 

@@ -24,38 +24,53 @@ public class LoginServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-
 		String userType = request.getParameter("userType");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
 		// ユーザーチェック
-		if (userType == null ) {
+		if (userType == null) {
 			request.setAttribute("errorMsg", "ユーザー種別が不明です。。");
 			request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			return;
 		}
 
 		HttpSession session = request.getSession();
+
+		// ゲストログイン時
+		if ("guest".equals(userType)) {
+			Customer customer = new Customer();
+			customer.setCustomer_id(0);
+			customer.setCustomer_name("ゲスト");
+			
+			session.setAttribute("customer", customer);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
+			dispatcher.forward(request, response);
+		}
 		
-		if("store".equals(userType)||"customer".equals(userType)) {
-			if(email == null || password == null || email.isEmpty() || password.isEmpty()) {
+		// 入力チェック
+		if ("store".equals(userType) || "customer".equals(userType)) {
+			if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
 				request.setAttribute("errorMsg", "全ての項目を入力してください。1");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 				return;
 			}
 		}
+		
+		
+		
 		// 店舗ログイン
 		if ("store".equals(userType)) {
 			Store store = new StoreDAO().login(email, password);
 			if (store != null) {
 				session.setAttribute("store", store);
-				 response.sendRedirect(request.getContextPath() + "/StoreBusinessServlet");
+				response.sendRedirect(request.getContextPath() + "/StoreBusinessServlet");
 			} else {
 				request.setAttribute("errorMsg", "店舗ログイン失敗。メールアドレスまたはパスワードが間違っています。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}
-			// 顧客ログイン
+			
+		// 顧客ログイン
 		} else if ("customer".equals(userType)) {
 			Customer customer = new CustomerDAO().login(email, password);
 			if (customer != null) {
@@ -67,7 +82,8 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("errorMsg", "顧客ログイン失敗。メールアドレスまたはパスワードが間違っています。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}
-			// 新規登録
+		
+		// 新規登録
 		} else if ("register".equals(userType)) {
 			String name = request.getParameter("name");
 			String regEmail = request.getParameter("email");
@@ -80,20 +96,20 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 				return;
 			}
-			
+
 			Customer newCustomer = new Customer();
 			newCustomer.setCustomer_name(name);
 			newCustomer.setCustomer_email(regEmail);
 			newCustomer.setCustomer_password(regPassword);
 			newCustomer.setCustomer_birthday(birthday);
-			
+
 			boolean result = new CustomerDAO().insert(newCustomer);
-			if(result) {
+			if (result) {
 				session.setAttribute("customer", newCustomer);
 				// response.sendRedirect("/WEB-INF/jsp/CustomerHome.jsp");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerHomeServlet");
 				dispatcher.forward(request, response);
-			}else {
+			} else {
 				request.setAttribute("errorMsg", "顧客ログイン失敗。");
 				request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 			}

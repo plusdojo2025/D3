@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+#catgorys {
+	display: flex;
+	justify-content: center;
+	gap: 20px; /* ボタンの間隔 */
+	margin-bottom: 30px;
+}
+
