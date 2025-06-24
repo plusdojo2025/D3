@@ -1,6 +1,5 @@
 未着手
 テストデータ
-・keep_bottle
 ・store_memo
 
 
