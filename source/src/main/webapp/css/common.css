@@ -13,6 +13,7 @@ html {
 
 body {
 	margin: 0;
+	padding: 0;
 }
 
 h1 {
@@ -43,6 +44,7 @@ a:active {
 .icon {
 	margin: auto;
 	display: block;
+	width: 250px;
 }
 
 #logotitle {
