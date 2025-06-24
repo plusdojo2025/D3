@@ -4,6 +4,8 @@
 <html>
 <head>
 <title>BARLOOP/会計確認</title>
+<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+<link rel="stylesheet" href="<c:url value='/css/StoreBusiness.css' />">
 
 </head>
 
