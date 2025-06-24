@@ -33,7 +33,7 @@ public class OrderListDAO {
 			for (int i = 0; i < order.size(); i++) {
 
 				// SQL文を準備する
-				String sql = "INSERT INTO OrderList VALUES (0, ?, ?,NOW(), ?)";
+				String sql = "INSERT INTO OrderList VALUES (0, ?, ?,NOW(), ?,?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -43,6 +43,8 @@ public class OrderListDAO {
 				pStmt.setInt(2, order.get(i).getCommodity().getCommodity_id());
 
 				pStmt.setInt(3, order.get(i).getOrder_quantity());
+				pStmt.setInt(4, order.get(i).getVisit_id());
+
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {

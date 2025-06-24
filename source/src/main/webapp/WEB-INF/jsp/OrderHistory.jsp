@@ -153,7 +153,7 @@ th {
 
 		<!-- 注文ランキング -->
 		<div class="orderRanking">
-			<h2>注文ランキング</h2>
+			<h2>ランキング</h2>
 
 			<!-- フード -->
 			<div class="accordion-section">
