@@ -72,13 +72,19 @@
 <div>
 <p>今日来店したお客様</p>
 <ul>
-<c:forEach var="vis" items="${visitor}">
-<li>${vis.customer.customer_name }</li>
-<li>ニックネーム（変数）</li>
-</c:forEach>
+  <c:forEach var="vis" items="${visitor}" varStatus="status">
+    <li>
+      <form id="customerForm_${status.index}" method="POST" action="${pageContext.request.contextPath}/CustomerListServlet" style="display: none;">
+        <input type="hidden" name="customer_name" value="${vis.customer.customer_name}" />
+      </form>
 
-<li>ニックネーム（変数）</li>
+      <a href="#" onclick="document.getElementById('customerForm_${status.index}').submit(); return false;">
+        ${vis.customer.customer_name}
+      </a>
+    </li>
+  </c:forEach>
 </ul>
+
 <br><br><br><br><br>
 
 </div>
