@@ -186,12 +186,17 @@ public class OrderListDAO {
 
 			// SQL文を完成させる
 			pStmt.setString(1, String.valueOf(commodity_id));
+			if(order_datetime!=null) {
 			pStmt.setString(2, order_datetime);
+			}
+			else {
+				pStmt.setString(2, "%");
+			}
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 			
-			int i=0;
+			
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				
@@ -221,6 +226,70 @@ public class OrderListDAO {
 		
 		return sum;
 	}
+	
+	
+	
+	// 指定された商品（日時）の個数を返す。
+		public int quantity2(int commodity_id) {
+			
+			
+			Connection conn = null;
+			int sum =0;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+
+				String sql = "SELECT order_quantity FROM OrderList "
+						+ "WHERE commodity_id = ?";
+				
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				pStmt.setString(1, String.valueOf(commodity_id));
+				
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					
+							
+					sum+=(rs.getInt("order_quantity"));
+					
+				} // while終了
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				sum = 0;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				sum = 0;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						sum = 0;
+					}
+				}
+			}
+
+			
+			return sum;
+		}
 
 	//
 	// 指定された顧客のいつもの商品IDを返す。
