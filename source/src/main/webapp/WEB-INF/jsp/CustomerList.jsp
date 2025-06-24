@@ -13,7 +13,7 @@
 <body>
 <p id="clock">time</p>
 <header>
-<a href="<c:url value='/StoreStaffServlet' />">
+<a href="<c:url value='/StoreBusinessServlet' />">
 <img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
 </a>
 </header>
