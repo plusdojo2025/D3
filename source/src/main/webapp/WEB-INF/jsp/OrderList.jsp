@@ -29,25 +29,35 @@
 	<main>
 		<h2>ご注文リスト</h2>
 		<form id="orderForm" action="<%= request.getContextPath() %>/OrderListServlet" method="POST">
+			
 			<div id="orderList">
-			<div class="orderListSub">
+			
+			<table>
 				<c:forEach var="order" items="${orderList}">
 					<div class="order" onclick="">
 						<input type="hidden" name="customerId" value="${order.customer.customer_id}">
 						<input type="hidden" name="commodityId" value="${order.commodity.commodity_id}"> 
-						<input value="${order.commodity.commodity_name}" readonly class="inputMenu"> 
-						￥<input value="${order.commodity.commodity_price}" readonly class="inputMenu"style="width: 80px;">
-						×<input name="commodityQuantity" value="${order.order_quantity}" readonly class="inputMenu">
+						<input type="hidden" value="${order.commodity.commodity_name}" readonly class="inputMenu"> 
+						<input type="hidden" value="${order.commodity.commodity_price}" readonly class="inputMenu"style="width: 80px;">
+						<input type="hidden"name="commodityQuantity" value="${order.order_quantity}" readonly class="inputMenu">
 							
 					</div>
+					<tr>
+					<td>${order.commodity.commodity_name}</td>
+					<td>￥${order.commodity.commodity_price}</td>
+					<td>✖${order.order_quantity}</td>
+					</tr>
+					
 				</c:forEach>
-				</div>
+				</table>
+				
 				<button type="button" onclick="submitOrder()"class="cool-submit">注文確定する</button>
 			</div>
 			<div class="subButton">
 			<input type="submit" name="menu" value="メニューに戻る" onclick="RedirectMenu(1)" class="cool-submit-small">
 			
 			</div>
+			
 		</form>
 	</main>
 	
