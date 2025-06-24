@@ -88,7 +88,8 @@
 	</footer>
 
 	<!-- 外部JSファイル読み込み -->
-	<script src="js/Accounting.js"></script>
+	<script src="${pageContext.request.contextPath}/js/Accounting.js"></script>
+
 
 </body>
 </html>
