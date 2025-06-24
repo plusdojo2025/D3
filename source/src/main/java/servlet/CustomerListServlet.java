@@ -160,7 +160,7 @@ public class CustomerListServlet extends HttpServlet {
         List<KeepBottle> keepBottleList = kbDao.selectAll();
 
         CommodityDAO commodityDao = new CommodityDAO();
-        List<Commodity> commodityList = commodityDao.selectAll();
+        List<Commodity> commodityList = commodityDao.selectKeepBottleCommodities();
 
         request.setAttribute("customerList", customerList);
         request.setAttribute("talkMap", talkMap);
