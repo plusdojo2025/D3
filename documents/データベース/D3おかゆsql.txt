@@ -1,9 +1,3 @@
-未着手
-テストデータ
-・store_memo
-
-
-
 
 CREATE TABLE category (
 category_id INT AUTO_INCREMENT PRIMARY KEY,
