@@ -122,15 +122,7 @@
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
 	
-	<form method="GET" action="${pageContext.request.contextPath}/CustomerListServlet">
-	<div class="Pagination">
-		<c:forEach var="page" items="${pagenumber}" varStatus="status">
-			<c:if test="${(status.index) <5}">
-				<input type=submit value="${page}" name="number" class="page">
-			</c:if>
-		</c:forEach>
-		</div>
-	</form>
+
 </main>
 
 <footer>
