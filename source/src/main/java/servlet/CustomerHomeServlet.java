@@ -47,13 +47,12 @@ public class CustomerHomeServlet extends HttpServlet {
 
 		// セッションからログイン中の顧客情報を取得
 		HttpSession session = request.getSession();
-		//Customer loginCustomer = (Customer) session.getAttribute("customer");
-		Customer loginCustomer = new Customer(1, "", "", "", "");
+		Customer loginCustomer = (Customer) session.getAttribute("customer");
 		// ログインしていない場合はログイン画面へリダイレクト
-		//if (loginCustomer == null) {
-		//	response.sendRedirect("/D3/LoginServlet");
-		//	return;
-		//}
+//		if (loginCustomer == null) {
+//			response.sendRedirect("/D3/LoginServlet");
+//			return;
+//		}
 		// お知らせ取得（最新3件）
 		EventDAO dao = new EventDAO();
 		List<Event> eventList =dao.select();
