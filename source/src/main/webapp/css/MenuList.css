@@ -30,6 +30,21 @@ input[name="category"] {
 	user-select: none;
 	font-family: 'Courier New', Courier, monospace;
 }
+/* ホバー時の変化 */
+button:hover,
+input[name="category"]:hover {
+    background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+    color: rgb(14, 33, 72);
+    box-shadow: 0 2px 8px rgb(227, 208, 149);
+    transform: scale(1.05);
+}
+
+/* クリック時の変化 */
+button:active,
+input[name="category"]:active {
+    transform: scale(0.95);
+}
+
 
 .commority-container {
 	display: flex;
@@ -113,6 +128,7 @@ input[name="cancel"] {
 	font-family: 'Courier New', Courier, monospace;
 }
 
+
 .Pagination form{
   display: flex;  
   justify-content: center; /* ← 横方向中央揃え */
@@ -169,7 +185,7 @@ input[name="cancel"] {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background: rgb(30, 50, 90)  ;
+	background: rgb(30, 50, 90)  ;;
 	padding: 30px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
