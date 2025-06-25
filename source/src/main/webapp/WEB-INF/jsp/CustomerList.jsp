@@ -42,7 +42,7 @@
 					<p><strong>ユーザーネーム:<br></strong> <input type="text" name="customer_name" value="${e.customer_name}"></p>
 					<p><strong>誕生日:<br></strong> <input type="text" name="customer_birthday" value="${e.customer_birthday}"></p>
 					<p><strong>メールアドレス:<br></strong> <input type="text" name="customer_email" value="${e.customer_email}"></p>
-					<p><strong>いつもの:<br></strong> <input type="text" name="every" value="${every[status.index]}"readonly></p>
+					<p><strong>いつもの:<br></strong> <input type="text" name="every" value="${every[status.index]}"readonly id="itumo"></p>
 					<input type="submit" name="submit" value="顧客情報更新" class="cool-submit-small">
 					<input type="submit" name="submit" value="顧客情報削除" class="cool-submit-small">
 				
@@ -91,7 +91,7 @@
 							<p class="keep">
 								商品名: ${kb.commodity.commodity_name}　<br>
 								
-								期限: <fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" />
+								期限: <strong><fmt:formatDate value="${kb.bottle_limit}" pattern="yyyy-MM-dd" /></strong>
 								残量: <input type="number" name="bottle_remaining_${kb.bottle_id}" value="${kb.bottle_remaining}" min=0 style="width: 70px;">ml<br>
 								<button type="submit" name="action" value="update_bottle_${kb.bottle_id}" class="cool-submit-mini">更新</button>
 								<button type="submit" name="action" value="delete_bottle_${kb.bottle_id}" class="cool-submit-mini">削除</button>
