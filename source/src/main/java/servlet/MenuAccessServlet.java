@@ -55,11 +55,13 @@ public class MenuAccessServlet extends HttpServlet {
 
 		if ("guest".equals(userType)) {
 			session.setAttribute("isLogin", true);
-
+			
+			Customer customer = (Customer)session.getAttribute("customer");
+			customer.setCustomer_name((String)request.getParameter("customerName"));
+			
 			CustomerDAO customerDAO = new CustomerDAO();
 			VisitorDAO visitorDAO = new VisitorDAO();
 
-			Customer customer = (Customer) session.getAttribute("customer");
 			int guestCount = customerDAO.countGuest();
 			guestCount++;
 			customer.setCustomer_email("guest" + guestCount + "@example.com");
@@ -68,7 +70,7 @@ public class MenuAccessServlet extends HttpServlet {
 				
 				int customerId = customerDAO.getCustomerIdByCustomerEmail(customer.getCustomer_email());
 				if (customerId != -1) {
-					
+
 					if (visitorDAO.insertVisitor(customerId, storeId)) {
 						session.setAttribute("visitId", visitorDAO.getVisitorId(customerId, storeId));
 					}
