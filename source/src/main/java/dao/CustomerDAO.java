@@ -389,5 +389,74 @@ public class CustomerDAO {
 
 		return count;
 	}
+	
+	public int countGuest() {
+		Connection conn = null;
+		int count = 0;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
+					"password");
+
+			String sql = "SELECT COUNT(*) FROM Customer "
+					+ "WHERE customer_email LIKE 'guest%' AND customer_email LIKE '%@example.com'";
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+	
+	public int getCustomerIdByCustomerEmail(String email) {
+		Connection conn = null;
+		int customerId = -1;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
+					"password");
+
+			String sql = "SELECT customer_id FROM Customer "
+					+ "WHERE customer_email = ?";
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, email);
+
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				customerId = rs.getInt("customer_id");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return customerId;
+	}
 
 }

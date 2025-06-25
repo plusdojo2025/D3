@@ -66,8 +66,6 @@ public class AccountingServlet extends HttpServlet {
 		VisitorDAO visitorDAO = new VisitorDAO();
 		visitorDAO.updateVisitorExit(visitId);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/StoreBusiness.jsp");
-		dispatcher.forward(request, response);
-
+		response.sendRedirect(request.getContextPath() + "/StoreBusinessServlet");
 	}
 }

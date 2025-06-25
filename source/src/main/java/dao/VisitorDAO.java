@@ -126,6 +126,24 @@ public class VisitorDAO {
 		
 		return false;
 	}
+	public int getVisitorId(int customerId, int storeId) {
+		String sql = "SELECT visit_id FROM visitor "
+				+ "WHERE customer_id = ? AND store_id = ?"
+				+ " AND exit_time IS NULL";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, customerId);
+			pStmt.setInt(2, customerId);
+			
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next())
+				return rs.getInt("visit_id");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return -1;
+	}
 	
 	public boolean updateVisitorExit(int visitId) {
 		String sql = "UPDATE visitor "
@@ -183,6 +201,25 @@ public class VisitorDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public boolean isCurrentVisitByVisitId(int visitId) {
+		String sql = "SELECT visit_id FROM visitor "
+				+ "WHERE visit_id = ? AND exsit_time IS NULL";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, visitId);
+			
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return false;
 	}
 
 	static {

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.OrderListDAO;
+import dao.VisitorDAO;
 import dto.Cart;
 import dto.Commodity;
 import dto.Customer;
@@ -50,10 +51,16 @@ public class OrderListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		HttpSession session = request.getSession();
+		int visitId = Integer.parseInt((String)session.getAttribute("visitId"));
+		VisitorDAO visitorDAO = new VisitorDAO();
+		if (visitorDAO.isCurrentVisitByVisitId(visitId) == false) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		}
+		
 		String[] commodityIds = request.getParameterValues("commodityId");
 		String[] quantitys = request.getParameterValues("commodityQuantity");
 		
-		HttpSession session = request.getSession();
 		Customer customer = (Customer)session.getAttribute("customer");
 
 		OrderListDAO orderListDAO = new OrderListDAO();
