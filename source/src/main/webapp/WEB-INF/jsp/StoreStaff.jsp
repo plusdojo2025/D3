@@ -66,7 +66,7 @@
 
 <main>
 <div>
-イベント
+<h2>イベント</h2>
 <form method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="event_name" placeholder="イベント名">
 	<input type="text" name="event_remark" placeholder="備考">
@@ -76,7 +76,7 @@
 </div>
 
 <div>
-業務連絡
+<h2>業務連絡</h2>
 <form method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="store_remark" placeholder="連絡内容">
 	<input type="date" name="store_date" >
