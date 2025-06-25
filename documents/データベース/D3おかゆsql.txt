@@ -133,6 +133,8 @@ INSERT INTO commodity VALUES (NULL,'キングオブスコッチ',1700,2,'menu_im
 
 INSERT INTO commodity VALUES (NULL,'ジントニック',500,3,'menu_imag.jpg');
 INSERT INTO commodity VALUES (NULL,'ホワイトレディ',800,3,'menu_imag.jpg');
+INSERT INTO commodity VALUES (NULL,'マティーニ',800,3,'menu_imag.jpg');
+INSERT INTO commodity VALUES (NULL,'グラスホッパー',800,3,'menu_imag.jpg');
 INSERT INTO commodity VALUES (NULL,'ゴットファザー',900,3,'menu_imag.jpg');
 INSERT INTO commodity VALUES (NULL,'モスコミュール',800,3,'menu_imag.jpg');
 INSERT INTO commodity VALUES (NULL,'XYZ',1000,3,'menu_imag.jpg');
