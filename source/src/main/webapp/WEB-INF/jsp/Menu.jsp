@@ -41,7 +41,7 @@
 	<div id="loginPopup">
 		<div id="loginChoice">
 			<button type="button" onclick="showLoginForm()">ログイン</button>
-			<button type="submit" onclick="postAndRedirectMenuAccess()">ゲスト</button>
+			<button type="submit" onclick="showGuestForm()">ゲスト</button>
 		</div>
 
 		<div id="loginForm">
@@ -50,7 +50,16 @@
 				<input type="hidden" name="userType"value="customer"><br>
 				<input type="text" name="email" placeholder="メールアドレス" required><br>
 				<input type="password" name="password" placeholder="パスワード" required><br>
-				<button type="submit">送信</button>
+				<button type="submit">ログイン</button>
+			</form>
+		</div>
+		
+		<div id="guestForm">
+			<button type="button" onclick="backLoginChoice()">X</button>
+			<form action="<%=request.getContextPath()%>/MenuAccessServlet" method="POST">
+			<input type="hidden" name="userType" value="guest">
+			<input type="text" name="customerName" placeholder="ニックネーム" required><br>
+			<button type="submit">メニューへ</button>
 			</form>
 		</div>
 	</div>

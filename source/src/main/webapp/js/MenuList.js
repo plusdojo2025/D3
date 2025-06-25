@@ -21,7 +21,10 @@ window.addEventListener("DOMContentLoaded", () => {
 	const loginElement = document.getElementById("loginPopup");
 	const overlay = document.getElementById("overlay");
 	const loginForm = document.getElementById("loginForm");
+	const guestForm = document.getElementById("guestForm");
+	
 	loginForm.style.display = "none";
+	guestForm.style.display = "none";
 
 	if (!isVisitor) {
 		loginElement.style.display = "none";
@@ -132,22 +135,14 @@ function showLoginForm() {
 	document.getElementById("loginChoice").style.display = "none";
 	document.getElementById("loginForm").style.display = "block";
 }
+function showGuestForm() {
+	document.getElementById("overlay").style.display = "block";
+	document.getElementById("loginChoice").style.display = "none";
+	document.getElementById("guestForm").style.display = "block";	
+}
+
 function backLoginChoice() {
 	document.getElementById("loginChoice").style.display = "block";
 	document.getElementById("loginForm").style.display = "none";
-}
-
-function postAndRedirectMenuAccess() {
-	const form = document.createElement("form");
-	form.method = "POST";
-	form.action = `${contextPath}/MenuAccessServlet`;
-
-	const input = document.createElement("input");
-	input.type = "hidden";
-	input.name = "userType";
-	input.value = "guest";
-
-	form.appendChild(input);
-	document.body.appendChild(form);
-	form.submit();
+	document.getElementById("guestForm").style.display = "none";
 }

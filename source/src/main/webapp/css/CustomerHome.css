@@ -119,3 +119,64 @@ td,th{
   
 }
 
+/*ランキング*/
+.rankCss {
+  margin: 20px auto;
+  width: 500px;
+  background: linear-gradient(135deg, rgb(25, 47, 97), rgb(44, 68, 122));
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #f3e8b1;
+  text-align: left;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 200, 0.3);
+  font-family: "Segoe UI", sans-serif;
+  
+  
+}
+
+.rankCss p {
+  font-size: 1.2rem;
+  margin: 12px 0;
+  position: relative;
+  padding-left: 40px;
+}
+
+.rank-icon {
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(5%);
+}
+
+.gold {
+  color: gold;
+  text-shadow: 0 0 5px gold, 0 0 10px gold;
+}
+
+.silver {
+  color: silver;
+  text-shadow: 0 0 5px silver, 0 0 10px silver;
+}
+
+.bronze {
+  color: #cd7f32;
+  text-shadow: 0 0 5px #cd7f32, 0 0 10px #cd7f32;
+}
+
+.quantity {
+  float: right;
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(255,255,255,0.7);
+}
+
+@keyframes shimmer {
+  0% { text-shadow: 0 0 5px #fff; }
+  50% { text-shadow: 0 0 20px #ffd700, 0 0 10px #fff; }
+  100% { text-shadow: 0 0 5px #fff; }
+}
+
+.rank-icon.gold, .rank-icon.silver,.rank-icon.bronze{
+  animation: shimmer 2s infinite;
+}
