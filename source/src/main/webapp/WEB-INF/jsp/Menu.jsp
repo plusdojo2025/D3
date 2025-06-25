@@ -46,8 +46,7 @@
 
 		<div id="loginForm">
 			<button type="button" onclick="backLoginChoice()">X</button>
-			<form action="<%=request.getContextPath()%>/MenuAccessServlet"
-				method="POST">
+			<form action="<%=request.getContextPath()%>/MenuAccessServlet" method="POST">
 				<input type="text" name="email" placeholder="メールアドレス" required><br>
 				<input type="password" name="password" placeholder="パスワード" required><br>
 				<button type="submit">送信</button>
@@ -58,11 +57,11 @@
 
 	<main>
 		<h1>メニュー</h1>
-		<form id="categorys" method="GET" action="/D3/MenuListServlet">
-			<input type="submit" value="cocktail" name="category"> <input
-				type="submit" value="whisky" name="category"> <input
-				type="submit" value="beer" name="category"> <input
-				type="submit" value="food" name="category">
+		<form id="categorys" method="GET" action="<%=request.getContextPath()%>/MenuListServlet">
+			<input type="submit" value="cocktail" name="category">
+			<input type="submit" value="whisky" name="category">
+			<input type="submit" value="beer" name="category">
+			<input type="submit" value="food" name="category">
 		</form>
 
 
@@ -124,7 +123,7 @@
 		</div>
 
 		<div class="Pagination">
-			<form method="GET" action="/D3/MenuListServlet">
+			<form method="GET" action="<%=request.getContextPath()%>/MenuListServlet">
 				<c:forEach var="page" items="${pagenumber}" varStatus="status">
 					<c:if test="${(status.index) <5}">
 						<input type=submit value="${page}" name="number">
