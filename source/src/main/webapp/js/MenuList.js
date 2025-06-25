@@ -53,7 +53,7 @@ function popupCommodity(id, image, name, price) {
 	cName.innerHTML = "";
 	cPrice.innerHTML = "";
 
-	cImg.textContent = `${image}`;
+	cImg.src = `${contextPath}/img/${image}`;
 	cName.textContent = `${name}`;
 	cPrice.textContent = `${price}`;
 
