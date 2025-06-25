@@ -23,7 +23,7 @@ height: 100px;
 }
 
 #visitorsbox {
-  height: 100px;
+  height: 200px;
   overflow-y: scroll;
   border: 1px solid rgb(227, 208, 149);
   padding: 10px 20px; 
@@ -33,5 +33,19 @@ height: 100px;
 
 #visitors {
 	
-	text-align: left;
+	text-align: center;
+}
+
+
+.toggleBtn,.accBtn {
+    background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+    color: white;
+    padding: 12px 30px;
+    margin: 15px 5px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    transition: background 0.3s ease, transform 0.2s ease;
 }

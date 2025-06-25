@@ -160,6 +160,7 @@ input::placeholder {
 }
 
 select:disabled {
+	color: rgb(70, 90, 140) ;
   background: linear-gradient(45deg, #e4def5, #d7cff0);
   border: 1px solid #b3a5d3;
   cursor: default; /* ← 禁止マークを通常の矢印に変更 */
