@@ -45,7 +45,7 @@
 
 <p id="clock">time</p>
 <header>
-  <a href="/D3/StoreBusinessServlet">
+  <a href="<c:url value='/StoreBusinessServlet' />">
 <img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
 </a>
 <h1>事務画面</h1>
