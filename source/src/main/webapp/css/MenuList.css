@@ -113,17 +113,14 @@ input[name="cancel"] {
 	font-family: 'Courier New', Courier, monospace;
 }
 
-.Pagination {
-  display: flex;
-  align-items: center;     /* 縦方向中央（高さがある場合に有効） */
+.Pagination form{
+  display: flex;  
   justify-content: center; /* ← 横方向中央揃え */
-  text-align: center;
 }
 .Pagination input[type="submit"] {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
@@ -167,14 +164,15 @@ input[name="cancel"] {
 }
 
 /* ポップアップ表示位置 */
-#loginPopup {
+#popupCommodity {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background: white;
+	background: rgb(30, 50, 90)  ;
 	padding: 30px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 	z-index: 1000;
 }
+
