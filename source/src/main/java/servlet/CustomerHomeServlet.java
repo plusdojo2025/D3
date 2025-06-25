@@ -90,7 +90,6 @@ public class CustomerHomeServlet extends HttpServlet {
 		// topCount分のランキング取得
 		int topCount = 3;
 		List<OrderList> topOrders = orderListDAO.getTopCommoditiesByDate(topCount, yesterdayMonth);
-        System.out.println(topOrders.size());
 		request.setAttribute("topCommodity", topOrders);
 		
 		/*
