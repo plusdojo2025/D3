@@ -2,13 +2,35 @@ document.addEventListener("DOMContentLoaded", () => {
 	const forms = document.querySelectorAll("form");
 
 	forms.forEach(form => {
-		form.addEventListener("submit", function(e) {
-			const submitter = e.submitter;
-			if (!submitter || !submitter.name || !submitter.value) return;
+		let clickedButton = null;
 
-			const action = submitter.value;
+		// どのボタンが押されたか記録
+		const buttons = form.querySelectorAll("button, input[type='submit']");
+		buttons.forEach(button => {
+			button.addEventListener("click", function () {
+				clickedButton = button;
+			});
+		});
 
-			// --- 更新・削除の確認 ---
+		form.addEventListener("submit", function (e) {
+			if (!clickedButton) return;
+
+			const action = clickedButton.value;
+
+			// --- 顧客情報の更新・削除の確認 ---
+			if (action === "顧客情報更新") {
+				if (!confirm("顧客情報を更新しますか？")) {
+					e.preventDefault();
+					return;
+				}
+			} else if (action === "顧客情報削除") {
+				if (!confirm("顧客情報を削除しますか？")) {
+					e.preventDefault();
+					return;
+				}
+			}
+
+			// --- update/delete系ボタンの一括確認（talk/bottleなど） ---
 			if (action.includes("update") && !action.includes("insert")) {
 				if (!confirm("更新しますか？")) {
 					e.preventDefault();
@@ -20,6 +42,28 @@ document.addEventListener("DOMContentLoaded", () => {
 					return;
 				}
 			}
+			
+			// --- 会話内容の重複チェック ---
+if (action === "insert_talk") {
+  const topicSelect = form.querySelector("select[name='new_topic_id']");
+  if (!topicSelect) return;
+
+  const selectedTopicId = topicSelect.value;
+  let isDuplicate = false;
+
+  // 既存の hidden フィールドから重複チェック
+  form.querySelectorAll("input[type='hidden'][name^='talk_topic_id_']").forEach(hiddenInput => {
+    if (hiddenInput.value === selectedTopicId) {
+      isDuplicate = true;
+    }
+  });
+
+  if (isDuplicate) {
+    alert("このトピックはすでに登録されています。");
+    e.preventDefault();
+    return;
+  }
+}
 
 			// --- キープボトル登録バリデーションと重複チェック ---
 			if (action === "insert_bottle") {
@@ -39,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 					return;
 				}
 
-				// 重複チェック（商品名ベース）
 				const newCommodityName = commodity.options[commodity.selectedIndex].text;
 				let isDuplicate = false;
 
