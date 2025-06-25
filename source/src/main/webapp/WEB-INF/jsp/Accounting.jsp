@@ -84,6 +84,6 @@
 
     <!-- 外部JSファイル読み込み -->
     <script src="${pageContext.request.contextPath}/js/Accounting.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>
