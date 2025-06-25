@@ -66,7 +66,7 @@
 	<p>キープ中のボトルはありません。</p>
 </c:if>
 
-<h2>ランキング</h2>
+<h2>👑ランキング</h2>
 
 <div class="rankCss">
   <p><span class="rank-icon gold">🥇</span> ${topCommodity[0].commodity.commodity_name}　<span class="quantity">${topCommodity[0].order_quantity}</span></p>
