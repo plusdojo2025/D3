@@ -16,8 +16,8 @@ import dto.Visitor;
 public class VisitorDAO {
 
 	public List<Visitor> getVisitorByDate(String date) {
-		String sql = "SELECT customer.customer_id, customer.customer_name, customer.customer_id " + "FROM orderList "
-				+ "JOIN customer on orderList.customer_id = customer.customer_id " + "WHERE order_datetime >= ? "
+		String sql = "SELECT customer.customer_id, customer.customer_name, customer.customer_id " + "FROM orderlist "
+				+ "JOIN customer on orderlist.customer_id = customer.customer_id " + "WHERE order_datetime >= ? "
 				+ "GROUP BY customer.customer_name, customer.customer_id";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setString(1, date);
@@ -55,9 +55,9 @@ public class VisitorDAO {
 
 	private String getModeOrderByCustomerId(Connection conn, int id) throws SQLException {
 		String sql = "SELECT commodity.commodity_name "
-				+ "FROM orderList "
+				+ "FROM orderlist "
 				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
-				+ "WHERE orderList.customer_id = ? "
+				+ "WHERE orderlist.customer_id = ? "
 				+ "GROUP BY commodity.commodity_id, commodity.commodity_name "
 				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
@@ -74,9 +74,9 @@ public class VisitorDAO {
 
 	public String getModeOrderByCustomerId(int id) {
 		String result = "";
-		String sql = "SELECT commodity.commodity_name " + "FROM orderList "
-				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
-				+ "WHERE orderList.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
+		String sql = "SELECT commodity.commodity_name " + "FROM orderlist "
+				+ "JOIN commodity ON commodity.commodity_id = orderlist.commodity_id "
+				+ "WHERE orderlist.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
 				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, id);
