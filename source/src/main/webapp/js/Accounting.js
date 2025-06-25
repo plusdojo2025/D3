@@ -48,7 +48,7 @@ function submitPayment() {
     });
 }
 
-function closePopup() {
+function closePopup(visitId) {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
 
@@ -56,6 +56,17 @@ function closePopup() {
     if (overlay) overlay.style.display = 'none';
 
     const contextPath = document.body.dataset.context || '';
-    window.location.href = contextPath + "/StoreBusinessServlet";
 
+	const form = document.createElement("form");
+	form.method = "POST";
+	form.action = `${contextPath}/AccountingServlet`;
+	
+	const input = document.createElement("input");
+	input.type = "hidden"
+	input.name = "visitId";
+	input.value = visitId;
+	
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
 }
