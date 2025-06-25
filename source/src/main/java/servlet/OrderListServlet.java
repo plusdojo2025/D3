@@ -52,7 +52,8 @@ public class OrderListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		int visitId = Integer.parseInt((String)session.getAttribute("visitId"));
+		int visitId = (int)session.getAttribute("visitId");
+
 		VisitorDAO visitorDAO = new VisitorDAO();
 		if (visitorDAO.isCurrentVisitByVisitId(visitId) == false) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
