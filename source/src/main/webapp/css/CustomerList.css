@@ -68,10 +68,12 @@ p{
 input[type="text"],
 input[type="number"],
 input[type="date"],
+textarea,
 select {
 	width: 90%;
 	padding: 4px;
 	box-sizing: border-box;
+	border-radius: 6px;   
 }
 
 /*サブボタン*/
