@@ -228,3 +228,8 @@ p.keep{
 #itumo{
 	background: linear-gradient(45deg, #e4def5, #d7cff0);
 }
+
+/*キープボトル残量の文字の太さ*/
+.bold-input {
+  font-weight: 600;
+}
