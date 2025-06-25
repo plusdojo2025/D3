@@ -47,6 +47,7 @@
 		<div id="loginForm">
 			<button type="button" onclick="backLoginChoice()">X</button>
 			<form action="<%=request.getContextPath()%>/MenuAccessServlet" method="POST">
+				<input type="hidden" name="userType"value="customer"><br>
 				<input type="text" name="email" placeholder="メールアドレス" required><br>
 				<input type="password" name="password" placeholder="パスワード" required><br>
 				<button type="submit">送信</button>
