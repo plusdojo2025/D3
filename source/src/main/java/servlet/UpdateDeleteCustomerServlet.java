@@ -65,7 +65,7 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 				} else if (action.equals("insert_bottle")) {
 					int commodityId = Integer.parseInt(request.getParameter("new_commodity_id"));
 					int remaining = Integer.parseInt(request.getParameter("new_bottle_remaining"));
-					Timestamp limit = Timestamp.valueOf(request.getParameter("new_bottle_limit") + " 00:00:00");
+					Timestamp limit = Timestamp.valueOf(request.getParameter("new_bottle_limit") );
 
 					KeepBottle newBottle = new KeepBottle();
 					newBottle.setCustomer(new Customer(customer_id, null, null, null, null));
