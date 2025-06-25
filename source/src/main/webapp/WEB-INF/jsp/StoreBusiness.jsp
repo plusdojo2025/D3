@@ -94,7 +94,7 @@
 							<form id="accountingForm" method="GET"
 								action="<%=request.getContextPath()%>/AccountingServlet">
 								<div id="accountingInput"></div>
-								<button type="button" onclick="AccountingGet(${visitor.visit_id})">会計</button>
+								<button class="accBtn"type="button" onclick="AccountingGet(${visitor.visit_id})">会計</button>
 
 							</form>
 						</div>
