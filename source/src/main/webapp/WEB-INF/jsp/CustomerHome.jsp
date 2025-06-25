@@ -68,14 +68,11 @@
 
 <h2>ランキング</h2>
 
-<table>
-<c:forEach var="drink" items="${topCommodity}">
-<tr>
-<td>${drink.commodity.commodity_name}</td>
-<td>${drink.order_quantity}</td>
-</tr>
-</c:forEach>
-</table>
+<div class="rankCss">
+  <p><span class="rank-icon gold">🥇</span> ${topCommodity[0].commodity.commodity_name}　<span class="quantity">${topCommodity[0].order_quantity}</span></p>
+  <p><span class="rank-icon silver">🥈</span> ${topCommodity[1].commodity.commodity_name}　<span class="quantity">${topCommodity[1].order_quantity}</span></p>
+  <p><span class="rank-icon bronze">🥉</span> ${topCommodity[2].commodity.commodity_name}　<span class="quantity">${topCommodity[2].order_quantity}</span></p>
+</div>
 <!-- 
 <table>
 <c:forEach var="drink" items="${best3drink}" varStatus="status">
