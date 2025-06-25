@@ -66,7 +66,7 @@
 	<p>キープ中のボトルはありません。</p>
 </c:if>
 
-<h2>ドリンクランキング</h2>
+<h2>ランキング</h2>
 
 <table>
 <c:forEach var="drink" items="${topCommodity}">
