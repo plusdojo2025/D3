@@ -74,8 +74,8 @@
 
 				<div class="commodity"
 					onclick="popupCommodity(${menu.commodity_id}, '${menu.commodity_image}', '${menu.commodity_name}', ${menu.commodity_price})">
-					<img src="/D3/img/${menu.commodity_image}" alt="メニュー" width="150"
-						height="150"> <br>${menu.commodity_name}
+					<img src="<c:url value='/img/${menu.commodity_image}' />" alt="メニュー" width="150"
+						height="150"> <br>${menu.commodity_name}<br>
 					￥${menu.commodity_price}
 				</div>
 
