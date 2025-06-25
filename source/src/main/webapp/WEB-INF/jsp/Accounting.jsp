@@ -72,7 +72,7 @@
         <div id="overlay"></div>
         <div id="popup">
             <div id="popupContent">読み込み中...</div>
-            <button onclick="closePopup()" style="margin-top: 15px; padding: 10px 20px;">閉じる</button>
+            <button onclick="closePopup(${visitId})" style="margin-top: 15px; padding: 10px 20px;">閉じる</button>
         </div>
     </main>
 

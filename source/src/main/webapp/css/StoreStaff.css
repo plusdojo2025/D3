@@ -1,18 +1,33 @@
 @charset "UTF-8";
 
-/*共通スタイル*/
+/* ===== 共通スタイル ===== */
 html {
 	text-align: center;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #0f1d3d;
+	margin: 0;
+	padding: 0;
 }
 
-/* フォーム全体*/
-form{
+/* ===== フォーム全体 ===== */
+form {
 	margin: 20px auto;
 	max-width: 500px;
 	background-color: rgb(25, 47, 97);
-	padding:20px;
+	padding: 20px;
 	border-radius: 5px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* フォームのラベルと見出し（必要に応じて） */
+form h2, form label {
+	color: rgb(255, 235, 180);
+	margin-bottom: 10px;
+	display: block;
+	text-align: left;
+}
+
+/* テキスト・日付入力欄 */
 input[type="text"], input[type="date"] {
 	width: 100%;
 	padding: 10px;
@@ -22,46 +37,74 @@ input[type="text"], input[type="date"] {
 	border: none;
 	font-weight: bold;
 	cursor: pointer;
+	border-radius: 3px;
+	box-sizing: border-box;
 }
 
+/* 送信ボタン＆通常ボタン */
+input[type="submit"], button {
+	background-color: rgb(227, 208, 149);
+	color: rgb(14, 33, 72);
+	font-weight: bold;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	margin-top: 10px;
+}
+
+/* ホバー時 */
 input[type="submit"]:hover, button:hover {
-	background-color: rgb(255,235,180);
+	background-color: rgb(255, 235, 180);
 }
 
-/* 顧客リスト表示*/
-ul{
+/* ===== 顧客リスト表示 ===== */
+ul {
 	list-style-type: none;
-	padding:0;
+	padding: 0;
 	color: rgb(227, 208, 149);
+	margin-top: 20px;
 }
 
 ul li {
 	padding: 5px 0;
-	border-bottom: 1px solid rgb(227,208, 149);
+	border-bottom: 1px solid rgb(227, 208, 149);
 	width: 300px;
 	margin: 0 auto;
 }
 
-/* フッター*/
+/* ===== メッセージ表示用（エラー／成功） ===== */
+.message {
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+.message.success {
+	background-color: #d4edda;
+	color: #155724;
+}
+
+.message.error {
+	background-color: #f8d7da;
+	color: #721c24;
+}
+
+/* ===== フッター ===== */
 footer {
 	margin-top: 60px;
 	padding: 20px;
 	color: rgb(227, 208, 149);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ===== レスポンシブ対応 ===== */
+@media screen and (max-width: 600px) {
+	form {
+		width: 90%;
+	}
+	ul li {
+		width: 90%;
+	}
+}

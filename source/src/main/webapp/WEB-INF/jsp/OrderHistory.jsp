@@ -83,6 +83,12 @@ th {
 
 	<main>
 
+	<form action="OrderHistoryServlet" method="get" class="date-search-form">
+  <label for="targetDate">表示日付：</label>
+  <input type="date" id="targetDate" name="targetDate" value="${today}">
+  <input type="submit" value="表示" class="cool-submit">
+</form>
+
 		<!-- カテゴリランキング -->
 		<div class="categoryRanking">
 			<h2>カテゴリ</h2>
