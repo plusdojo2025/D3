@@ -93,13 +93,18 @@ INSERT INTO store VALUES (NULL,'dojouser1','#SEplus2025SEplus');
 
 INSERT INTO store_memo VALUES (1,NOW(),'テストメモ');
 
-INSERT INTO topic_tag VALUES (NULL,'スポーツ（野球）');
-INSERT INTO topic_tag VALUES (NULL,'スポーツ（サッカー）');
-INSERT INTO topic_tag VALUES (NULL,'スポーツ（その他）');
-INSERT INTO topic_tag VALUES (NULL,'音楽（クラシック）');
-INSERT INTO topic_tag VALUES (NULL,'音楽（ＪＰＯＰ）');
-INSERT INTO topic_tag VALUES (NULL,'ニュース（株）');
-INSERT INTO topic_tag VALUES (NULL,'旅行');
+INSERT INTO topic_tag VALUES (NULL,'スポーツ');
+INSERT INTO topic_tag VALUES (NULL,'音楽');
+INSERT INTO topic_tag VALUES (NULL,'ニュース');
+INSERT INTO topic_tag VALUES (NULL,'映画');
+INSERT INTO topic_tag VALUES (NULL,'仕事');
+INSERT INTO topic_tag VALUES (NULL,'恋愛');
+INSERT INTO topic_tag VALUES (NULL,'漫画・アニメ');
+INSERT INTO topic_tag VALUES (NULL,'出身地');
+INSERT INTO topic_tag VALUES (NULL,'家族');
+INSERT INTO topic_tag VALUES (NULL,'イベント');
+INSERT INTO topic_tag VALUES (NULL,'食べ物');
+INSERT INTO topic_tag VALUES (NULL,'動物');
 INSERT INTO topic_tag VALUES (NULL,'その他');
 INSERT INTO topic_tag VALUES (NULL,'ＮＧ内容');
 
