@@ -31,13 +31,21 @@
 <!-- お知らせ・イベント情報 -->
 <h2>📢お知らせ・イベント</h2>
 <c:if test="${not empty eventList}">
+
 	<c:forEach var="event" items="${eventList}">
-		<p>
-			<strong>イベント名：</strong> ${event.event_name}<br>
-			<strong>日程：</strong> ${event.event_date}<br>
-			<strong>内容：</strong> ${event.event_remark}
-		</p>
+	<table class="eventCss">
+		<tr>
+			<th><strong>イベント：</strong></th><td> ${event.event_name}</td>
+		</tr>
+		<tr>
+			<th><strong>日程：</strong> </th><td>${event.event_date}</td>
+		</tr>
+		<tr>
+			<th><strong>内容：</strong></th><td>${event.event_remark}</td>
+		</tr>
+		</table>
 	</c:forEach>
+
 </c:if>
 <c:if test="${empty eventList}">
 	<p>現在お知らせはありません。</p>
