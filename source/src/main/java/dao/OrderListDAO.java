@@ -33,7 +33,7 @@ public class OrderListDAO {
 			for (int i = 0; i < order.size(); i++) {
 
 				// SQL文を準備する
-				String sql = "INSERT INTO OrderList VALUES (0, ?, ?,NOW(), ?,?)";
+				String sql = "INSERT INTO orderlist VALUES (0, ?, ?,NOW(), ?,?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -89,7 +89,7 @@ public class OrderListDAO {
 
 			// SQL文を準備する
 
-			String sql = "SELECT * FROM OrderList "
+			String sql = "SELECT * FROM orderlist "
 					+ "WHERE order_id LIKE ? AND customer_id LIKE ? AND commodity_id LIKE ? AND order_datetime LIKE ? AND order_quantity LIKE ? "
 					+ "ORDER BY order_datetime DESC";
 
@@ -178,7 +178,7 @@ public class OrderListDAO {
 
 			// SQL文を準備する
 
-			String sql = "SELECT order_quantity FROM OrderList "
+			String sql = "SELECT order_quantity FROM orderlist "
 					+ "WHERE commodity_id = ? AND order_datetime = ? ";
 			
 
@@ -229,7 +229,7 @@ public class OrderListDAO {
 	
 	public List<OrderList> getTopCommoditiesByDate(int topCount, String date) {
 		String sql = "SELECT c.commodity_name, SUM(o.order_quantity) AS total_quantity "
-				+ "FROM orderList o "
+				+ "FROM orderlist o "
 				+ "JOIN commodity c ON o.commodity_id = c.commodity_id "
 				+ "WHERE o.order_datetime LIKE ? "
 				+ "GROUP BY c.commodity_name "
@@ -279,7 +279,7 @@ public class OrderListDAO {
 
 				// SQL文を準備する
 
-				String sql = "SELECT order_quantity FROM OrderList WHERE commodity_id = ?";
+				String sql = "SELECT order_quantity FROM orderlist WHERE commodity_id = ?";
 				
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -391,10 +391,10 @@ public class OrderListDAO {
 	
 	public List<OrderList> getTodayOrderByCustomerId(int id, String date) {
 		String sql = "SELECT order_id, order_datetime, order_quantity, customer.customer_name, commodity.commodity_name "
-				+ "FROM orderList "
-				+ "JOIN customer ON orderList.customer_id = customer.customer_id "
-				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
-				+ "WHERE orderList.customer_id = ? AND order_datetime >= ? "
+				+ "FROM orderlist "
+				+ "JOIN customer ON orderlist.customer_id = customer.customer_id "
+				+ "JOIN commodity ON orderlist.commodity_id = commodity.commodity_id "
+				+ "WHERE orderlist.customer_id = ? AND order_datetime >= ? "
 				+ "ORDER BY order_datetime DESC";
 		List<OrderList> orderList = new ArrayList<OrderList>();
 		
@@ -428,10 +428,10 @@ public class OrderListDAO {
 	}
 	public List<OrderList> getTodayOrderByStoreId(int id, String date) {
 		String sql = "SELECT order_id, order_datetime, order_quantity, customer.customer_name, commodity.commodity_name "
-				+ "FROM orderList "
-				+ "JOIN customer ON orderList.customer_id = customer.customer_id "
-				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
-				+ "WHERE orderList.store_id = ? AND order_datetime >= ? "
+				+ "FROM orderlist "
+				+ "JOIN customer ON orderlist.customer_id = customer.customer_id "
+				+ "JOIN commodity ON orderlist.commodity_id = commodity.commodity_id "
+				+ "WHERE orderlist.store_id = ? AND order_datetime >= ? "
 				+ "ORDER BY order_datetime DESC";
 		List<OrderList> orderList = new ArrayList<OrderList>();
 		
@@ -465,10 +465,10 @@ public class OrderListDAO {
 	}
 	
 	public List<OrderList> getOrderByVisitId(int id) {
-		String sql = "SELECT orderList.order_quantity, commodity.commodity_name, commodity.commodity_price"
-				+ " FROM orderList "
-				+ "JOIN commodity ON orderList.commodity_id = commodity.commodity_id "
-				+ "WHERE orderList.visit_id = ?";
+		String sql = "SELECT orderlist.order_quantity, commodity.commodity_name, commodity.commodity_price"
+				+ " FROM orderlist "
+				+ "JOIN commodity ON orderlist.commodity_id = commodity.commodity_id "
+				+ "WHERE orderlist.visit_id = ?";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, id);
 
@@ -481,7 +481,7 @@ public class OrderListDAO {
 				commodity.setCommodity_price(rs.getInt("commodity.commodity_price"));
 				order.setCommodity(commodity);
 				
-				order.setOrder_quantity(rs.getInt("orderList.order_quantity"));
+				order.setOrder_quantity(rs.getInt("orderlist.order_quantity"));
 				order.setOrder_id(id);
 				
 				orderList.add(order);

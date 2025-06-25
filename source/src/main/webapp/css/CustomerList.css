@@ -159,6 +159,7 @@ input::placeholder {
 }
 
 select:disabled {
+	color: rgb(70, 90, 140) ;
   background: linear-gradient(45deg, #e4def5, #d7cff0);
   border: 1px solid #b3a5d3;
   cursor: default; /* ← 禁止マークを通常の矢印に変更 */
@@ -174,6 +175,7 @@ select:disabled {
 p.keep{
 	padding: 10px 0px;
 	margin: 5px 30px;
+	background: linear-gradient(45deg, #e4def5, #d7cff0);
 	color: rgb(14, 33, 72);
 	border: 1px solid rgb(246, 246, 246);
 	border-radius: 6px;     
@@ -219,4 +221,9 @@ p.keep{
 
 .Pagination > * + * {
   margin-left: 8px;
+}
+
+/*入力できない背景色「いつもの」*/
+#itumo{
+	background: linear-gradient(45deg, #e4def5, #d7cff0);
 }

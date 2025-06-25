@@ -198,7 +198,7 @@ public class StoreMemoDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Store_Memo WHERE store_id=?";
+			String sql = "DELETE FROM store_memo WHERE store_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる

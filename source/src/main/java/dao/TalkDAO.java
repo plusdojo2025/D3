@@ -22,7 +22,7 @@ public class TalkDAO {
 	                "root", "password");
 
 	        // ★ customer_id を必須条件に加える
-	        String sql = "SELECT * FROM Talk WHERE customer_id = ?";
+	        String sql = "SELECT * FROM talk WHERE customer_id = ?";
 
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -69,7 +69,7 @@ public class TalkDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO Talk (customer_id, topic_id, talk_remark) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO talk (customer_id, topic_id, talk_remark) VALUES (?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -126,7 +126,7 @@ public class TalkDAO {
 					"root", "password");
 
 			// topic_idは一意で変わらない想定なので、SETから外して条件に使う
-			String sql = "UPDATE Talk SET talk_remark=? WHERE customer_id=? AND topic_id=?";
+			String sql = "UPDATE talk SET talk_remark=? WHERE customer_id=? AND topic_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, card.getTalk_remark() != null ? card.getTalk_remark() : "");
@@ -164,7 +164,7 @@ public class TalkDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Talk WHERE customer_id=? AND topic_id=?";
+			String sql = "DELETE FROM talk WHERE customer_id=? AND topic_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる

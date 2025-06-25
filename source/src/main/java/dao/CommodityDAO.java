@@ -27,7 +27,7 @@ public class CommodityDAO {
 			int offset = (page - 1) * itemsPerPage;
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Commodity WHERE commodity_category = ? LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM commodity WHERE commodity_category = ? LIMIT ? OFFSET ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, category_id);
@@ -65,7 +65,7 @@ public class CommodityDAO {
 	    try (Connection conn = DriverManager.getConnection(
 	                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	                "root", "password");
-	         PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM Commodity");
+	         PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM commodity");
 	         ResultSet rs = pStmt.executeQuery()) {
 
 	        while (rs.next()) {
@@ -95,7 +95,7 @@ public class CommodityDAO {
 	                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	                "root", "password");
 	         PreparedStatement pStmt = conn.prepareStatement(
-	             "SELECT * FROM Commodity WHERE commodity_category = ?")) {
+	             "SELECT * FROM commodity WHERE commodity_category = ?")) {
 
 	        pStmt.setInt(1, keepBottleCategoryId);
 	        ResultSet rs = pStmt.executeQuery();
