@@ -183,6 +183,17 @@ input[name="cancel"] {
 	z-index: 999;
 	pointer-events: auto;
 }
+#loginPopup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgb(30, 50, 90)  ;;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	z-index: 1000;
+}
 
 /* ポップアップ表示位置 */
 #popupCommodity {
