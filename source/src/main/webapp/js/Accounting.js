@@ -25,10 +25,8 @@ function submitPayment() {
         return;
     }
 
-    // コンテキストパスの取得（JSPの<body>に data-context属性がある想定）
     const contextPath = document.body.dataset.context || '';
 
-    // Fetch API で PaymentComplete にPOST送信
     fetch(contextPath + "/PaymentComplete", {
         method: 'POST',
         body: formData
@@ -57,7 +55,7 @@ function closePopup() {
     if (popup) popup.style.display = 'none';
     if (overlay) overlay.style.display = 'none';
 
-    // コンテキストパスを使って menu.jsp にリダイレクト
     const contextPath = document.body.dataset.context || '';
-    window.location.href = contextPath + "/menu.jsp";
+    window.location.href = contextPath + "/StoreBusinessServlet";
+
 }
