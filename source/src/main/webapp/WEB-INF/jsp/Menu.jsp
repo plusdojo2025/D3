@@ -91,7 +91,7 @@
 		</c:if>
 		<div id="popupCommodity">
 			<input type="hidden" id="commodityId" value="" readonly><br>
-			<p id="commodityImage"></p>
+			<img id="commodityImage" src="" alt="商品画像" width="200">
 			<br>
 			<p id="commodityName"></p>
 			<br>
