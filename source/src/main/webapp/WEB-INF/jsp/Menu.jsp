@@ -123,7 +123,7 @@
 			</form>
 		</div>
 
-		<div>
+		<div class="Pagination">
 			<form method="GET" action="/D3/MenuListServlet">
 				<c:forEach var="page" items="${pagenumber}" varStatus="status">
 					<c:if test="${(status.index) <5}">
