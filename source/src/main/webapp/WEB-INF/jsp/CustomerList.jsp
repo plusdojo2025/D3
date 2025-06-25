@@ -33,7 +33,7 @@
 	<h1>顧客一覧</h1>
 
 	<c:forEach var="e" items="${customerList}" varStatus="status">
-		<form method="POST" action="/D3/UpdateDeleteCustomerServlet">
+		<form method="POST" action="${pageContext.request.contextPath}/UpdateDeleteCustomerServlet">
 			<div class="customer-row">
 				<input type="hidden" name="customer_id" value="${e.customer_id}">
 				
@@ -122,7 +122,7 @@
 		<p>指定された条件に一致するデータはありません。</p>
 	</c:if>
 	
-	<form method="GET" action="/D3/CustomerListServlet">
+	<form method="GET" action="${pageContext.request.contextPath}/CustomerListServlet">
 	<div class="Pagination">
 		<c:forEach var="page" items="${pagenumber}" varStatus="status">
 			<c:if test="${(status.index) <5}">

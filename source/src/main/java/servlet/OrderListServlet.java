@@ -75,6 +75,7 @@ public class OrderListServlet extends HttpServlet {
 
 			order.setCustomer(new Customer(customer.getCustomer_id(), "", "", "", ""));
 			order.setOrder_quantity(Integer.parseInt(quantitys[i]));
+			order.setVisit_id(visitId);
 			orderList.add(order);
 		}
 		orderListDAO.insert(orderList);
