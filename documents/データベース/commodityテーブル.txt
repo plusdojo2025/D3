@@ -11,52 +11,91 @@ commodity_image VARCHAR(100)
 ) ;
 
 /*テストデータ*/
-INSERT INTO commodity VALUES (NULL,'ミックスナッツ',550,1,NULL);
-INSERT INTO commodity VALUES (NULL,'チーズベーコンピザ',1500,1,NULL);
-INSERT INTO commodity VALUES (NULL,'フライドポテト',770,1,NULL);
-INSERT INTO commodity VALUES (NULL,'サラダ',600,1,NULL);
-INSERT INTO commodity VALUES (NULL,'燻製',1500,1,NULL);
-INSERT INTO commodity VALUES (NULL,'オリーブ',600,1,NULL);
-INSERT INTO commodity VALUES (NULL,'チーズ３種',700,1,NULL);
-INSERT INTO commodity VALUES (NULL,'ビーフジャーキー',1100,1,NULL);
-INSERT INTO commodity VALUES (NULL,'レーズンバター',800,1,NULL);
+-- おつまみ・フード（カテゴリ:1）
+INSERT INTO commodity VALUES (NULL, '冷奴', 350, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '枝豆', 400, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'ガーリックトースト', 450, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '漬物盛り合わせ', 500, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '自家製ピクルス', 500, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'ミックスナッツ', 550, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'オリーブ', 600, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'サラダ', 600, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'チーズ３種', 700, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'フライドポテト', 770, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '唐揚げ', 800, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'レーズンバター', 800, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'アヒージョ（エビ＆マッシュルーム）', 980, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'ビーフジャーキー', 1100, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '生ハムとチーズの盛り合わせ', 1200, 1, NULL);
+INSERT INTO commodity VALUES (NULL, 'チーズベーコンピザ', 1500, 1, NULL);
+INSERT INTO commodity VALUES (NULL, '燻製', 1500, 1, NULL);
 
-INSERT INTO commodity VALUES (NULL,'山崎',2000,2,NULL);
-INSERT INTO commodity VALUES (NULL,'白州',1900,2,NULL);
-INSERT INTO commodity VALUES (NULL,'グレンリベット',1200,2,NULL);
-INSERT INTO commodity VALUES (NULL,'デュワーズ',1000,2,NULL);
-INSERT INTO commodity VALUES (NULL,'MAKERs MARK',1100,2,NULL);
-INSERT INTO commodity VALUES (NULL,'ワイルドターキー',900,2,NULL);
-INSERT INTO commodity VALUES (NULL,'カバラン',1200,2,NULL);
-INSERT INTO commodity VALUES (NULL,'ラフロイグ',1900,2,NULL);
-INSERT INTO commodity VALUES (NULL,'キングオブスコッチ',1700,2,NULL);
+-- ウイスキー（ショット）（カテゴリ:2）
+INSERT INTO commodity VALUES (NULL, 'デュワーズ', 1000, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'ワイルドターキー', 900, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'MAKERs MARK', 1100, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'グレンリベット', 1200, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'カバラン', 1200, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'グレンモーレンジ', 1300, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'ボウモア', 1500, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'マッカラン', 1600, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'タリスカー', 1600, 2, NULL);
+INSERT INTO commodity VALUES (NULL, '知多', 1700, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'キングオブスコッチ', 1700, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'アードベッグ', 1800, 2, NULL);
+INSERT INTO commodity VALUES (NULL, '白州', 1900, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'ラフロイグ', 1900, 2, NULL);
+INSERT INTO commodity VALUES (NULL, '山崎', 2000, 2, NULL);
+INSERT INTO commodity VALUES (NULL, 'イチローズモルト', 2000, 2, NULL);
 
-INSERT INTO commodity VALUES (NULL,'ジントニック',500,3,NULL);
-INSERT INTO commodity VALUES (NULL,'ホワイトレディ',800,3,NULL);
-INSERT INTO commodity VALUES (NULL,'ゴットファザー',900,3,NULL);
-INSERT INTO commodity VALUES (NULL,'モスコミュール',800,3,NULL);
-INSERT INTO commodity VALUES (NULL,'XYZ',1000,3,NULL);
-INSERT INTO commodity VALUES (NULL,'ダイキリ',900,3,NULL);
-INSERT INTO commodity VALUES (NULL,'テキーラサンライズ',800,3,NULL);
-INSERT INTO commodity VALUES (NULL,'マルガリータ',900,3,NULL);
-INSERT INTO commodity VALUES (NULL,'ピュアラブ',800,3,NULL);
+-- カクテル（カテゴリ:3）
+INSERT INTO commodity VALUES (NULL, 'ジントニック', 500, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'カシスオレンジ', 700, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ファジーネーブル', 700, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'スクリュードライバー', 700, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'レッドアイ', 750, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ホワイトレディ', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'モスコミュール', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'テキーラサンライズ', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ピュアラブ', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ブルーハワイ', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'チャイナブルー', 800, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ミモザ', 850, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ゴットファザー', 900, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ダイキリ', 900, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'マルガリータ', 900, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'ブラックルシアン', 950, 3, NULL);
+INSERT INTO commodity VALUES (NULL, 'XYZ', 1000, 3, NULL);
 
-INSERT INTO commodity VALUES (NULL,'生ビール',800,4,NULL);
-INSERT INTO commodity VALUES (NULL,'バドワイザー',800,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ハイネケン',800,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ハートランド',900,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ドスエキス',900,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ヒューガルデンホワイト',800,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ヒューガルデンロゼ',800,4,NULL);
-INSERT INTO commodity VALUES (NULL,'ギネス',900,4,NULL);
+-- ビール類（カテゴリ:4）
+INSERT INTO commodity VALUES (NULL, 'アサヒスーパードライ', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, '生ビール', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'バドワイザー', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ハイネケン', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ヒューガルデンホワイト', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ヒューガルデンロゼ', 800, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'コロナ', 850, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'レーベンブロイ', 850, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ハートランド', 900, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ドスエキス', 900, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'ギネス', 900, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'エビスビール', 900, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'よなよなエール', 950, 4, NULL);
+INSERT INTO commodity VALUES (NULL, 'インドの青鬼', 980, 4, NULL);
 
-
-INSERT INTO commodity VALUES (NULL,'山崎',25000,5,NULL);
-INSERT INTO commodity VALUES (NULL,'白州',15000,5,NULL);
-INSERT INTO commodity VALUES (NULL,'グレンリベット',8000,5,NULL);
-INSERT INTO commodity VALUES (NULL,'デュワーズ',5000,5,NULL);
-INSERT INTO commodity VALUES (NULL,'ゴードン',800,5,NULL);
-INSERT INTO commodity VALUES (NULL,'白酒',80000,5,NULL);
-
-/*テーブルデータ確認*/
+-- ボトル（カテゴリ:5）
+INSERT INTO commodity VALUES (NULL, 'ゴードン', 800, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'デュワーズ', 5000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'I.W.ハーパー ゴールドメダル', 6500, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'フォアローゼズ ブラック', 7200, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'グレンリベット', 8000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, '知多', 8800, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'シーバスリーガル12年', 10000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'ジャックダニエル', 12000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'シーバスリーガルミズナラ', 14000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, '白州', 15000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, 'バランタイン17年', 18000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, '山崎', 25000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, '響 JAPANESE HARMONY', 25000, 5, NULL);
+INSERT INTO commodity VALUES (NULL, '白酒', 80000, 5, NULL);/*テーブルデータ確認*/
 SELECT * FROM commodity;
