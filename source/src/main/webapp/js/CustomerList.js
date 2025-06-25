@@ -45,24 +45,24 @@ document.addEventListener("DOMContentLoaded", () => {
 			
 			// --- 会話内容の重複チェック ---
 if (action === "insert_talk") {
-	const topicSelect = form.querySelector("select[name='new_topic_id']");
-	if (!topicSelect) return;
+  const topicSelect = form.querySelector("select[name='new_topic_id']");
+  if (!topicSelect) return;
 
-	const selectedTopicId = topicSelect.value;
-	let isDuplicate = false;
+  const selectedTopicId = topicSelect.value;
+  let isDuplicate = false;
 
-	// 既存のトークセレクトボックスから重複チェック
-	form.querySelectorAll("select[name^='talk_topic_id_']").forEach(sel => {
-		if (sel.value === selectedTopicId) {
-			isDuplicate = true;
-		}
-	});
+  // 既存の hidden フィールドから重複チェック
+  form.querySelectorAll("input[type='hidden'][name^='talk_topic_id_']").forEach(hiddenInput => {
+    if (hiddenInput.value === selectedTopicId) {
+      isDuplicate = true;
+    }
+  });
 
-	if (isDuplicate) {
-		alert("このトピックはすでに登録されています。");
-		e.preventDefault();
-		return;
-	}
+  if (isDuplicate) {
+    alert("このトピックはすでに登録されています。");
+    e.preventDefault();
+    return;
+  }
 }
 
 			// --- キープボトル登録バリデーションと重複チェック ---

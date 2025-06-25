@@ -119,53 +119,33 @@ public class TalkDAO {
 		boolean result = false;
 
 		try {
-			// JDBCドライバを読み込む
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/d3?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
-			// SQL文を準備する
-			String sql = "UPDATE Talk SET topic_id=?, talk_remark=? WHERE customer_id=?";
+			// topic_idは一意で変わらない想定なので、SETから外して条件に使う
+			String sql = "UPDATE Talk SET talk_remark=? WHERE customer_id=? AND topic_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
-			if (card.getTopic_id() != null) {
-				pStmt.setInt(1, card.getTopic_id());
-			} else {
-				pStmt.setNull(1, java.sql.Types.INTEGER);
-			}
-			
-			if (card.getTalk_remark() != null) {
-				pStmt.setString(2, card.getTalk_remark());
-			} else {
-				pStmt.setString(2, "");
-			}
-			
-			pStmt.setInt(3, card.getCustomer_id());
+			pStmt.setString(1, card.getTalk_remark() != null ? card.getTalk_remark() : "");
+			pStmt.setInt(2, card.getCustomer_id());
+			pStmt.setInt(3, card.getTopic_id());
 
-			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 
-		// 結果を返す
 		return result;
 	}
 

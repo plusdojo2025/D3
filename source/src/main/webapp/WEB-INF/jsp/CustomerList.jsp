@@ -53,20 +53,23 @@
 				<!-- 会話 -->
 				<div class="talk-section">
 					<p><strong>会話内容:</strong></p>
-					<c:forEach var="t" items="${talkMap[e.customer_id]}">
-						<p>
-							<select name="talk_topic_id_${t.topic_id}">
-								<c:forEach var="tag" items="${topicTagList}">
-									<option value="${tag.topic_id}" <c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>
-										${tag.topic_name}
-									</option>
-								</c:forEach>
-							</select>
-							<textarea name="talk_remark_${t.topic_id}" rows="3" cols="40">${t.talk_remark}</textarea><br>
-							<button type="submit" name="action" value="update_talk_${t.topic_id}"class="cool-submit-mini">更新</button>
-							<button type="submit" name="action" value="delete_talk_${t.topic_id}"class="cool-submit-mini">削除</button>
-						</p>
-					</c:forEach>
+<c:forEach var="t" items="${talkMap[e.customer_id]}">
+    <p>
+        <select disabled>
+            <c:forEach var="tag" items="${topicTagList}">
+                <option value="${tag.topic_id}" <c:if test="${tag.topic_id == t.topic_id}">selected</c:if>>
+                    ${tag.topic_name}
+                </option>
+            </c:forEach>
+        </select>
+        <input type="hidden" name="talk_topic_id_${t.topic_id}" value="${t.topic_id}">
+        
+        <textarea name="talk_remark_${t.topic_id}" rows="3" cols="40">${t.talk_remark}</textarea><br>
+        
+        <button type="submit" name="action" value="update_talk_${t.topic_id}" class="cool-submit-mini">更新</button>
+        <button type="submit" name="action" value="delete_talk_${t.topic_id}" class="cool-submit-mini">削除</button>
+    </p>
+</c:forEach>
 
 					<p><strong>会話新規登録:</strong></p>
 					<p>
