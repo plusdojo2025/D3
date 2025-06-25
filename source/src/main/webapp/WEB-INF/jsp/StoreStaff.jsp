@@ -82,7 +82,7 @@
 	<input type="date" name="store_date" >
 	<input type="submit" name="info">
 </form>
-<br><br><br><br>
+
 </div>
 
 
