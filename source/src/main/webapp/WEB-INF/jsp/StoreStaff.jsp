@@ -45,9 +45,10 @@
 
 <p id="clock">time</p>
 <header>
+  <a href="/D3/StoreBusinessServlet">
 <img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
-
-<h1>店舗事務画面</h1>
+</a>
+<h1>事務画面</h1>
 </header>
 
 
