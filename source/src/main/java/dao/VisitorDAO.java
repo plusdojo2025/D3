@@ -132,11 +132,12 @@ public class VisitorDAO {
 				+ " AND exit_time IS NULL";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, customerId);
-			pStmt.setInt(2, customerId);
+			pStmt.setInt(2, storeId);
 			
 			ResultSet rs = pStmt.executeQuery();
-			if (rs.next())
+			if (rs.next()) {
 				return rs.getInt("visit_id");
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,7 +206,7 @@ public class VisitorDAO {
 	
 	public boolean isCurrentVisitByVisitId(int visitId) {
 		String sql = "SELECT visit_id FROM visitor "
-				+ "WHERE visit_id = ? AND exsit_time IS NULL";
+				+ "WHERE visit_id = ? AND exit_time IS NULL";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, visitId);
 			

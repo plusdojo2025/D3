@@ -55,17 +55,17 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 					int bottleId = Integer.parseInt(action.replace("update_bottle_", ""));
 					int remaining = Integer.parseInt(request.getParameter("bottle_remaining_" + bottleId));
 					kbDao.updateBottleRemaining(bottleId, remaining);
-					request.setAttribute("result", new Result("ボトル残量を更新しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("ボトル残量を更新しました。", request.getContextPath() + "/CustomerListServlet"));
 
 				} else if (action.startsWith("delete_bottle_")) {
 					int bottleId = Integer.parseInt(action.replace("delete_bottle_", ""));
 					kbDao.deleteBottle(bottleId);
-					request.setAttribute("result", new Result("ボトルを削除しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("ボトルを削除しました。", request.getContextPath() + "/CustomerListServlet"));
 
 				} else if (action.equals("insert_bottle")) {
 					int commodityId = Integer.parseInt(request.getParameter("new_commodity_id"));
 					int remaining = Integer.parseInt(request.getParameter("new_bottle_remaining"));
-					Timestamp limit = Timestamp.valueOf(request.getParameter("new_bottle_limit") + " 00:00:00");
+					Timestamp limit = Timestamp.valueOf(request.getParameter("new_bottle_limit") );
 
 					KeepBottle newBottle = new KeepBottle();
 					newBottle.setCustomer(new Customer(customer_id, null, null, null, null));
@@ -78,47 +78,47 @@ public class UpdateDeleteCustomerServlet extends HttpServlet {
 					newBottle.setBottle_limit(limit);
 
 					kbDao.insertBottle(newBottle);
-					request.setAttribute("result", new Result("ボトルを登録しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("ボトルを登録しました。", request.getContextPath() + "/CustomerListServlet"));
 
 				} else if (action.startsWith("update_talk_")) {
 					int topicId = Integer.parseInt(action.replace("update_talk_", ""));
 					int selectedTopicId = Integer.parseInt(request.getParameter("talk_topic_id_" + topicId));
 					String remark = request.getParameter("talk_remark_" + topicId);
 					talkDao.update(new Talk(customer_id, selectedTopicId, remark));
-					request.setAttribute("result", new Result("会話情報を更新しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("会話情報を更新しました。", request.getContextPath() + "/CustomerListServlet"));
 
 				} else if (action.startsWith("delete_talk_")) {
 					int topicId = Integer.parseInt(action.replace("delete_talk_", ""));
 					talkDao.delete(new Talk(customer_id, topicId, null));
-					request.setAttribute("result", new Result("会話情報を削除しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("会話情報を削除しました。", request.getContextPath() + "/CustomerListServlet"));
 
 				} else if (action.equals("insert_talk")) {
 					int topicId = Integer.parseInt(request.getParameter("new_topic_id"));
 					String remark = request.getParameter("new_talk_remark");
 					talkDao.insert(new Talk(customer_id, topicId, remark));
-					request.setAttribute("result", new Result("会話情報を追加しました。", "/D3/CustomerListServlet"));
+					request.setAttribute("result", new Result("会話情報を追加しました。", request.getContextPath() + "/CustomerListServlet"));
 				}
 			} else {
 				// 顧客更新・削除
 				if ("顧客情報更新".equals(request.getParameter("submit"))) {
 					if (cDao.update(new Customer(customer_id, customer_name, customer_email, customer_password,
 							customer_birthday))) {
-						request.setAttribute("result", new Result("顧客情報を更新しました。", "/D3/CustomerListServlet"));
+						request.setAttribute("result", new Result("顧客情報を更新しました。", request.getContextPath() + "/CustomerListServlet"));
 					} else {
-						request.setAttribute("result", new Result("顧客情報を更新できませんでした。", "/D3/CustomerListServlet"));
+						request.setAttribute("result", new Result("顧客情報を更新できませんでした。", request.getContextPath() + "/CustomerListServlet"));
 					}
 				} else {
 					if (cDao.delete(new Customer(customer_id, customer_name, customer_email, customer_password,
 							customer_birthday))) {
-						request.setAttribute("result", new Result("顧客情報を削除しました。", "/D3/CustomerListServlet"));
+						request.setAttribute("result", new Result("顧客情報を削除しました。", request.getContextPath() + "/CustomerListServlet"));
 					} else {
-						request.setAttribute("result", new Result("顧客情報を削除できませんでした。", "/D3/CustomerListServlet"));
+						request.setAttribute("result", new Result("顧客情報を削除できませんでした。", request.getContextPath() + "/CustomerListServlet"));
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("result", new Result("エラーが発生しました。", "/D3/CustomerListServlet"));
+			request.setAttribute("result", new Result("エラーが発生しました。", request.getContextPath() + "/CustomerListServlet"));
 		}
 
 		response.sendRedirect(request.getContextPath() + "/CustomerListServlet");
