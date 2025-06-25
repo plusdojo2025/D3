@@ -64,7 +64,7 @@ public class CustomerListServlet extends HttpServlet {
             }
         } else {
             // 顧客全件からページングで取得
-            int pageSize = 10; // 1ページあたりの件数
+            int pageSize = 1000; // 1ページあたりの件数
             int page = 1; // 初期ページ
 
             if (request.getParameter("number") != null) {
