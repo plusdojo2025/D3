@@ -46,6 +46,7 @@ public class QRCodeServlet extends HttpServlet {
 			MatrixToImageWriter.writeToStream(bitMatrix, "PNG", baos);
 			String base64Image = Base64.getEncoder().encodeToString(baos.toByteArray());
 
+			request.setAttribute("store", storeId);
 			request.setAttribute("qrBase64", base64Image);
 			request.getRequestDispatcher("/WEB-INF/jsp/QRCode.jsp").forward(request, response);
 		} catch (WriterException e) {
