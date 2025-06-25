@@ -25,7 +25,7 @@ public class CategoryDAO {
 					"root", "password");
 			
 			//SQL
-			String sql = "SELECT * FROM Category";
+			String sql = "SELECT * FROM category";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//SQL実行
