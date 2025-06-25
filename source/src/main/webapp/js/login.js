@@ -95,6 +95,10 @@ function validateLoginForm(formType) {
 
 // 登録チェック
 function validateRegisterForm() {
+	if (!confirm("20歳以上ですか？")) {
+		return false;
+	}
+	
 	var name = document.getElementById("register_name").value.trim();
 	var email = document.getElementById("register_email").value.trim();
 	var password = document.getElementById("register_password").value.trim();
