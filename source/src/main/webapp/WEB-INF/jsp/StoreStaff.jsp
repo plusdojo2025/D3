@@ -69,7 +69,7 @@
 <h2>イベント</h2>
 <form id="eventForm" method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="event_name" placeholder="イベント名">
-	<input type="text" name="event_remark" placeholder="備考">
+	<input type="text" name="event_remark" placeholder="イベント内容">
 	<input type="date" name="event_date" >
 	<input type="submit" name="event">
 </form>
