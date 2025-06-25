@@ -27,7 +27,7 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Customer WHERE customer_name LIKE ? ORDER BY customer_id";
+			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? ORDER BY customer_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -84,7 +84,7 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO Customer (customer_name, customer_email, customer_password, customer_birthday)"
+			String sql = "INSERT INTO customer (customer_name, customer_email, customer_password, customer_birthday)"
 					+ " VALUES (?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -132,7 +132,7 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "UPDATE Customer SET customer_name=?, customer_email=?, customer_password=?, customer_birthday=? where customer_id=?";
+			String sql = "UPDATE customer SET customer_name=?, customer_email=?, customer_password=?, customer_birthday=? where customer_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -196,7 +196,7 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "DELETE FROM Customer WHERE customer_id=?";
+			String sql = "DELETE FROM customer WHERE customer_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -241,7 +241,7 @@ public class CustomerDAO {
 	            "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	            "root", "password");
 
-	        String sql = "SELECT * FROM Customer WHERE customer_id = ?";
+	        String sql = "SELECT * FROM customer WHERE customer_id = ?";
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, customerId);
 
@@ -328,7 +328,7 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT * FROM Customer WHERE customer_name LIKE ? ORDER BY customer_id LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? ORDER BY customer_id LIMIT ? OFFSET ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
 			pStmt.setInt(2, limit);
@@ -367,7 +367,7 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT COUNT(*) FROM Customer WHERE customer_name LIKE ?";
+			String sql = "SELECT COUNT(*) FROM customer WHERE customer_name LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
 
@@ -400,7 +400,7 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT COUNT(*) FROM Customer "
+			String sql = "SELECT COUNT(*) FROM customer "
 					+ "WHERE customer_email LIKE 'guest%' AND customer_email LIKE '%@example.com'";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -434,7 +434,7 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT customer_id FROM Customer "
+			String sql = "SELECT customer_id FROM customer "
 					+ "WHERE customer_email = ?";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);

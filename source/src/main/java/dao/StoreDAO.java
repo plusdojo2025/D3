@@ -17,7 +17,7 @@ public class StoreDAO {
 	                "jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	                "root", "password");
 
-	        String sql = "SELECT * FROM Store WHERE store_name = ? AND store_password = ?";
+	        String sql = "SELECT * FROM store WHERE store_name = ? AND store_password = ?";
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setString(1, storeName);
 	        pStmt.setString(2, storePassword);
