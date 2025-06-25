@@ -32,7 +32,7 @@
 	
 <main>
 <div class="QR">
-	<a href="${pageContext.request.contextPath}/MenuAccessServlet?store_id=${store_id}">
+	<a href="${pageContext.request.contextPath}/MenuAccessServlet?store=${store}">
 		 <img src="data:image/png;base64,${qrBase64}" alt="QRコード" />
 	</a>
 </div>
