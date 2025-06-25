@@ -1,9 +1,8 @@
 package servlet;
 	
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,10 +60,20 @@ public class OrderHistoryServlet extends HttpServlet {
 		OrderListDAO ordDao = new OrderListDAO();
 		CommodityDAO comDao = new CommodityDAO();	
 		
-		Date today = Date.valueOf(LocalDate.now());
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = formatter.format(today);
-        
+		String dateString = request.getParameter("targetDate");
+
+		// パラメータが無ければ今日の日付にする
+		if (dateString == null || dateString.isEmpty()) {
+		    dateString = LocalDate.now().toString();
+		}
+		
+		try {
+		    LocalDate.parse(dateString); // 日付の形式をチェック（例：yyyy-MM-dd）
+		} catch (DateTimeParseException e) {
+		    dateString = LocalDate.now().toString(); // エラー時は今日に戻すなど
+		}
+		
+		
         //カテゴリnの商品リストの取得
         
 		//（カテゴリ＝1,ページ1,3件)

@@ -113,3 +113,71 @@ main{
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+/*日付入力*/
+/* 日付検索フォーム全体 */
+.date-search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 日付選択ボックス */
+.date-search-form input[type="date"] {
+  background-color: rgb(25, 47, 97);
+  border: 1px solid rgb(227, 208, 149);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 15px;
+  color: rgb(227, 208, 149);
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: inset 0 1px 2px rgba(120, 100, 180, 0.3);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+	
+}
+
+.date-search-form input[type="date"]:focus {
+  border-color: #5f27cd;
+  box-shadow: 0 0 4px rgba(95, 39, 205, 0.3);
+  outline: none;
+}
+
+.date-search-form label {
+  color: rgb(14, 33, 72);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+
+/*ボタン*/
+.cool-submit {
+  background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  font-family:'Courier New', Courier, monospace; 
+  margin:10px;
+}
+
+.cool-submit:hover {
+	color: rgb(14, 33, 72);
+	background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+	box-shadow: 0 2px 8px rgb(227, 208, 149);
+	transform: scale(1.05);
+}
+
+.cool-submit:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgb(227, 208, 149);
+}
