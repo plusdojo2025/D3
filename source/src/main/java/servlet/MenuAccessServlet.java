@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CustomerDAO;
+import dao.VisitorDAO;
 import dto.Customer;
+import dto.Store;
 
 @WebServlet("/MenuAccessServlet")
 public class MenuAccessServlet extends HttpServlet {
@@ -21,15 +23,12 @@ public class MenuAccessServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		// TODO 削除 デバッグ用session削除
-		session.invalidate();
-		session = request.getSession();
 		session.setMaxInactiveInterval(60 * 60 * 2);
 
-		// TODO 削除
-		// int storeId = Integer.parseInt(request.getParameter("store"));
-		int storeId = 1;
-		session.setAttribute("storeID", storeId);
+		int storeId = Integer.parseInt(request.getParameter("store"));
+		Store store = new Store();
+		store.setStore_id(storeId);
+		session.setAttribute("store", store);
 
 		Customer customer = new Customer();
 		customer.setCustomer_id(storeId);
@@ -41,7 +40,7 @@ public class MenuAccessServlet extends HttpServlet {
 		session.setAttribute("customer", customer);
 		session.setAttribute("isVisitor", true);
 		session.setAttribute("islogin", false);
-		
+
 		response.sendRedirect(request.getContextPath() + "/MenuListServlet");
 	}
 
@@ -49,13 +48,35 @@ public class MenuAccessServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		Store store = (Store) session.getAttribute("store");
+		int storeId = store.getStore_id();
+
 		String userType = request.getParameter("userType");
+
 		if ("guest".equals(userType)) {
 			session.setAttribute("isLogin", true);
-		}
-		else if ("customer".equals(userType)) {
+
+			CustomerDAO customerDAO = new CustomerDAO();
+			VisitorDAO visitorDAO = new VisitorDAO();
+
+			Customer customer = (Customer) session.getAttribute("customer");
+			int guestCount = customerDAO.countGuest();
+			guestCount++;
+			customer.setCustomer_email("guest" + guestCount + "@example.com");
+
+			if (customerDAO.insert(customer)) {
+				
+				int customerId = customerDAO.getCustomerIdByCustomerEmail(customer.getCustomer_email());
+				if (customerId != -1) {
+					
+					if (visitorDAO.insertVisitor(customerId, storeId)) {
+						session.setAttribute("visitId", visitorDAO.getVisitorId(customerId, storeId));
+					}
+				}
+			}
+		} else if ("customer".equals(userType)) {
 			session.setAttribute("isLogin", true);
-			
+
 			String email = (String) request.getParameter("email");
 			String password = (String) request.getParameter("password");
 
@@ -63,6 +84,13 @@ public class MenuAccessServlet extends HttpServlet {
 				Customer customer = new CustomerDAO().login(email, password);
 				if (customer != null) {
 					session.setAttribute("customer", customer);
+
+					VisitorDAO visitorDAO = new VisitorDAO();
+					int customerId = customer.getCustomer_id();
+
+					if (visitorDAO.insertVisitor(customerId, storeId)) {
+						session.setAttribute("visitId", visitorDAO.getVisitorId(customerId, storeId));
+					}
 				}
 			}
 		}
