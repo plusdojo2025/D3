@@ -227,7 +227,39 @@ public class OrderListDAO {
 		return sum;
 	}
 	
-	
+	public List<OrderList> getTopCommoditiesByDate(int topCount, String date) {
+		String sql = "SELECT c.commodity_name, SUM(o.order_quantity) AS total_quantity "
+				+ "FROM orderList o "
+				+ "JOIN commodity c ON o.commodity_id = c.commodity_id "
+				+ "WHERE o.order_datetime LIKE ? "
+				+ "GROUP BY c.commodity_name "
+				+ "ORDER BY total_quantity DESC "
+				+ "LIMIT ?";
+		
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setString(1, date + "-%");
+			pStmt.setInt(2, topCount);
+
+			ResultSet rs = pStmt.executeQuery();
+			List<OrderList> topOrder = new ArrayList<OrderList>();
+			while (rs.next()) {
+				Commodity commodity = new Commodity(0, "", 0, 0, "");
+				commodity.setCommodity_name(rs.getString("commodity_name"));
+
+				OrderList order = new OrderList();
+				order.setCommodity(commodity);
+				order.setOrder_quantity(rs.getInt("total_quantity"));
+				
+				topOrder.add(order);
+			}
+
+			return topOrder;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	// 指定された商品（日時）の個数を返す。
 		public int quantity2(int commodity_id) {

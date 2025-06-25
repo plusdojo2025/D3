@@ -61,6 +61,15 @@
 <h2>ドリンクランキング</h2>
 
 <table>
+<c:forEach var="drink" items="${topCommodity}">
+<tr>
+<td>${drink.commodity.commodity_name}</td>
+<td>${drink.order_quantity}</td>
+</tr>
+</c:forEach>
+</table>
+<!-- 
+<table>
 <c:forEach var="drink" items="${best3drink}" varStatus="status">
 <tr>
 <td>${drink.commodity_name}</td>
@@ -68,7 +77,7 @@
 </tr>
 </c:forEach>
 </table>
-
+ -->
 </main>
 <!-- フッター -->
 <footer>

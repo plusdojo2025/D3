@@ -1,11 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,14 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommodityDAO;
 import dao.EventDAO;
 import dao.KeepBottleDAO;
 import dao.OrderListDAO;
-import dto.Commodity;
 import dto.Customer;
 import dto.Event;
 import dto.KeepBottle;
+import dto.OrderList;
 
 @WebServlet("/CustomerHomeServlet")
 public class CustomerHomeServlet extends HttpServlet {
@@ -53,12 +48,11 @@ public class CustomerHomeServlet extends HttpServlet {
 		// セッションからログイン中の顧客情報を取得
 		HttpSession session = request.getSession();
 		Customer loginCustomer = (Customer) session.getAttribute("customer");
-		
 		// ログインしていない場合はログイン画面へリダイレクト
-		//if (loginCustomer == null) {
-		//	response.sendRedirect("/D3/LoginServlet");
-		//	return;
-		//}
+//		if (loginCustomer == null) {
+//			response.sendRedirect("/D3/LoginServlet");
+//			return;
+//		}
 		// お知らせ取得（最新3件）
 		EventDAO dao = new EventDAO();
 		List<Event> eventList =dao.select();
@@ -83,7 +77,21 @@ public class CustomerHomeServlet extends HttpServlet {
 		}
 		
 		//ランキング
+		// 昨日の日付の取得
+		LocalDate today = LocalDate.now();
+		String yesterday = today.minusDays(1).toString();
+		// 昨日の月
+		String yesterdayMonth = yesterday.substring(0, 7);
 		
+		
+		OrderListDAO orderListDAO = new OrderListDAO();
+		
+		// topCount分のランキング取得
+		int topCount = 3;
+		List<OrderList> topOrders = orderListDAO.getTopCommoditiesByDate(topCount, yesterdayMonth);
+		request.setAttribute("topCommodity", topOrders);
+		
+		/*
 		OrderListDAO ordDao = new OrderListDAO();
 		CommodityDAO comDao = new CommodityDAO();	
 		
@@ -182,34 +190,10 @@ public class CustomerHomeServlet extends HttpServlet {
 				best3drink.add(2, list4.get(i));			
 			}
 		}
-        
-        
-        
-        
-        
 
         request.setAttribute("best3drink", best3drink);
         request.setAttribute("best3drinkSum", best3drinkSum);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        */
 		
 		// 顧客ホーム画面へフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CustomerHome.jsp");
