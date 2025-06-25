@@ -60,20 +60,7 @@ input[type="text"] {
 }
 
 /* === ボタン共通 === */
-button {
-    background: linear-gradient(45deg, rgb(72, 58, 160), rgb(121, 101, 193));
-    color: white;
-    padding: 12px 30px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: inherit;
-    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.5);
-    transition: background 0.3s ease, transform 0.2s ease;
-}
+
 
 button:hover {
     background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
