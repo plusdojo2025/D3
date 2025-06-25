@@ -91,7 +91,7 @@
 
 
 <h2>顧客リスト</h2>
-<form method="POST" action="/D3/CustomerListServlet">
+<form method="POST" action="<c:url value='/CustomerListServlet' />">
 <input type="text" name="customer_name" placeholder="ニックネーム"><br>
 
 <input type="submit" name="submit" value="検索"><br>
@@ -119,7 +119,7 @@
 
 	
 <div>
-<a href="/D3/OrderHistoryServlet">
+<a href="<c:url value='/OrderHistoryServlet'/>">
 <button>注文履歴</button>
 </a>
 </div>
