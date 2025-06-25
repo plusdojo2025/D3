@@ -104,6 +104,14 @@ a:active {
 #siteMapPanel a:hover {
     text-decoration: underline;
 }
-/*main*/
 
-/*footer*/
+button:hover {
+    background: linear-gradient(45deg, rgb(227, 208, 149), rgb(194, 172, 100));
+    color: rgb(14, 33, 72);
+    box-shadow: 0 2px 8px rgb(227, 208, 149);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
