@@ -27,15 +27,17 @@ public class CustomerDAO {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? ORDER BY customer_id";
+			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? AND customer_email NOT LIKE ? ORDER BY customer_id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
 			if (customer.getCustomer_name() != null) {
-				pStmt.setString(1, "%" + customer.getCustomer_name() + "%");
+			    pStmt.setString(1, "%" + customer.getCustomer_name() + "%");
 			} else {
-				pStmt.setString(1, "%");
+			    pStmt.setString(1, "%");
 			}
+			// 「@example.com」を除外
+			pStmt.setString(2, "%@example.com");
+
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -328,11 +330,14 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? ORDER BY customer_id LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM customer WHERE customer_name LIKE ? AND customer_email NOT LIKE ? ORDER BY customer_id LIMIT ? OFFSET ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
-			pStmt.setInt(2, limit);
-			pStmt.setInt(3, offset);
+			// ゲスト排除
+			pStmt.setString(2, "%@example.com");
+			pStmt.setInt(3, limit);
+			pStmt.setInt(4, offset);
+
 
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
@@ -367,9 +372,11 @@ public class CustomerDAO {
 					"jdbc:mysql://localhost:3306/d3?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9", "root",
 					"password");
 
-			String sql = "SELECT COUNT(*) FROM customer WHERE customer_name LIKE ?";
+			String sql = "SELECT COUNT(*) FROM customer WHERE customer_name LIKE ? AND customer_email NOT LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%" + (name == null ? "" : name) + "%");
+			// ゲスト排除
+			pStmt.setString(2, "%@example.com");
 
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
