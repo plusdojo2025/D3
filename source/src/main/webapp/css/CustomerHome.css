@@ -90,3 +90,32 @@ footer {
     border-top: 1px solid rgb(227, 208, 149);
 }
 
+.eventCss{
+	margin: 20px auto;
+	width: 500px;
+	background-color: rgb(25, 47, 97);
+	padding:20px;
+	border-radius: 5px;
+	border:1px solid rgb(227, 208, 149);
+	text-align: left;
+}
+
+th{
+	width: 100px;
+}
+
+/*テーブル*/
+table{
+	margin: 0 auto;
+	text-align: left;
+	
+	border-collapse: separate;
+  border-spacing: 0;
+}
+
+td,th{
+  border-bottom: 1px solid rgb(227, 208, 149);
+  padding: 10px 0px; 
+  
+}
+
