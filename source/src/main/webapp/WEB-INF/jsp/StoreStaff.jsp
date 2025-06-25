@@ -67,7 +67,7 @@
 <main>
 <div>
 <h2>イベント</h2>
-<form method="POST" action="<c:url value='/StoreStaffServlet' />">
+<form id="eventForm" method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="event_name" placeholder="イベント名">
 	<input type="text" name="event_remark" placeholder="備考">
 	<input type="date" name="event_date" >
@@ -77,7 +77,7 @@
 
 <div>
 <h2>業務連絡</h2>
-<form method="POST" action="<c:url value='/StoreStaffServlet' />">
+<form id="infoForm" method="POST" action="<c:url value='/StoreStaffServlet' />">
 	<input type="text" name="store_remark" placeholder="連絡内容">
 	<input type="date" name="store_date" >
 	<input type="submit" name="info">
@@ -136,7 +136,6 @@
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>
 	<script src="${pageContext.request.contextPath}/js/StoreStaff.js"></script>
-
 	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	
