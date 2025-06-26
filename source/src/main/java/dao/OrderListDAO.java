@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -179,19 +184,26 @@ public class OrderListDAO {
 			// SQL文を準備する
 
 			String sql = "SELECT order_quantity FROM orderlist "
-					+ "WHERE commodity_id = ? AND order_datetime >= ? ";
+					+ "WHERE commodity_id = ? AND order_datetime BETWEEN ?  AND ?";
 			
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+			LocalDateTime baseTime;
+			if (order_datetime != null && !order_datetime.isEmpty()) {
+			    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			    baseTime = LocalDateTime.parse(order_datetime, formatter);
+			} else {
+			    baseTime = LocalTime.now().isBefore(LocalTime.NOON)
+			        ? LocalDate.now().minusDays(1).atTime(12, 0)
+			        : LocalDate.now().atTime(12, 0);
+			}
+			LocalDateTime endTime = baseTime.plusDays(1);
+			
 			// SQL文を完成させる
 			pStmt.setString(1, String.valueOf(commodity_id));
-			if(order_datetime!=null) {
-			pStmt.setString(2, order_datetime);
-			}
-			else {
-				pStmt.setString(2, "%");
-			}
+			pStmt.setTimestamp(2, Timestamp.valueOf(baseTime));
+			pStmt.setTimestamp(3, Timestamp.valueOf(endTime));
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
