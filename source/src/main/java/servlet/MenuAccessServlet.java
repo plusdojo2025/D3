@@ -76,7 +76,6 @@ public class MenuAccessServlet extends HttpServlet {
 						session.setAttribute("isLogin", true);
 
 				} else {
-					// TODO 削除Webテスト用
 					response.sendRedirect(request.getContextPath() + "/LoginServlet");
 				}
 			}
@@ -96,7 +95,6 @@ public class MenuAccessServlet extends HttpServlet {
 
 						session.setAttribute("isLogin", true);
 					} else {
-						// TODO 削除Webテスト用
 						response.sendRedirect(request.getContextPath() + "/LoginServlet");
 
 					}
