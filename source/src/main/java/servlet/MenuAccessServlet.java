@@ -57,10 +57,10 @@ public class MenuAccessServlet extends HttpServlet {
 		String userType = request.getParameter("userType");
 
 		if ("guest".equals(userType)) {
-			
-			Customer customer = (Customer)session.getAttribute("customer");
-			customer.setCustomer_name((String)request.getParameter("customerName"));
-			
+
+			Customer customer = (Customer) session.getAttribute("customer");
+			customer.setCustomer_name((String) request.getParameter("customerName"));
+
 			CustomerDAO customerDAO = new CustomerDAO();
 
 			int guestCount = customerDAO.countGuest();
@@ -68,13 +68,17 @@ public class MenuAccessServlet extends HttpServlet {
 			customer.setCustomer_email("guest" + guestCount + "@example.com");
 
 			if (customerDAO.insert(customer)) {
-				
+
 				int customerId = customerDAO.getCustomerIdByCustomerEmail(customer.getCustomer_email());
 				if (0 < customerId) {
 
 					session.setAttribute("customer", customer);
 					if (isVisitorIdNotNull(customerId, storeId, request))
 						session.setAttribute("isLogin", true);
+
+				} else {
+					// TODO 削除Webテスト用
+					response.sendRedirect(request.getContextPath() + "/LoginServlet");
 				}
 			}
 		} else if ("customer".equals(userType)) {
@@ -89,29 +93,35 @@ public class MenuAccessServlet extends HttpServlet {
 
 					int customerId = customer.getCustomer_id();
 
-					if (isVisitorIdNotNull(customerId, storeId, request))
+					if (isVisitorIdNotNull(customerId, storeId, request)) {
+
 						session.setAttribute("isLogin", true);
+					} else {
+						// TODO 削除Webテスト用
+						response.sendRedirect(request.getContextPath() + "/LoginServlet");
+
+					}
 				}
 			}
 		}
-		
+
 		response.sendRedirect(request.getContextPath() + "/MenuListServlet");
 	}
-	
+
 	private boolean isVisitorIdNotNull(int CustomerId, int StoreId, HttpServletRequest request) {
 		VisitorDAO visitorDAO = new VisitorDAO();
 		if (visitorDAO.insertVisitor(CustomerId, StoreId)) {
-			
+
 			Integer visitId = visitorDAO.getVisitorId(CustomerId, StoreId);
 			if (visitId != null && 0 < visitId) {
 
 				HttpSession session = request.getSession();
 				session.setAttribute("visitId", visitId);
-				
+
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }
