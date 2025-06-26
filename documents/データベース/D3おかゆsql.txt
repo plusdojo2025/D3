@@ -176,3 +176,7 @@ INSERT INTO keep_bottle VALUES (NULL,2,41,200,DATE_ADD(CURDATE(), INTERVAL 1 YEA
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 1, NOW());
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 1, NOW());
 INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 1, NOW());
+
+INSERT INTO talk VALUES (1,4,'「ゴッドファーザー」が好き');
+INSERT INTO talk VALUES (2,10,'ダーツが好きで、大会によく出場する');
+INSERT INTO talk VALUES (3,2,'BE:FIRSTが好きでライブにもよく行く');
