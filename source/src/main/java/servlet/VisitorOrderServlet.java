@@ -2,7 +2,12 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +38,17 @@ public class VisitorOrderServlet extends HttpServlet {
 			return;
 		}
 		
-		String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-
+		LocalDateTime baseTime;
+		if (LocalTime.now().isBefore(LocalTime.NOON)) {
+		    baseTime = LocalDate.now().minusDays(1).atTime(12, 0);
+		} else {
+		    baseTime = LocalDate.now().atTime(12, 0);
+		}
+		
+		java.util.Date dateAtNoon = Date.from(baseTime.atZone(ZoneId.systemDefault()).toInstant());
+		String formatted = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dateAtNoon);
+		
+		
 		VisitorDAO visitorDAO = new VisitorDAO();
 		OrderListDAO orderListDAO = new OrderListDAO();
 
@@ -42,7 +56,7 @@ public class VisitorOrderServlet extends HttpServlet {
 		List<OrderList> orders = new ArrayList<>();
 
 		for (Visitor v : visitors) {
-			List<OrderList> visitorOrders = orderListDAO.getTodayOrderByCustomerId(v.getCustomer().getCustomer_id(), date);
+			List<OrderList> visitorOrders = orderListDAO.getTodayOrderByCustomerId(v.getCustomer().getCustomer_id(), formatted);
 			orders.addAll(visitorOrders);
 		}
 

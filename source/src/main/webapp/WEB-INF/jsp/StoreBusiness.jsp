@@ -90,7 +90,7 @@
 						</a>
 
 						<div class="visitorDetails" style="display: none;">
-							${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
+							${visitor.visit_id} ${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
 
 							<form id="accountingForm" method="GET"
 								action="<%=request.getContextPath()%>/AccountingServlet">
