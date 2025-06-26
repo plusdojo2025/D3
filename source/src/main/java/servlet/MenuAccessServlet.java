@@ -69,7 +69,8 @@ public class MenuAccessServlet extends HttpServlet {
 
 				int customerId = customerDAO.getCustomerIdByCustomerEmail(customer.getCustomer_email());
 				if (0 < customerId) {
-
+					
+					customer.setCustomer_id(customerId);
 					session.setAttribute("customer", customer);
 					if (isVisitorIdNotNull(customerId, storeId, request))
 						session.setAttribute("isLogin", true);

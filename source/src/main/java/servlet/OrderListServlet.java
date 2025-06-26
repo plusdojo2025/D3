@@ -67,7 +67,12 @@ public class OrderListServlet extends HttpServlet {
 		String[] quantitys = request.getParameterValues("commodityQuantity");
 		
 		Customer customer = (Customer)session.getAttribute("customer");
-
+		Integer customerId = (Integer)customer.getCustomer_id();
+		if (customerId == null || customerId < 1) {
+			response.sendRedirect(request.getContextPath() + "/MenuAccessServlet");
+			return;
+		}
+		
 		OrderListDAO orderListDAO = new OrderListDAO();
 		List<OrderList> orderList = new ArrayList<OrderList>();
 		for (int i = 0; i < commodityIds.length; i++) {
