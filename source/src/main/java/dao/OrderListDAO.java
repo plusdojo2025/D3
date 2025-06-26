@@ -179,7 +179,7 @@ public class OrderListDAO {
 			// SQL文を準備する
 
 			String sql = "SELECT order_quantity FROM orderlist "
-					+ "WHERE commodity_id = ? AND order_datetime = ? ";
+					+ "WHERE commodity_id = ? AND order_datetime >= ? ";
 			
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);

@@ -1,8 +1,12 @@
 package servlet;
 	
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,18 +64,15 @@ public class OrderHistoryServlet extends HttpServlet {
 		OrderListDAO ordDao = new OrderListDAO();
 		CommodityDAO comDao = new CommodityDAO();	
 		
-		String dateString = request.getParameter("targetDate");
-
-		// パラメータが無ければ今日の日付にする
-		if (dateString == null || dateString.isEmpty()) {
-		    dateString = LocalDate.now().toString();
+		LocalDateTime baseTime;
+		if (LocalTime.now().isBefore(LocalTime.NOON)) {
+		    baseTime = LocalDate.now().minusDays(1).atTime(12, 0);
+		} else {
+		    baseTime = LocalDate.now().atTime(12, 0);
 		}
 		
-		try {
-		    LocalDate.parse(dateString); // 日付の形式をチェック（例：yyyy-MM-dd）
-		} catch (DateTimeParseException e) {
-		    dateString = LocalDate.now().toString(); // エラー時は今日に戻すなど
-		}
+		java.util.Date dateAtNoon = Date.from(baseTime.atZone(ZoneId.systemDefault()).toInstant());
+		String formatted = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dateAtNoon);
 		
 		
         //カテゴリnの商品リストの取得
@@ -89,19 +90,19 @@ public class OrderHistoryServlet extends HttpServlet {
 		
 		//商品ごとの合計値を計算
 		for(int i=0;i<list1food.size();i++) {		
-			list1foodSum[i] = ordDao.quantity(list1food.get(i).getCommodity_id(),dateString);
+			list1foodSum[i] = ordDao.quantity(list1food.get(i).getCommodity_id(),formatted);
 		}
 		
 		for(int i=0;i<list2.size();i++) {		
-			list2Sum[i] = ordDao.quantity(list2.get(i).getCommodity_id(),dateString);
+			list2Sum[i] = ordDao.quantity(list2.get(i).getCommodity_id(),formatted);
 		}
 		
 		for(int i=0;i<list3.size();i++) {		
-			list3Sum[i] = ordDao.quantity(list3.get(i).getCommodity_id(),dateString);
+			list3Sum[i] = ordDao.quantity(list3.get(i).getCommodity_id(),formatted);
 		}
 		
 		for(int i=0;i<list4.size();i++) {		
-			list4Sum[i] = ordDao.quantity(list4.get(i).getCommodity_id(),dateString);
+			list4Sum[i] = ordDao.quantity(list4.get(i).getCommodity_id(),formatted);
 		}
 		
 		
@@ -180,7 +181,7 @@ public class OrderHistoryServlet extends HttpServlet {
 	
 
 		//商品の種類と合計値をセットで送る（上半分）
-		request.setAttribute("today", dateString);
+		request.setAttribute("today", formatted);
 		
 		request.setAttribute("list1food", sortedList1);
 		request.setAttribute("list2", sortedList2);
