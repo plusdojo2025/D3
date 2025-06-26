@@ -54,18 +54,20 @@ public class VisitorDAO {
 	}
 
 	private String getModeOrderByCustomerId(Connection conn, int id) throws SQLException {
-		String sql = "SELECT commodity.commodity_name "
-				+ "FROM orderlist "
-				+ "JOIN commodity ON commodity.commodity_id = orderlist.commodity_id "
-				+ "WHERE orderlist.customer_id = ? "
-				+ "GROUP BY commodity.commodity_id, commodity.commodity_name "
-				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
+		String sql = "SELECT c.commodity_name, "
+				+ "SUM(o.order_quantity) AS total_quantity "
+				+ "FROM orderlist o JOIN commodity c "
+				+ "ON c.commodity_id = o.commodity_id "
+				+ "WHERE o.customer_id = ? "
+				+ "GROUP BY c.commodity_id, c.commodity_name "
+				+ "ORDER BY total_quantity "
+				+ "DESC LIMIT 1";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setInt(1, id);
 
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				return rs.getString("commodity.commodity_name");
+				return rs.getString("commodity_name");
 			} else {
 				return "いつものなし";
 			}
@@ -74,16 +76,20 @@ public class VisitorDAO {
 
 	public String getModeOrderByCustomerId(int id) {
 		String result = "";
-		String sql = "SELECT commodity.commodity_name " + "FROM orderlist "
-				+ "JOIN commodity ON commodity.commodity_id = orderlist.commodity_id "
-				+ "WHERE orderlist.customer_id = ? " + "GROUP BY commodity.commodity_id, commodity.commodity_name "
-				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";
+		String sql = "SELECT c.commodity_name, "
+				+ "SUM(o.order_quantity) AS total_quantity "
+				+ "FROM orderlist o JOIN commodity c "
+				+ "ON c.commodity_id = o.commodity_id "
+				+ "WHERE o.customer_id = ? "
+				+ "GROUP BY c.commodity_id, c.commodity_name "
+				+ "ORDER BY total_quantity "
+				+ "DESC LIMIT 1";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
 			pStmt.setInt(1, id);
 
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				result = rs.getString("commodity.commodity_name");
+				result = rs.getString("commodity_name");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
