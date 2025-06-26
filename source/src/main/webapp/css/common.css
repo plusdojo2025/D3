@@ -41,6 +41,12 @@ a:active {
 }
 
 /*header*/
+header {
+    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgb(227, 208, 149);
+}
+
 .icon {
 	margin: auto;
 	display: block;
