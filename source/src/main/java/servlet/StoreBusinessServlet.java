@@ -36,8 +36,8 @@ public class StoreBusinessServlet extends HttpServlet {
 			return;
 		}
 
-		int storeId = loginStore.getStore_id();
-		if (storeId < 1) {
+		Integer storeId = loginStore.getStore_id();
+		if (storeId < 1 || storeId == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 		}

@@ -67,7 +67,7 @@ public class VisitorDAO {
 			if (rs.next()) {
 				return rs.getString("commodity.commodity_name");
 			} else {
-				return "?";
+				return "いつものなし";
 			}
 		}
 	}
@@ -103,7 +103,7 @@ public class VisitorDAO {
 			if (rs.next()) {
 				return rs.getString("topic_tag.topic_name");
 			} else {
-				return "?";
+				return "トピックなし";
 			}
 		}
 	}
@@ -166,7 +166,7 @@ public class VisitorDAO {
 	public List<Visitor> getCurrentVisitorByStoreId(int storeId) {
 		String sql = "SELECT visitor.visit_id, customer.customer_id, customer.customer_name "
 				+ "FROM visitor "
-				+ "JOIN customer on visitor.customer_id = customer.customer_id "
+				+ "JOIN customer ON visitor.customer_id = customer.customer_id "
 				+ "WHERE visitor.store_id = ? "
 				+ "AND visitor.exit_time IS NULL";
 		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
