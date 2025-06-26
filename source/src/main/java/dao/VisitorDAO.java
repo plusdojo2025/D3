@@ -56,7 +56,7 @@ public class VisitorDAO {
 	private String getModeOrderByCustomerId(Connection conn, int id) throws SQLException {
 		String sql = "SELECT commodity.commodity_name "
 				+ "FROM orderlist "
-				+ "JOIN commodity ON commodity.commodity_id = orderList.commodity_id "
+				+ "JOIN commodity ON commodity.commodity_id = orderlist.commodity_id "
 				+ "WHERE orderlist.customer_id = ? "
 				+ "GROUP BY commodity.commodity_id, commodity.commodity_name "
 				+ "ORDER BY COUNT(*) DESC " + "LIMIT 1";

@@ -82,7 +82,10 @@ public class OrderListServlet extends HttpServlet {
 			order.setVisit_id(visitId);
 			orderList.add(order);
 		}
-		orderListDAO.insert(orderList);
+		
+		if (orderListDAO.insert(orderList) == false) {
+			response.sendRedirect(request.getContextPath() + "/MenuAccessServlet");
+		}
 
 		response.sendRedirect(request.getContextPath() + "/MenuListServlet");
 	}

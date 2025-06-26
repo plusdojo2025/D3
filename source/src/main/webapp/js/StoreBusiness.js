@@ -1,71 +1,46 @@
 
 // 注文用
-function getStatusMap() {
-	try {
-		const data = localStorage.getItem("orderStatusMap");
-		return data ? JSON.parse(data) : {};
-	} catch (e) {
-		console.error("failed orderStatusMap loaded", e);
-		localStorage.removeItem("orderStatusMap");
-		return {};
-	}
-}
-function saveStatusMap(map) {
-	localStorage.setItem("orderStatusMap", JSON.stringify(map));
-}
-function nextStatus(current) {
-	if (current === "未処理")
-		return "完了";
-	return "未処理";
+function fetchOrderData() {
+	fetch(`${contextPath}/VisitorOrderServlet`)
+		.then(response => {
+			if (!response.ok) throw new Error('response not ok');
+			return response.json();
+		})
+		.then(data => {
+			console.log('注文データ:', data);
+			updateOrderList(data);
+		})
+		.catch(error => {
+			console.error('注文取得エラー:', error);
+		});
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+fetchOrderData();
 
-	function fetchOrders() {
-		const orderStatusMap = getStatusMap();
-		const showComplete = document.getElementById("showComplete").checked;
+setInterval(fetchOrderData, 5000);
 
-		fetch(`${location.origin}${location.pathname.replace(/\/[^\/]*$/, '')}/VisitorOrderServlet`)
-			.then(response => response.json())
-			.then(data => {
-				const container = document.getElementById("orderList");
-				container.innerHTML = "";
+function updateOrderList(data) {
+	const listContainer = document.getElementById("orderList");
+	listContainer.innerHTML = "";
 
-				data.forEach(order => {
-					const block = document.createElement("div");
-					block.className = "orderBlock";
+	data.forEach(order => {
+		const item = document.createElement("div");
+		item.className = "order";
+		item.textContent = `${order.customerName} - ${order.commodityName} × ${order.quantity}`;
+		console.log(order.customerName, order.commodityName, order.quantity);
 
-					const orderId = order.orderId;
-					const status = orderStatusMap[orderId] || "未処理";
+		const button = document.createElement("button");
+		button.textContent = "X";
+		button.className = "deleteBtn";
 
-					if (status === "完了" && !showComplete)
-						return
+		button.addEventListener("click", () => {
+			item.style.display = "none";
+		});
 
-					block.textContent = `${order.customerName} ${order.commodityName} × ${order.quantity} ${status}`;
-
-					const btn = document.createElement("button");
-					btn.textContent = "X";
-					btn.addEventListener("click", () => {
-						const next = nextStatus(status);
-						orderStatusMap[orderId] = next;
-						saveStatusMap(orderStatusMap);
-						fetchOrders();
-					});
-
-					block.appendChild(btn);
-					container.appendChild(block);
-				});
-			})
-			.catch(error => {
-				console.error("注文取得エラー:", error);
-			});
-	}
-
-	fetchOrders();
-	setInterval(fetchOrders, 5000);
-
-	document.getElementById("showComplete").addEventListener("change", fetchOrders);
-});
+		item.appendChild(button);
+		listContainer.appendChild(item);
+	});
+}
 
 
 
@@ -97,3 +72,4 @@ function AccountingGet(visitId) {
 
 	document.getElementById("accountingForm").submit();
 }
+

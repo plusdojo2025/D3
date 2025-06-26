@@ -69,7 +69,8 @@
 		<label> <input type="checkbox" id="showComplete">
 			完了も表示
 		</label>
-		<div id="orderList"></div>
+		<div id="orderList">
+		</div>
 
 		<%-- 仮でcss記入してます --%>
 		<h2>来店者一覧</h2>
@@ -89,7 +90,7 @@
 						</a>
 
 						<div class="visitorDetails" style="display: none;">
-							${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
+							${visitor.visit_id} ${visitor.commodity.commodity_name} ${visitor.topic.topic_name}
 
 							<form id="accountingForm" method="GET"
 								action="<%=request.getContextPath()%>/AccountingServlet">
