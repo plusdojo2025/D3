@@ -95,7 +95,7 @@ th {
 
 			<!-- ウイスキー -->
 			<div class="accordion-section">
-				<h3 class="accordion-toggle">WHUSKY</h3>
+				<h3 class="accordion-toggle">WHISKY</h3>
 				<div class="accordion-content">
 					<table class="categoryRankingTable">
 						<tr>
