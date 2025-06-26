@@ -52,11 +52,15 @@ public class OrderListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		int visitId = (int)session.getAttribute("visitId");
+		Integer visitId = (Integer)session.getAttribute("visitId");
+		if (visitId == null || visitId < 1) {
+			session.setAttribute("isLogin", false);
+			response.sendRedirect(request.getContextPath() + "/MenuAccessServlet");
+		}
 
 		VisitorDAO visitorDAO = new VisitorDAO();
 		if (visitorDAO.isCurrentVisitByVisitId(visitId) == false) {
-			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			response.sendRedirect(request.getContextPath() + "/MenuAccessServlet");
 		}
 		
 		String[] commodityIds = request.getParameterValues("commodityId");
