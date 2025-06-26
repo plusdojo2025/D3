@@ -173,6 +173,6 @@ INSERT INTO event VALUES (NULL,1,'2025-07-21','流しそうめん','毎年恒例
 INSERT INTO keep_bottle VALUES (NULL,1,40,100,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
 INSERT INTO keep_bottle VALUES (NULL,2,41,200,DATE_ADD(CURDATE(), INTERVAL 1 YEAR) );
 
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 1, NOW());
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 1, NOW());
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 1, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 2, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 2, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 2, NOW());

@@ -11,10 +11,10 @@ exit_time TIMESTAMP
 );
 
 /*テストデータ*/
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 1, NOW());
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 1, NOW());
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 1, NOW());
-INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (4, 1, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (1, 2, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (2, 2, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (3, 2, NOW());
+INSERT INTO visitor (customer_id, store_id, visit_time) VALUES (4, 2, NOW());
 
 /*テーブルデータ確認*/
 SELECT * FROM visitor;
