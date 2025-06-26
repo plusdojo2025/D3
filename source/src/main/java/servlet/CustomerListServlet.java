@@ -87,6 +87,7 @@ public class CustomerListServlet extends HttpServlet {
                 pagenumber = new int[maxPage];
                 for (int i = 0; i < maxPage; i++) {
                     pagenumber[i] = i + 1;
+                    
                 }
             } else {
                 pagenumber = new int[5];
