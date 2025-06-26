@@ -23,8 +23,6 @@ public class MenuAccessServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		session.invalidate();
-		session = request.getSession();
 		session.setMaxInactiveInterval(60 * 60 * 2);
 
 		int storeId = Integer.parseInt(request.getParameter("store"));

@@ -164,7 +164,7 @@ public class VisitorDAO {
 	}
 	
 	public List<Visitor> getCurrentVisitorByStoreId(int storeId) {
-		String sql = "SELECT visit_id, customer.customer_id, customer.customer_name, customer.customer_id "
+		String sql = "SELECT visitor.visit_id, customer.customer_id, customer.customer_name "
 				+ "FROM visitor "
 				+ "JOIN customer on visitor.customer_id = customer.customer_id "
 				+ "WHERE visitor.store_id = ? "
