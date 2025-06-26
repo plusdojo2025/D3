@@ -48,9 +48,8 @@
   <a href="<c:url value='/StoreBusinessServlet' />">
 <img src="<c:url value='/img/BARLOOP.png' />" alt="BARLOOP" class="icon" width="250">
 </a>
-<h1>事務画面</h1>
 </header>
-
+<h1>事務画面</h1>
 
 <button id="openSiteMap">O</button>
 	<button id="closeSiteMap">X</button>

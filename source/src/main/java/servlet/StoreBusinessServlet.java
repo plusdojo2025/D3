@@ -37,10 +37,13 @@ public class StoreBusinessServlet extends HttpServlet {
 		}
 
 		int storeId = loginStore.getStore_id();
+		if (storeId < 1) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}
 
 		// 来店者表示
 		VisitorDAO dao = new VisitorDAO();
-		// List<Visitor> visitor = dao.getVisitorByDate(date);
 		List<Visitor> visitor = dao.getCurrentVisitorByStoreId(storeId);
 
 		request.setAttribute("visitors", visitor);
