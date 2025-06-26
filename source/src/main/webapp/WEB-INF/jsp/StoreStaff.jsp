@@ -11,33 +11,8 @@
 <link rel="stylesheet" href="<c:url value='/css/StoreStaff.css' />">
 </head>
 <style>
-.accordion-toggle {
-	cursor: pointer;
-	color: rgb(227, 208, 149);
-	background-color: rgb(14, 33, 72);
-	padding: 10px;
-	border: 1px solid rgb(227, 208, 149);
-	border-radius: 4px;
-	margin: 20px auto;
-	width: 80%;
-	max-width: 500px;
-}
 
-.accordion-toggle.active {
-	background-color: rgb(25, 47, 97); /* 少し明るいネイビーで開いたことを示す */
-}
 
-.accordion-content {
-	display: none;
-	padding: 15px;
-	background-color: rgb(25, 47, 97); /* フォームと同じ */
-	color: rgb(227, 208, 149);         /* ゴールド文字 */
-	border: 1px solid rgb(227, 208, 149);
-	border-radius: 4px;
-	margin: 10px auto;
-	width: 80%;
-	max-width: 500px;
-	text-align: left;
 }
 </style>
 
@@ -99,8 +74,7 @@
 </div>
 
 <h2 class="accordion-toggle">今日来店したお客様 ▼</h2>
-<div class="accordion-content" style="display: none; padding: 10px; background: #f1f1f1; border: 1px solid #ccc;">
-    <ul>
+<div class="accordion-content" >
         <c:forEach var="vis" items="${visitor}" varStatus="status">
     <li>
       <form id="customerForm_${status.index}" method="POST" action="${pageContext.request.contextPath}/CustomerListServlet" style="display: none;">
