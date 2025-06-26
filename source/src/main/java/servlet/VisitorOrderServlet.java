@@ -30,6 +30,7 @@ public class VisitorOrderServlet extends HttpServlet {
 		Store store = (Store)session.getAttribute("store");
 		if (store == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
 		}
 		
 		String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
