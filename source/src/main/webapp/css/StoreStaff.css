@@ -25,7 +25,7 @@ form h2, form label {
 
 
 /* 送信ボタン＆通常ボタン */
-/*input[type="submit"], button {
+input[name="event"] ,[name="info"],[name="submit"],[name="acc"]{
 	background-color: rgb(227, 208, 149);
 	color: rgb(14, 33, 72);
 	font-weight: bold;
@@ -35,7 +35,7 @@ form h2, form label {
 	cursor: pointer;
 	transition: background-color 0.3s;
 	margin-top: 10px;
-}*/
+}
 
 /* ホバー時 */
 input[type="submit"]:hover, button:hover {

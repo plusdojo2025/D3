@@ -93,7 +93,7 @@
 	
 <div>
 <a href="<c:url value='/OrderHistoryServlet'/>">
-<button>注文履歴</button>
+<button name="acc">注文履歴</button>
 </a>
 </div>
 	
