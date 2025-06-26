@@ -58,7 +58,7 @@
 
 	<%-- 店舗ログインフォーム --%>
 	<div id="storeLogin" onclick="popup('store')">
-		<h2>店舗ログイン</h2>
+		<h2 class="h2Button">店舗ログイン</h2>
 	</div>
 	<div id="storeLoginOverlay" class="overlay"></div>
 
@@ -79,7 +79,7 @@
 
 	<%-- 顧客ログインフォーム --%>
 	<div id="customerLogin" onclick="popup('customer')">
-		<h2>顧客ログイン</h2>
+		<h2 class="h2Button">顧客ログイン</h2>
 	</div>
 	<div id="customerLoginOverlay" class="overlay"></div>
 
@@ -100,7 +100,7 @@
 
 	<%-- 新規登録フォーム --%>
 	<div id="regist" onclick="popup('regist')">
-		<h2>新規登録</h2>
+		<h2 class="h2Button">新規登録</h2>
 	</div>
 	<div id="registOverlay" class="overlay"></div>
 
