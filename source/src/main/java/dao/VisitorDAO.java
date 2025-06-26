@@ -228,6 +228,27 @@ public class VisitorDAO {
 		
 		return false;
 	}
+	
+	public boolean isCustomerNotVisit(int customerId) {
+		String sql = "SELECT COUNT(*) "
+				+ "FROM visitor "
+				+ "WHERE customer_id = ? "
+				+ "AND exit_time IS NULL";
+		try (Connection conn = connectDatabase(); PreparedStatement pStmt = conn.prepareStatement(sql.toString());) {
+			pStmt.setInt(1, customerId);
+			
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				return false;
+			}
+			
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	static {
 		try {

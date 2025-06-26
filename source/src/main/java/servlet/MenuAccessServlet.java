@@ -69,7 +69,7 @@ public class MenuAccessServlet extends HttpServlet {
 
 				int customerId = customerDAO.getCustomerIdByCustomerEmail(customer.getCustomer_email());
 				if (0 < customerId) {
-					
+
 					customer.setCustomer_id(customerId);
 					session.setAttribute("customer", customer);
 					if (isVisitorIdNotNull(customerId, storeId, request))
@@ -77,6 +77,7 @@ public class MenuAccessServlet extends HttpServlet {
 
 				} else {
 					response.sendRedirect(request.getContextPath() + "/LoginServlet");
+					return;
 				}
 			}
 		} else if ("customer".equals(userType)) {
@@ -96,7 +97,7 @@ public class MenuAccessServlet extends HttpServlet {
 						session.setAttribute("isLogin", true);
 					} else {
 						response.sendRedirect(request.getContextPath() + "/LoginServlet");
-
+						return;
 					}
 				}
 			}
@@ -107,15 +108,19 @@ public class MenuAccessServlet extends HttpServlet {
 
 	private boolean isVisitorIdNotNull(int CustomerId, int StoreId, HttpServletRequest request) {
 		VisitorDAO visitorDAO = new VisitorDAO();
-		if (visitorDAO.insertVisitor(CustomerId, StoreId)) {
 
-			Integer visitId = visitorDAO.getVisitorId(CustomerId, StoreId);
-			if (visitId != null && 0 < visitId) {
+		if (visitorDAO.isCustomerNotVisit(CustomerId)) {
 
-				HttpSession session = request.getSession();
-				session.setAttribute("visitId", visitId);
+			if (visitorDAO.insertVisitor(CustomerId, StoreId)) {
 
-				return true;
+				Integer visitId = visitorDAO.getVisitorId(CustomerId, StoreId);
+				if (visitId != null && 0 < visitId) {
+
+					HttpSession session = request.getSession();
+					session.setAttribute("visitId", visitId);
+
+					return true;
+				}
 			}
 		}
 
