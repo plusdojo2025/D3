@@ -94,7 +94,6 @@
 		const contextPath = "${pageContext.request.contextPath}";
 	</script>
 
-	<script src="${pageContext.request.contextPath}/js/StoreBusiness.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 
 </body>
