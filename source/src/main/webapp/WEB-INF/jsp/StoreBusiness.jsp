@@ -69,7 +69,8 @@
 		<label> <input type="checkbox" id="showComplete">
 			完了も表示
 		</label>
-		<div id="orderList"></div>
+		<div id="orderList">
+		</div>
 
 		<%-- 仮でcss記入してます --%>
 		<h2>来店者一覧</h2>
