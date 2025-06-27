@@ -70,6 +70,7 @@
 			完了も表示
 		</label>
 		<div id="orderList">
+		
 		</div>
 
 		<%-- 仮でcss記入してます --%>
