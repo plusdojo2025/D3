@@ -7,13 +7,13 @@ html {
 
 #remarks{
 
-	max-width: 1200px;
+	max-width: 500px;
 	  margin: 0 auto;
 	height: 150px;
   overflow-y: scroll;
   border: 1px solid rgb(227, 208, 149);
   padding: 10px 20px; 
-  font-size: 20px;
+  
   border-radius: 3px;
   
 
@@ -21,15 +21,16 @@ html {
 }
 
 #orderList{
+	text-align: left;
   height: 320px;
   overflow-y: scroll;
   border: 1px solid rgb(227, 208, 149);
   padding: 10px 20px; 
   margin: 10px 30px;
   background-color:rgb(30, 50, 90)  ; 
-  max-width: 1200px;
+  max-width: 500px;
 	  margin: 0 auto;
-	  font-size: 20px;
+	  
 	  border-radius: 3px;
 }
 
@@ -40,9 +41,9 @@ html {
   padding: 10px 20px; 
   margin: 10px 30px;
   background-color:rgb(30, 50, 90)  ; 
-  max-width: 1200px;
+  max-width: 500px;
 	  margin: 0 auto;
-	  font-size: 20px;
+	  
 	  border-radius: 3px;
 }
 

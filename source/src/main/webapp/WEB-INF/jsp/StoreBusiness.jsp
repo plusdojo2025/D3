@@ -86,7 +86,7 @@
 
 						<a
 							href="${pageContext.request.contextPath}/CustomerListServlet?customerId=${visitor.customer.customer_id}">
-							${visitor.customer.customer_name}<br>
+							<strong>${visitor.customer.customer_name}</strong><br>
 						</a>
 
 						<div class="visitorDetails" style="display: none;">
