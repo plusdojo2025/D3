@@ -230,7 +230,7 @@ public class VisitorDAO {
 	}
 	
 	public boolean isCustomerNotVisit(int customerId) {
-		String sql = "SELECT COUNT(*) "
+		String sql = "SELECT visit_id "
 				+ "FROM visitor "
 				+ "WHERE customer_id = ? "
 				+ "AND exit_time IS NULL";
