@@ -66,7 +66,7 @@
 
 		<%-- 仮でcss記入してます --%>
 		<h2>注文</h2>
-		<label> <input type="checkbox" id="showComplete">
+		<label> <input type="checkbox" id="showComplete" onclick="fetchOrder()">
 			完了も表示
 		</label>
 		<div id="orderList">

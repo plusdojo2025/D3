@@ -1,5 +1,24 @@
 
 // 注文用
+function getStatusMap() {
+	try {
+		const data = localStorage.getItem("orderStatusMap");
+		return data ? JSON.parse(data) : {};
+	} catch (e) {
+		console.error("failed orderStatusMap loaded", e);
+		localStorage.removeItem("orderStatusMap");
+		return {};
+	}
+}
+function saveStatusMap(map) {
+	localStorage.setItem("orderStatusMap", JSON.stringify(map));
+}
+function nextStatus(current) {
+	if (current === "未処理")
+		return "完了";
+	return "未処理";
+}
+
 function fetchOrderData() {
 	fetch(`${contextPath}/VisitorOrderServlet`)
 		.then(response => {
@@ -7,7 +26,6 @@ function fetchOrderData() {
 			return response.json();
 		})
 		.then(data => {
-			console.log('注文データ:', data);
 			updateOrderList(data);
 		})
 		.catch(error => {
@@ -27,21 +45,39 @@ function updateOrderList(data) {
 		const item = document.createElement("div");
 		item.className = "order";
 		item.textContent = `${order.customerName} - ${order.commodityName} × ${order.quantity}`;
-		console.log(order.customerName, order.commodityName, order.quantity);
+		item.style.display = "none";
 
-		const button = document.createElement("button");
-		button.textContent = "X";
-		button.className = "deleteBtn";
+		// 完了表示
+		const orderStatusMap = getStatusMap();
+		const showComplete = document.getElementById("showComplete").checked;
 
-		button.addEventListener("click", () => {
-			item.style.display = "none";
-		});
+		const orderId = order.orderId;
+		const status = orderStatusMap[orderId] || "未処理";
 
-		item.appendChild(button);
+		if (status === "未処理" || showComplete) {
+			const button = document.createElement("button");
+			button.textContent = status;
+			button.className = "changeStatusBtn";
+			item.style.display = "block";
+
+			button.addEventListener("click", () => {
+				const next = nextStatus(status);
+				orderStatusMap[orderId] = next;
+				button.textContent = next;
+				
+				saveStatusMap(orderStatusMap);
+				fetchOrderData();
+			});
+
+			item.appendChild(button);
+		}
 		listContainer.appendChild(item);
 	});
 }
 
+function fetchOrder() {
+	fetchOrderData();
+}
 
 
 // 来店者
